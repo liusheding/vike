@@ -15,6 +15,9 @@
 		663643951F2830FC00ED2345 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 663643931F2830FC00ED2345 /* LaunchScreen.storyboard */; };
 		663643A01F2830FD00ED2345 /* SaleSecretaryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6636439F1F2830FD00ED2345 /* SaleSecretaryTests.swift */; };
 		663643AB1F2830FD00ED2345 /* SaleSecretaryUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 663643AA1F2830FD00ED2345 /* SaleSecretaryUITests.swift */; };
+		6E70FE2F1F286C6200803E73 /* MessageListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E70FE2D1F286C6200803E73 /* MessageListCell.swift */; };
+		6E70FE301F286C6200803E73 /* MessageListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E70FE2E1F286C6200803E73 /* MessageListCell.xib */; };
+		6E70FE381F28721200803E73 /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E70FE371F28721200803E73 /* MessageViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +52,9 @@
 		663643A61F2830FD00ED2345 /* SaleSecretaryUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SaleSecretaryUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		663643AA1F2830FD00ED2345 /* SaleSecretaryUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaleSecretaryUITests.swift; sourceTree = "<group>"; };
 		663643AC1F2830FD00ED2345 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6E70FE2D1F286C6200803E73 /* MessageListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageListCell.swift; sourceTree = "<group>"; };
+		6E70FE2E1F286C6200803E73 /* MessageListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageListCell.xib; sourceTree = "<group>"; };
+		6E70FE371F28721200803E73 /* MessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +105,7 @@
 		663643861F2830FC00ED2345 /* SaleSecretary */ = {
 			isa = PBXGroup;
 			children = (
+				6E70FE241F28495C00803E73 /* Message */,
 				663643B81F28311600ED2345 /* Main */,
 				663643871F2830FC00ED2345 /* AppDelegate.swift */,
 				663643911F2830FC00ED2345 /* Assets.xcassets */,
@@ -158,6 +165,40 @@
 				663643891F2830FC00ED2345 /* ViewController.swift */,
 			);
 			name = View;
+			sourceTree = "<group>";
+		};
+		6E70FE241F28495C00803E73 /* Message */ = {
+			isa = PBXGroup;
+			children = (
+				6E70FE271F28498B00803E73 /* Controller */,
+				6E70FE261F28498100803E73 /* Model */,
+				6E70FE251F28497700803E73 /* View */,
+			);
+			name = Message;
+			sourceTree = "<group>";
+		};
+		6E70FE251F28497700803E73 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				6E70FE2D1F286C6200803E73 /* MessageListCell.swift */,
+				6E70FE2E1F286C6200803E73 /* MessageListCell.xib */,
+				6E70FE371F28721200803E73 /* MessageViewController.swift */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		6E70FE261F28498100803E73 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		6E70FE271F28498B00803E73 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -268,6 +309,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				663643951F2830FC00ED2345 /* LaunchScreen.storyboard in Resources */,
+				6E70FE301F286C6200803E73 /* MessageListCell.xib in Resources */,
 				663643921F2830FC00ED2345 /* Assets.xcassets in Resources */,
 				6636438D1F2830FC00ED2345 /* Main.storyboard in Resources */,
 			);
@@ -295,8 +337,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				6636438A1F2830FC00ED2345 /* ViewController.swift in Sources */,
+				6E70FE2F1F286C6200803E73 /* MessageListCell.swift in Sources */,
 				663643901F2830FC00ED2345 /* SaleSecretary.xcdatamodeld in Sources */,
 				663643881F2830FC00ED2345 /* AppDelegate.swift in Sources */,
+				6E70FE381F28721200803E73 /* MessageViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -541,6 +585,7 @@
 				663643B11F2830FD00ED2345 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		663643B21F2830FD00ED2345 /* Build configuration list for PBXNativeTarget "SaleSecretaryTests" */ = {
 			isa = XCConfigurationList;
@@ -549,6 +594,7 @@
 				663643B41F2830FD00ED2345 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		663643B51F2830FD00ED2345 /* Build configuration list for PBXNativeTarget "SaleSecretaryUITests" */ = {
 			isa = XCConfigurationList;
@@ -557,6 +603,7 @@
 				663643B71F2830FD00ED2345 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
