@@ -15,6 +15,7 @@
 		663643951F2830FC00ED2345 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 663643931F2830FC00ED2345 /* LaunchScreen.storyboard */; };
 		663643A01F2830FD00ED2345 /* SaleSecretaryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6636439F1F2830FD00ED2345 /* SaleSecretaryTests.swift */; };
 		663643AB1F2830FD00ED2345 /* SaleSecretaryUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 663643AA1F2830FD00ED2345 /* SaleSecretaryUITests.swift */; };
+		6E59D83A1F2984E00096F57E /* Message.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E59D8391F2984E00096F57E /* Message.storyboard */; };
 		6E70FE2F1F286C6200803E73 /* MessageListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E70FE2D1F286C6200803E73 /* MessageListCell.swift */; };
 		6E70FE301F286C6200803E73 /* MessageListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E70FE2E1F286C6200803E73 /* MessageListCell.xib */; };
 		6E70FE381F28721200803E73 /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E70FE371F28721200803E73 /* MessageViewController.swift */; };
@@ -52,6 +53,7 @@
 		663643A61F2830FD00ED2345 /* SaleSecretaryUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SaleSecretaryUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		663643AA1F2830FD00ED2345 /* SaleSecretaryUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaleSecretaryUITests.swift; sourceTree = "<group>"; };
 		663643AC1F2830FD00ED2345 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6E59D8391F2984E00096F57E /* Message.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Message.storyboard; sourceTree = "<group>"; };
 		6E70FE2D1F286C6200803E73 /* MessageListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageListCell.swift; sourceTree = "<group>"; };
 		6E70FE2E1F286C6200803E73 /* MessageListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageListCell.xib; sourceTree = "<group>"; };
 		6E70FE371F28721200803E73 /* MessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
@@ -197,6 +199,7 @@
 		6E70FE271F28498B00803E73 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				6E59D8391F2984E00096F57E /* Message.storyboard */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -310,6 +313,7 @@
 			files = (
 				663643951F2830FC00ED2345 /* LaunchScreen.storyboard in Resources */,
 				6E70FE301F286C6200803E73 /* MessageListCell.xib in Resources */,
+				6E59D83A1F2984E00096F57E /* Message.storyboard in Resources */,
 				663643921F2830FC00ED2345 /* Assets.xcassets in Resources */,
 				6636438D1F2830FC00ED2345 /* Main.storyboard in Resources */,
 			);
