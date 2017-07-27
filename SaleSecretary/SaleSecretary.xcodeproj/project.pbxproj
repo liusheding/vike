@@ -9,10 +9,10 @@
 /* Begin PBXBuildFile section */
 		45BDDB34CBA326F0F1C1F3CBB472F1DE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D47ACF391485904A172658C073C4CF /* AppDelegate.swift */; };
 		4CC34A42AA4DDB3561243C35E9A3DD6E /* SaleSecretaryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9B097EE912BE08E90307C3D5DBEAA47 /* SaleSecretaryTests.swift */; };
+		5B61C6CC8719F793AA22DE8CE2E016A7 /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFF07A861B596FBF6B58926BCD4CB27 /* MessageViewController.swift */; };
 		5F81108AF566E3AA21DC1DE8FE984ECE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45CD96F7DFFD87860F121A1A9F14848 /* ViewController.swift */; };
 		63FFE17B8518E311F485E78D5AC99EDF /* MessageListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E05D3EF5639A9140AFEB3E73C399202E /* MessageListCell.swift */; };
 		837E4CB3CAA4F9E6F67FCD9B689A4731 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F3ED2E7C36C4CC96B9B25E5F44BB6DC /* Assets.xcassets */; };
-		844B9C59A19C420A50A16F7BC34316A7 /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941087DED619C471294F5B2DEF921264 /* MessageViewController.swift */; };
 		8CFB1C9E00B955CC94391FA02B432CCF /* Message.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71922CC4806E1E76CF99D479D160CD83 /* Message.storyboard */; };
 		AF201728C3391AB87079CD9BA8E73001 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 03D25B800318496B626EE1356C773AA4 /* Main.storyboard */; };
 		B1CD15B5F521C5D0040C8C6FF7E7477F /* SaleSecretaryUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B1304CBBFB165B9BCE2C5264AB48FAF /* SaleSecretaryUITests.swift */; };
@@ -22,14 +22,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		F33C0D10C95B5D17C0CD9D005331708D /* PBXContainerItemProxy */ = {
+		2F0373467A29E0D5176A6A4EC30D54E0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 97397EDA25754BD1B27A3933E6CC7083 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 5D9576533D7D7338A391E31418964354;
 			remoteInfo = SaleSecretary;
 		};
-		2F0373467A29E0D5176A6A4EC30D54E0 /* PBXContainerItemProxy */ = {
+		F33C0D10C95B5D17C0CD9D005331708D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 97397EDA25754BD1B27A3933E6CC7083 /* Project object */;
 			proxyType = 1;
@@ -42,9 +42,9 @@
 		1F3ED2E7C36C4CC96B9B25E5F44BB6DC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3B50DBFE5619E6ECC0F0893AEE08D288 /* SaleSecretaryTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SaleSecretaryTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E75E8F33B3F1B94561C76CE533E329A /* MessageListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageListCell.xib; sourceTree = "<group>"; };
+		5EFF07A861B596FBF6B58926BCD4CB27 /* MessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
 		6B1304CBBFB165B9BCE2C5264AB48FAF /* SaleSecretaryUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaleSecretaryUITests.swift; sourceTree = "<group>"; };
 		71922CC4806E1E76CF99D479D160CD83 /* Message.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Message.storyboard; sourceTree = "<group>"; };
-		941087DED619C471294F5B2DEF921264 /* MessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
 		B427303374369F3F694A3E88B024FF52 /* SaleSecretary.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SaleSecretary.xcdatamodel; sourceTree = "<group>"; };
 		B45CD96F7DFFD87860F121A1A9F14848 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		B5110A908A25F067CDF103F926B2627C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -60,7 +60,7 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		6493E279780C01D67448A468CD8F5328 /* Frameworks */ = {
+		0CC4486DEC35379F58B3427F48437FA2 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -74,7 +74,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		0CC4486DEC35379F58B3427F48437FA2 /* Frameworks */ = {
+		6493E279780C01D67448A468CD8F5328 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -84,16 +84,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		109CF3EC5FBDD447063E3847B6FB7B07 = {
-			isa = PBXGroup;
-			children = (
-				0CDBCAFFFDB1BD9128254835506150B5 /* Products */,
-				0EA0B277261348029FDB9BAE2CF16043 /* SaleSecretary */,
-				C819ABF84D749EE4831554CAFEBAA9B2 /* SaleSecretaryTests */,
-				84EC0D867B218897AF0A38187FBB3D20 /* SaleSecretaryUITests */,
-			);
-			sourceTree = "<group>";
-		};
 		0CDBCAFFFDB1BD9128254835506150B5 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -118,22 +108,14 @@
 			path = SaleSecretary;
 			sourceTree = "<group>";
 		};
-		C819ABF84D749EE4831554CAFEBAA9B2 /* SaleSecretaryTests */ = {
+		109CF3EC5FBDD447063E3847B6FB7B07 = {
 			isa = PBXGroup;
 			children = (
-				F62447EA9409681F76292A514C7312A9 /* Info.plist */,
-				E9B097EE912BE08E90307C3D5DBEAA47 /* SaleSecretaryTests.swift */,
+				0CDBCAFFFDB1BD9128254835506150B5 /* Products */,
+				0EA0B277261348029FDB9BAE2CF16043 /* SaleSecretary */,
+				C819ABF84D749EE4831554CAFEBAA9B2 /* SaleSecretaryTests */,
+				84EC0D867B218897AF0A38187FBB3D20 /* SaleSecretaryUITests */,
 			);
-			path = SaleSecretaryTests;
-			sourceTree = "<group>";
-		};
-		84EC0D867B218897AF0A38187FBB3D20 /* SaleSecretaryUITests */ = {
-			isa = PBXGroup;
-			children = (
-				B5110A908A25F067CDF103F926B2627C /* Info.plist */,
-				6B1304CBBFB165B9BCE2C5264AB48FAF /* SaleSecretaryUITests.swift */,
-			);
-			path = SaleSecretaryUITests;
 			sourceTree = "<group>";
 		};
 		2F673B09140D61E9954FB873D91AF82C /* Main */ = {
@@ -146,18 +128,36 @@
 			name = Main;
 			sourceTree = "<group>";
 		};
-		9F42C0D310E85E7E56A0DE055E19EE8D /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Controller;
-			sourceTree = "<group>";
-		};
 		334FA7D8DDBF4687976EF258B32793F5 /* Model */ = {
 			isa = PBXGroup;
 			children = (
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		38219B296459F1D229EAB903EB8BBE63 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				71922CC4806E1E76CF99D479D160CD83 /* Message.storyboard */,
+				5EFF07A861B596FBF6B58926BCD4CB27 /* MessageViewController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		84EC0D867B218897AF0A38187FBB3D20 /* SaleSecretaryUITests */ = {
+			isa = PBXGroup;
+			children = (
+				B5110A908A25F067CDF103F926B2627C /* Info.plist */,
+				6B1304CBBFB165B9BCE2C5264AB48FAF /* SaleSecretaryUITests.swift */,
+			);
+			path = SaleSecretaryUITests;
+			sourceTree = "<group>";
+		};
+		9F42C0D310E85E7E56A0DE055E19EE8D /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Controller;
 			sourceTree = "<group>";
 		};
 		C088F1DA3C61109B9D3BF6ED150B5427 /* View */ = {
@@ -179,14 +179,13 @@
 			name = Message;
 			sourceTree = "<group>";
 		};
-		DECB3B49B2471C7E9EB1FAB06DEB0BDF /* View */ = {
+		C819ABF84D749EE4831554CAFEBAA9B2 /* SaleSecretaryTests */ = {
 			isa = PBXGroup;
 			children = (
-				E05D3EF5639A9140AFEB3E73C399202E /* MessageListCell.swift */,
-				4E75E8F33B3F1B94561C76CE533E329A /* MessageListCell.xib */,
-				941087DED619C471294F5B2DEF921264 /* MessageViewController.swift */,
+				F62447EA9409681F76292A514C7312A9 /* Info.plist */,
+				E9B097EE912BE08E90307C3D5DBEAA47 /* SaleSecretaryTests.swift */,
 			);
-			name = View;
+			path = SaleSecretaryTests;
 			sourceTree = "<group>";
 		};
 		D6C569A3304F1DE766B6A3CB9DE86D18 /* Model */ = {
@@ -196,12 +195,13 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
-		38219B296459F1D229EAB903EB8BBE63 /* Controller */ = {
+		DECB3B49B2471C7E9EB1FAB06DEB0BDF /* View */ = {
 			isa = PBXGroup;
 			children = (
-				71922CC4806E1E76CF99D479D160CD83 /* Message.storyboard */,
+				E05D3EF5639A9140AFEB3E73C399202E /* MessageListCell.swift */,
+				4E75E8F33B3F1B94561C76CE533E329A /* MessageListCell.xib */,
 			);
-			name = Controller;
+			name = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -224,24 +224,6 @@
 			productReference = B78013FA05C85654B14C93F66423543A /* SaleSecretary.app */;
 			productType = "com.apple.product-type.application";
 		};
-		9BA9431FFF44352CCC311CB465BE7BD2 /* SaleSecretaryTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 88CD9089A66DE75132DB01BFADD09DEA /* Build configuration list for PBXNativeTarget "SaleSecretaryTests" */;
-			buildPhases = (
-				0699B6641036A632E6118A79E5EB50C3 /* Sources */,
-				25943149E5EF01482E39A7058C7FC7D9 /* Frameworks */,
-				1AF22C9DC725BF8EA63BE9D9A6DC6765 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				EBB714B1CA725B18726A7C36D88D50BC /* PBXTargetDependency */,
-			);
-			name = SaleSecretaryTests;
-			productName = SaleSecretaryTests;
-			productReference = 3B50DBFE5619E6ECC0F0893AEE08D288 /* SaleSecretaryTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 		87D83AE7681EF3D1025F9F50065708F8 /* SaleSecretaryUITests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 58C62DDCB08D7A6A27552FA0BBDF9C02 /* Build configuration list for PBXNativeTarget "SaleSecretaryUITests" */;
@@ -260,6 +242,24 @@
 			productReference = D371670FE9B8DBB273DF1F7BA7CDCAB4 /* SaleSecretaryUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		9BA9431FFF44352CCC311CB465BE7BD2 /* SaleSecretaryTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 88CD9089A66DE75132DB01BFADD09DEA /* Build configuration list for PBXNativeTarget "SaleSecretaryTests" */;
+			buildPhases = (
+				0699B6641036A632E6118A79E5EB50C3 /* Sources */,
+				25943149E5EF01482E39A7058C7FC7D9 /* Frameworks */,
+				1AF22C9DC725BF8EA63BE9D9A6DC6765 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EBB714B1CA725B18726A7C36D88D50BC /* PBXTargetDependency */,
+			);
+			name = SaleSecretaryTests;
+			productName = SaleSecretaryTests;
+			productReference = 3B50DBFE5619E6ECC0F0893AEE08D288 /* SaleSecretaryTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -274,12 +274,12 @@
 						CreatedOnToolsVersion = 8.3.3;
 						ProvisioningStyle = Automatic;
 					};
-					9BA9431FFF44352CCC311CB465BE7BD2 = {
+					87D83AE7681EF3D1025F9F50065708F8 = {
 						CreatedOnToolsVersion = 8.3.3;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 5D9576533D7D7338A391E31418964354;
 					};
-					87D83AE7681EF3D1025F9F50065708F8 = {
+					9BA9431FFF44352CCC311CB465BE7BD2 = {
 						CreatedOnToolsVersion = 8.3.3;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 5D9576533D7D7338A391E31418964354;
@@ -307,18 +307,6 @@
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		C321DF94B9386C24B7C8ED20E409BFBF /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				837E4CB3CAA4F9E6F67FCD9B689A4731 /* Assets.xcassets in Resources */,
-				B57F541A2E6EE35F55BF1F726094C124 /* LaunchScreen.storyboard in Resources */,
-				AF201728C3391AB87079CD9BA8E73001 /* Main.storyboard in Resources */,
-				8CFB1C9E00B955CC94391FA02B432CCF /* Message.storyboard in Resources */,
-				D9D045E89EEF6E531B731C29AF71C6D8 /* MessageListCell.xib in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		1AF22C9DC725BF8EA63BE9D9A6DC6765 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -333,21 +321,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-/* End PBXResourcesBuildPhase section */
-
-/* Begin PBXSourcesBuildPhase section */
-		B5314BFBB8148436A1FE46B96F2C9BED /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
+		C321DF94B9386C24B7C8ED20E409BFBF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				45BDDB34CBA326F0F1C1F3CBB472F1DE /* AppDelegate.swift in Sources */,
-				63FFE17B8518E311F485E78D5AC99EDF /* MessageListCell.swift in Sources */,
-				844B9C59A19C420A50A16F7BC34316A7 /* MessageViewController.swift in Sources */,
-				E1E92A825F157EE0E15E88EC43FED169 /* SaleSecretary.xcdatamodeld in Sources */,
-				5F81108AF566E3AA21DC1DE8FE984ECE /* ViewController.swift in Sources */,
+				837E4CB3CAA4F9E6F67FCD9B689A4731 /* Assets.xcassets in Resources */,
+				B57F541A2E6EE35F55BF1F726094C124 /* LaunchScreen.storyboard in Resources */,
+				AF201728C3391AB87079CD9BA8E73001 /* Main.storyboard in Resources */,
+				8CFB1C9E00B955CC94391FA02B432CCF /* Message.storyboard in Resources */,
+				D9D045E89EEF6E531B731C29AF71C6D8 /* MessageListCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
 		0699B6641036A632E6118A79E5EB50C3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -364,18 +352,30 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B5314BFBB8148436A1FE46B96F2C9BED /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				45BDDB34CBA326F0F1C1F3CBB472F1DE /* AppDelegate.swift in Sources */,
+				63FFE17B8518E311F485E78D5AC99EDF /* MessageListCell.swift in Sources */,
+				5B61C6CC8719F793AA22DE8CE2E016A7 /* MessageViewController.swift in Sources */,
+				E1E92A825F157EE0E15E88EC43FED169 /* SaleSecretary.xcdatamodeld in Sources */,
+				5F81108AF566E3AA21DC1DE8FE984ECE /* ViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		EBB714B1CA725B18726A7C36D88D50BC /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 5D9576533D7D7338A391E31418964354 /* SaleSecretary */;
-			targetProxy = F33C0D10C95B5D17C0CD9D005331708D /* PBXContainerItemProxy */;
-		};
 		5038BBABD717A9C32689A65603A58382 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 5D9576533D7D7338A391E31418964354 /* SaleSecretary */;
 			targetProxy = 2F0373467A29E0D5176A6A4EC30D54E0 /* PBXContainerItemProxy */;
+		};
+		EBB714B1CA725B18726A7C36D88D50BC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5D9576533D7D7338A391E31418964354 /* SaleSecretary */;
+			targetProxy = F33C0D10C95B5D17C0CD9D005331708D /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -399,6 +399,71 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		09DDABD502CED4A63DAFDB3BE11203C9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = SaleSecretaryTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.zjjy.SaleSecretaryTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SaleSecretary.app/SaleSecretary";
+			};
+			name = Release;
+		};
+		2655FC78E3EFC7C8115B26451296762A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				INFOPLIST_FILE = SaleSecretaryUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.zjjy.SaleSecretaryUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = SaleSecretary;
+			};
+			name = Debug;
+		};
+		3E5D4025DBE108B228EF5E2A73C5030A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = SaleSecretary/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.zjjy.SaleSecretary;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		5350E170AF9A7AB20A92DFDA50C33510 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = SaleSecretaryTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.zjjy.SaleSecretaryTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SaleSecretary.app/SaleSecretary";
+			};
+			name = Debug;
+		};
+		60E2F32B97DACFDB4E9D3BCB30BF9892 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = SaleSecretary/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.zjjy.SaleSecretary;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
 		A009771B86D46807FAA83F7B9D320F86 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -492,71 +557,6 @@
 			};
 			name = Release;
 		};
-		3E5D4025DBE108B228EF5E2A73C5030A /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = SaleSecretary/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.zjjy.SaleSecretary;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
-			};
-			name = Debug;
-		};
-		60E2F32B97DACFDB4E9D3BCB30BF9892 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = SaleSecretary/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.zjjy.SaleSecretary;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
-			};
-			name = Release;
-		};
-		5350E170AF9A7AB20A92DFDA50C33510 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				INFOPLIST_FILE = SaleSecretaryTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.zjjy.SaleSecretaryTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SaleSecretary.app/SaleSecretary";
-			};
-			name = Debug;
-		};
-		09DDABD502CED4A63DAFDB3BE11203C9 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				INFOPLIST_FILE = SaleSecretaryTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.zjjy.SaleSecretaryTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SaleSecretary.app/SaleSecretary";
-			};
-			name = Release;
-		};
-		2655FC78E3EFC7C8115B26451296762A /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				INFOPLIST_FILE = SaleSecretaryUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.zjjy.SaleSecretaryUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
-				TEST_TARGET_NAME = SaleSecretary;
-			};
-			name = Debug;
-		};
 		F5089FDAC27C072C28CEC3950EE3931C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -573,20 +573,20 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		58C62DDCB08D7A6A27552FA0BBDF9C02 /* Build configuration list for PBXNativeTarget "SaleSecretaryUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2655FC78E3EFC7C8115B26451296762A /* Debug */,
+				F5089FDAC27C072C28CEC3950EE3931C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		6E24A456B9D4091FA402BB5626CC4FCA /* Build configuration list for PBXProject "SaleSecretary" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A009771B86D46807FAA83F7B9D320F86 /* Debug */,
 				B5C7F5A2377522DD4EF52207FF2DEFAA /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		A97662B69FB217025AF5525631AB7437 /* Build configuration list for PBXNativeTarget "SaleSecretary" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				3E5D4025DBE108B228EF5E2A73C5030A /* Debug */,
-				60E2F32B97DACFDB4E9D3BCB30BF9892 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -600,11 +600,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		58C62DDCB08D7A6A27552FA0BBDF9C02 /* Build configuration list for PBXNativeTarget "SaleSecretaryUITests" */ = {
+		A97662B69FB217025AF5525631AB7437 /* Build configuration list for PBXNativeTarget "SaleSecretary" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				2655FC78E3EFC7C8115B26451296762A /* Debug */,
-				F5089FDAC27C072C28CEC3950EE3931C /* Release */,
+				3E5D4025DBE108B228EF5E2A73C5030A /* Debug */,
+				60E2F32B97DACFDB4E9D3BCB30BF9892 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
