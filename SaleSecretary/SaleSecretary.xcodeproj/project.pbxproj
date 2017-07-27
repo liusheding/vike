@@ -9,11 +9,14 @@
 /* Begin PBXBuildFile section */
 		45BDDB34CBA326F0F1C1F3CBB472F1DE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D47ACF391485904A172658C073C4CF /* AppDelegate.swift */; };
 		4CC34A42AA4DDB3561243C35E9A3DD6E /* SaleSecretaryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9B097EE912BE08E90307C3D5DBEAA47 /* SaleSecretaryTests.swift */; };
-		5B61C6CC8719F793AA22DE8CE2E016A7 /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFF07A861B596FBF6B58926BCD4CB27 /* MessageViewController.swift */; };
+		53E56F706EB9015CA4B22F2CB85E21EB /* ToolCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1388E83064119789E4E2181C9871C9F6 /* ToolCellView.swift */; };
 		5F81108AF566E3AA21DC1DE8FE984ECE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45CD96F7DFFD87860F121A1A9F14848 /* ViewController.swift */; };
 		63FFE17B8518E311F485E78D5AC99EDF /* MessageListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E05D3EF5639A9140AFEB3E73C399202E /* MessageListCell.swift */; };
+		7D4F943E251DFCF1E855A17CA7047BAB /* ToolCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1EDAEF18CBA6F23688F9247911F93EDF /* ToolCellView.xib */; };
 		837E4CB3CAA4F9E6F67FCD9B689A4731 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F3ED2E7C36C4CC96B9B25E5F44BB6DC /* Assets.xcassets */; };
+		844B9C59A19C420A50A16F7BC34316A7 /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941087DED619C471294F5B2DEF921264 /* MessageViewController.swift */; };
 		8CFB1C9E00B955CC94391FA02B432CCF /* Message.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71922CC4806E1E76CF99D479D160CD83 /* Message.storyboard */; };
+		A1388B73E89097D71FE47270B8861FF9 /* ToolsUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F3B5FF5B6840C01FE98AB14DBF66A9 /* ToolsUIViewController.swift */; };
 		AF201728C3391AB87079CD9BA8E73001 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 03D25B800318496B626EE1356C773AA4 /* Main.storyboard */; };
 		B1CD15B5F521C5D0040C8C6FF7E7477F /* SaleSecretaryUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B1304CBBFB165B9BCE2C5264AB48FAF /* SaleSecretaryUITests.swift */; };
 		B57F541A2E6EE35F55BF1F726094C124 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E91976E222A3B14574B6924020DD4A84 /* LaunchScreen.storyboard */; };
@@ -39,18 +42,21 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1388E83064119789E4E2181C9871C9F6 /* ToolCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToolCellView.swift; sourceTree = "<group>"; };
+		1EDAEF18CBA6F23688F9247911F93EDF /* ToolCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ToolCellView.xib; sourceTree = "<group>"; };
 		1F3ED2E7C36C4CC96B9B25E5F44BB6DC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3B50DBFE5619E6ECC0F0893AEE08D288 /* SaleSecretaryTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SaleSecretaryTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E75E8F33B3F1B94561C76CE533E329A /* MessageListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageListCell.xib; sourceTree = "<group>"; };
-		5EFF07A861B596FBF6B58926BCD4CB27 /* MessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
 		6B1304CBBFB165B9BCE2C5264AB48FAF /* SaleSecretaryUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaleSecretaryUITests.swift; sourceTree = "<group>"; };
 		71922CC4806E1E76CF99D479D160CD83 /* Message.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Message.storyboard; sourceTree = "<group>"; };
+		941087DED619C471294F5B2DEF921264 /* MessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
 		B427303374369F3F694A3E88B024FF52 /* SaleSecretary.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SaleSecretary.xcdatamodel; sourceTree = "<group>"; };
 		B45CD96F7DFFD87860F121A1A9F14848 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		B5110A908A25F067CDF103F926B2627C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B78013FA05C85654B14C93F66423543A /* SaleSecretary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SaleSecretary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C44B64C515E9205C02855331FBB73F3F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D371670FE9B8DBB273DF1F7BA7CDCAB4 /* SaleSecretaryUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SaleSecretaryUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D9F3B5FF5B6840C01FE98AB14DBF66A9 /* ToolsUIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToolsUIViewController.swift; sourceTree = "<group>"; };
 		DC5DE7BB98E8B43BBAFCD9F6E6D94AC0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E05D3EF5639A9140AFEB3E73C399202E /* MessageListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageListCell.swift; sourceTree = "<group>"; };
 		E1D47ACF391485904A172658C073C4CF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -99,6 +105,7 @@
 			children = (
 				2F673B09140D61E9954FB873D91AF82C /* Main */,
 				C5DB8245E853880567A8AA818CFA3A83 /* Message */,
+				353CBCFE5817ABE2C74E225413D69D8F /* Tools */,
 				E1D47ACF391485904A172658C073C4CF /* AppDelegate.swift */,
 				1F3ED2E7C36C4CC96B9B25E5F44BB6DC /* Assets.xcassets */,
 				FB20A214877D05C6E7E1ECF3F9E4A391 /* Info.plist */,
@@ -135,13 +142,39 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
+		335AFE1AFF613A74F03B490AE40CED3B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				1388E83064119789E4E2181C9871C9F6 /* ToolCellView.swift */,
+				1EDAEF18CBA6F23688F9247911F93EDF /* ToolCellView.xib */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		353CBCFE5817ABE2C74E225413D69D8F /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				C8FADB2F97F8DCCFB2573A6DC4E39CB6 /* Controller */,
+				77D28E5543C148C1D2B03F577CBA0F88 /* Model */,
+				335AFE1AFF613A74F03B490AE40CED3B /* View */,
+			);
+			name = Tools;
+			sourceTree = "<group>";
+		};
 		38219B296459F1D229EAB903EB8BBE63 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				941087DED619C471294F5B2DEF921264 /* MessageViewController.swift */,
 				71922CC4806E1E76CF99D479D160CD83 /* Message.storyboard */,
-				5EFF07A861B596FBF6B58926BCD4CB27 /* MessageViewController.swift */,
 			);
 			name = Controller;
+			sourceTree = "<group>";
+		};
+		77D28E5543C148C1D2B03F577CBA0F88 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 		84EC0D867B218897AF0A38187FBB3D20 /* SaleSecretaryUITests */ = {
@@ -186,6 +219,14 @@
 				E9B097EE912BE08E90307C3D5DBEAA47 /* SaleSecretaryTests.swift */,
 			);
 			path = SaleSecretaryTests;
+			sourceTree = "<group>";
+		};
+		C8FADB2F97F8DCCFB2573A6DC4E39CB6 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				D9F3B5FF5B6840C01FE98AB14DBF66A9 /* ToolsUIViewController.swift */,
+			);
+			name = Controller;
 			sourceTree = "<group>";
 		};
 		D6C569A3304F1DE766B6A3CB9DE86D18 /* Model */ = {
@@ -330,6 +371,7 @@
 				AF201728C3391AB87079CD9BA8E73001 /* Main.storyboard in Resources */,
 				8CFB1C9E00B955CC94391FA02B432CCF /* Message.storyboard in Resources */,
 				D9D045E89EEF6E531B731C29AF71C6D8 /* MessageListCell.xib in Resources */,
+				7D4F943E251DFCF1E855A17CA7047BAB /* ToolCellView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -358,8 +400,10 @@
 			files = (
 				45BDDB34CBA326F0F1C1F3CBB472F1DE /* AppDelegate.swift in Sources */,
 				63FFE17B8518E311F485E78D5AC99EDF /* MessageListCell.swift in Sources */,
-				5B61C6CC8719F793AA22DE8CE2E016A7 /* MessageViewController.swift in Sources */,
+				844B9C59A19C420A50A16F7BC34316A7 /* MessageViewController.swift in Sources */,
 				E1E92A825F157EE0E15E88EC43FED169 /* SaleSecretary.xcdatamodeld in Sources */,
+				53E56F706EB9015CA4B22F2CB85E21EB /* ToolCellView.swift in Sources */,
+				A1388B73E89097D71FE47270B8861FF9 /* ToolsUIViewController.swift in Sources */,
 				5F81108AF566E3AA21DC1DE8FE984ECE /* ViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

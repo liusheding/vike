@@ -30,18 +30,13 @@ class MessageViewController: UITableViewController {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
-
-    // MARK: - Table view data source
-
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return self.Names.count
     }
 
@@ -53,6 +48,29 @@ class MessageViewController: UITableViewController {
         cell.celltime.text = self.Times[indexPath.row]
         cell.cellimage.image = UIImage(named: self.Images[indexPath.row])
         return cell
+    }
+    
+    //处理选中事件
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.tableView!.deselectRow(at: indexPath, animated: true)
+        print("选中的Cell 为\(indexPath.row)")
+    }
+    
+    //返回编辑类型，滑动删除
+    override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+        return UITableViewCellEditingStyle.delete
+    }
+    
+    //修改删除按钮的文字
+    override func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
+        return "点击删除"
+    }
+    
+    //点击删除按钮的响应方法，处理删除的逻辑
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == UITableViewCellEditingStyle.delete {
+            self.tableView!.deleteRows(at: [indexPath], with: UITableViewRowAnimation.fade)
+        }
     }
     
 
