@@ -15,8 +15,11 @@ class ToolCellView: UITableViewCell {
     @IBOutlet weak var toolImage: UIImageView!
     
     
-    @IBOutlet weak var toolLable: UILabel!
+    @IBOutlet weak var toolLabel: UILabel!
     
+    open var viewController: UIViewController.Type!
+    
+    open var args : Any?
     
     override func awakeFromNib() {
         super.awakeFromNib()
