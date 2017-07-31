@@ -27,6 +27,8 @@
 		B57F541A2E6EE35F55BF1F726094C124 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E91976E222A3B14574B6924020DD4A84 /* LaunchScreen.storyboard */; };
 		D9D045E89EEF6E531B731C29AF71C6D8 /* MessageListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E75E8F33B3F1B94561C76CE533E329A /* MessageListCell.xib */; };
 		E1E92A825F157EE0E15E88EC43FED169 /* SaleSecretary.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 372EFD95BCC4506D668112468A0C6F18 /* SaleSecretary.xcdatamodeld */; };
+		E7ED74C61F2EE5DF00A57BE6 /* AddNewCustomersCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7ED74C51F2EE5DF00A57BE6 /* AddNewCustomersCell.xib */; };
+		E7ED74C81F2EF3D000A57BE6 /* AddNewCustomerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7ED74C71F2EF3D000A57BE6 /* AddNewCustomerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +72,8 @@
 		DC5DE7BB98E8B43BBAFCD9F6E6D94AC0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E05D3EF5639A9140AFEB3E73C399202E /* MessageListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageListCell.swift; sourceTree = "<group>"; };
 		E1D47ACF391485904A172658C073C4CF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		E7ED74C51F2EE5DF00A57BE6 /* AddNewCustomersCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddNewCustomersCell.xib; sourceTree = "<group>"; };
+		E7ED74C71F2EF3D000A57BE6 /* AddNewCustomerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNewCustomerView.swift; sourceTree = "<group>"; };
 		E9B097EE912BE08E90307C3D5DBEAA47 /* SaleSecretaryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaleSecretaryTests.swift; sourceTree = "<group>"; };
 		F62447EA9409681F76292A514C7312A9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FB20A214877D05C6E7E1ECF3F9E4A391 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -113,6 +117,7 @@
 		0EA0B277261348029FDB9BAE2CF16043 /* SaleSecretary */ = {
 			isa = PBXGroup;
 			children = (
+				E7ED74C11F2EE4F100A57BE6 /* Contacts */,
 				2F673B09140D61E9954FB873D91AF82C /* Main */,
 				C5DB8245E853880567A8AA818CFA3A83 /* Message */,
 				353CBCFE5817ABE2C74E225413D69D8F /* Tools */,
@@ -260,6 +265,39 @@
 			name = View;
 			sourceTree = "<group>";
 		};
+		E7ED74C11F2EE4F100A57BE6 /* Contacts */ = {
+			isa = PBXGroup;
+			children = (
+				E7ED74C41F2EE52100A57BE6 /* View */,
+				E7ED74C31F2EE51500A57BE6 /* Model */,
+				E7ED74C21F2EE4FC00A57BE6 /* Controller */,
+			);
+			name = Contacts;
+			sourceTree = "<group>";
+		};
+		E7ED74C21F2EE4FC00A57BE6 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		E7ED74C31F2EE51500A57BE6 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		E7ED74C41F2EE52100A57BE6 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E7ED74C51F2EE5DF00A57BE6 /* AddNewCustomersCell.xib */,
+				E7ED74C71F2EF3D000A57BE6 /* AddNewCustomerView.swift */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -382,6 +420,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				837E4CB3CAA4F9E6F67FCD9B689A4731 /* Assets.xcassets in Resources */,
+				E7ED74C61F2EE5DF00A57BE6 /* AddNewCustomersCell.xib in Resources */,
 				B57F541A2E6EE35F55BF1F726094C124 /* LaunchScreen.storyboard in Resources */,
 				6E0C8CE31F2EE0A90066885F /* MessageDetail.storyboard in Resources */,
 				AF201728C3391AB87079CD9BA8E73001 /* Main.storyboard in Resources */,
@@ -416,6 +455,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				45BDDB34CBA326F0F1C1F3CBB472F1DE /* AppDelegate.swift in Sources */,
+				E7ED74C81F2EF3D000A57BE6 /* AddNewCustomerView.swift in Sources */,
 				63FFE17B8518E311F485E78D5AC99EDF /* MessageListCell.swift in Sources */,
 				5B61C6CC8719F793AA22DE8CE2E016A7 /* MessageViewController.swift in Sources */,
 				4D8C433AFF25A62C0F123986B3D3B2AC /* SMSUIViewController.swift in Sources */,
