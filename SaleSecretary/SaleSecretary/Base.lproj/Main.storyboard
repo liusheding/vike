@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="j2D-Lg-Ac9">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="j2D-Lg-Ac9">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -20,22 +20,13 @@
                     <view key="view" contentMode="scaleToFill" id="jC0-wl-NIc">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="通讯录页面" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i43-8f-Xej">
-                                <rect key="frame" x="36" y="84" width="302" height="320"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="通讯录" image="tab_txl_1" id="CCy-Pm-Kkh"/>
+                    <navigationItem key="navigationItem" title="通讯录" id="dbW-jO-H8g"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GkO-0y-6Ua" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="588" y="-418.74062968515744"/>
+            <point key="canvasLocation" x="1527.2" y="-418.74062968515744"/>
         </scene>
         <!--Main-->
         <scene sceneID="vzh-AB-Cs8">
@@ -47,7 +38,7 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="sEa-Fs-Ett" kind="relationship" relationship="viewControllers" id="Ong-RB-kse"/>
+                        <segue destination="l9T-uG-Y5h" kind="relationship" relationship="viewControllers" id="Ong-RB-kse"/>
                         <segue destination="bJP-cQ-5ub" kind="relationship" relationship="viewControllers" id="yGm-Z7-bPg"/>
                         <segue destination="tbD-dN-Hu5" kind="relationship" relationship="viewControllers" id="WHK-x5-ogj"/>
                         <segue destination="trc-ei-Azm" kind="relationship" relationship="viewControllers" id="BVn-xg-qUy"/>
@@ -138,7 +129,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qFY-eM-sCg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2527" y="86"/>
+            <point key="canvasLocation" x="3464.8000000000002" y="85.907046476761622"/>
         </scene>
         <!--工具-->
         <scene sceneID="ZMV-qz-HXU">
@@ -156,7 +147,26 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fhx-FU-55N" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1502" y="86"/>
+            <point key="canvasLocation" x="2440.8000000000002" y="85.907046476761622"/>
+        </scene>
+        <!--通讯录-->
+        <scene sceneID="eyW-2e-vaU">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="l9T-uG-Y5h" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="通讯录" image="tab_txl_1" id="CCy-Pm-Kkh"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="p8n-Wm-pPR">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="sEa-Fs-Ett" kind="relationship" relationship="rootViewController" id="tLS-Pv-yFA"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aPg-KR-q2U" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="588" y="-418.74062968515744"/>
         </scene>
     </scenes>
     <resources>
