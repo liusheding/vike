@@ -54,6 +54,14 @@ class MessageViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.tableView!.deselectRow(at: indexPath, animated: true)
         print("选中的Cell 为\(indexPath.row)")
+        self.hidesBottomBarWhenPushed = true
+        let controller = MessageDetailController()
+        controller.aa = indexPath.row
+        let cell = self.tableView.cellForRow(at: indexPath) as! MessageListCell
+        print("\(cell.cellname.text ?? "")")
+        self.navigationController?.pushViewController(controller, animated: true)
+        self.hidesBottomBarWhenPushed = false
+        
     }
     
     //返回编辑类型，滑动删除
@@ -63,40 +71,19 @@ class MessageViewController: UITableViewController {
     
     //修改删除按钮的文字
     override func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
-        return "点击删除"
+        return "删除"
     }
     
     //点击删除按钮的响应方法，处理删除的逻辑
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == UITableViewCellEditingStyle.delete {
+            self.Names.remove(at: indexPath.row)
+            self.Phones.remove(at: indexPath.row)
+            self.Times.remove(at: indexPath.row)
+            self.Images.remove(at: indexPath.row)
             self.tableView!.deleteRows(at: [indexPath], with: UITableViewRowAnimation.fade)
         }
-    }
-    
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
 
     }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
