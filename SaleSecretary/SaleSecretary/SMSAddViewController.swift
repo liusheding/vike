@@ -59,47 +59,130 @@ class SMSAddViewController : UIViewController {
             }
         }
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        print(self.segmentCtrl.frame)
+    }
 }
 
 
 
 class SMSTemplateViewController : UIViewController {
     
-    @IBOutlet weak var customerField: UITextField!
+//    @IBOutlet weak var customerField: UITextField!
     
+    @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUpTextFields()
+        // setUpTextFields()
+        setUpTableView()
     }
     
+    fileprivate var cellId : String  = "smsTmpleteCellId"
     
-    func setUpTextFields() {
-        print("setUpTextFields ")
-        customerField.borderStyle = UITextBorderStyle.roundedRect
-        customerField.sizeThatFits(<#T##size: CGSize##CGSize#>)
-        let leftImage = UIImageView(image: UIImage(named: "icon_kh"))
-        let rightImage = UIImageView(image : UIImage(named: "icon_tjfz"))
-        rightImage.isUserInteractionEnabled = true
-        let recog = UIGestureRecognizer()
-        recog.addTarget(self, action: Selector(("touched")))
-        rightImage.addGestureRecognizer(recog)
-        customerField.leftView = leftImage
-        customerField.rightView = rightImage
-        customerField.leftViewMode = UITextFieldViewMode.always
-        customerField.rightViewMode = UITextFieldViewMode.always
-        
-        func touched () {
-            
-            print("toeched")
-        }
-        
-    }
+//    func setUpTextFields() {
+//        print("setUpTextFields ")
+//        customerField.borderStyle = UITextBorderStyle.roundedRect
+//        let leftImage = UIImageView(image: UIImage(named: "icon_kh"))
+//        let rightImage = UIImageView(image : UIImage(named: "icon_tjfz"))
+//        rightImage.isUserInteractionEnabled = true
+//        let recog = UIGestureRecognizer()
+//        recog.addTarget(self, action: Selector(("touched")))
+//        rightImage.addGestureRecognizer(recog)
+//        customerField.leftView = leftImage
+//        customerField.rightView = rightImage
+//        customerField.leftViewMode = UITextFieldViewMode.always
+//        customerField.rightViewMode = UITextFieldViewMode.always
+//        
+//        func touched () {
+//            
+//            print("toeched")
+//        }
+//        
+//    }
+    
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        customerField.isHidden = true
+        // customerField.isHidden = true
     }
 }
+
+
+extension SMSTemplateViewController : UITableViewDataSource, UITableViewDelegate {
+   
+    func setUpTableView() {
+        self.tableView.dataSource = self
+        self.tableView.delegate = self
+        print(self.bottomLayoutGuide)
+        self.tableView.tableFooterView = UIView()
+        self.tableView.tableHeaderView = UIView(frame: CGRect.zero)
+               // self.tableView.ti
+        self.tableView.backgroundColor = UIColor.white
+        self.tableView.sectionIndexBackgroundColor = UIColor.black
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return CGFloat(50)
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return CGFloat(5)
+    }
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 0
+    }
+    
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        if indexPath.section == 0 {
+            let cell = UITableViewCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: cellId)
+            cell.imageView?.image = UIImage(named: "icon_kh")
+            cell.textLabel?.text = "请选择客户...刘总、张总、刘总、张总、刘总、张总、刘总、张总、刘总、张总刘总、张总、刘总、张总、刘总、张总、刘总、张总、刘总、张总、刘总、张总"
+            cell.textLabel?.font = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
+            cell.textLabel?.numberOfLines = 3
+            cell.textLabel?.textColor = UIColor.lightGray
+            cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
+            // cell.addConstraint(NSLayoutConstraint)
+            return cell
+        } else {
+            return UITableViewCell()
+        }
+    }
+    
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let custSelectVC = UIStoryboard(name: "SMSView", bundle: nil).instantiateViewController(withIdentifier: "CustomerSelectViewController") as! CustomerSelectViewController
+        present(custSelectVC, animated: true) {
+            [weak self] in {
+                print(self)
+            }()
+        }
+    }
+    
+    
+    
+    
+    override func viewDidAppear(_ animated: Bool) {
+        // self.tableView.scrollsToTop = true
+        // print("\(self.tableView.frame)")
+        // print("\(self.tableView.rectForRow(at: IndexPath(row: 0, section: 0)))")
+    }
+    
+}
+
 
 
 

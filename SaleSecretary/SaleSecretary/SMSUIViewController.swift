@@ -106,7 +106,7 @@ extension SMSUIViewController  {
     
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("only one row ")
+        // print("only one row ")
         return 3
     }
     
@@ -129,7 +129,7 @@ extension SMSUIViewController  {
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        print("display table view sections, 1/1")
+        // print("display table view sections, 1/1")
         return 1
     }
     

@@ -13,4 +13,9 @@ class CustomTextView : UITextView {
     
     
     
+    // let c : UITableViewCell = UITableViewCell(style: UITableViewCellStyle.subtitle)
+    
+    
+    
+    
 }

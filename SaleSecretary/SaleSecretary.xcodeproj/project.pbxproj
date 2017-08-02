@@ -25,6 +25,7 @@
 		66B602FB1F301230002A55E6 /* SMSDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B602FA1F301230002A55E6 /* SMSDetailController.swift */; };
 		66B602FD1F302238002A55E6 /* Recipient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B602FC1F302238002A55E6 /* Recipient.swift */; };
 		66BF592B1F3075E800154E8C /* SMSAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66BF592A1F3075E800154E8C /* SMSAddViewController.swift */; };
+		66D3D0E21F31E7C2005347D0 /* CustomerSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D3D0E11F31E7C2005347D0 /* CustomerSelectViewController.swift */; };
 		66F265411F30243100E9ECAB /* SMSMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F265401F30243100E9ECAB /* SMSMessage.swift */; };
 		6E0C8CE31F2EE0A90066885F /* MessageDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E0C8CE21F2EE0A90066885F /* MessageDetail.storyboard */; };
 		6E0C8CE51F2EE0B40066885F /* MessageDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0C8CE41F2EE0B40066885F /* MessageDetailController.swift */; };
@@ -77,6 +78,7 @@
 		66B602FA1F301230002A55E6 /* SMSDetailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SMSDetailController.swift; sourceTree = "<group>"; };
 		66B602FC1F302238002A55E6 /* Recipient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Recipient.swift; sourceTree = "<group>"; };
 		66BF592A1F3075E800154E8C /* SMSAddViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SMSAddViewController.swift; sourceTree = "<group>"; };
+		66D3D0E11F31E7C2005347D0 /* CustomerSelectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerSelectViewController.swift; sourceTree = "<group>"; };
 		66F265401F30243100E9ECAB /* SMSMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SMSMessage.swift; sourceTree = "<group>"; };
 		6B1304CBBFB165B9BCE2C5264AB48FAF /* SaleSecretaryUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaleSecretaryUITests.swift; sourceTree = "<group>"; };
 		6E0C8CE21F2EE0A90066885F /* MessageDetail.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MessageDetail.storyboard; sourceTree = "<group>"; };
@@ -311,6 +313,7 @@
 				D9F3B5FF5B6840C01FE98AB14DBF66A9 /* ToolsUIViewController.swift */,
 				66B602FA1F301230002A55E6 /* SMSDetailController.swift */,
 				66BF592A1F3075E800154E8C /* SMSAddViewController.swift */,
+				66D3D0E11F31E7C2005347D0 /* CustomerSelectViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -559,6 +562,7 @@
 				66B602F91F2F3BA7002A55E6 /* SMSDetailView.swift in Sources */,
 				4D8C433AFF25A62C0F123986B3D3B2AC /* SMSUIViewController.swift in Sources */,
 				6E0C8CE81F2EE0C20066885F /* MessageDetailCell.swift in Sources */,
+				66D3D0E21F31E7C2005347D0 /* CustomerSelectViewController.swift in Sources */,
 				E1E92A825F157EE0E15E88EC43FED169 /* SaleSecretary.xcdatamodeld in Sources */,
 				662D6A441F316F81001C1FB1 /* CustomTextView.swift in Sources */,
 				53E56F706EB9015CA4B22F2CB85E21EB /* ToolCellView.swift in Sources */,
