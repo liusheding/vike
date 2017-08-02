@@ -74,7 +74,9 @@ class ToolsUIViewController : UITableViewController {
         let selectedRow = self.tableView.cellForRow(at: indexPath)
         print("\(String(describing: selectedRow))")
         // print(selectedRow?.value(forKey: "id"))
-        self.navigationController?.pushViewController(SMSUIViewController(), animated: false)
+        let storyBoard = UIStoryboard(name: "SMSView", bundle: nil)
+        let smsVC = storyBoard.instantiateViewController(withIdentifier: "SMSUIViewController")
+        self.navigationController?.pushViewController(smsVC, animated: false)
     
     }
     
