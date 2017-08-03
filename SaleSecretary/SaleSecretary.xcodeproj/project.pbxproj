@@ -15,9 +15,13 @@
 		5B61C6CC8719F793AA22DE8CE2E016A7 /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFF07A861B596FBF6B58926BCD4CB27 /* MessageViewController.swift */; };
 		5F81108AF566E3AA21DC1DE8FE984ECE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45CD96F7DFFD87860F121A1A9F14848 /* ViewController.swift */; };
 		63FFE17B8518E311F485E78D5AC99EDF /* MessageListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E05D3EF5639A9140AFEB3E73C399202E /* MessageListCell.swift */; };
-		662D6A441F316F81001C1FB1 /* CustomTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 662D6A431F316F81001C1FB1 /* CustomTextView.swift */; };
 		662D6A491F3177BA001C1FB1 /* AddNewCustomersCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 662D6A471F3177BA001C1FB1 /* AddNewCustomersCell.xib */; };
 		662D6A4A1F3177BA001C1FB1 /* AddNewCustomerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 662D6A481F3177BA001C1FB1 /* AddNewCustomerView.swift */; };
+		66451F0C1F32C4C7009B65DD /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66451F0B1F32C4C7009B65DD /* UIColor+Hex.swift */; };
+		66451F0E1F330DDD009B65DD /* AppellationCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 66451F0D1F330DDD009B65DD /* AppellationCellView.xib */; };
+		66451F101F331001009B65DD /* AppellationCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66451F0F1F331001009B65DD /* AppellationCellView.swift */; };
+		66451F121F331E81009B65DD /* InscribeViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 66451F111F331E81009B65DD /* InscribeViewCell.xib */; };
+		66451F161F331F8E009B65DD /* InscribeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66451F151F331F8E009B65DD /* InscribeViewCell.swift */; };
 		66B602F01F2F043E002A55E6 /* SMSListViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B602EF1F2F043E002A55E6 /* SMSListViewCell.swift */; };
 		66B602F21F2F074A002A55E6 /* SMSListViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 66B602F11F2F074A002A55E6 /* SMSListViewCell.xib */; };
 		66B602F71F2F35CC002A55E6 /* SMSDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 66B602F61F2F35CC002A55E6 /* SMSDetailView.xib */; };
@@ -68,9 +72,13 @@
 		4E75E8F33B3F1B94561C76CE533E329A /* MessageListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageListCell.xib; sourceTree = "<group>"; };
 		523881837A69778310643A65B3F29D96 /* SMSUIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SMSUIViewController.swift; sourceTree = "<group>"; };
 		5EFF07A861B596FBF6B58926BCD4CB27 /* MessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
-		662D6A431F316F81001C1FB1 /* CustomTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTextView.swift; sourceTree = "<group>"; };
 		662D6A471F3177BA001C1FB1 /* AddNewCustomersCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddNewCustomersCell.xib; sourceTree = "<group>"; };
 		662D6A481F3177BA001C1FB1 /* AddNewCustomerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNewCustomerView.swift; sourceTree = "<group>"; };
+		66451F0B1F32C4C7009B65DD /* UIColor+Hex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
+		66451F0D1F330DDD009B65DD /* AppellationCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AppellationCellView.xib; sourceTree = "<group>"; };
+		66451F0F1F331001009B65DD /* AppellationCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppellationCellView.swift; sourceTree = "<group>"; };
+		66451F111F331E81009B65DD /* InscribeViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InscribeViewCell.xib; sourceTree = "<group>"; };
+		66451F151F331F8E009B65DD /* InscribeViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InscribeViewCell.swift; sourceTree = "<group>"; };
 		66B602EF1F2F043E002A55E6 /* SMSListViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SMSListViewCell.swift; sourceTree = "<group>"; };
 		66B602F11F2F074A002A55E6 /* SMSListViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SMSListViewCell.xib; sourceTree = "<group>"; };
 		66B602F61F2F35CC002A55E6 /* SMSDetailView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SMSDetailView.xib; sourceTree = "<group>"; };
@@ -194,7 +202,10 @@
 				66B602F11F2F074A002A55E6 /* SMSListViewCell.xib */,
 				66B602F61F2F35CC002A55E6 /* SMSDetailView.xib */,
 				66B602F81F2F3BA7002A55E6 /* SMSDetailView.swift */,
-				662D6A431F316F81001C1FB1 /* CustomTextView.swift */,
+				66451F0D1F330DDD009B65DD /* AppellationCellView.xib */,
+				66451F0F1F331001009B65DD /* AppellationCellView.swift */,
+				66451F111F331E81009B65DD /* InscribeViewCell.xib */,
+				66451F151F331F8E009B65DD /* InscribeViewCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -248,6 +259,7 @@
 		66B602F31F2F25F9002A55E6 /* Others */ = {
 			isa = PBXGroup;
 			children = (
+				66451F0B1F32C4C7009B65DD /* UIColor+Hex.swift */,
 			);
 			name = Others;
 			sourceTree = "<group>";
@@ -468,12 +480,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				66451F0E1F330DDD009B65DD /* AppellationCellView.xib in Resources */,
 				66B602F21F2F074A002A55E6 /* SMSListViewCell.xib in Resources */,
 				837E4CB3CAA4F9E6F67FCD9B689A4731 /* Assets.xcassets in Resources */,
 				B57F541A2E6EE35F55BF1F726094C124 /* LaunchScreen.storyboard in Resources */,
 				66B602F71F2F35CC002A55E6 /* SMSDetailView.xib in Resources */,
 				6E0C8CE31F2EE0A90066885F /* MessageDetail.storyboard in Resources */,
 				AF201728C3391AB87079CD9BA8E73001 /* Main.storyboard in Resources */,
+				66451F121F331E81009B65DD /* InscribeViewCell.xib in Resources */,
 				D9D045E89EEF6E531B731C29AF71C6D8 /* MessageListCell.xib in Resources */,
 				29D06932D6D0A7D01DEBF31C0546DAAE /* SMSView.storyboard in Resources */,
 				6E0C8CE91F2EE0C20066885F /* MessageDetailCell.xib in Resources */,
@@ -561,10 +575,12 @@
 				662D6A4A1F3177BA001C1FB1 /* AddNewCustomerView.swift in Sources */,
 				66B602F91F2F3BA7002A55E6 /* SMSDetailView.swift in Sources */,
 				4D8C433AFF25A62C0F123986B3D3B2AC /* SMSUIViewController.swift in Sources */,
+				66451F101F331001009B65DD /* AppellationCellView.swift in Sources */,
 				6E0C8CE81F2EE0C20066885F /* MessageDetailCell.swift in Sources */,
+				66451F0C1F32C4C7009B65DD /* UIColor+Hex.swift in Sources */,
 				66D3D0E21F31E7C2005347D0 /* CustomerSelectViewController.swift in Sources */,
 				E1E92A825F157EE0E15E88EC43FED169 /* SaleSecretary.xcdatamodeld in Sources */,
-				662D6A441F316F81001C1FB1 /* CustomTextView.swift in Sources */,
+				66451F161F331F8E009B65DD /* InscribeViewCell.swift in Sources */,
 				53E56F706EB9015CA4B22F2CB85E21EB /* ToolCellView.swift in Sources */,
 				A1388B73E89097D71FE47270B8861FF9 /* ToolsUIViewController.swift in Sources */,
 				6E0C8CE51F2EE0B40066885F /* MessageDetailController.swift in Sources */,

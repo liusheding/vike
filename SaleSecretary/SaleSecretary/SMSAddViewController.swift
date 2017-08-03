@@ -74,13 +74,19 @@ class SMSTemplateViewController : UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
+    @IBOutlet weak var previewBtn: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // setUpTextFields()
         setUpTableView()
+        previewBtn.layer.cornerRadius = 5.0
+        // previewBtn.layer.borderColor = 5.0f
     }
     
     fileprivate var cellId : String  = "smsTmpleteCellId"
+    
+    fileprivate var cellIdforInscribe: String  = "cellIdforInscribe"
     
 //    func setUpTextFields() {
 //        print("setUpTextFields ")
@@ -110,21 +116,26 @@ class SMSTemplateViewController : UIViewController {
 }
 
 
-extension SMSTemplateViewController : UITableViewDataSource, UITableViewDelegate {
+extension SMSTemplateViewController : UITableViewDataSource, UITableViewDelegate, CustomerSelectDelegate {
    
     func setUpTableView() {
         self.tableView.dataSource = self
         self.tableView.delegate = self
-        print(self.bottomLayoutGuide)
+        self.tableView.register(UINib(nibName: "AppellationCellView", bundle: nil), forCellReuseIdentifier: cellId)
+        self.tableView.register(UINib(nibName: "InscribeViewCell", bundle: nil), forCellReuseIdentifier: cellIdforInscribe)
         self.tableView.tableFooterView = UIView()
         self.tableView.tableHeaderView = UIView(frame: CGRect.zero)
                // self.tableView.ti
         self.tableView.backgroundColor = UIColor.white
-        self.tableView.sectionIndexBackgroundColor = UIColor.black
+        self.tableView.sectionIndexBackgroundColor = UIColor.lightGray
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return CGFloat(50)
+        if indexPath.section == 1 {
+            return 120
+        } else {
+            return 50
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -132,12 +143,16 @@ extension SMSTemplateViewController : UITableViewDataSource, UITableViewDelegate
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return 4
     }
     
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return CGFloat(5)
+        if section == 0 {
+            return 5
+        }
+        
+        return CGFloat(10)
     }
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -146,30 +161,83 @@ extension SMSTemplateViewController : UITableViewDataSource, UITableViewDelegate
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        if indexPath.section == 0 {
-            let cell = UITableViewCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: cellId)
-            cell.imageView?.image = UIImage(named: "icon_kh")
-            cell.textLabel?.text = "请选择客户...刘总、张总、刘总、张总、刘总、张总、刘总、张总、刘总、张总刘总、张总、刘总、张总、刘总、张总、刘总、张总、刘总、张总、刘总、张总"
-            cell.textLabel?.font = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
-            cell.textLabel?.numberOfLines = 3
-            cell.textLabel?.textColor = UIColor.lightGray
-            cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
-            // cell.addConstraint(NSLayoutConstraint)
-            return cell
-        } else {
+        switch indexPath.section {
+        case 0:
+            return createCustomerCell()
+        case 1:
+            return createTemplateCell()
+        case 2:
+            return createAppellationCell()
+        case 3:
+            return createInscribeCell()
+        default:
             return UITableViewCell()
         }
     }
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 2
+    }
+    func createAccessoryButton() -> UIButton {
+        let btn = UIButton(type : UIButtonType.custom)
+        btn.frame = CGRect(x:0, y:0, width: 32, height:32)
+        let image = UIImage(named: "icon_tj")
+        btn.setImage(image, for: UIControlState.normal)
+        return btn
+    }
     
+    
+    open func createCustomerCell() -> UITableViewCell {
+        let cell = UITableViewCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: cellId)
+        cell.imageView?.image = UIImage(named: "icon_kh")
+        cell.textLabel?.text = "请选择客户..."
+        cell.textLabel?.font = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
+        cell.textLabel?.numberOfLines = 3
+        cell.textLabel?.textColor = UIColor.lightGray
+        // cell.accessoryView = UIImageView(image: UIImage(named: "icon_tj"))
+        // cell.addConstraint(NSLayoutConstraint)
+        cell.accessoryView = createAccessoryButton()
+        return cell
+    }
+    
+    private func createTemplateCell() -> UITableViewCell {
+        let cell = UITableViewCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: cellId)
+        cell.imageView?.image = UIImage(named: "icon_nr")
+        cell.textLabel?.text = "短信模版内容"
+        cell.textLabel?.font = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
+        cell.textLabel?.numberOfLines = 5
+       
+        // btn.setImage(image, for: UIControlState.highlighted)
+        // cell.accessoryType = UITableViewCellAccessoryType.detailDisclosureButton
+        // cell.accessoryView = UIImageView(image: image)
+        // cell.accessoryType = UITableViewCellAccessoryType.detailButton
+        cell.accessoryView = createAccessoryButton()
+        return cell
+    }
+    
+    private func createInscribeCell() -> UITableViewCell {
+        let cell = self.tableView.dequeueReusableCell(withIdentifier: cellIdforInscribe) as! InscribeViewCell
+        return cell
+    }
+    
+    private func createAppellationCell() -> UITableViewCell {
+        let cell = self.tableView.dequeueReusableCell(withIdentifier: cellId) as! AppellationCellView
+        return cell
+    }
+    
+    
+    func selectedRecipients(rec: [Recipient]) {
+        let idx = self.tableView.indexPathForSelectedRow
+        if idx != nil {
+            let cell = self.tableView.cellForRow(at: idx!)
+            let names = rec.flatMap({$0.name}).joined(separator: "、")
+            cell?.textLabel?.text = names
+        }
+    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let custSelectVC = UIStoryboard(name: "SMSView", bundle: nil).instantiateViewController(withIdentifier: "CustomerSelectViewController") as! CustomerSelectViewController
-        present(custSelectVC, animated: true) {
-            [weak self] in {
-                print(self)
-            }()
-        }
+        custSelectVC.delegate = self
+        present(custSelectVC, animated: true) {}
     }
     
     

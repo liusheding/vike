@@ -11,20 +11,18 @@ import Foundation
 
 class Recipient {
     
-    var imageStr : String!
+    var imageStr : String! = ""
     
-    var name : String!
+    var name : String! = ""
     
     var title : String! = ""
     
-    var phone : String! = "" {
+    var phone : String! = ""
     
-        didSet {
-            func check() ->Bool {
-                return true
-            }
-            self.phone = "12"
-        }
+    
+    public init(name: String, phone:String) {
+        self.name = name
+        self.phone = phone
     }
     
 }
