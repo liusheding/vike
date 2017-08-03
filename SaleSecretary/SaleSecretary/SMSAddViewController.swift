@@ -26,6 +26,7 @@ class SMSAddViewController : UIViewController {
     
     @IBOutlet weak var customerView: UIView!
     
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -88,6 +89,8 @@ class SMSTemplateViewController : UIViewController {
     
     fileprivate var cellIdforInscribe: String  = "cellIdforInscribe"
     
+    fileprivate let planDatePickerId = "planDatePicker"
+    
 //    func setUpTextFields() {
 //        print("setUpTextFields ")
 //        customerField.borderStyle = UITextBorderStyle.roundedRect
@@ -123,6 +126,7 @@ extension SMSTemplateViewController : UITableViewDataSource, UITableViewDelegate
         self.tableView.delegate = self
         self.tableView.register(UINib(nibName: "AppellationCellView", bundle: nil), forCellReuseIdentifier: cellId)
         self.tableView.register(UINib(nibName: "InscribeViewCell", bundle: nil), forCellReuseIdentifier: cellIdforInscribe)
+        self.tableView.register(UINib(nibName: "PlanExecTimeCellView", bundle: nil), forCellReuseIdentifier: planDatePickerId)
         self.tableView.tableFooterView = UIView()
         self.tableView.tableHeaderView = UIView(frame: CGRect.zero)
                // self.tableView.ti
@@ -143,7 +147,7 @@ extension SMSTemplateViewController : UITableViewDataSource, UITableViewDelegate
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 4
+        return 5
     }
     
     
@@ -170,6 +174,8 @@ extension SMSTemplateViewController : UITableViewDataSource, UITableViewDelegate
             return createAppellationCell()
         case 3:
             return createInscribeCell()
+        case 4:
+            return createPlanDatePickerCell()
         default:
             return UITableViewCell()
         }
@@ -224,6 +230,11 @@ extension SMSTemplateViewController : UITableViewDataSource, UITableViewDelegate
         return cell
     }
     
+    private func createPlanDatePickerCell() -> UITableViewCell {
+        let cell = self.tableView.dequeueReusableCell(withIdentifier: planDatePickerId) as! PlanExecTimeCellView
+        return cell
+    }
+    
     
     func selectedRecipients(rec: [Recipient]) {
         let idx = self.tableView.indexPathForSelectedRow
@@ -235,9 +246,14 @@ extension SMSTemplateViewController : UITableViewDataSource, UITableViewDelegate
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let custSelectVC = UIStoryboard(name: "SMSView", bundle: nil).instantiateViewController(withIdentifier: "CustomerSelectViewController") as! CustomerSelectViewController
-        custSelectVC.delegate = self
-        present(custSelectVC, animated: true) {}
+        switch indexPath.section {
+        case 0:
+            let custSelectVC = UIStoryboard(name: "SMSView", bundle: nil).instantiateViewController(withIdentifier: "CustomerSelectViewController") as! CustomerSelectViewController
+            custSelectVC.delegate = self
+            present(custSelectVC, animated: true) {}
+        default:
+            return
+        }
     }
     
     
