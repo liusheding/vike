@@ -47,17 +47,17 @@
                         </subviews>
                     </stackView>
                     <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="5Yn-OC-veW">
-                        <rect key="frame" x="71" y="19.5" width="73.5" height="50"/>
+                        <rect key="frame" x="71" y="19.5" width="74" height="50"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Vsi-S5-Wk5">
-                                <rect key="frame" x="0.0" y="0.0" width="73.5" height="50"/>
+                                <rect key="frame" x="0.0" y="0.0" width="74" height="50"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="qLW-dr-Jis">
-                                        <rect key="frame" x="0.0" y="0.0" width="73.5" height="50"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="74" height="50"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="QgC-Pk-ICe">
-                                                <rect key="frame" x="0.0" y="0.0" width="73.5" height="50"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="74" height="50"/>
                                             </stackView>
                                         </subviews>
                                     </stackView>

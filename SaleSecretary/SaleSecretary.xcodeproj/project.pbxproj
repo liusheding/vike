@@ -15,12 +15,31 @@
 		5B61C6CC8719F793AA22DE8CE2E016A7 /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFF07A861B596FBF6B58926BCD4CB27 /* MessageViewController.swift */; };
 		5F81108AF566E3AA21DC1DE8FE984ECE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45CD96F7DFFD87860F121A1A9F14848 /* ViewController.swift */; };
 		63FFE17B8518E311F485E78D5AC99EDF /* MessageListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E05D3EF5639A9140AFEB3E73C399202E /* MessageListCell.swift */; };
+		662D6A491F3177BA001C1FB1 /* AddNewCustomersCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 662D6A471F3177BA001C1FB1 /* AddNewCustomersCell.xib */; };
+		662D6A4A1F3177BA001C1FB1 /* AddNewCustomerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 662D6A481F3177BA001C1FB1 /* AddNewCustomerView.swift */; };
+		66451F0C1F32C4C7009B65DD /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66451F0B1F32C4C7009B65DD /* UIColor+Hex.swift */; };
+		66451F0E1F330DDD009B65DD /* AppellationCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 66451F0D1F330DDD009B65DD /* AppellationCellView.xib */; };
+		66451F101F331001009B65DD /* AppellationCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66451F0F1F331001009B65DD /* AppellationCellView.swift */; };
+		66451F121F331E81009B65DD /* InscribeViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 66451F111F331E81009B65DD /* InscribeViewCell.xib */; };
+		66451F161F331F8E009B65DD /* InscribeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66451F151F331F8E009B65DD /* InscribeViewCell.swift */; };
+		66451F181F332AB8009B65DD /* PlanExecTimeCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 66451F171F332AB8009B65DD /* PlanExecTimeCellView.xib */; };
+		66451F1A1F332D4E009B65DD /* PlanExecTimeCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66451F191F332D4E009B65DD /* PlanExecTimeCellView.swift */; };
+		66B602F01F2F043E002A55E6 /* SMSListViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B602EF1F2F043E002A55E6 /* SMSListViewCell.swift */; };
+		66B602F21F2F074A002A55E6 /* SMSListViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 66B602F11F2F074A002A55E6 /* SMSListViewCell.xib */; };
+		66B602F71F2F35CC002A55E6 /* SMSDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 66B602F61F2F35CC002A55E6 /* SMSDetailView.xib */; };
+		66B602F91F2F3BA7002A55E6 /* SMSDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B602F81F2F3BA7002A55E6 /* SMSDetailView.swift */; };
+		66B602FB1F301230002A55E6 /* SMSDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B602FA1F301230002A55E6 /* SMSDetailController.swift */; };
+		66B602FD1F302238002A55E6 /* Recipient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B602FC1F302238002A55E6 /* Recipient.swift */; };
+		66BF592B1F3075E800154E8C /* SMSAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66BF592A1F3075E800154E8C /* SMSAddViewController.swift */; };
+		66D3D0E21F31E7C2005347D0 /* CustomerSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D3D0E11F31E7C2005347D0 /* CustomerSelectViewController.swift */; };
+		66F265411F30243100E9ECAB /* SMSMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F265401F30243100E9ECAB /* SMSMessage.swift */; };
 		6E0C8CE31F2EE0A90066885F /* MessageDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E0C8CE21F2EE0A90066885F /* MessageDetail.storyboard */; };
 		6E0C8CE51F2EE0B40066885F /* MessageDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0C8CE41F2EE0B40066885F /* MessageDetailController.swift */; };
 		6E0C8CE81F2EE0C20066885F /* MessageDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0C8CE61F2EE0C20066885F /* MessageDetailCell.swift */; };
 		6E0C8CE91F2EE0C20066885F /* MessageDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E0C8CE71F2EE0C20066885F /* MessageDetailCell.xib */; };
 		7D4F943E251DFCF1E855A17CA7047BAB /* ToolCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1EDAEF18CBA6F23688F9247911F93EDF /* ToolCellView.xib */; };
 		837E4CB3CAA4F9E6F67FCD9B689A4731 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F3ED2E7C36C4CC96B9B25E5F44BB6DC /* Assets.xcassets */; };
+		8F857D8EE568B6B553022CDE /* Pods_SaleSecretary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96CFA79C8767534862334D7C /* Pods_SaleSecretary.framework */; };
 		A1388B73E89097D71FE47270B8861FF9 /* ToolsUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F3B5FF5B6840C01FE98AB14DBF66A9 /* ToolsUIViewController.swift */; };
 		AF201728C3391AB87079CD9BA8E73001 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 03D25B800318496B626EE1356C773AA4 /* Main.storyboard */; };
 		B1CD15B5F521C5D0040C8C6FF7E7477F /* SaleSecretaryUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B1304CBBFB165B9BCE2C5264AB48FAF /* SaleSecretaryUITests.swift */; };
@@ -106,6 +125,24 @@
 		4E75E8F33B3F1B94561C76CE533E329A /* MessageListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageListCell.xib; sourceTree = "<group>"; };
 		523881837A69778310643A65B3F29D96 /* SMSUIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SMSUIViewController.swift; sourceTree = "<group>"; };
 		5EFF07A861B596FBF6B58926BCD4CB27 /* MessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
+		662D6A471F3177BA001C1FB1 /* AddNewCustomersCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddNewCustomersCell.xib; sourceTree = "<group>"; };
+		662D6A481F3177BA001C1FB1 /* AddNewCustomerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNewCustomerView.swift; sourceTree = "<group>"; };
+		66451F0B1F32C4C7009B65DD /* UIColor+Hex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
+		66451F0D1F330DDD009B65DD /* AppellationCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AppellationCellView.xib; sourceTree = "<group>"; };
+		66451F0F1F331001009B65DD /* AppellationCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppellationCellView.swift; sourceTree = "<group>"; };
+		66451F111F331E81009B65DD /* InscribeViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InscribeViewCell.xib; sourceTree = "<group>"; };
+		66451F151F331F8E009B65DD /* InscribeViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InscribeViewCell.swift; sourceTree = "<group>"; };
+		66451F171F332AB8009B65DD /* PlanExecTimeCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlanExecTimeCellView.xib; sourceTree = "<group>"; };
+		66451F191F332D4E009B65DD /* PlanExecTimeCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlanExecTimeCellView.swift; sourceTree = "<group>"; };
+		66B602EF1F2F043E002A55E6 /* SMSListViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SMSListViewCell.swift; sourceTree = "<group>"; };
+		66B602F11F2F074A002A55E6 /* SMSListViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SMSListViewCell.xib; sourceTree = "<group>"; };
+		66B602F61F2F35CC002A55E6 /* SMSDetailView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SMSDetailView.xib; sourceTree = "<group>"; };
+		66B602F81F2F3BA7002A55E6 /* SMSDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SMSDetailView.swift; sourceTree = "<group>"; };
+		66B602FA1F301230002A55E6 /* SMSDetailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SMSDetailController.swift; sourceTree = "<group>"; };
+		66B602FC1F302238002A55E6 /* Recipient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Recipient.swift; sourceTree = "<group>"; };
+		66BF592A1F3075E800154E8C /* SMSAddViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SMSAddViewController.swift; sourceTree = "<group>"; };
+		66D3D0E11F31E7C2005347D0 /* CustomerSelectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerSelectViewController.swift; sourceTree = "<group>"; };
+		66F265401F30243100E9ECAB /* SMSMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SMSMessage.swift; sourceTree = "<group>"; };
 		6B1304CBBFB165B9BCE2C5264AB48FAF /* SaleSecretaryUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaleSecretaryUITests.swift; sourceTree = "<group>"; };
 		6E0C8CE21F2EE0A90066885F /* MessageDetail.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MessageDetail.storyboard; sourceTree = "<group>"; };
 		6E0C8CE41F2EE0B40066885F /* MessageDetailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageDetailController.swift; sourceTree = "<group>"; };
@@ -117,6 +154,7 @@
 		B5110A908A25F067CDF103F926B2627C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B78013FA05C85654B14C93F66423543A /* SaleSecretary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SaleSecretary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C44B64C515E9205C02855331FBB73F3F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		C6ADDA7123B0C31E576BB48B /* Pods-SaleSecretary.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SaleSecretary.release.xcconfig"; path = "Pods/Target Support Files/Pods-SaleSecretary/Pods-SaleSecretary.release.xcconfig"; sourceTree = "<group>"; };
 		D371670FE9B8DBB273DF1F7BA7CDCAB4 /* SaleSecretaryUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SaleSecretaryUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D600CFAFAE0B824ECFF06CA2EEDB46DF /* SMSView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SMSView.storyboard; sourceTree = "<group>"; };
 		D9F3B5FF5B6840C01FE98AB14DBF66A9 /* ToolsUIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToolsUIViewController.swift; sourceTree = "<group>"; };
@@ -177,7 +215,8 @@
 		0EA0B277261348029FDB9BAE2CF16043 /* SaleSecretary */ = {
 			isa = PBXGroup;
 			children = (
-				E7ED74C11F2EE4F100A57BE6 /* Contacts */,
+				662D6A451F317755001C1FB1 /* Contacts */,
+				66B602F31F2F25F9002A55E6 /* Others */,
 				2F673B09140D61E9954FB873D91AF82C /* Main */,
 				C5DB8245E853880567A8AA818CFA3A83 /* Message */,
 				353CBCFE5817ABE2C74E225413D69D8F /* Tools */,
@@ -224,6 +263,16 @@
 			children = (
 				1388E83064119789E4E2181C9871C9F6 /* ToolCellView.swift */,
 				1EDAEF18CBA6F23688F9247911F93EDF /* ToolCellView.xib */,
+				66B602EF1F2F043E002A55E6 /* SMSListViewCell.swift */,
+				66B602F11F2F074A002A55E6 /* SMSListViewCell.xib */,
+				66B602F61F2F35CC002A55E6 /* SMSDetailView.xib */,
+				66B602F81F2F3BA7002A55E6 /* SMSDetailView.swift */,
+				66451F0D1F330DDD009B65DD /* AppellationCellView.xib */,
+				66451F0F1F331001009B65DD /* AppellationCellView.swift */,
+				66451F111F331E81009B65DD /* InscribeViewCell.xib */,
+				66451F151F331F8E009B65DD /* InscribeViewCell.swift */,
+				66451F171F332AB8009B65DD /* PlanExecTimeCellView.xib */,
+				66451F191F332D4E009B65DD /* PlanExecTimeCellView.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -260,6 +309,8 @@
 		77D28E5543C148C1D2B03F577CBA0F88 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				66B602FC1F302238002A55E6 /* Recipient.swift */,
+				66F265401F30243100E9ECAB /* SMSMessage.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -314,6 +365,9 @@
 				523881837A69778310643A65B3F29D96 /* SMSUIViewController.swift */,
 				D600CFAFAE0B824ECFF06CA2EEDB46DF /* SMSView.storyboard */,
 				D9F3B5FF5B6840C01FE98AB14DBF66A9 /* ToolsUIViewController.swift */,
+				66B602FA1F301230002A55E6 /* SMSDetailController.swift */,
+				66BF592A1F3075E800154E8C /* SMSAddViewController.swift */,
+				66D3D0E11F31E7C2005347D0 /* CustomerSelectViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -574,14 +628,17 @@
 			files = (
 				E754352F1F331C0B00BDE8C6 /* customerList.plist in Resources */,
 				837E4CB3CAA4F9E6F67FCD9B689A4731 /* Assets.xcassets in Resources */,
-				E7ED74C61F2EE5DF00A57BE6 /* AddNewCustomersCell.xib in Resources */,
 				B57F541A2E6EE35F55BF1F726094C124 /* LaunchScreen.storyboard in Resources */,
+				66B602F71F2F35CC002A55E6 /* SMSDetailView.xib in Resources */,
 				6E0C8CE31F2EE0A90066885F /* MessageDetail.storyboard in Resources */,
 				AF201728C3391AB87079CD9BA8E73001 /* Main.storyboard in Resources */,
+				66451F121F331E81009B65DD /* InscribeViewCell.xib in Resources */,
 				D9D045E89EEF6E531B731C29AF71C6D8 /* MessageListCell.xib in Resources */,
 				E77D66111F307B870013B178 /* CustomersCell.xib in Resources */,
 				29D06932D6D0A7D01DEBF31C0546DAAE /* SMSView.storyboard in Resources */,
 				6E0C8CE91F2EE0C20066885F /* MessageDetailCell.xib in Resources */,
+				66451F181F332AB8009B65DD /* PlanExecTimeCellView.xib in Resources */,
+				662D6A491F3177BA001C1FB1 /* AddNewCustomersCell.xib in Resources */,
 				7D4F943E251DFCF1E855A17CA7047BAB /* ToolCellView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -671,6 +728,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				66BF592B1F3075E800154E8C /* SMSAddViewController.swift in Sources */,
 				45BDDB34CBA326F0F1C1F3CBB472F1DE /* AppDelegate.swift in Sources */,
 				E70864E01F315C9200181DCC /* ContactTableViewController.swift in Sources */,
 				63FFE17B8518E311F485E78D5AC99EDF /* MessageListCell.swift in Sources */,
@@ -679,13 +737,20 @@
 				4D8C433AFF25A62C0F123986B3D3B2AC /* SMSUIViewController.swift in Sources */,
 				E70864E21F31BEA200181DCC /* TableViewCell.swift in Sources */,
 				6E0C8CE81F2EE0C20066885F /* MessageDetailCell.swift in Sources */,
+				66451F0C1F32C4C7009B65DD /* UIColor+Hex.swift in Sources */,
+				66451F1A1F332D4E009B65DD /* PlanExecTimeCellView.swift in Sources */,
+				66D3D0E21F31E7C2005347D0 /* CustomerSelectViewController.swift in Sources */,
 				E1E92A825F157EE0E15E88EC43FED169 /* SaleSecretary.xcdatamodeld in Sources */,
+				66451F161F331F8E009B65DD /* InscribeViewCell.swift in Sources */,
 				53E56F706EB9015CA4B22F2CB85E21EB /* ToolCellView.swift in Sources */,
 				E77D66131F307FE80013B178 /* CustomersCell.swift in Sources */,
 				A1388B73E89097D71FE47270B8861FF9 /* ToolsUIViewController.swift in Sources */,
 				6E0C8CE51F2EE0B40066885F /* MessageDetailController.swift in Sources */,
 				E77D66171F3093210013B178 /* CustomerModel.swift in Sources */,
 				5F81108AF566E3AA21DC1DE8FE984ECE /* ViewController.swift in Sources */,
+				66B602FB1F301230002A55E6 /* SMSDetailController.swift in Sources */,
+				66B602F01F2F043E002A55E6 /* SMSListViewCell.swift in Sources */,
+				66B602FD1F302238002A55E6 /* Recipient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
