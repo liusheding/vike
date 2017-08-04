@@ -17,8 +17,6 @@
 		63FFE17B8518E311F485E78D5AC99EDF /* MessageListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E05D3EF5639A9140AFEB3E73C399202E /* MessageListCell.swift */; };
 		6615BF541F33F9A60052879B /* CustomSMSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6615BF531F33F9A60052879B /* CustomSMSViewController.swift */; };
 		6615BF5C1F3413210052879B /* ContactTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6615BF581F3413210052879B /* ContactTableViewController.swift */; };
-		6615BF5D1F3413210052879B /* ContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6615BF591F3413210052879B /* ContactViewController.swift */; };
-		6615BF5E1F3413210052879B /* CustomerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6615BF5A1F3413210052879B /* CustomerViewController.swift */; };
 		6615BF641F3413420052879B /* ContactsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6615BF5F1F3413420052879B /* ContactsTableViewCell.swift */; };
 		6615BF651F3413420052879B /* CustomerDetailInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6615BF601F3413420052879B /* CustomerDetailInfo.swift */; };
 		6615BF661F3413420052879B /* CustomerHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6615BF611F3413420052879B /* CustomerHeaderView.swift */; };
@@ -88,8 +86,6 @@
 		5EFF07A861B596FBF6B58926BCD4CB27 /* MessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
 		6615BF531F33F9A60052879B /* CustomSMSViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSMSViewController.swift; sourceTree = "<group>"; };
 		6615BF581F3413210052879B /* ContactTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactTableViewController.swift; sourceTree = "<group>"; };
-		6615BF591F3413210052879B /* ContactViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactViewController.swift; sourceTree = "<group>"; };
-		6615BF5A1F3413210052879B /* CustomerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerViewController.swift; sourceTree = "<group>"; };
 		6615BF5F1F3413420052879B /* ContactsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactsTableViewCell.swift; sourceTree = "<group>"; };
 		6615BF601F3413420052879B /* CustomerDetailInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerDetailInfo.swift; sourceTree = "<group>"; };
 		6615BF611F3413420052879B /* CustomerHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerHeaderView.swift; sourceTree = "<group>"; };
@@ -273,8 +269,6 @@
 			isa = PBXGroup;
 			children = (
 				6615BF581F3413210052879B /* ContactTableViewController.swift */,
-				6615BF591F3413210052879B /* ContactViewController.swift */,
-				6615BF5A1F3413210052879B /* CustomerViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -632,7 +626,6 @@
 				66BF592B1F3075E800154E8C /* SMSAddViewController.swift in Sources */,
 				45BDDB34CBA326F0F1C1F3CBB472F1DE /* AppDelegate.swift in Sources */,
 				66F265411F30243100E9ECAB /* SMSMessage.swift in Sources */,
-				6615BF5E1F3413210052879B /* CustomerViewController.swift in Sources */,
 				63FFE17B8518E311F485E78D5AC99EDF /* MessageListCell.swift in Sources */,
 				5B61C6CC8719F793AA22DE8CE2E016A7 /* MessageViewController.swift in Sources */,
 				662D6A4A1F3177BA001C1FB1 /* AddNewCustomerView.swift in Sources */,
@@ -649,7 +642,6 @@
 				6615BF6C1F34134C0052879B /* CustomerModel.swift in Sources */,
 				66451F1A1F332D4E009B65DD /* PlanExecTimeCellView.swift in Sources */,
 				66D3D0E21F31E7C2005347D0 /* CustomerSelectViewController.swift in Sources */,
-				6615BF5D1F3413210052879B /* ContactViewController.swift in Sources */,
 				6615BF661F3413420052879B /* CustomerHeaderView.swift in Sources */,
 				E1E92A825F157EE0E15E88EC43FED169 /* SaleSecretary.xcdatamodeld in Sources */,
 				66451F161F331F8E009B65DD /* InscribeViewCell.swift in Sources */,
