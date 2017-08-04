@@ -55,10 +55,17 @@ class MessageViewController: UITableViewController {
         self.tableView!.deselectRow(at: indexPath, animated: true)
         print("选中的Cell 为\(indexPath.row)")
         self.hidesBottomBarWhenPushed = true
+        let cell = self.tableView.cellForRow(at: indexPath) as! MessageListCell
+        print("\(cell.cellname.text!)")
+        
+        if (cell.cellname.text! == "指尖刘总"){
+            self.navigationController?.pushViewController(MessageChatController(), animated: true)
+            self.hidesBottomBarWhenPushed = false
+            return
+        }
+       
         let controller = MessageDetailController()
         controller.aa = indexPath.row
-        let cell = self.tableView.cellForRow(at: indexPath) as! MessageListCell
-        print("\(cell.cellname.text ?? "")")
         self.navigationController?.pushViewController(controller, animated: true)
         self.hidesBottomBarWhenPushed = false
         

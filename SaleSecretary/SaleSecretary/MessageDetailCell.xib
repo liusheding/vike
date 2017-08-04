@@ -19,10 +19,10 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BYi-dV-Jzt">
-                        <rect key="frame" x="8" y="5" width="82" height="14"/>
+                        <rect key="frame" x="8" y="5" width="106" height="14"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="14" id="9ot-lW-k8L"/>
-                            <constraint firstAttribute="width" priority="999" constant="94" id="r82-eD-VL2"/>
+                            <constraint firstAttribute="width" priority="999" constant="98" id="r82-eD-VL2"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -51,7 +51,7 @@
                     <constraint firstAttribute="trailing" secondItem="GpR-Iu-a1N" secondAttribute="trailing" constant="4" id="BBy-t7-lFv"/>
                     <constraint firstAttribute="bottom" secondItem="GpR-Iu-a1N" secondAttribute="bottom" constant="5" id="EFg-9W-UcP"/>
                     <constraint firstItem="BYi-dV-Jzt" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="SVh-eu-xXB"/>
-                    <constraint firstAttribute="trailing" secondItem="BYi-dV-Jzt" secondAttribute="trailing" constant="244" id="mqu-eG-YXx"/>
+                    <constraint firstAttribute="trailing" secondItem="BYi-dV-Jzt" secondAttribute="trailing" constant="220" id="mqu-eG-YXx"/>
                     <constraint firstItem="GpR-Iu-a1N" firstAttribute="top" secondItem="BYi-dV-Jzt" secondAttribute="bottom" constant="22.5" id="yp9-qP-gUI"/>
                 </constraints>
             </tableViewCellContentView>
