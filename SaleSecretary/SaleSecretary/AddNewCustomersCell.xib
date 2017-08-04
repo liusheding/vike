@@ -14,12 +14,12 @@
         <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="64" id="YkT-n9-UpO">
             <rect key="frame" x="0.0" y="0.0" width="396" height="64"/>
             <autoresizingMask key="autoresizingMask"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="addNewCustomers" tableViewCell="YkT-n9-UpO" id="XxH-pI-3ri">
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="customersView" tableViewCell="YkT-n9-UpO" id="XxH-pI-3ri">
                 <rect key="frame" x="0.0" y="0.0" width="396" height="63.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon_gd" translatesAutoresizingMaskIntoConstraints="NO" id="nvJ-r8-0hk">
-                        <rect key="frame" x="361" y="-3" width="35" height="69"/>
+                        <rect key="frame" x="361" y="0.0" width="35" height="64"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="新的客户" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8iC-wc-2Tq">
@@ -29,8 +29,8 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="pic_xkh" translatesAutoresizingMaskIntoConstraints="NO" id="Oyo-eJ-9at">
-                        <rect key="frame" x="14" y="2" width="61" height="61"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="pic_xkh" translatesAutoresizingMaskIntoConstraints="NO" id="Lra-Q3-FRA">
+                        <rect key="frame" x="8" y="1" width="63" height="63"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
                 </subviews>
