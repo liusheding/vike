@@ -17,6 +17,8 @@ class PlanExecTimeCellView : UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        // self.datePicker
+        // self.imageView?.image = UIImage(named: "icon_zxsj")
     }
     
 }

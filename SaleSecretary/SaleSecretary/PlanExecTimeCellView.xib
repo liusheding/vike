@@ -11,34 +11,27 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="planDatePicker" rowHeight="50" id="VMm-5V-NB1" customClass="PlanExecTimeCellView" customModule="SaleSecretary" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="planDatePicker" rowHeight="120" id="VMm-5V-NB1" customClass="PlanExecTimeCellView" customModule="SaleSecretary" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="409" height="123"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VMm-5V-NB1" id="UJK-tq-yLJ">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="409" height="122.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon_zxsj" translatesAutoresizingMaskIntoConstraints="NO" id="lN6-QJ-GRL">
-                        <rect key="frame" x="8" y="9" width="24" height="24"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    </imageView>
                     <datePicker contentMode="scaleToFill" fixedFrame="YES" highlighted="YES" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="30" translatesAutoresizingMaskIntoConstraints="NO" id="iS2-f1-Qm3">
-                        <rect key="frame" x="81" y="-4" width="270" height="50"/>
+                        <rect key="frame" x="0.0" y="0.0" width="409" height="123"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                         <date key="date" timeIntervalSinceReferenceDate="523447158.221587">
                             <!--2017-08-03 09:59:18 +0000-->
                         </date>
-                        <locale key="locale" localeIdentifier="zh"/>
+                        <locale key="locale" localeIdentifier="zh-Hans"/>
                     </datePicker>
                 </subviews>
             </tableViewCellContentView>
             <connections>
                 <outlet property="datePicker" destination="iS2-f1-Qm3" id="3FX-YP-I6P"/>
             </connections>
-            <point key="canvasLocation" x="-189.5" y="69"/>
+            <point key="canvasLocation" x="-172.5" y="108.5"/>
         </tableViewCell>
     </objects>
-    <resources>
-        <image name="icon_zxsj" width="20" height="20"/>
-    </resources>
 </document>

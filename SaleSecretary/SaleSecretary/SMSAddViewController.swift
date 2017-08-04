@@ -91,6 +91,13 @@ class SMSTemplateViewController : UIViewController {
     
     fileprivate let planDatePickerId = "planDatePicker"
     
+    
+    lazy var datePicker : PlanExecTimeCellView = {
+        let cell = self.tableView.dequeueReusableCell(withIdentifier: self.planDatePickerId) as! PlanExecTimeCellView
+        cell.isHidden = true
+        return cell
+    }()
+    
 //    func setUpTextFields() {
 //        print("setUpTextFields ")
 //        customerField.borderStyle = UITextBorderStyle.roundedRect
@@ -127,7 +134,9 @@ extension SMSTemplateViewController : UITableViewDataSource, UITableViewDelegate
         self.tableView.register(UINib(nibName: "AppellationCellView", bundle: nil), forCellReuseIdentifier: cellId)
         self.tableView.register(UINib(nibName: "InscribeViewCell", bundle: nil), forCellReuseIdentifier: cellIdforInscribe)
         self.tableView.register(UINib(nibName: "PlanExecTimeCellView", bundle: nil), forCellReuseIdentifier: planDatePickerId)
+        
         self.tableView.tableFooterView = UIView()
+        self.tableView.tableFooterView?.backgroundColor = UIColor.lightGray
         self.tableView.tableHeaderView = UIView(frame: CGRect.zero)
                // self.tableView.ti
         self.tableView.backgroundColor = UIColor.white
@@ -135,9 +144,15 @@ extension SMSTemplateViewController : UITableViewDataSource, UITableViewDelegate
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
         if indexPath.section == 1 {
             return 120
-        } else {
+        } else if indexPath.section == 5 {
+//            if self.datePicker.isHidden {
+//                return 0
+//            }
+            return 120
+        } else  {
             return 50
         }
     }
@@ -147,11 +162,12 @@ extension SMSTemplateViewController : UITableViewDataSource, UITableViewDelegate
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 5
+        return 6
     }
     
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        
         if section == 0 {
             return 5
         }
@@ -175,7 +191,9 @@ extension SMSTemplateViewController : UITableViewDataSource, UITableViewDelegate
         case 3:
             return createInscribeCell()
         case 4:
-            return createPlanDatePickerCell()
+            return createPlanDateCell()
+        case 5:
+            return self.datePicker
         default:
             return UITableViewCell()
         }
@@ -230,19 +248,23 @@ extension SMSTemplateViewController : UITableViewDataSource, UITableViewDelegate
         return cell
     }
     
-    private func createPlanDatePickerCell() -> UITableViewCell {
-        let cell = self.tableView.dequeueReusableCell(withIdentifier: planDatePickerId) as! PlanExecTimeCellView
+    private func createPlanDateCell() -> UITableViewCell {
+        
+        let cell = UITableViewCell(style: UITableViewCellStyle.value1, reuseIdentifier: cellId)
+        cell.imageView?.image = UIImage(named: "icon_zxsj")
+        cell.detailTextLabel?.text = "执行时间"
+        cell.detailTextLabel?.font = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
+        cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
         return cell
+        
     }
     
-    
     func selectedRecipients(rec: [Recipient]) {
-        let idx = self.tableView.indexPathForSelectedRow
-        if idx != nil {
-            let cell = self.tableView.cellForRow(at: idx!)
-            let names = rec.flatMap({$0.name}).joined(separator: "、")
-            cell?.textLabel?.text = names
-        }
+        // let idx = self.tableView.indexPathForSelectedRow
+        let cell = self.tableView.cellForRow(at: [0, 0])
+        let names = rec.flatMap({$0.name}).joined(separator: "、")
+        cell?.textLabel?.text = names
+    
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -251,15 +273,31 @@ extension SMSTemplateViewController : UITableViewDataSource, UITableViewDelegate
             let custSelectVC = UIStoryboard(name: "SMSView", bundle: nil).instantiateViewController(withIdentifier: "CustomerSelectViewController") as! CustomerSelectViewController
             custSelectVC.delegate = self
             present(custSelectVC, animated: true) {}
+        case 4:
+            toggleDatePicker()
         default:
             return
         }
+         self.tableView.deselectRow(at:indexPath, animated: true)
+    }
+    
+    func toggleDatePicker() {
+        self.datePicker.isHidden = !self.datePicker.isHidden
+        // self.tableView.reloadData()
+        // self.tableView.reloadRows(at: [[5, 0]], with: UITableViewRowAnimation.bottom)
+        // self.tableView.reloadSections([5], with: UITableViewRowAnimation.bottom)
+        // self.tableView.beginUpdates()
+        // self.tableView.reloadData()
+        // self.tableView.reloadSections([5], with: UITableViewRowAnimation.right)
+        // self.tableView.endUpdates()
+        // self.tableView.com
     }
     
     
     
     
     override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         // self.tableView.scrollsToTop = true
         // print("\(self.tableView.frame)")
         // print("\(self.tableView.rectForRow(at: IndexPath(row: 0, section: 0)))")
