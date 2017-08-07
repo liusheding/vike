@@ -8,43 +8,24 @@
 
 import UIKit
 
+
 class ContactTableViewController: UIViewController {
 
     let headIdentifier = "headView"
     let cellId = "TableViewCell"
     
-    let sectionOne = ["name": "新的客户", "icon": "pic_xkh", "id":"dxjg" , "count" : "0"]
 //    let sectionOne = ["name": "新的客户", "friends": "" , "count" : "0" , "isOpen": false] as [String : Any]
-    let sectionTwo = [ ["name": "默认" , "friends":[["name": "刘一斌", "icon": "icon_gj_mpsm", "id":"mpsm" , "phone_number":"13899936668"],
-                                                      ["name": "刘总", "icon": "icon_gj_ewmmp", "id":"ewmmp" , "phone_number":"13899936556"]],
-                        "count": 2 ,  "isOpen": false ] ,
-                       ["name": "意向客户" , "friends":[["name": "马云", "icon": "icon_gj_mpsm", "id":"mpsm" , "phone_number":"13899936668"],
-                                                            ["name": "马总","icon": "icon_gj_ewmmp", "id":"ewmmp","phone_number":"13899936556"]],
-                        "count": 2 ,  "isOpen": false]
-    ]
-    
-    
-    /*
-     * 构造数据 [ 0 : A , 1: B ] B:[ 0: a , 1: b ]
-     */
-    lazy var contactsCells:[CustomerGroup] =  {
-//        var array = [CustomerGroup]()
-//        let p : CustomerGroup = CustomerGroup.init(dict: self.sectionOne as [String : AnyObject])
-//        array.append(p)
-//        
-//        // init group array
-//        let tmp = self.sectionTwo as NSArray
-//        for item in tmp  {
-//            let i : CustomerGroup = CustomerGroup.init( dict: item as! [String : AnyObject] )
-//            array.append(p)
-//        }
-//        return array
-        var friendsModelArray = [CustomerGroup]()
-        friendsModelArray = CustomerGroup.dictModel()
-        return friendsModelArray
-    }()
+    var ctMoreItemView : CustomerPopUpView!
     
     @IBOutlet weak var tableView: UITableView!
+    
+    // MARK : about ... more bar item (float)
+    @IBOutlet weak var ctMoreBar: UIBarButtonItem!
+    
+    @IBAction func ctFloatMoreBar(_ sender: Any) {
+        self.ctMoreItemView.hide(!self.ctMoreItemView.isHidden)
+        NSLog(" push ctFloatMoreBar")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,21 +34,38 @@ class ContactTableViewController: UIViewController {
         self.tableView.delegate = self
         self.tableView.dataSource = self
         NSLog("ContactTableviewController init !")
+        // mark register tablecell
         self.tableView.register( TableViewCell.self , forCellReuseIdentifier: cellId)
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        
+        // init pop up view (float)
+        self.ctMoreItemView = CustomerPopUpView()
+        self.ctMoreItemView.delegate = self as? ActionFloatViewDelegate
+        self.view.addSubview(self.ctMoreItemView)
+        self.ctMoreItemView.snp.makeConstraints { (make) -> Void in
+            make.edges.equalTo(UIEdgeInsetsMake(64, 0, 0, 0))
+        }
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        
+        super.viewWillDisappear(animated)
+        self.ctMoreItemView.hide(true)
+    }
+    
+    // 构造数据 [ 0 : A , 1: B ] B:[ 0: a , 1: b ]
+    lazy var contactsCells:[CustomerGroup] =  {
+        var friendsModelArray = [CustomerGroup]()
+        friendsModelArray = CustomerGroup.dictModel()
+        return friendsModelArray
+    }()
 }
 
-extension ContactTableViewController : UITableViewDataSource, UITableViewDelegate , LSHeaderViewDelegate {
+extension ContactTableViewController : UITableViewDataSource, UITableViewDelegate , LSHeaderViewDelegate , ActionFloatViewDelegate {
 
    
     // 每次点击headerView时，改变group的isOpen参数，然后刷新tableview，显示或者隐藏好友信息
@@ -75,9 +73,6 @@ extension ContactTableViewController : UITableViewDataSource, UITableViewDelegat
         self.tableView.reloadData()
     }
  
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return CGFloat(60)
-//    }
     
     // MARK: - Table view data source
 
@@ -150,6 +145,18 @@ extension ContactTableViewController : UITableViewDataSource, UITableViewDelegat
         headView.friendGroup = group
         return headView
         
+    }
+    
+    func floatViewTapItemIndex(_ type: ActionFloatViewItemType) {
+        NSLog("floatViewTapItemIndex:\(type)")
+        switch type {
+            case .synContacts:
+                break
+            case .managerGroup:
+                break
+            case .batchOperate :
+                break
+        }
     }
     
 
