@@ -14,7 +14,6 @@ class ContactTableViewController: UIViewController {
     let headIdentifier = "headView"
     let cellId = "TableViewCell"
     
-//    let sectionOne = ["name": "新的客户", "friends": "" , "count" : "0" , "isOpen": false] as [String : Any]
     var ctMoreItemView : CustomerPopUpView!
     
     @IBOutlet weak var tableView: UITableView!
