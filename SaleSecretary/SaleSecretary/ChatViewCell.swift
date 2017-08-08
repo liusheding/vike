@@ -39,43 +39,43 @@ class ChatViewCell:UITableViewCell {
         
         var y:CGFloat =  0
         
-//        //显示用户头像
-//        if (self.msgItem.user.username != "")
-//        {
-//            
-//            let thisUser =  self.msgItem.user
-//            //self.avatarImage.removeFromSuperview()
-//            
-//            let imageName = thisUser.avatar != "" ? thisUser.avatar : "noAvatar.png"
-//            self.avatarImage = UIImageView(image:UIImage(named:imageName))
-//            
-//            self.avatarImage.layer.cornerRadius = 9.0
-//            self.avatarImage.layer.masksToBounds = true
-//            self.avatarImage.layer.borderColor = UIColor(white:0.0 ,alpha:0.2).cgColor
-//            self.avatarImage.layer.borderWidth = 1.0
-//            
-//            //别人头像，在左边，我的头像在右边
-//            let avatarX =  (type == ChatType.someone) ? 2 : self.frame.size.width - 52
-//            
-//            //头像居于消息顶部
-//            let avatarY:CGFloat =  0
-//            //set the frame correctly
-//            self.avatarImage.frame = CGRect(x: avatarX, y: avatarY, width: 50, height: 50)
-//            self.addSubview(self.avatarImage)
-//            
-//            //如果只有一行消息（消息框高度不大于头像）则将消息框居中于头像位置 
-//            let delta =  (50 - (self.msgItem.insets.top
-//                + self.msgItem.insets.bottom + self.msgItem.view.frame.size.height))/2
-//            if (delta > 0) {
-//                y = delta
-//            }
-//            if (type == ChatType.someone) {
-//                x += 54
-//            }
-//            if (type == ChatType.mine) {
-//                x -= 54
-//            }
-//        }
+        //显示用户头像
+        if (self.msgItem.user.username != "")
+        {
+            
+            let thisUser =  self.msgItem.user
+            //self.avatarImage.removeFromSuperview()
+            
+            let imageName = thisUser.avatar != "" ? thisUser.avatar : "noAvatar.png"
+            self.avatarImage = UIImageView(image:UIImage(named:imageName))
+            
+            self.avatarImage.layer.cornerRadius = 9.0
+            self.avatarImage.layer.masksToBounds = true
+            self.avatarImage.layer.borderColor = UIColor(white:0.0 ,alpha:0.2).cgColor
+            self.avatarImage.layer.borderWidth = 1.0
+            
+            //别人头像，在左边，我的头像在右边
+            let avatarX =  (type == ChatType.someone) ? 2 : self.frame.size.width - 52
+            
+            //头像居于消息顶部
+            let avatarY:CGFloat =  0
+            //set the frame correctly
+            self.avatarImage.frame = CGRect(x: avatarX, y: avatarY, width: 50, height: 50)
+            self.addSubview(self.avatarImage)
+            
+            //如果只有一行消息（消息框高度不大于头像）则将消息框居中于头像位置 
+            let delta =  (50 - (self.msgItem.insets.top
+                + self.msgItem.insets.bottom + self.msgItem.view.frame.size.height))/2
+            if (delta > 0) {
+                y = delta
+            }
+            if (type == ChatType.someone) {
+                x += 54
+            }
+            if (type == ChatType.mine) {
+                x -= 54
+            }
+        }
         
         self.customView = self.msgItem.view
         self.customView.frame = CGRect(x: x + self.msgItem.insets.left,

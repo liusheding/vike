@@ -21,8 +21,11 @@ class MessageChatController: UIViewController,ChatDataSource,UITextFieldDelegate
     
     var keyBaordView:UIView!
     var KeyBoardHeight:CGFloat!
+    var DataSource:MessageData!
+    var chattitle: String!
     
     override func viewDidLoad() {
+        self.navigationItem.title = chattitle
         super.viewDidLoad()
         
         setupChatTable()
@@ -167,18 +170,17 @@ class MessageChatController: UIViewController,ChatDataSource,UITextFieldDelegate
         
         //创建一个重用的单元格
         self.tableView!.register(ChatViewCell.self, forCellReuseIdentifier: "ChatCell")
-        me = UserInfo(name:"Xiaoming" ,logo:("xiaoming.png"))
-        you  = UserInfo(name:"Xiaohua", logo:("xiaohua.png"))
-        
-        let first =  MessageItem(body:"2017年7月30日，庆祝中国人民解放军建军90周年阅兵在朱日和联合训练基地隆重举行，中共中央总书记、国家主席、中央军委主席习近平检阅部队并发表重要讲话。", user:me,  date:Date(timeIntervalSinceNow:-90000600), mtype:.mine)
-        
-//        let second =  MessageItem(image:UIImage(named:"sz.png")!,user:me, date:Date(timeIntervalSinceNow:-90000290), mtype:.mine)
-        
-        let fifth =  MessageItem(body:"“我想的最多的就是，在党和人民需要的时候，我们这支军队能不能始终坚持住党的绝对领导，能不能拉得上去、打胜仗，各级指挥员能不能带兵打仗、指挥打仗？”这一“胜战之问”，萦绕在三军统帅的心头，叩问着三军将士.",user:you, date:Date(timeIntervalSinceNow:0), mtype:.someone)
-        
+        me = UserInfo(name:"" ,logo:("xiaoming.png"))
+        you  = UserInfo(name:"", logo:("xiaohua.png"))
         
         Chats = NSMutableArray()
-        Chats.addObjects(from: [first,fifth])
+        let message = self.DataSource.message
+        var array: [MessageItem] = []
+        for msgdetail in message! as NSMutableArray {
+            let msg = msgdetail as! MessageDetail
+            array.append(MessageItem(body:msg.msgcontent as NSString, user:me,  date:msg.msgdate, mtype:msg.msgtype))
+        }
+        Chats.addObjects(from: array)
         
         //set the chatDataSource
         self.tableView.chatDataSource = self

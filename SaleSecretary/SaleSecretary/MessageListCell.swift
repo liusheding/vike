@@ -13,12 +13,21 @@ class MessageListCell: UITableViewCell {
     @IBOutlet weak var cellname: UILabel!
     @IBOutlet weak var cellphone: UILabel!
     @IBOutlet weak var celltime: UILabel!
+    @IBOutlet weak var unreadnum: UILabel!
+    var mtype:Int!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        self.unreadnum.layer.masksToBounds = true
+        self.unreadnum.layer.cornerRadius = self.unreadnum.bounds.height / 2.0
+    }
+    
+    func setCellContnet(_ num: Int) {
+        self.unreadnum.text = num > 99 ? "99+" : String(num)
+        self.unreadnum.isHidden = (num == 0)
     }
 
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 

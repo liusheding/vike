@@ -4,6 +4,7 @@ import UIKit
 enum ChatType {
     case mine
     case someone
+    case system
 }
 
 class MessageItem {
