@@ -20,6 +20,9 @@ class CustomerSelectViewController : UIViewController {
     
     var delegate: CustomerSelectDelegate?
     
+    @IBOutlet weak var cancelBtn: UIBarButtonItem!
+    
+    @IBOutlet weak var confirmBtn: UIBarButtonItem!
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setUpTableView()
@@ -42,7 +45,7 @@ class CustomerSelectViewController : UIViewController {
         if idxs == nil {
             let uc = UIAlertController(title: "", message: "请选择客户", preferredStyle: UIAlertControllerStyle.alert)
             uc.addAction(UIAlertAction(title: "好的", style: UIAlertActionStyle.default))
-            present(uc, animated: true, completion: nil)
+            self.present(uc, animated: true, completion: nil)
             return
         }
         var _recs : [Recipient] = []
@@ -65,6 +68,11 @@ class CustomerSelectViewController : UIViewController {
                     Recipient(name : "客户3", phone : "185192233902")]
         return _rec
     }()
+    
+
+    override func viewWillDisappear(_ animated: Bool) {
+        self.tableView.setContentOffset(self.tableView.contentOffset, animated: false)
+    }
     
     
 }

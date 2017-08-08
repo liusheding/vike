@@ -11,22 +11,35 @@ import Foundation
 
 class SMSMessage {
     
+    var id : String!
+    
     var content : String!
     
     var time : Date!
     
-    var reps : [Recipient]
+    var recipent : Recipient!
     
-    public init() {
-        content = ""
-        time = Date()
-        reps = []
+    
+    var lengths : [Int] {
+        get {
+            return [title.characters.count, content.characters.count, inscribe.characters.count]
+        }
     }
     
-    public init(_ content : String, time: Date, reps : [Recipient]) {
+    var title : String  {
+        get {
+            return (recipent.title != nil && recipent.title! != "") ? recipent.title! : recipent.name
+        }
+    }
+    
+    var inscribe : String
+    
+    
+    public init(_ content : String, time: Date, recipent : Recipient, inscribe: String) {
         self.content = content
         self.time = time
-        self.reps = reps
+        self.recipent = recipent
+        self.inscribe = inscribe
     }
     
 }

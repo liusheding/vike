@@ -9,5 +9,6 @@ target "SaleSecretary" do
     pod 'RxSwift', '~> 3.0'
     pod 'RxCocoa', '~> 3.0'
     pod 'SnapKit', '3.0.2'
-    pod 'DropDown' 
+    pod 'DropDown'
+    pod 'YBAttributeTextTapAction'
 end

@@ -9,8 +9,11 @@
 
 import UIKit
 
+
+
 extension UIColor {
     //用数值初始化颜色，便于生成设计图上标明的十六进制颜色
+    // 
     convenience init(valueRGB: UInt, alpha: CGFloat = 1.0) {
         self.init(
             red: CGFloat((valueRGB & 0xFF0000) >> 16) / 255.0,
@@ -20,3 +23,5 @@ extension UIColor {
         )
     }
 }
+
+public let APP_THEME_COLOR = UIColor(valueRGB: 0x50AF37)

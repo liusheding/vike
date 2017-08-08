@@ -30,6 +30,11 @@
 		66451F161F331F8E009B65DD /* InscribeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66451F151F331F8E009B65DD /* InscribeViewCell.swift */; };
 		66451F181F332AB8009B65DD /* PlanExecTimeCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 66451F171F332AB8009B65DD /* PlanExecTimeCellView.xib */; };
 		66451F1A1F332D4E009B65DD /* PlanExecTimeCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66451F191F332D4E009B65DD /* PlanExecTimeCellView.swift */; };
+		6647E8BF1F39C4F80053AFF3 /* PhoneSMSViewContronller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6647E8BD1F39C4F80053AFF3 /* PhoneSMSViewContronller.swift */; };
+		6647E8C01F39C4F80053AFF3 /* SMSPreviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6647E8BE1F39C4F80053AFF3 /* SMSPreviewController.swift */; };
+		6647E8C31F39C6160053AFF3 /* CommonSMSTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6647E8C21F39C6160053AFF3 /* CommonSMSTableCell.swift */; };
+		6647E8C61F39C63B0053AFF3 /* SMSContentTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6647E8C41F39C63B0053AFF3 /* SMSContentTextCell.swift */; };
+		6647E8C71F39C63B0053AFF3 /* SMSContentTextCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6647E8C51F39C63B0053AFF3 /* SMSContentTextCell.xib */; };
 		66B602F01F2F043E002A55E6 /* SMSListViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B602EF1F2F043E002A55E6 /* SMSListViewCell.swift */; };
 		66B602F21F2F074A002A55E6 /* SMSListViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 66B602F11F2F074A002A55E6 /* SMSListViewCell.xib */; };
 		66B602F71F2F35CC002A55E6 /* SMSDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 66B602F61F2F35CC002A55E6 /* SMSDetailView.xib */; };
@@ -110,6 +115,11 @@
 		66451F151F331F8E009B65DD /* InscribeViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InscribeViewCell.swift; sourceTree = "<group>"; };
 		66451F171F332AB8009B65DD /* PlanExecTimeCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlanExecTimeCellView.xib; sourceTree = "<group>"; };
 		66451F191F332D4E009B65DD /* PlanExecTimeCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlanExecTimeCellView.swift; sourceTree = "<group>"; };
+		6647E8BD1F39C4F80053AFF3 /* PhoneSMSViewContronller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhoneSMSViewContronller.swift; sourceTree = "<group>"; };
+		6647E8BE1F39C4F80053AFF3 /* SMSPreviewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SMSPreviewController.swift; sourceTree = "<group>"; };
+		6647E8C21F39C6160053AFF3 /* CommonSMSTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonSMSTableCell.swift; sourceTree = "<group>"; };
+		6647E8C41F39C63B0053AFF3 /* SMSContentTextCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SMSContentTextCell.swift; sourceTree = "<group>"; };
+		6647E8C51F39C63B0053AFF3 /* SMSContentTextCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SMSContentTextCell.xib; sourceTree = "<group>"; };
 		66B602EF1F2F043E002A55E6 /* SMSListViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SMSListViewCell.swift; sourceTree = "<group>"; };
 		66B602F11F2F074A002A55E6 /* SMSListViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SMSListViewCell.xib; sourceTree = "<group>"; };
 		66B602F61F2F35CC002A55E6 /* SMSDetailView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SMSDetailView.xib; sourceTree = "<group>"; };
@@ -242,6 +252,8 @@
 		335AFE1AFF613A74F03B490AE40CED3B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				6647E8C41F39C63B0053AFF3 /* SMSContentTextCell.swift */,
+				6647E8C51F39C63B0053AFF3 /* SMSContentTextCell.xib */,
 				1388E83064119789E4E2181C9871C9F6 /* ToolCellView.swift */,
 				1EDAEF18CBA6F23688F9247911F93EDF /* ToolCellView.xib */,
 				66B602EF1F2F043E002A55E6 /* SMSListViewCell.swift */,
@@ -261,6 +273,7 @@
 		353CBCFE5817ABE2C74E225413D69D8F /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				6647E8C11F39C5D80053AFF3 /* Common */,
 				C8FADB2F97F8DCCFB2573A6DC4E39CB6 /* Controller */,
 				77D28E5543C148C1D2B03F577CBA0F88 /* Model */,
 				335AFE1AFF613A74F03B490AE40CED3B /* View */,
@@ -327,6 +340,14 @@
 				E75435731F34640E00BDE8C6 /* CustomerPopUpView.swift */,
 			);
 			name = View;
+			sourceTree = "<group>";
+		};
+		6647E8C11F39C5D80053AFF3 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				6647E8C21F39C6160053AFF3 /* CommonSMSTableCell.swift */,
+			);
+			name = Common;
 			sourceTree = "<group>";
 		};
 		66B602F31F2F25F9002A55E6 /* Others */ = {
@@ -404,6 +425,8 @@
 		C8FADB2F97F8DCCFB2573A6DC4E39CB6 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				6647E8BD1F39C4F80053AFF3 /* PhoneSMSViewContronller.swift */,
+				6647E8BE1F39C4F80053AFF3 /* SMSPreviewController.swift */,
 				523881837A69778310643A65B3F29D96 /* SMSUIViewController.swift */,
 				D600CFAFAE0B824ECFF06CA2EEDB46DF /* SMSView.storyboard */,
 				D9F3B5FF5B6840C01FE98AB14DBF66A9 /* ToolsUIViewController.swift */,
@@ -592,6 +615,7 @@
 				6615BF681F3413420052879B /* CustomersCell.xib in Resources */,
 				66451F181F332AB8009B65DD /* PlanExecTimeCellView.xib in Resources */,
 				662D6A491F3177BA001C1FB1 /* AddNewCustomersCell.xib in Resources */,
+				6647E8C71F39C63B0053AFF3 /* SMSContentTextCell.xib in Resources */,
 				7D4F943E251DFCF1E855A17CA7047BAB /* ToolCellView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -659,7 +683,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -699,13 +723,16 @@
 				E75435761F3542AE00BDE8C6 /* ContactMessageViewController.swift in Sources */,
 				6E20EC9D1F341B7D00A0F29E /* TableView.swift in Sources */,
 				66451F101F331001009B65DD /* AppellationCellView.swift in Sources */,
+				6647E8BF1F39C4F80053AFF3 /* PhoneSMSViewContronller.swift in Sources */,
 				6E0C8CE81F2EE0C20066885F /* MessageDetailCell.swift in Sources */,
+				6647E8C61F39C63B0053AFF3 /* SMSContentTextCell.swift in Sources */,
 				66451F0C1F32C4C7009B65DD /* UIColor+Hex.swift in Sources */,
 				6615BF6E1F3413EA0052879B /* TableViewCell.swift in Sources */,
 				6615BF6C1F34134C0052879B /* CustomerModel.swift in Sources */,
 				66451F1A1F332D4E009B65DD /* PlanExecTimeCellView.swift in Sources */,
 				6E20ECA11F341B8D00A0F29E /* MessageChatController.swift in Sources */,
 				6E20EC991F341B6C00A0F29E /* ChatViewCell.swift in Sources */,
+				6647E8C01F39C4F80053AFF3 /* SMSPreviewController.swift in Sources */,
 				66D3D0E21F31E7C2005347D0 /* CustomerSelectViewController.swift in Sources */,
 				6615BF661F3413420052879B /* CustomerHeaderView.swift in Sources */,
 				E1E92A825F157EE0E15E88EC43FED169 /* SaleSecretary.xcdatamodeld in Sources */,
@@ -714,6 +741,7 @@
 				6E20EC9C1F341B7D00A0F29E /* TableHeaderViewCell.swift in Sources */,
 				A1388B73E89097D71FE47270B8861FF9 /* ToolsUIViewController.swift in Sources */,
 				6E0C8CE51F2EE0B40066885F /* MessageDetailController.swift in Sources */,
+				6647E8C31F39C6160053AFF3 /* CommonSMSTableCell.swift in Sources */,
 				5F81108AF566E3AA21DC1DE8FE984ECE /* ViewController.swift in Sources */,
 				66B602FB1F301230002A55E6 /* SMSDetailController.swift in Sources */,
 				66B602F01F2F043E002A55E6 /* SMSListViewCell.swift in Sources */,

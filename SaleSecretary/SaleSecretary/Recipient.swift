@@ -11,11 +11,11 @@ import Foundation
 
 class Recipient {
     
-    var imageStr : String! = ""
+    var imageStr : String?
     
     var name : String! = ""
     
-    var title : String! = ""
+    var title : String?
     
     var phone : String! = ""
     

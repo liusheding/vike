@@ -7,6 +7,7 @@ PODS:
   - RxSwift (3.6.0)
   - SnapKit (3.0.2)
   - SwiftyJSON (3.1.4)
+  - YBAttributeTextTapAction (2.0.6)
 
 DEPENDENCIES:
   - Alamofire (~> 4.4.0)
@@ -16,6 +17,7 @@ DEPENDENCIES:
   - RxSwift (~> 3.0)
   - SnapKit (= 3.0.2)
   - SwiftyJSON (~> 3.1.4)
+  - YBAttributeTextTapAction
 
 SPEC CHECKSUMS:
   Alamofire: dc44b1600b800eb63da6a19039a0083d62a6a62d
@@ -25,7 +27,8 @@ SPEC CHECKSUMS:
   RxSwift: a0925c7fb11fbe60055285f6f2062241aa37a175
   SnapKit: 2e456761aa92d4d4067a7a5594c18769d451a8ad
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
+  YBAttributeTextTapAction: 650ff36251479f8cfc7b5dd8fb62587c538ce502
 
-PODFILE CHECKSUM: 0ff1866bbe2e1a0154d3469a338e31e6606a7761
+PODFILE CHECKSUM: 18eda5ad55f32720dfe7cb752257073183794254
 
-COCOAPODS: 1.3.0.beta.3
+COCOAPODS: 1.2.1

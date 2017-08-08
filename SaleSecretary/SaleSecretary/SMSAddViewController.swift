@@ -27,10 +27,11 @@ class SMSAddViewController : UIViewController {
     @IBOutlet weak var customerView: UIView!
     
 
+    @IBOutlet weak var phoneView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        segmentedViews = [templeteView, customerView]
+        segmentedViews = [templeteView, customerView, phoneView]
         // self.addChildViewController(<#T##childController: UIViewController##UIViewController#>)
         showSelectedView(0)
     }
@@ -123,6 +124,13 @@ class SMSTemplateViewController : UIViewController {
         super.viewDidDisappear(animated)
         // customerField.isHidden = true
     }
+    
+    @IBAction func previewContent(_ sender: UIButton) {
+        let preVC = UIStoryboard(name: "SMSView", bundle: nil).instantiateViewController(withIdentifier: "SMSPreviewController") as! SMSPreviewController
+        self.navigationController?.pushViewController(preVC, animated: true)
+        // present(, animated: true, completion: nil)
+    }
+    
 }
 
 
@@ -183,7 +191,7 @@ extension SMSTemplateViewController : UITableViewDataSource, UITableViewDelegate
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
         case 0:
-            return createCustomerCell()
+            return CommonTableCell.createCustomerCell(cellId)
         case 1:
             return createTemplateCell()
         case 2:
@@ -191,7 +199,7 @@ extension SMSTemplateViewController : UITableViewDataSource, UITableViewDelegate
         case 3:
             return createInscribeCell()
         case 4:
-            return createPlanDateCell()
+            return CommonTableCell.createPlanDateCell(cellId)
         case 5:
             return self.datePicker
         default:
@@ -201,28 +209,9 @@ extension SMSTemplateViewController : UITableViewDataSource, UITableViewDelegate
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 2
     }
-    func createAccessoryButton() -> UIButton {
-        let btn = UIButton(type : UIButtonType.custom)
-        btn.frame = CGRect(x:0, y:0, width: 32, height:32)
-        let image = UIImage(named: "icon_tj")
-        btn.setImage(image, for: UIControlState.normal)
-        return btn
-    }
     
     
-    open func createCustomerCell() -> UITableViewCell {
-        let cell = UITableViewCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: cellId)
-        cell.imageView?.image = UIImage(named: "icon_kh")
-        cell.textLabel?.text = "请选择客户..."
-        cell.textLabel?.font = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
-        cell.textLabel?.numberOfLines = 3
-        cell.textLabel?.textColor = UIColor.lightGray
-        // cell.accessoryView = UIImageView(image: UIImage(named: "icon_tj"))
-        // cell.addConstraint(NSLayoutConstraint)
-        cell.accessoryView = createAccessoryButton()
-        return cell
-    }
-    
+   
     private func createTemplateCell() -> UITableViewCell {
         let cell = UITableViewCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: cellId)
         cell.imageView?.image = UIImage(named: "icon_nr")
@@ -234,7 +223,7 @@ extension SMSTemplateViewController : UITableViewDataSource, UITableViewDelegate
         // cell.accessoryType = UITableViewCellAccessoryType.detailDisclosureButton
         // cell.accessoryView = UIImageView(image: image)
         // cell.accessoryType = UITableViewCellAccessoryType.detailButton
-        cell.accessoryView = createAccessoryButton()
+        cell.accessoryView = CommonTableCell.createAccessoryButton()
         return cell
     }
     
@@ -248,16 +237,7 @@ extension SMSTemplateViewController : UITableViewDataSource, UITableViewDelegate
         return cell
     }
     
-    private func createPlanDateCell() -> UITableViewCell {
-        
-        let cell = UITableViewCell(style: UITableViewCellStyle.value1, reuseIdentifier: cellId)
-        cell.imageView?.image = UIImage(named: "icon_zxsj")
-        cell.detailTextLabel?.text = "执行时间"
-        cell.detailTextLabel?.font = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
-        cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
-        return cell
-        
-    }
+    
     
     func selectedRecipients(rec: [Recipient]) {
         // let idx = self.tableView.indexPathForSelectedRow
@@ -278,23 +258,12 @@ extension SMSTemplateViewController : UITableViewDataSource, UITableViewDelegate
         default:
             return
         }
-         self.tableView.deselectRow(at:indexPath, animated: true)
+        self.tableView.deselectRow(at:indexPath, animated: true)
     }
     
     func toggleDatePicker() {
         self.datePicker.isHidden = !self.datePicker.isHidden
-        // self.tableView.reloadData()
-        // self.tableView.reloadRows(at: [[5, 0]], with: UITableViewRowAnimation.bottom)
-        // self.tableView.reloadSections([5], with: UITableViewRowAnimation.bottom)
-        // self.tableView.beginUpdates()
-        // self.tableView.reloadData()
-        // self.tableView.reloadSections([5], with: UITableViewRowAnimation.right)
-        // self.tableView.endUpdates()
-        // self.tableView.com
     }
-    
-    
-    
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)

@@ -24,7 +24,27 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>RxCocoa.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>RxSwift.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>SnapKit.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>SwiftyJSON.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>YBAttributeTextTapAction.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -32,7 +52,17 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>29902ADE8C6C103FE5A3C81F55B1A11A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>2F0C0F810568D3E82219429D9D870F04</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>42B583F8C2CE46B9E1AB247208FAEB8E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -42,7 +72,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>5B0A63523B831FF975198B09FD5E54CA</key>
+		<key>6AF42D05A2B52AD7541C7ADFF52EE99F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -52,7 +82,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E3CDF0FB3605519412033FE06F932C9E</key>
+		<key>AA018AC5349157777402D1193D957A33</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>EF7F310A3C6DCEC05BC9CE3F86FCED5A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F773103462BEE2FCA7150479CB0A8F09</key>
 		<dict>
 			<key>primary</key>
 			<true/>
