@@ -22,7 +22,7 @@ class Customer : NSObject{
     var icon: String?   //
 //    var userid: Int?
 //    var is_verify: Bool?
-    let properties = ["name", "phone_number" , "icon"]
+    let properties = ["name", "phone_number" , "icon" , "nick_name" , "time"]
     
     override var description: String {
         let dict = dictionaryWithValues(forKeys: properties)
@@ -33,7 +33,9 @@ class Customer : NSObject{
         super.init()
         setValuesForKeys(dict)
     }
-    
+    override init () {
+        self.name =  "demo"
+    }
     override func  setValue(_ value: Any?, forUndefinedKey key: String) { }
     
    }

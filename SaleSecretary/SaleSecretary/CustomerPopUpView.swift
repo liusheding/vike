@@ -129,7 +129,7 @@ class CustomerPopUpView: UIView {
      - parameter hide: is hide
      */
     func hide(_ hide: Bool) {
-        NSLog("customerPopUpview  hide \(hide)")
+//        NSLog("customerPopUpview  hide \(hide)")
         if hide {
             self.alpha = 1.0
             UIView.animate(withDuration: 0.2 ,

@@ -121,15 +121,13 @@ extension ContactTableViewController : UITableViewDataSource, UITableViewDelegat
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedRow = tableView.cellForRow(at: indexPath)
-        print("\(String(describing: selectedRow))")
-        // print(selectedRow?.value(forKey: "id"))
-        if indexPath.section > 0 {
-            // show exist customer current this section
-            NSLog("show this section detail customers")
-        }else {
-            // get new customer page
-            self.navigationController?.pushViewController(SMSUIViewController(), animated: false)
-        }
+        let detail = self.storyboard?.instantiateViewController(withIdentifier: "customerDetail") as! CTCustomerDetailInfoViewController
+        let dict = ["name": selectedRow?.textLabel?.text , "phone_number" : selectedRow?.detailTextLabel?.text]
+        detail.userInfo = Customer(dict: dict as [String : AnyObject])
+        
+        NSLog("\(String(describing: selectedRow))")
+        self.navigationController?.pushViewController( detail , animated: false)
+//        self.performSegue(withIdentifier: "xxx", sender: tableView.cellForRow(at: indexPath))
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
