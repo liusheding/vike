@@ -34,7 +34,7 @@ class CTCustomerDetailInfoViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        segmentView = [customerInfo , customerTrail]
+        segmentView = [ customerTrail , customerInfo]
         self.navigationItem.title = "详细资料"
         self.view.backgroundColor = UIColor.white
         self.name.text = userInfo.name
@@ -56,10 +56,13 @@ class CTCustomerDetailInfoViewController: UIViewController {
             } else {
                 e.isHidden = true
             }
+            NSLog(" segment view hide \(i) --\(idx)-- \(e.isHidden)------")
         }
-        for e in segmentView {
-            NSLog(" segment view hide \(e.isHidden)")
-        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        print(self.segments.frame)
     }
 
 }
