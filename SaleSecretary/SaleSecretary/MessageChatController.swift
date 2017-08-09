@@ -17,12 +17,15 @@ class MessageChatController: UIViewController,ChatDataSource,UITextFieldDelegate
     var tableView:TableView!
     var me:UserInfo!
     var you:UserInfo!
-    var txtMsg:UITextField!
+    var txtMsg:UITextView!
     
     var keyBaordView:UIView!
     var KeyBoardHeight:CGFloat!
     var DataSource:MessageData!
     var chattitle: String!
+    var isShowBoard:Bool!
+    var keyBoardRect:CGRect!
+    var sendBtn:UIButton!
     
     override func viewDidLoad() {
         self.navigationItem.title = chattitle
@@ -35,8 +38,32 @@ class MessageChatController: UIViewController,ChatDataSource,UITextFieldDelegate
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide(_:)), name: .UIKeyboardWillHide, object: nil)
         
+        NotificationCenter.default.addObserver(self, selector: #selector(self.textChanged(_:)), name: .UITextViewTextDidChange, object: nil)
+        
         //注册点击事件
         self.view.addGestureRecognizer(UITapGestureRecognizer(target:self, action:#selector(self.handleTap(sender:))))
+    }
+    
+    func textChanged(_ notification: Notification){
+        let txtheight = txtMsg.contentSize.height
+        if txtheight <= txtMsg.bounds.height{
+            return
+        }
+        
+        changeviewsize()
+        scrollToRow()
+        print("\(txtMsg.bounds.height)")
+    }
+    
+    func changeviewsize(){
+        let txtheight = txtMsg.contentSize.height
+        let screenWidth = UIScreen.main.bounds.width
+        let offset = txtheight - txtMsg.bounds.height
+        
+        keyBaordView.frame = CGRect(x: 0,y: keyBaordView.frame.origin.y - offset,width: screenWidth,height: keyBaordView.frame.height + offset)
+        txtMsg.frame = CGRect(x: 7,y: 10,width: screenWidth - 95,height: txtheight)
+        self.tableView.frame = CGRect(x:0 , y:20 , width:SCREEN_WIDTH, height:self.tableView.frame.height - offset)
+        sendBtn.frame = CGRect(x: screenWidth - 80,y: sendBtn.frame.origin.y + offset,width: 72,height: 36)
     }
     
     //对应方法
@@ -55,7 +82,7 @@ class MessageChatController: UIViewController,ChatDataSource,UITextFieldDelegate
         sendView.backgroundColor=UIColor.groupTableViewBackground
         sendView.alpha=0.9
         
-        txtMsg = UITextField(frame:CGRect(x: 7,y: 10,width: screenWidth - 95,height: 36))
+        txtMsg = UITextView(frame:CGRect(x: 7,y: 10,width: screenWidth - 95,height: 36))
         txtMsg.backgroundColor = UIColor.white
         txtMsg.textColor=UIColor.black
         txtMsg.font=UIFont.boldSystemFont(ofSize: 12)
@@ -63,18 +90,19 @@ class MessageChatController: UIViewController,ChatDataSource,UITextFieldDelegate
         txtMsg.returnKeyType = UIReturnKeyType.send
         
         //Set the delegate so you can respond to user input
-        txtMsg.delegate=self
+        txtMsg.delegate=self as? UITextViewDelegate
         sendView.addSubview(txtMsg)
         self.view.addSubview(sendView)
         
         let sendButton = UIButton(frame:CGRect(x: screenWidth - 80,y: 10,width: 72,height: 36))
-        sendButton.backgroundColor = UIColor(red: 0x15/255, green: 0x7d/255, blue: 0xf9/255, alpha: 1)
+        sendButton.backgroundColor = UIColor(red: 0x21/255, green: 0xcd/255, blue: 0x68/255, alpha: 1)
         sendButton.addTarget(self, action:#selector(self.sendMessage) ,
                              for:UIControlEvents.touchUpInside)
         sendButton.layer.cornerRadius = 6.0
         sendButton.setTitle("发送", for:UIControlState())
         sendView.addSubview(sendButton)
         
+        sendBtn = sendButton
         keyBaordView = sendView
     }
     
@@ -89,6 +117,7 @@ class MessageChatController: UIViewController,ChatDataSource,UITextFieldDelegate
         let kbInfo = notification.userInfo
         //获取键盘的size
         let kbRect = (kbInfo?[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        keyBoardRect = kbRect
         //键盘的高度
         let kbHeight = kbRect.size.height
         KeyBoardHeight = kbHeight
@@ -98,20 +127,37 @@ class MessageChatController: UIViewController,ChatDataSource,UITextFieldDelegate
         UIView.animate(withDuration: duration) {
             self.tableView.frame = CGRect(x:0 , y:20 , width:SCREEN_WIDTH, height:SCREEN_HEIGHT - 76 - kbHeight)
             self.keyBaordView.frame = CGRect(x:0, y:kbRect.origin.y - 56, width:SCREEN_WIDTH,  height:56)
+            self.txtMsg.frame = CGRect(x: 7,y: 10,width: SCREEN_WIDTH - 95,height: 36)
+            self.sendBtn.frame = CGRect(x: SCREEN_WIDTH - 80,y: 10,width: 72,height: 36)
+            
+            let txtheight = self.txtMsg.contentSize.height
+            if txtheight > 36{
+                self.changeviewsize()
+            }
             self.scrollToRow()
         }
+        self.isShowBoard = true
     }
     //键盘的隐藏
     func keyboardWillHide(_ notification: Notification){
         let kbInfo = notification.userInfo
         let kbRect = (kbInfo?[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        keyBoardRect = kbRect
         let changeY = kbRect.origin.y
         let duration = kbInfo?[UIKeyboardAnimationDurationUserInfoKey] as! Double
         UIView.animate(withDuration: duration) {
             self.tableView.frame = CGRect(x:0 , y:20 , width:SCREEN_WIDTH, height:SCREEN_HEIGHT - 76)
             self.keyBaordView.frame = CGRect(x:0, y:changeY - 56, width:SCREEN_WIDTH, height:56)
+            self.txtMsg.frame = CGRect(x: 7,y: 10,width: SCREEN_WIDTH - 95,height: 36)
+            self.sendBtn.frame = CGRect(x: SCREEN_WIDTH - 80,y: 10,width: 72,height: 36)
+            
+            let txtheight = self.txtMsg.contentSize.height
+            if txtheight > 36{
+                self.changeviewsize()
+            }
             self.scrollToRow()
         }
+        self.isShowBoard=false
     }
     
     func textFieldShouldReturn(_ textField:UITextField) -> Bool
@@ -131,6 +177,15 @@ class MessageChatController: UIViewController,ChatDataSource,UITextFieldDelegate
         Chats.add(thatChat)
         
         self.tableView.chatDataSource = self
+        if self.isShowBoard{
+            self.tableView.frame = CGRect(x:0 , y:20 , width:SCREEN_WIDTH, height:SCREEN_HEIGHT - 76 - KeyBoardHeight)
+        }
+        else{
+            self.tableView.frame = CGRect(x:0 , y:20 , width:SCREEN_WIDTH, height:SCREEN_HEIGHT - 76)
+            }
+        self.sendBtn.frame = CGRect(x: SCREEN_WIDTH - 80,y: 10,width: 72,height: 36)
+        self.keyBaordView.frame = CGRect(x:0, y:keyBoardRect.origin.y - 56, width:SCREEN_WIDTH,  height:56)
+        self.txtMsg.frame = CGRect(x: 7,y: 10,width: SCREEN_WIDTH - 95,height: 36)
         scrollToRow()
         sender?.text = ""
         
