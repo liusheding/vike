@@ -92,7 +92,10 @@ extension SMSUIViewController  {
             if index == 0 {
                 self.performSegue(withIdentifier: "addMsgSchedule", sender: self)
             } else if index == 1 {
-                NetworkUtils.postBackEnd("R_BASE_TXL_CUS_GROUP", body: ["id" : "15dc14f554af466f99b946cc495bd772"])
+                NetworkUtils.postBackEnd("R_BASE_TXL_CUS_GROUP", body: ["id" : "15dc14f554af466f99b946cc495bd772"]) {
+                    json in
+                    print("call back : \(json)")
+                }
             }
         }
         

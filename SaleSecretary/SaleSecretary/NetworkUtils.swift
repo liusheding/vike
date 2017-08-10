@@ -59,7 +59,7 @@ extension String {
 
 struct NetworkUtils {
     
-    static func postBackEnd(_ method: String, body: [String: Any], handler: @escaping ((JSON) -> Void))  {
+    static func postBackEnd(_ method: String, body: [String: Any], handler: ((_ json : JSON) -> Void)?) {
         let bodyStr = createBody(method, body: body)
         print(bodyStr)
         var req = URLRequest(url: URL(string: ZJKJ_API_URL)!)
@@ -72,7 +72,9 @@ struct NetworkUtils {
             switch result  {
             case .success(let value):
                 guard response.result.value != nil else {return }
-                handler(JSON(value))
+                if handler != nil {
+                    handler!(JSON(value))
+                }
             case .failure(let error):
                 print(error)
             }

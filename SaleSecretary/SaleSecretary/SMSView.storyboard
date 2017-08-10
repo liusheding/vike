@@ -455,6 +455,24 @@
             </objects>
             <point key="canvasLocation" x="-790" y="1536"/>
         </scene>
+        <!--模版选择-->
+        <scene sceneID="RxX-gQ-oAC">
+            <objects>
+                <viewController title="模版选择" id="2VU-kh-fcd" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="DEd-kJ-v9f"/>
+                        <viewControllerLayoutGuide type="bottom" id="yh5-P5-vqY"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="vlY-hm-Dhs">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xxQ-u1-7Nx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-3716" y="1483"/>
+        </scene>
         <!--手机号码群发-->
         <scene sceneID="1YP-8g-fc9">
             <objects>
