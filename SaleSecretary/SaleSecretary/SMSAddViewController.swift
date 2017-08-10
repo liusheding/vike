@@ -39,7 +39,6 @@ class SMSAddViewController : UIViewController {
     
     @IBAction func onSegmChange(_ sender: UISegmentedControl) {
         
-        
         let idx = sender.selectedSegmentIndex
         print("select \(idx) segment")
         if idx >= segmentedViews.count {

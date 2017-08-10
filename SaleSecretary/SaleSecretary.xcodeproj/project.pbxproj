@@ -35,6 +35,8 @@
 		6647E8C31F39C6160053AFF3 /* CommonSMSTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6647E8C21F39C6160053AFF3 /* CommonSMSTableCell.swift */; };
 		6647E8C61F39C63B0053AFF3 /* SMSContentTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6647E8C41F39C63B0053AFF3 /* SMSContentTextCell.swift */; };
 		6647E8C71F39C63B0053AFF3 /* SMSContentTextCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6647E8C51F39C63B0053AFF3 /* SMSContentTextCell.xib */; };
+		6647E8C91F3AEDCE0053AFF3 /* NetworkUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6647E8C81F3AEDCE0053AFF3 /* NetworkUtils.swift */; };
+		6647E8CC1F3AFEE90053AFF3 /* CryptoHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 6647E8CB1F3AFEE90053AFF3 /* CryptoHeader.m */; };
 		66B602F01F2F043E002A55E6 /* SMSListViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B602EF1F2F043E002A55E6 /* SMSListViewCell.swift */; };
 		66B602F21F2F074A002A55E6 /* SMSListViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 66B602F11F2F074A002A55E6 /* SMSListViewCell.xib */; };
 		66B602F71F2F35CC002A55E6 /* SMSDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 66B602F61F2F35CC002A55E6 /* SMSDetailView.xib */; };
@@ -124,6 +126,9 @@
 		6647E8C21F39C6160053AFF3 /* CommonSMSTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonSMSTableCell.swift; sourceTree = "<group>"; };
 		6647E8C41F39C63B0053AFF3 /* SMSContentTextCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SMSContentTextCell.swift; sourceTree = "<group>"; };
 		6647E8C51F39C63B0053AFF3 /* SMSContentTextCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SMSContentTextCell.xib; sourceTree = "<group>"; };
+		6647E8C81F3AEDCE0053AFF3 /* NetworkUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkUtils.swift; sourceTree = "<group>"; };
+		6647E8CA1F3AFEE80053AFF3 /* SaleSecretary-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SaleSecretary-Bridging-Header.h"; sourceTree = "<group>"; };
+		6647E8CB1F3AFEE90053AFF3 /* CryptoHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CryptoHeader.m; sourceTree = "<group>"; };
 		66B602EF1F2F043E002A55E6 /* SMSListViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SMSListViewCell.swift; sourceTree = "<group>"; };
 		66B602F11F2F074A002A55E6 /* SMSListViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SMSListViewCell.xib; sourceTree = "<group>"; };
 		66B602F61F2F35CC002A55E6 /* SMSDetailView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SMSDetailView.xib; sourceTree = "<group>"; };
@@ -366,6 +371,9 @@
 			isa = PBXGroup;
 			children = (
 				66451F0B1F32C4C7009B65DD /* UIColor+Hex.swift */,
+				6647E8C81F3AEDCE0053AFF3 /* NetworkUtils.swift */,
+				6647E8CB1F3AFEE90053AFF3 /* CryptoHeader.m */,
+				6647E8CA1F3AFEE80053AFF3 /* SaleSecretary-Bridging-Header.h */,
 			);
 			name = Others;
 			sourceTree = "<group>";
@@ -555,6 +563,8 @@
 				TargetAttributes = {
 					5D9576533D7D7338A391E31418964354 = {
 						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = DY8NN2JBA9;
+						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 					};
 					87D83AE7681EF3D1025F9F50065708F8 = {
@@ -743,6 +753,7 @@
 				E7B2A2721F39FE76001D8C61 /* CTrailViewController.swift in Sources */,
 				6615BF6E1F3413EA0052879B /* TableViewCell.swift in Sources */,
 				6615BF6C1F34134C0052879B /* CustomerModel.swift in Sources */,
+				6647E8C91F3AEDCE0053AFF3 /* NetworkUtils.swift in Sources */,
 				66451F1A1F332D4E009B65DD /* PlanExecTimeCellView.swift in Sources */,
 				6E20ECA11F341B8D00A0F29E /* MessageChatController.swift in Sources */,
 				6E20EC991F341B6C00A0F29E /* ChatViewCell.swift in Sources */,
@@ -765,6 +776,7 @@
 				E75435741F34640E00BDE8C6 /* CustomerPopUpView.swift in Sources */,
 				6E20EC971F341B5500A0F29E /* UserInfo.swift in Sources */,
 				6E20ECB01F39B3D300A0F29E /* MessageCache.swift in Sources */,
+				6647E8CC1F3AFEE90053AFF3 /* CryptoHeader.m in Sources */,
 				6E20EC931F341B2B00A0F29E /* ChatDataSource.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -836,10 +848,15 @@
 			baseConfigurationReference = 2C6A867B230F110B4E0648AC /* Pods-SaleSecretary.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				DEVELOPMENT_TEAM = DY8NN2JBA9;
 				INFOPLIST_FILE = SaleSecretary/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.zjjy.SaleSecretary;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SaleSecretary/SaleSecretary-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -863,10 +880,14 @@
 			baseConfigurationReference = C6ADDA7123B0C31E576BB48B /* Pods-SaleSecretary.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				DEVELOPMENT_TEAM = DY8NN2JBA9;
 				INFOPLIST_FILE = SaleSecretary/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.zjjy.SaleSecretary;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SaleSecretary/SaleSecretary-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
@@ -912,7 +933,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -956,7 +977,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
