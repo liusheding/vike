@@ -63,6 +63,11 @@
 		6E20ECA81F341BD600A0F29E /* sz.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E20ECA71F341BD600A0F29E /* sz.png */; };
 		6E20ECB01F39B3D300A0F29E /* MessageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E20ECAF1F39B3D300A0F29E /* MessageCache.swift */; };
 		6E20ECB21F39B3DE00A0F29E /* MessageInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E20ECB11F39B3DE00A0F29E /* MessageInfo.swift */; };
+		6EBAA5441F3C03240099DA89 /* MineViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBAA5421F3C03240099DA89 /* MineViewCell.swift */; };
+		6EBAA5451F3C03240099DA89 /* MineViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EBAA5431F3C03240099DA89 /* MineViewCell.xib */; };
+		6EBAA54F1F3C2E480099DA89 /* MineInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBAA54E1F3C2E480099DA89 /* MineInfoCell.swift */; };
+		6EBAA5511F3C2E520099DA89 /* MineInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EBAA5501F3C2E520099DA89 /* MineInfoCell.xib */; };
+		6EF19C5D1F3BF9E000646BCF /* MineUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF19C5C1F3BF9E000646BCF /* MineUIViewController.swift */; };
 		7D4F943E251DFCF1E855A17CA7047BAB /* ToolCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1EDAEF18CBA6F23688F9247911F93EDF /* ToolCellView.xib */; };
 		837E4CB3CAA4F9E6F67FCD9B689A4731 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F3ED2E7C36C4CC96B9B25E5F44BB6DC /* Assets.xcassets */; };
 		8F857D8EE568B6B553022CDE /* Pods_SaleSecretary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96CFA79C8767534862334D7C /* Pods_SaleSecretary.framework */; };
@@ -156,6 +161,11 @@
 		6E20ECA71F341BD600A0F29E /* sz.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sz.png; sourceTree = "<group>"; };
 		6E20ECAF1F39B3D300A0F29E /* MessageCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageCache.swift; sourceTree = "<group>"; };
 		6E20ECB11F39B3DE00A0F29E /* MessageInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageInfo.swift; sourceTree = "<group>"; };
+		6EBAA5421F3C03240099DA89 /* MineViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MineViewCell.swift; sourceTree = "<group>"; };
+		6EBAA5431F3C03240099DA89 /* MineViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MineViewCell.xib; sourceTree = "<group>"; };
+		6EBAA54E1F3C2E480099DA89 /* MineInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MineInfoCell.swift; sourceTree = "<group>"; };
+		6EBAA5501F3C2E520099DA89 /* MineInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MineInfoCell.xib; sourceTree = "<group>"; };
+		6EF19C5C1F3BF9E000646BCF /* MineUIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MineUIViewController.swift; sourceTree = "<group>"; };
 		96CFA79C8767534862334D7C /* Pods_SaleSecretary.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SaleSecretary.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B427303374369F3F694A3E88B024FF52 /* SaleSecretary.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SaleSecretary.xcdatamodel; sourceTree = "<group>"; };
 		B45CD96F7DFFD87860F121A1A9F14848 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -219,6 +229,7 @@
 		0EA0B277261348029FDB9BAE2CF16043 /* SaleSecretary */ = {
 			isa = PBXGroup;
 			children = (
+				6EF19C581F3BF47800646BCF /* Mine */,
 				662D6A451F317755001C1FB1 /* Contacts */,
 				66B602F31F2F25F9002A55E6 /* Others */,
 				2F673B09140D61E9954FB873D91AF82C /* Main */,
@@ -386,6 +397,42 @@
 				6E20ECA41F341BCD00A0F29E /* xiaoming.png */,
 			);
 			name = images;
+			sourceTree = "<group>";
+		};
+		6EF19C581F3BF47800646BCF /* Mine */ = {
+			isa = PBXGroup;
+			children = (
+				6EF19C5B1F3BF4CC00646BCF /* View */,
+				6EF19C5A1F3BF4C000646BCF /* Model */,
+				6EF19C591F3BF4AB00646BCF /* Controller */,
+			);
+			name = Mine;
+			sourceTree = "<group>";
+		};
+		6EF19C591F3BF4AB00646BCF /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				6EF19C5C1F3BF9E000646BCF /* MineUIViewController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		6EF19C5A1F3BF4C000646BCF /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		6EF19C5B1F3BF4CC00646BCF /* View */ = {
+			isa = PBXGroup;
+			children = (
+				6EBAA5501F3C2E520099DA89 /* MineInfoCell.xib */,
+				6EBAA54E1F3C2E480099DA89 /* MineInfoCell.swift */,
+				6EBAA5421F3C03240099DA89 /* MineViewCell.swift */,
+				6EBAA5431F3C03240099DA89 /* MineViewCell.xib */,
+			);
+			name = View;
 			sourceTree = "<group>";
 		};
 		77D28E5543C148C1D2B03F577CBA0F88 /* Model */ = {
@@ -629,10 +676,12 @@
 				AF201728C3391AB87079CD9BA8E73001 /* Main.storyboard in Resources */,
 				66451F121F331E81009B65DD /* InscribeViewCell.xib in Resources */,
 				6E20ECA81F341BD600A0F29E /* sz.png in Resources */,
+				6EBAA5511F3C2E520099DA89 /* MineInfoCell.xib in Resources */,
 				6E20ECA01F341B8D00A0F29E /* MessageChat.storyboard in Resources */,
 				D9D045E89EEF6E531B731C29AF71C6D8 /* MessageListCell.xib in Resources */,
 				29D06932D6D0A7D01DEBF31C0546DAAE /* SMSView.storyboard in Resources */,
 				6615BF6B1F34134C0052879B /* customerList.plist in Resources */,
+				6EBAA5451F3C03240099DA89 /* MineViewCell.xib in Resources */,
 				6E0C8CE91F2EE0C20066885F /* MessageDetailCell.xib in Resources */,
 				6615BF681F3413420052879B /* CustomersCell.xib in Resources */,
 				66451F181F332AB8009B65DD /* PlanExecTimeCellView.xib in Resources */,
@@ -733,6 +782,7 @@
 			files = (
 				6E20EC951F341B4500A0F29E /* MessageItem.swift in Sources */,
 				66BF592B1F3075E800154E8C /* SMSAddViewController.swift in Sources */,
+				6EBAA5441F3C03240099DA89 /* MineViewCell.swift in Sources */,
 				45BDDB34CBA326F0F1C1F3CBB472F1DE /* AppDelegate.swift in Sources */,
 				66F265411F30243100E9ECAB /* SMSMessage.swift in Sources */,
 				63FFE17B8518E311F485E78D5AC99EDF /* MessageListCell.swift in Sources */,
@@ -754,6 +804,7 @@
 				6615BF6E1F3413EA0052879B /* TableViewCell.swift in Sources */,
 				6615BF6C1F34134C0052879B /* CustomerModel.swift in Sources */,
 				6647E8C91F3AEDCE0053AFF3 /* NetworkUtils.swift in Sources */,
+				6EBAA54F1F3C2E480099DA89 /* MineInfoCell.swift in Sources */,
 				66451F1A1F332D4E009B65DD /* PlanExecTimeCellView.swift in Sources */,
 				6E20ECA11F341B8D00A0F29E /* MessageChatController.swift in Sources */,
 				6E20EC991F341B6C00A0F29E /* ChatViewCell.swift in Sources */,
@@ -774,6 +825,7 @@
 				E7B2A2741F39FE97001D8C61 /* CTCustomerDetailInfoView.swift in Sources */,
 				66B602FD1F302238002A55E6 /* Recipient.swift in Sources */,
 				E75435741F34640E00BDE8C6 /* CustomerPopUpView.swift in Sources */,
+				6EF19C5D1F3BF9E000646BCF /* MineUIViewController.swift in Sources */,
 				6E20EC971F341B5500A0F29E /* UserInfo.swift in Sources */,
 				6E20ECB01F39B3D300A0F29E /* MessageCache.swift in Sources */,
 				6647E8CC1F3AFEE90053AFF3 /* CryptoHeader.m in Sources */,
