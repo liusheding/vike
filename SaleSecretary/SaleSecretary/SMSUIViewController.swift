@@ -92,10 +92,12 @@ extension SMSUIViewController  {
             if index == 0 {
                 self.performSegue(withIdentifier: "addMsgSchedule", sender: self)
             } else if index == 1 {
-                NetworkUtils.postBackEnd("R_BASE_TXL_CUS_GROUP", body: ["id" : "15dc14f554af466f99b946cc495bd772"]) {
-                    json in
-                    print("call back : \(json)")
-                }
+//                NetworkUtils.postBackEnd("R_BASE_TXL_CUS_GROUP", body: ["id" : "15dc14f554af466f99b946cc495bd772"]) {
+//                    json in
+//                    print("call back : \(json)")
+//                }
+                let vc = UIStoryboard(name: "SMSView", bundle: nil).instantiateViewController(withIdentifier: "TemplateSelectorController") as! TemplateSelectorController
+                self.navigationController?.pushViewController(vc, animated: true)
             }
         }
         
