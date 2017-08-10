@@ -85,7 +85,7 @@ class MessageChatController: UIViewController,ChatDataSource,UITextFieldDelegate
         txtMsg = UITextView(frame:CGRect(x: 7,y: 10,width: screenWidth - 95,height: 36))
         txtMsg.backgroundColor = UIColor.white
         txtMsg.textColor=UIColor.black
-        txtMsg.font=UIFont.boldSystemFont(ofSize: 12)
+        txtMsg.font=UIFont.boldSystemFont(ofSize: 15)
         txtMsg.layer.cornerRadius = 10.0
         txtMsg.returnKeyType = UIReturnKeyType.send
         
