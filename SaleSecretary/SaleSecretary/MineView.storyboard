@@ -19,6 +19,7 @@
                     </navigationBar>
                     <connections>
                         <segue destination="H4a-uu-dpN" kind="show" id="nCb-Oy-y5i"/>
+                        <segue destination="BLI-4e-wF0" kind="show" id="ecL-Yl-oaE"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UWG-KZ-c9U" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -86,7 +87,7 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TTD-bl-vZE">
                                 <rect key="frame" x="28" y="412" width="320" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.10657404794700209" green="0.77210897842639592" blue="0.18728323477262465" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.0039215686274509803" green="0.70588235294117641" blue="0.078431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="提现">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
@@ -104,7 +105,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="我的钱包" id="ual-YC-bqw">
                         <barButtonItem key="rightBarButtonItem" title="收支明细" id="Ukj-4E-wbn">
-                            <color key="tintColor" red="0.1065740479" green="0.77210897840000003" blue="0.1872832348" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="tintColor" red="0.0039215686274509803" green="0.70588235294117641" blue="0.078431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <segue destination="HwN-ap-zze" kind="show" id="Z1n-r7-kIo"/>
                             </connections>
@@ -137,6 +138,34 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yCM-d2-JHE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="148" y="136"/>
+        </scene>
+        <!--业务统计-->
+        <scene sceneID="8N6-qZ-oeH">
+            <objects>
+                <viewController storyboardIdentifier="BusinessRecord" title="业务统计" automaticallyAdjustsScrollViewInsets="NO" hidesBottomBarWhenPushed="YES" id="BLI-4e-wF0" customClass="BusinessRecordController" customModule="SaleSecretary" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="5t0-aN-5AY"/>
+                        <viewControllerLayoutGuide type="bottom" id="DwZ-3q-ps1"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="BpZ-oq-iGP">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="50" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="eXe-Ys-ZBv">
+                                <rect key="frame" x="0.0" y="100" width="375" height="567"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="eXe-Ys-ZBv" id="vfr-tP-mMh"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6PK-xj-5kW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-703.20000000000005" y="894.60269865067471"/>
         </scene>
     </scenes>
     <resources>

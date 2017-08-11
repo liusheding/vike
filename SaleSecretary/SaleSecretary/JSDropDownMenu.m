@@ -616,7 +616,7 @@
             leftTableView.frame = CGRectMake(_origin.x, self.frame.origin.y + self.frame.size.height, self.frame.size.width*ratio, 0);
             [self.superview addSubview:leftTableView];
             
-            leftTableViewHeight = ([leftTableView numberOfRowsInSection:0] > 5) ? (5 * leftTableView.rowHeight) : ([leftTableView numberOfRowsInSection:0] * leftTableView.rowHeight);
+            leftTableViewHeight = ([leftTableView numberOfRowsInSection:0] > 6) ? (6 * leftTableView.rowHeight) : ([leftTableView numberOfRowsInSection:0] * leftTableView.rowHeight);
 
         }
         
@@ -627,7 +627,7 @@
                 
                 [self.superview addSubview:rightTableView];
                 
-                rightTableViewHeight = ([rightTableView numberOfRowsInSection:0] > 5) ? (5 * rightTableView.rowHeight) : ([rightTableView numberOfRowsInSection:0] * rightTableView.rowHeight);
+                rightTableViewHeight = ([rightTableView numberOfRowsInSection:0] > 6) ? (6 * rightTableView.rowHeight) : ([rightTableView numberOfRowsInSection:0] * rightTableView.rowHeight);
             }
         }
         
@@ -678,7 +678,7 @@
             collectionView.frame = CGRectMake(_origin.x, self.frame.origin.y + self.frame.size.height, self.frame.size.width, 0);
             [self.superview addSubview:collectionView];
             
-            collectionViewHeight = ([collectionView numberOfItemsInSection:0] > 10) ? (5 * 38) : (ceil([collectionView numberOfItemsInSection:0]/2.0) * 38);
+            collectionViewHeight = ([collectionView numberOfItemsInSection:0] > 10) ? (6 * 38) : (ceil([collectionView numberOfItemsInSection:0]/2.0) * 38);
         }
         
         [UIView animateWithDuration:0.2 animations:^{

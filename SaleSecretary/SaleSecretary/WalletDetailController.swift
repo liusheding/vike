@@ -28,19 +28,14 @@ class WalletDetailController: UITableViewController {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
-    // MARK: - Table view data source
-
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 4
+        return self.RecordData.count
     }
 
     
@@ -54,7 +49,7 @@ class WalletDetailController: UITableViewController {
         let index = str?.index((str?.startIndex)!, offsetBy: 1)
         let prefix = str?.substring(to: index!)
         if prefix == "+"{
-            cell.money.textColor = UIColor.green
+            cell.money.textColor = APP_THEME_COLOR
         }else{
             cell.money.textColor = UIColor.black
         }
