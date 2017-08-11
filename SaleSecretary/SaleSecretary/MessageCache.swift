@@ -2,7 +2,7 @@
 //  MessageCache.swift
 //  SaleSecretary
 //
-//  Created by 肖强 on 2017/8/6.
+//  Created by xiaoqiang on 2017/8/6.
 //  Copyright © 2017年 zjjy. All rights reserved.
 //
 

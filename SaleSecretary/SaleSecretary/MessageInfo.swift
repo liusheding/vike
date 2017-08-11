@@ -2,7 +2,7 @@
 //  MessageInfo.swift
 //  SaleSecretary
 //
-//  Created by 肖强 on 2017/8/8.
+//  Created by xiaoqiang on 2017/8/8.
 //  Copyright © 2017年 zjjy. All rights reserved.
 //
 

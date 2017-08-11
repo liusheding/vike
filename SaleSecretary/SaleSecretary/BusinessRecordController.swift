@@ -2,7 +2,7 @@
 //  BusinessRecordController.swift
 //  SaleSecretary
 //
-//  Created by 肖强 on 2017/8/11.
+//  Created by xiaoqiang on 2017/8/11.
 //  Copyright © 2017年 zjjy. All rights reserved.
 //
 
