@@ -88,6 +88,11 @@
 		E1E92A825F157EE0E15E88EC43FED169 /* SaleSecretary.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 372EFD95BCC4506D668112468A0C6F18 /* SaleSecretary.xcdatamodeld */; };
 		E75435741F34640E00BDE8C6 /* CustomerPopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E75435731F34640E00BDE8C6 /* CustomerPopUpView.swift */; };
 		E75435761F3542AE00BDE8C6 /* ContactMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E75435751F3542AE00BDE8C6 /* ContactMessageViewController.swift */; };
+		E754DC931F3D4E3D0025DBBE /* ContactStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E754DC901F3D4E3D0025DBBE /* ContactStoryboard.storyboard */; };
+		E754DC941F3D4E3D0025DBBE /* CTAddNewTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E754DC911F3D4E3D0025DBBE /* CTAddNewTableViewController.swift */; };
+		E754DC951F3D4E3D0025DBBE /* CTChooseNewerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E754DC921F3D4E3D0025DBBE /* CTChooseNewerController.swift */; };
+		E754DC971F3D4E4B0025DBBE /* AddNewCustomerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E754DC961F3D4E4B0025DBBE /* AddNewCustomerCell.swift */; };
+		E754DC991F3D4E5A0025DBBE /* GetContactUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E754DC981F3D4E5A0025DBBE /* GetContactUtils.swift */; };
 		E7B2A2701F39FE76001D8C61 /* CTCustomerDetailInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B2A26D1F39FE76001D8C61 /* CTCustomerDetailInfoViewController.swift */; };
 		E7B2A2711F39FE76001D8C61 /* CTInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B2A26E1F39FE76001D8C61 /* CTInfoViewController.swift */; };
 		E7B2A2721F39FE76001D8C61 /* CTrailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B2A26F1F39FE76001D8C61 /* CTrailViewController.swift */; };
@@ -200,6 +205,11 @@
 		E1D47ACF391485904A172658C073C4CF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E75435731F34640E00BDE8C6 /* CustomerPopUpView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerPopUpView.swift; sourceTree = "<group>"; };
 		E75435751F3542AE00BDE8C6 /* ContactMessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactMessageViewController.swift; sourceTree = "<group>"; };
+		E754DC901F3D4E3D0025DBBE /* ContactStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ContactStoryboard.storyboard; sourceTree = "<group>"; };
+		E754DC911F3D4E3D0025DBBE /* CTAddNewTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CTAddNewTableViewController.swift; sourceTree = "<group>"; };
+		E754DC921F3D4E3D0025DBBE /* CTChooseNewerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CTChooseNewerController.swift; sourceTree = "<group>"; };
+		E754DC961F3D4E4B0025DBBE /* AddNewCustomerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNewCustomerCell.swift; sourceTree = "<group>"; };
+		E754DC981F3D4E5A0025DBBE /* GetContactUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetContactUtils.swift; sourceTree = "<group>"; };
 		E7B2A26D1F39FE76001D8C61 /* CTCustomerDetailInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CTCustomerDetailInfoViewController.swift; sourceTree = "<group>"; };
 		E7B2A26E1F39FE76001D8C61 /* CTInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CTInfoViewController.swift; sourceTree = "<group>"; };
 		E7B2A26F1F39FE76001D8C61 /* CTrailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CTrailViewController.swift; sourceTree = "<group>"; };
@@ -348,6 +358,9 @@
 		6615BF551F3412EF0052879B /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				E754DC901F3D4E3D0025DBBE /* ContactStoryboard.storyboard */,
+				E754DC911F3D4E3D0025DBBE /* CTAddNewTableViewController.swift */,
+				E754DC921F3D4E3D0025DBBE /* CTChooseNewerController.swift */,
 				E7B2A26D1F39FE76001D8C61 /* CTCustomerDetailInfoViewController.swift */,
 				E7B2A26E1F39FE76001D8C61 /* CTInfoViewController.swift */,
 				E7B2A26F1F39FE76001D8C61 /* CTrailViewController.swift */,
@@ -379,6 +392,7 @@
 		662D6A461F317781001C1FB1 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				E754DC961F3D4E4B0025DBBE /* AddNewCustomerCell.swift */,
 				E7B2A2731F39FE97001D8C61 /* CTCustomerDetailInfoView.swift */,
 				6615BF6D1F3413EA0052879B /* TableViewCell.swift */,
 				6615BF611F3413420052879B /* CustomerHeaderView.swift */,
@@ -410,6 +424,7 @@
 		66B602F31F2F25F9002A55E6 /* Others */ = {
 			isa = PBXGroup;
 			children = (
+				E754DC981F3D4E5A0025DBBE /* GetContactUtils.swift */,
 				66AB59071F3C65CE005FB30F /* JSDropDownMenu */,
 				66451F0B1F32C4C7009B65DD /* UIColor+Hex.swift */,
 				6647E8C81F3AEDCE0053AFF3 /* NetworkUtils.swift */,
@@ -726,6 +741,7 @@
 				6615BF681F3413420052879B /* CustomersCell.xib in Resources */,
 				66451F181F332AB8009B65DD /* PlanExecTimeCellView.xib in Resources */,
 				662D6A491F3177BA001C1FB1 /* AddNewCustomersCell.xib in Resources */,
+				E754DC931F3D4E3D0025DBBE /* ContactStoryboard.storyboard in Resources */,
 				6647E8C71F39C63B0053AFF3 /* SMSContentTextCell.xib in Resources */,
 				7D4F943E251DFCF1E855A17CA7047BAB /* ToolCellView.xib in Resources */,
 			);
@@ -821,6 +837,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6E20EC951F341B4500A0F29E /* MessageItem.swift in Sources */,
+				E754DC941F3D4E3D0025DBBE /* CTAddNewTableViewController.swift in Sources */,
 				66BF592B1F3075E800154E8C /* SMSAddViewController.swift in Sources */,
 				6EBAA5441F3C03240099DA89 /* MineViewCell.swift in Sources */,
 				45BDDB34CBA326F0F1C1F3CBB472F1DE /* AppDelegate.swift in Sources */,
@@ -830,8 +847,10 @@
 				6E20ECB21F39B3DE00A0F29E /* MessageInfo.swift in Sources */,
 				5B61C6CC8719F793AA22DE8CE2E016A7 /* MessageViewController.swift in Sources */,
 				66B602F91F2F3BA7002A55E6 /* SMSDetailView.swift in Sources */,
+				E754DC951F3D4E3D0025DBBE /* CTChooseNewerController.swift in Sources */,
 				6615BF5C1F3413210052879B /* ContactTableViewController.swift in Sources */,
 				6615BF541F33F9A60052879B /* CustomSMSViewController.swift in Sources */,
+				E754DC971F3D4E4B0025DBBE /* AddNewCustomerCell.swift in Sources */,
 				4D8C433AFF25A62C0F123986B3D3B2AC /* SMSUIViewController.swift in Sources */,
 				E7B2A2711F39FE76001D8C61 /* CTInfoViewController.swift in Sources */,
 				E75435761F3542AE00BDE8C6 /* ContactMessageViewController.swift in Sources */,
@@ -874,6 +893,7 @@
 				6E20EC971F341B5500A0F29E /* UserInfo.swift in Sources */,
 				6EBAA5611F3C43B50099DA89 /* WalletViewController.swift in Sources */,
 				6E20ECB01F39B3D300A0F29E /* MessageCache.swift in Sources */,
+				E754DC991F3D4E5A0025DBBE /* GetContactUtils.swift in Sources */,
 				6647E8CC1F3AFEE90053AFF3 /* CryptoHeader.m in Sources */,
 				6E20EC931F341B2B00A0F29E /* ChatDataSource.swift in Sources */,
 			);
