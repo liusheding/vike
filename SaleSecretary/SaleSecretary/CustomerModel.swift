@@ -15,7 +15,7 @@ class CustomerModel: NSObject {
 
 class Customer : NSObject{
     var name: String?
-    var phone_number: String?
+    var phone_number: [String]?
     var nick_name: String? // nick name
     var time: String?  // birthday
 //    var type: String?
@@ -35,6 +35,10 @@ class Customer : NSObject{
     }
     override init () {
         self.name =  "demo"
+        self.nick_name = "helloworld"
+        self.phone_number = ["888888"]
+        self.icon = "xx"
+        self.time = "1988-12-12"
     }
     override func  setValue(_ value: Any?, forUndefinedKey key: String) { }
     

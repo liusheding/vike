@@ -25,7 +25,7 @@ class TableViewCell: UITableViewCell {
             self.imageView?.image = UIImage(named: customerData!.icon!)
             self.textLabel?.text = customerData!.name!
 //            self.textLabel?.textColor = customerData!.vip == true ? UIColor.redColor() : UIColor.blackColor()
-            self.detailTextLabel?.text = customerData!.phone_number!
+            self.detailTextLabel?.text = customerData!.phone_number?[0]
         }
     }
     

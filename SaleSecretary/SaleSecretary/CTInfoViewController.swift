@@ -41,7 +41,7 @@ extension CTInfoViewController : UITableViewDelegate , UITableViewDataSource {
     
     func createCTInfoCell(indexPath:IndexPath , data : CTCustomerDetailInfoViewController ) -> UITableViewCell{
         let cell = UITableViewCell(style: UITableViewCellStyle.value1, reuseIdentifier: "cell")
-        let dataCell = [data.userInfo.name , data.userInfo.phone_number , data.userInfo.icon , data.userInfo.nick_name , data.userInfo.time]
+        let dataCell = [data.userInfo.name , data.userInfo.phone_number?[0] , data.userInfo.icon , data.userInfo.nick_name , data.userInfo.time]
         switch indexPath.section {
         case 0:
             let i = indexPath.row

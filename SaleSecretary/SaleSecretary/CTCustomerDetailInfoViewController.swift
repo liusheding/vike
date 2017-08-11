@@ -25,7 +25,7 @@ class CTCustomerDetailInfoViewController: UIViewController {
     @IBAction func changeSegment(_ sender: Any) {
         
         let idx = (sender as AnyObject).selectedSegmentIndex
-        NSLog("select \(String(describing: idx)) segment")
+//        NSLog("select \(String(describing: idx)) segment")
         if idx! >= segmentView.count {
             NSLog("unexcepted idx, please check code or storyboard")
             return
@@ -38,6 +38,7 @@ class CTCustomerDetailInfoViewController: UIViewController {
         self.navigationItem.title = "详细资料"
         self.view.backgroundColor = UIColor.white
         self.name.text = userInfo.name
+        self.hidesBottomBarWhenPushed=true
         
         // choose segment uiview
         showSelectedView(0)
@@ -56,7 +57,7 @@ class CTCustomerDetailInfoViewController: UIViewController {
             } else {
                 e.isHidden = true
             }
-            NSLog(" segment view hide \(i) --\(idx)-- \(e.isHidden)------")
+//            NSLog(" segment view hide \(i) --\(idx)-- \(e.isHidden)------")
         }
     }
     
