@@ -274,7 +274,7 @@ class TamplateTableViewDelegator: NSObject ,UITableViewDataSource, UITableViewDe
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 25.0
+        return 35.0
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
