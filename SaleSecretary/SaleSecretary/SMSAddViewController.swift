@@ -47,6 +47,7 @@ class SMSAddViewController : UIViewController {
         }
         
         showSelectedView(idx)
+        // print(self.navigationController?.viewControllers ?? "[]")
     }
     
     
@@ -63,7 +64,6 @@ class SMSAddViewController : UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        print(self.segmentCtrl.frame)
     }
 }
 
@@ -131,6 +131,7 @@ class SMSTemplateViewController : UIViewController {
     }
     
 }
+
 
 
 extension SMSTemplateViewController : UITableViewDataSource, UITableViewDelegate, CustomerSelectDelegate {
@@ -215,6 +216,7 @@ extension SMSTemplateViewController : UITableViewDataSource, UITableViewDelegate
         let cell = UITableViewCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: cellId)
         cell.imageView?.image = UIImage(named: "icon_nr")
         cell.textLabel?.text = "短信模版内容"
+        cell.textLabel?.textColor = UIColor.lightGray
         cell.textLabel?.font = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
         cell.textLabel?.numberOfLines = 5
        
@@ -242,6 +244,7 @@ extension SMSTemplateViewController : UITableViewDataSource, UITableViewDelegate
         // let idx = self.tableView.indexPathForSelectedRow
         let cell = self.tableView.cellForRow(at: [0, 0])
         let names = rec.flatMap({$0.name}).joined(separator: "、")
+        cell?.textLabel?.textColor = UIColor.darkText
         cell?.textLabel?.text = names
     
     }
@@ -252,6 +255,11 @@ extension SMSTemplateViewController : UITableViewDataSource, UITableViewDelegate
             let custSelectVC = UIStoryboard(name: "SMSView", bundle: nil).instantiateViewController(withIdentifier: "CustomerSelectViewController") as! CustomerSelectViewController
             custSelectVC.delegate = self
             present(custSelectVC, animated: true) {}
+        case 1:
+            let templateVC = UIStoryboard(name: "SMSView", bundle: nil).instantiateViewController(withIdentifier: "TemplateSelectorController") as! TemplateSelectorController
+            templateVC.tableCanSelected = true
+            templateVC.templateSelectorDelegate = self
+            self.navigationController?.pushViewController(templateVC, animated: true)
         case 4:
             toggleDatePicker()
         default:
@@ -269,6 +277,16 @@ extension SMSTemplateViewController : UITableViewDataSource, UITableViewDelegate
         // self.tableView.scrollsToTop = true
         // print("\(self.tableView.frame)")
         // print("\(self.tableView.rectForRow(at: IndexPath(row: 0, section: 0)))")
+    }
+    
+}
+
+extension SMSTemplateViewController : TemplateSelectorDelegate {
+    
+    func didSelected(_ template: SMSTemplate) {
+        // 短信内容cell
+        let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 1))
+        cell?.textLabel?.text = template.content
     }
     
 }

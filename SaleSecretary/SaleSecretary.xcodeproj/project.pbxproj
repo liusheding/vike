@@ -37,6 +37,7 @@
 		6647E8C71F39C63B0053AFF3 /* SMSContentTextCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6647E8C51F39C63B0053AFF3 /* SMSContentTextCell.xib */; };
 		6647E8C91F3AEDCE0053AFF3 /* NetworkUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6647E8C81F3AEDCE0053AFF3 /* NetworkUtils.swift */; };
 		6647E8CC1F3AFEE90053AFF3 /* CryptoHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 6647E8CB1F3AFEE90053AFF3 /* CryptoHeader.m */; };
+		664B998E1F3DA8CB00968AA5 /* SMSTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 664B998D1F3DA8CB00968AA5 /* SMSTemplate.swift */; };
 		66AB590B1F3C65E8005FB30F /* ico_make.png in Resources */ = {isa = PBXBuildFile; fileRef = 66AB59081F3C65E8005FB30F /* ico_make.png */; };
 		66AB590C1F3C65E8005FB30F /* JSDropDownMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 66AB590A1F3C65E8005FB30F /* JSDropDownMenu.m */; };
 		66AB590E1F3C65FA005FB30F /* TemplateSelectorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AB590D1F3C65FA005FB30F /* TemplateSelectorController.swift */; };
@@ -152,6 +153,7 @@
 		6647E8C81F3AEDCE0053AFF3 /* NetworkUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkUtils.swift; sourceTree = "<group>"; };
 		6647E8CA1F3AFEE80053AFF3 /* SaleSecretary-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SaleSecretary-Bridging-Header.h"; sourceTree = "<group>"; };
 		6647E8CB1F3AFEE90053AFF3 /* CryptoHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CryptoHeader.m; sourceTree = "<group>"; };
+		664B998D1F3DA8CB00968AA5 /* SMSTemplate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SMSTemplate.swift; sourceTree = "<group>"; };
 		66AB59081F3C65E8005FB30F /* ico_make.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ico_make.png; sourceTree = "<group>"; };
 		66AB59091F3C65E8005FB30F /* JSDropDownMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSDropDownMenu.h; sourceTree = "<group>"; };
 		66AB590A1F3C65E8005FB30F /* JSDropDownMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSDropDownMenu.m; sourceTree = "<group>"; };
@@ -511,6 +513,7 @@
 				66AB590F1F3C6607005FB30F /* Month.swift */,
 				66B602FC1F302238002A55E6 /* Recipient.swift */,
 				66F265401F30243100E9ECAB /* SMSMessage.swift */,
+				664B998D1F3DA8CB00968AA5 /* SMSTemplate.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -862,6 +865,7 @@
 				6EBAA5441F3C03240099DA89 /* MineViewCell.swift in Sources */,
 				45BDDB34CBA326F0F1C1F3CBB472F1DE /* AppDelegate.swift in Sources */,
 				66AB590C1F3C65E8005FB30F /* JSDropDownMenu.m in Sources */,
+				664B998E1F3DA8CB00968AA5 /* SMSTemplate.swift in Sources */,
 				66F265411F30243100E9ECAB /* SMSMessage.swift in Sources */,
 				63FFE17B8518E311F485E78D5AC99EDF /* MessageListCell.swift in Sources */,
 				6EBAA56F1F3D5C190099DA89 /* BusinessRecordController.swift in Sources */,

@@ -88,7 +88,6 @@ extension SMSUIViewController  {
         moreDrop.dataSource = ["新建执行计划", "模板目录"]
         moreDrop.selectionAction = { [unowned self] (index, item) in
             print("click \(index), \(item) ")
-            print("\(self)")
             if index == 0 {
                 self.performSegue(withIdentifier: "addMsgSchedule", sender: self)
             } else if index == 1 {

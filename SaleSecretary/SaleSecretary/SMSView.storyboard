@@ -504,7 +504,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="模板" id="y6H-sQ-h1k">
-                        <barButtonItem key="rightBarButtonItem" title="确认" id="4Xe-Cw-EWi"/>
+                        <barButtonItem key="rightBarButtonItem" title="确认" id="4Xe-Cw-EWi">
+                            <connections>
+                                <action selector="confirmSelection:" destination="2VU-kh-fcd" id="Wb9-IM-HM4"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>

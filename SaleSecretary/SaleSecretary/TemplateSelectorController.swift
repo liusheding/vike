@@ -8,7 +8,10 @@
 
 import UIKit
 
+
 class TemplateSelectorController: UIViewController {
+    
+   
     
     @IBOutlet weak var searchBar: UISearchBar!
     
@@ -16,9 +19,11 @@ class TemplateSelectorController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
+    // 下拉框插件
     var menu: JSDropDownMenu!
     
     @IBOutlet weak var confirmBtn: UIBarButtonItem!
+    
     
     let menuTitles = ["月份", "短信类型"]
     
@@ -32,10 +37,18 @@ class TemplateSelectorController: UIViewController {
     
     var indexForColumTypes: Int = 0
     
-    var templateDelegate: TamplateTableViewDelegator?
     
-    var tableCanSelected: Bool = true
+    
+    // 模板tableview代理，需要跟UISearchBar分开
+    var templateViewDelegate: TamplateTableViewDelegator?
+    
+    // 模板选择后代理，parentViewController如果要选择需要实现该代理
+    var templateSelectorDelegate: TemplateSelectorDelegate?
+    
+    //
+    var tableCanSelected: Bool = false
 
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,17 +64,33 @@ class TemplateSelectorController: UIViewController {
         // self.tableView.isHidden = true
         self.view.addSubview(menu)
         self.automaticallyAdjustsScrollViewInsets = false
-        self.templateDelegate = TamplateTableViewDelegator(self.tableView, controller: self)
+        self.templateViewDelegate = TamplateTableViewDelegator(self.tableView, controller: self)
         self.tableView.estimatedRowHeight = 44.0
         self.tableView.rowHeight = UITableViewAutomaticDimension
-        self.tableView.delegate = templateDelegate
-        self.tableView.dataSource = templateDelegate
+        self.tableView.delegate = templateViewDelegate
+        self.tableView.dataSource = templateViewDelegate
         self.tableView.tableFooterView = UIView()
         
         if !tableCanSelected {
             self.confirmBtn.title = nil
         }
+        
     }
+    
+    
+    @IBAction func confirmSelection(_ sender: UIBarButtonItem) {
+        let idx = self.tableView.indexPathForSelectedRow
+        if self.templateSelectorDelegate != nil {
+            if idx != nil {
+                let cell = self.tableView.cellForRow(at: idx!) as! CollapsibleTableViewCell
+                let content = cell.detailLabel.text!
+                self.templateSelectorDelegate!.didSelected(SMSTemplate("fake_id", content: content))
+                let count = self.navigationController?.viewControllers.count
+                self.navigationController?.popToViewController((self.navigationController?.viewControllers[count! - 2])!, animated: true)
+            }
+        }
+    }
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -152,6 +181,11 @@ typealias Section = CollapsibleSection
 typealias Item = CollapsibleItem
 
 let txt = "七夕到，喜鹊叫，我发短信把喜报，一喜夫妻恩爱好，二喜儿女膝边绕，三喜体健毛病少，四喜平安把你照，五喜吉祥富贵抱，六喜开心没烦恼，七喜幸福指数高，七夕的短信转转好，七夕的快乐少不了！"
+
+
+protocol TemplateSelectorDelegate {
+    func didSelected(_ template: SMSTemplate)
+}
 
 class TamplateTableViewDelegator: NSObject ,UITableViewDataSource, UITableViewDelegate, CollapsibleTableViewHeaderDelegate {
     
