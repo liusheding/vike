@@ -125,7 +125,7 @@ extension BusinessRecordController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .value1, reuseIdentifier: "smsTemplateCell")
+        let cell = UITableViewCell(style: .value1, reuseIdentifier: "recordCell")
         cell.imageView?.image = UIImage(named: (self.RecordCells[indexPath.row]["image"])!)
         cell.textLabel?.text = self.RecordCells[indexPath.row]["label"]
         cell.detailTextLabel?.text = self.RecordCells[indexPath.row]["info"]

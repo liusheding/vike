@@ -39,7 +39,7 @@ class MineUIViewController: UITableViewController {
     
     private var mineCells = [
         0: [["label": "", "image": "", "id":""]],
-        1: [["label": "短信", "image": "icon_w_dx", "id":"dx"]],
+        1: [["label": "短信（点我试试）", "image": "icon_w_dx", "id":"dx"]],
         2: [["label": "用户管理", "image": "icon_w_yhgl", "id":"yhgl"]],
         3: [["label": "钱包（点我试试）", "image": "icon_w_qb", "id":"qb"]],
         4: [["label": "短信发送统计（点我试试）", "image": "icon_w_dxtj", "id":"dxtj"]],
@@ -77,7 +77,10 @@ class MineUIViewController: UITableViewController {
         let selectedRow = self.tableView.cellForRow(at: indexPath)
         print("\(String(describing: selectedRow))")
         let storyBoard = UIStoryboard(name: "MineView", bundle: nil)
-        if indexPath.section == 3{
+        if indexPath.section == 1{
+            let walletVC = storyBoard.instantiateViewController(withIdentifier: "onlinepayID")
+            self.navigationController?.pushViewController(walletVC, animated: true)
+        }else if indexPath.section == 3{
             let walletVC = storyBoard.instantiateViewController(withIdentifier: "walletView")
             self.navigationController?.pushViewController(walletVC, animated: true)
         }else if indexPath.section == 4{

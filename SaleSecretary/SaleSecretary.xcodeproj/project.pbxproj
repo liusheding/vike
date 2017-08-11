@@ -83,6 +83,7 @@
 		6EBAA56B1F3C5B330099DA89 /* WalletDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EBAA5691F3C5B330099DA89 /* WalletDetailCell.xib */; };
 		6EBAA56F1F3D5C190099DA89 /* BusinessRecordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBAA56E1F3D5C190099DA89 /* BusinessRecordController.swift */; };
 		6EF19C5D1F3BF9E000646BCF /* MineUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF19C5C1F3BF9E000646BCF /* MineUIViewController.swift */; };
+		6EF2B7831F3DC0B000C808EE /* OnlinePayController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF2B7821F3DC0B000C808EE /* OnlinePayController.swift */; };
 		7D4F943E251DFCF1E855A17CA7047BAB /* ToolCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1EDAEF18CBA6F23688F9247911F93EDF /* ToolCellView.xib */; };
 		837E4CB3CAA4F9E6F67FCD9B689A4731 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F3ED2E7C36C4CC96B9B25E5F44BB6DC /* Assets.xcassets */; };
 		8F857D8EE568B6B553022CDE /* Pods_SaleSecretary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96CFA79C8767534862334D7C /* Pods_SaleSecretary.framework */; };
@@ -206,6 +207,7 @@
 		6EBAA5691F3C5B330099DA89 /* WalletDetailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WalletDetailCell.xib; sourceTree = "<group>"; };
 		6EBAA56E1F3D5C190099DA89 /* BusinessRecordController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BusinessRecordController.swift; sourceTree = "<group>"; };
 		6EF19C5C1F3BF9E000646BCF /* MineUIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MineUIViewController.swift; sourceTree = "<group>"; };
+		6EF2B7821F3DC0B000C808EE /* OnlinePayController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnlinePayController.swift; sourceTree = "<group>"; };
 		96CFA79C8767534862334D7C /* Pods_SaleSecretary.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SaleSecretary.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B427303374369F3F694A3E88B024FF52 /* SaleSecretary.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SaleSecretary.xcdatamodel; sourceTree = "<group>"; };
 		B45CD96F7DFFD87860F121A1A9F14848 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -485,6 +487,7 @@
 		6EF19C591F3BF4AB00646BCF /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				6EF2B7821F3DC0B000C808EE /* OnlinePayController.swift */,
 				6EBAA56E1F3D5C190099DA89 /* BusinessRecordController.swift */,
 				6EF19C5C1F3BF9E000646BCF /* MineUIViewController.swift */,
 				6EBAA5601F3C43B50099DA89 /* WalletViewController.swift */,
@@ -879,6 +882,7 @@
 				63FFE17B8518E311F485E78D5AC99EDF /* MessageListCell.swift in Sources */,
 				6EBAA56F1F3D5C190099DA89 /* BusinessRecordController.swift in Sources */,
 				6E20ECB21F39B3DE00A0F29E /* MessageInfo.swift in Sources */,
+				6EF2B7831F3DC0B000C808EE /* OnlinePayController.swift in Sources */,
 				5B61C6CC8719F793AA22DE8CE2E016A7 /* MessageViewController.swift in Sources */,
 				66B602F91F2F3BA7002A55E6 /* SMSDetailView.swift in Sources */,
 				E754DC951F3D4E3D0025DBBE /* CTChooseNewerController.swift in Sources */,
