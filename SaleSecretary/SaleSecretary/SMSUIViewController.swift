@@ -85,7 +85,7 @@ extension SMSUIViewController  {
         appearance.shadowRadius = 25
         appearance.animationduration = 0.25
         appearance.textColor = .darkGray
-        moreDrop.dataSource = ["新建执行计划", "查看模板"]
+        moreDrop.dataSource = ["新建执行计划", "模板目录"]
         moreDrop.selectionAction = { [unowned self] (index, item) in
             print("click \(index), \(item) ")
             print("\(self)")
