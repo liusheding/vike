@@ -1,0 +1,39 @@
+
+/* Class = "UINavigationItem"; title = "消息"; ObjectID = "9Ck-XB-b07"; */
+"9Ck-XB-b07.title" = "消息";
+
+/* Class = "UINavigationItem"; title = "工具"; ObjectID = "Adx-eC-F9V"; */
+"Adx-eC-F9V.title" = "工具";
+
+/* Class = "UITabBarItem"; title = "通讯录"; ObjectID = "CCy-Pm-Kkh"; */
+"CCy-Pm-Kkh.title" = "通讯录";
+
+/* Class = "UITabBarItem"; title = "消息"; ObjectID = "GMa-2s-qGX"; */
+"GMa-2s-qGX.title" = "消息";
+
+/* Class = "UITabBarItem"; title = "我"; ObjectID = "QLs-0h-wEw"; */
+"QLs-0h-wEw.title" = "我";
+
+/* Class = "UITableViewController"; title = "我"; ObjectID = "Rnc-SJ-OJw"; */
+"Rnc-SJ-OJw.title" = "我";
+
+/* Class = "UINavigationController"; title = "我"; ObjectID = "TPw-qJ-1jn"; */
+"TPw-qJ-1jn.title" = "我";
+
+/* Class = "UINavigationItem"; title = "通讯录"; ObjectID = "dbW-jO-H8g"; */
+"dbW-jO-H8g.title" = "通讯录";
+
+/* Class = "UITableViewController"; title = "工具"; ObjectID = "eJQ-6D-e4H"; */
+"eJQ-6D-e4H.title" = "工具";
+
+/* Class = "UINavigationItem"; title = "我"; ObjectID = "iG4-fy-3Hy"; */
+"iG4-fy-3Hy.title" = "我";
+
+/* Class = "UITabBarController"; title = "Main"; ObjectID = "j2D-Lg-Ac9"; */
+"j2D-Lg-Ac9.title" = "Main";
+
+/* Class = "UITabBarItem"; title = "工具"; ObjectID = "oEz-FH-shL"; */
+"oEz-FH-shL.title" = "工具";
+
+/* Class = "UIViewController"; title = "通讯录"; ObjectID = "sEa-Fs-Ett"; */
+"sEa-Fs-Ett.title" = "通讯录";

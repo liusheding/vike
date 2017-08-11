@@ -38,6 +38,7 @@
 		6647E8C91F3AEDCE0053AFF3 /* NetworkUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6647E8C81F3AEDCE0053AFF3 /* NetworkUtils.swift */; };
 		6647E8CC1F3AFEE90053AFF3 /* CryptoHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 6647E8CB1F3AFEE90053AFF3 /* CryptoHeader.m */; };
 		664B998E1F3DA8CB00968AA5 /* SMSTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 664B998D1F3DA8CB00968AA5 /* SMSTemplate.swift */; };
+		664B999A1F3DBE5700968AA5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 664B999C1F3DBE5700968AA5 /* InfoPlist.strings */; };
 		66AB590B1F3C65E8005FB30F /* ico_make.png in Resources */ = {isa = PBXBuildFile; fileRef = 66AB59081F3C65E8005FB30F /* ico_make.png */; };
 		66AB590C1F3C65E8005FB30F /* JSDropDownMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 66AB590A1F3C65E8005FB30F /* JSDropDownMenu.m */; };
 		66AB590E1F3C65FA005FB30F /* TemplateSelectorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AB590D1F3C65FA005FB30F /* TemplateSelectorController.swift */; };
@@ -154,6 +155,11 @@
 		6647E8CA1F3AFEE80053AFF3 /* SaleSecretary-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SaleSecretary-Bridging-Header.h"; sourceTree = "<group>"; };
 		6647E8CB1F3AFEE90053AFF3 /* CryptoHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CryptoHeader.m; sourceTree = "<group>"; };
 		664B998D1F3DA8CB00968AA5 /* SMSTemplate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SMSTemplate.swift; sourceTree = "<group>"; };
+		664B998F1F3DB92400968AA5 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		664B99901F3DB92400968AA5 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		664B999B1F3DBE5700968AA5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		664B999D1F3DBE5900968AA5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		664B999E1F3DBE5A00968AA5 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		66AB59081F3C65E8005FB30F /* ico_make.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ico_make.png; sourceTree = "<group>"; };
 		66AB59091F3C65E8005FB30F /* JSDropDownMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSDropDownMenu.h; sourceTree = "<group>"; };
 		66AB590A1F3C65E8005FB30F /* JSDropDownMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSDropDownMenu.m; sourceTree = "<group>"; };
@@ -279,6 +285,7 @@
 				FB20A214877D05C6E7E1ECF3F9E4A391 /* Info.plist */,
 				E91976E222A3B14574B6924020DD4A84 /* LaunchScreen.storyboard */,
 				372EFD95BCC4506D668112468A0C6F18 /* SaleSecretary.xcdatamodeld */,
+				664B999C1F3DBE5700968AA5 /* InfoPlist.strings */,
 			);
 			path = SaleSecretary;
 			sourceTree = "<group>";
@@ -708,6 +715,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
 			);
 			mainGroup = 109CF3EC5FBDD447063E3847B6FB7B07;
 			productRefGroup = 0CDBCAFFFDB1BD9128254835506150B5 /* Products */;
@@ -741,6 +749,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				66451F0E1F330DDD009B65DD /* AppellationCellView.xib in Resources */,
+				664B999A1F3DBE5700968AA5 /* InfoPlist.strings in Resources */,
 				6E20ECA51F341BCD00A0F29E /* xiaohua.png in Resources */,
 				6E20ECA61F341BCD00A0F29E /* xiaoming.png in Resources */,
 				66B602F21F2F074A002A55E6 /* SMSListViewCell.xib in Resources */,
@@ -947,14 +956,26 @@
 			isa = PBXVariantGroup;
 			children = (
 				C44B64C515E9205C02855331FBB73F3F /* Base */,
+				664B998F1F3DB92400968AA5 /* zh-Hans */,
 			);
 			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		664B999C1F3DBE5700968AA5 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				664B999B1F3DBE5700968AA5 /* Base */,
+				664B999D1F3DBE5900968AA5 /* en */,
+				664B999E1F3DBE5A00968AA5 /* zh-Hans */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 		E91976E222A3B14574B6924020DD4A84 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				DC5DE7BB98E8B43BBAFCD9F6E6D94AC0 /* Base */,
+				664B99901F3DB92400968AA5 /* zh-Hans */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -1042,6 +1063,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -1092,6 +1114,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
