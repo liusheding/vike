@@ -28,6 +28,7 @@ class TemplateSelectorController: UIViewController {
         return [self.months, self.smsTypes]
     }()
     
+    var indexForColumTypes: Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,6 +43,9 @@ class TemplateSelectorController: UIViewController {
         // self.tableView.isHidden = true
         self.view.addSubview(menu)
         self.automaticallyAdjustsScrollViewInsets = false
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+        self.tableView.tableFooterView = UIView()
     }
     
     override func didReceiveMemoryWarning() {
@@ -93,7 +97,10 @@ extension TemplateSelectorController: JSDropDownMenuDataSource, JSDropDownMenuDe
     }
     
     func currentLeftSelectedRow(_ column: Int) -> Int {
-        return 0
+        if column == 0 {
+            return 0
+        }
+        return indexForColumTypes
     }
     
     func displayByCollectionView(inColumn column: Int) -> Bool {
@@ -102,6 +109,9 @@ extension TemplateSelectorController: JSDropDownMenuDataSource, JSDropDownMenuDe
     }
     
     func menu(_ menu: JSDropDownMenu!, didSelectRowAt indexPath: JSIndexPath!) {
+        if indexPath.column == 1 {
+            self.indexForColumTypes = indexPath.row
+        }
         print(indexPath)
     }
 }
@@ -118,11 +128,10 @@ extension TemplateSelectorController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .default, reuseIdentifier: "smsTemplateCell")
-        cell.textLabel?.text = "祝福类"
+        let cell = UITableViewCell(style: .default, reuseIdentifier: "smsTemplateSearchCell")
+        cell.textLabel?.text = "你好ya "
         return cell
     }
-    
 }
 
 
