@@ -23,6 +23,9 @@ class MessageDetailController: UITableViewController {
         self.tableView.dataSource = self
         self.tableView.register(UINib(nibName: String(describing: MessageDetailCell.self), bundle: nil), forCellReuseIdentifier: cellId)
         
+        self.tableView.estimatedRowHeight = 50.0
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+        
     }
 
     override func didReceiveMemoryWarning() {
