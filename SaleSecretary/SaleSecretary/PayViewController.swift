@@ -1,14 +1,14 @@
 //
-//  OnlinePayController.swift
+//  PayViewController.swift
 //  SaleSecretary
 //
-//  Created by xiaoqiang on 2017/8/11.
+//  Created by xiaoqiang on 2017/8/12.
 //  Copyright © 2017年 zjjy. All rights reserved.
 //
 
 import UIKit
 
-class OnlinePayController: UIViewController {
+class PayViewController: UIViewController {
     @IBAction func clickbutton1(_ sender: UIButton) {
         changeButtonColor(UIColor.white.cgColor)
         sender.layer.backgroundColor = APP_THEME_COLOR.cgColor
@@ -113,13 +113,13 @@ class OnlinePayController: UIViewController {
         self.tableView.delegate = self
         self.tableView.dataSource = self
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
 }
 
-extension OnlinePayController: UITableViewDelegate, UITableViewDataSource {
+extension PayViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
