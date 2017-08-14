@@ -7,12 +7,27 @@
 //
 
 import UIKit
+import Toast_Swift
+import AipBase
+import AipOcrSdk
+
+let AIP_APP_KEY = "A5BKNDgXQavsP5O2HpTXPP1X"
+
+let AIP_APP_SK = "5O2jMbVeUGBHc64DgwHHRGA6OtP2svY6"
 
 class ToolsUIViewController : UITableViewController {
     
     
     
     let cellId = "toolsListID"
+    
+    @objc
+    lazy var aip : AipOcrService = {
+        let _aip = AipOcrService.shard()
+        _aip?.auth(withAK: AIP_APP_KEY, andSK: AIP_APP_SK)
+        _aip?.getTokenSuccessHandler({token in print(token!)}, failHandler: {(error) in print(error ?? "")})
+        return _aip!
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,7 +36,8 @@ class ToolsUIViewController : UITableViewController {
         self.tableView.dataSource = self
         self.tableView.register(UINib(nibName: String(describing: ToolCellView.self), bundle: nil), forCellReuseIdentifier: cellId)
         // self.tableView.register(MessageListCell.self, forCellReuseIdentifier: "MessageListID")
-        
+        // CSToastManager.setQueueEnabled(true)
+        // CSToastManager.setTapToDismissEnabled(true)
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -71,12 +87,24 @@ class ToolsUIViewController : UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.tableView.deselectRow(at: indexPath, animated: true)
         let selectedRow = self.tableView.cellForRow(at: indexPath)
         print("\(String(describing: selectedRow))")
-        // print(selectedRow?.value(forKey: "id"))
-        let storyBoard = UIStoryboard(name: "SMSView", bundle: nil)
-        let smsVC = storyBoard.instantiateViewController(withIdentifier: "SMSUIViewController")
-        self.navigationController?.pushViewController(smsVC, animated: false)
+        let row = indexPath.row
+        if indexPath.section == 0 {
+            // print(selectedRow?.value(forKey: "id"))
+            let storyBoard = UIStoryboard(name: "SMSView", bundle: nil)
+            let smsVC = storyBoard.instantiateViewController(withIdentifier: "SMSUIViewController")
+            self.navigationController?.pushViewController(smsVC, animated: true)
+        } else if indexPath.section == 1  && row == 0 {
+            let vc = AipGeneralVC.viewController(with: self)
+            // vc.delegate = self
+            self.present(vc!, animated: true, completion: nil)
+        } else {
+            self.view.window?.rootViewController?.view.makeToast("正在研发中，敬请期待...", duration: 1.5, position: .bottom)
+
+        }
+        
     
     }
     
@@ -91,6 +119,16 @@ class ToolsUIViewController : UITableViewController {
         }
         return cur
     }
+}
+
+
+extension ToolsUIViewController: AipOcrDelegate {
     
+    func ocr(onGeneralSuccessful resut: Any!) {
+        print(resut)
+    }
     
+    func ocr(onFail error: Error!) {
+        print(error)
+    }
 }
