@@ -21,6 +21,7 @@
                         <segue destination="H4a-uu-dpN" kind="show" id="nCb-Oy-y5i"/>
                         <segue destination="BLI-4e-wF0" kind="show" id="ecL-Yl-oaE"/>
                         <segue destination="9IF-2l-FT2" kind="show" id="3VZ-I0-lZl"/>
+                        <segue destination="SUu-Dz-cLQ" kind="show" id="eAC-3X-vjz"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UWG-KZ-c9U" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -157,6 +158,69 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Pe-Q8-jDn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="148" y="-627"/>
+        </scene>
+        <!--用户管理-->
+        <scene sceneID="0dn-Q2-13l">
+            <objects>
+                <viewController storyboardIdentifier="userManageID" title="用户管理" hidesBottomBarWhenPushed="YES" id="SUu-Dz-cLQ" customClass="UserManageViewController" customModule="SaleSecretary" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="aQJ-8f-Pbt"/>
+                        <viewControllerLayoutGuide type="bottom" id="gTk-Kp-oDo"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="3Pq-lY-eqJ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <searchBar contentMode="redraw" placeholder="请输入客户姓名或者手机号码" translatesAutoresizingMaskIntoConstraints="NO" id="pS6-5P-Ls2">
+                                <rect key="frame" x="0.0" y="64" width="375" height="44"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="SUu-Dz-cLQ" id="fih-Ct-Gn0"/>
+                                </connections>
+                            </searchBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="50" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="GI9-dX-SU1">
+                                <rect key="frame" x="0.0" y="108" width="375" height="559"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="GI9-dX-SU1" firstAttribute="leading" secondItem="3Pq-lY-eqJ" secondAttribute="leading" id="9mX-FJ-lka"/>
+                            <constraint firstItem="pS6-5P-Ls2" firstAttribute="leading" secondItem="3Pq-lY-eqJ" secondAttribute="leading" id="Cqc-nf-9Cm"/>
+                            <constraint firstItem="GI9-dX-SU1" firstAttribute="top" secondItem="pS6-5P-Ls2" secondAttribute="bottom" id="OX6-vO-EW1"/>
+                            <constraint firstAttribute="trailing" secondItem="pS6-5P-Ls2" secondAttribute="trailing" id="PXF-dq-z4d"/>
+                            <constraint firstItem="gTk-Kp-oDo" firstAttribute="top" secondItem="GI9-dX-SU1" secondAttribute="bottom" id="X1c-dw-Lj7"/>
+                            <constraint firstItem="GI9-dX-SU1" firstAttribute="top" secondItem="pS6-5P-Ls2" secondAttribute="bottom" id="i6g-kV-ogF"/>
+                            <constraint firstItem="pS6-5P-Ls2" firstAttribute="top" secondItem="aQJ-8f-Pbt" secondAttribute="bottom" id="lpm-ku-pEC"/>
+                            <constraint firstAttribute="trailing" secondItem="GI9-dX-SU1" secondAttribute="trailing" id="p6V-Av-ARf"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="searchBar" destination="pS6-5P-Ls2" id="Inh-Km-nmI"/>
+                        <outlet property="searchDisplayController" destination="Wua-Eh-Ayh" id="gyf-oe-ftv"/>
+                        <outlet property="tableView" destination="GI9-dX-SU1" id="E7h-n3-Xb9"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7iA-14-JFQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="uao-hj-924">
+                    <connections>
+                        <outlet property="delegate" destination="SUu-Dz-cLQ" id="fhd-Wu-PLm"/>
+                        <outlet property="searchContentsController" destination="SUu-Dz-cLQ" id="wmA-sQ-5te"/>
+                        <outlet property="searchResultsDataSource" destination="SUu-Dz-cLQ" id="Xzl-vW-uDa"/>
+                        <outlet property="searchResultsDelegate" destination="SUu-Dz-cLQ" id="n7t-Ud-tG9"/>
+                    </connections>
+                </searchDisplayController>
+                <searchDisplayController id="Wua-Eh-Ayh">
+                    <connections>
+                        <outlet property="delegate" destination="SUu-Dz-cLQ" id="7Wj-n6-n6a"/>
+                        <outlet property="searchBar" destination="pS6-5P-Ls2" id="NdD-Y0-Zhy"/>
+                        <outlet property="searchContentsController" destination="SUu-Dz-cLQ" id="Vbo-uh-CCQ"/>
+                        <outlet property="searchResultsDataSource" destination="SUu-Dz-cLQ" id="7Uv-A8-2ud"/>
+                        <outlet property="searchResultsDelegate" destination="SUu-Dz-cLQ" id="WB7-Yf-XDm"/>
+                    </connections>
+                </searchDisplayController>
+            </objects>
+            <point key="canvasLocation" x="-1522.4000000000001" y="894.60269865067471"/>
         </scene>
         <!--业务统计-->
         <scene sceneID="8N6-qZ-oeH">
