@@ -76,7 +76,7 @@
         <!--Main-->
         <scene sceneID="vzh-AB-Cs8">
             <objects>
-                <tabBarController title="Main" id="j2D-Lg-Ac9" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="mainID" title="Main" id="j2D-Lg-Ac9" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" id="7n8-z7-nEp">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
