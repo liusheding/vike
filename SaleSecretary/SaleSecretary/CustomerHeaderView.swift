@@ -35,23 +35,21 @@ class CustomerHeaderView: UITableViewHeaderFooterView {
         contentView.addSubview(self.groupTitle)
         self.groupTitle.setImage(UIImage.init(named: "buddy_header_arrow"), for: UIControlState.normal)
         
+        self.groupTitle.contentEdgeInsets = UIEdgeInsets(top: 15, left: 30, bottom: 15, right: 0)
+        self.groupTitle.imageEdgeInsets = UIEdgeInsets(top: 15, left: -15, bottom: 15, right: 20)
+        self.groupTitle.backgroundColor = UIColor.white
         self.groupTitle.setTitleColor(UIColor.gray , for: UIControlState.normal)
         
         self.groupTitle.contentHorizontalAlignment = UIControlContentHorizontalAlignment.left
         self.groupTitle.contentVerticalAlignment = UIControlContentVerticalAlignment.fill
-
         
         self.groupTitle.imageView?.contentMode = UIViewContentMode.center
         self.groupTitle.imageView?.clipsToBounds = false
-        
-        self.groupTitle.contentEdgeInsets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 0)
-        self.groupTitle.imageEdgeInsets = UIEdgeInsets(top: 15, left: 0, bottom: 15, right: 3)
+//        self.groupTitle.imageView.
         
         self.groupTitle.addTarget(self, action: #selector(clickGroupTitle), for: .touchUpInside)
         
         contentView.addSubview(self.groupOnlineCount)
-        
-//        self.contentView.backgroundColor = UIColor.red
         
     }
     

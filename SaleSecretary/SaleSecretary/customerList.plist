@@ -8,7 +8,7 @@
 			<dict>
 				<key>name</key>
 				<string>马云</string>
-				<key>icon</key>
+				<key>birthday</key>
 				<string>tab_w_1</string>
 				<key>phone_number</key>
 				<array>
@@ -18,7 +18,7 @@
 			<dict>
 				<key>name</key>
 				<string>马化腾</string>
-				<key>icon</key>
+				<key>birthday</key>
 				<string>tab_w_1</string>
 				<key>phone_number</key>
 				<array>
@@ -28,7 +28,7 @@
 			<dict>
 				<key>name</key>
 				<string>强东</string>
-				<key>icon</key>
+				<key>birthday</key>
 				<string>tab_w_1</string>
 				<key>phone_number</key>
 				<array>
@@ -49,7 +49,7 @@
 			<dict>
 				<key>name</key>
 				<string>马化腾</string>
-				<key>icon</key>
+				<key>birthday</key>
 				<string>tab_w_1</string>
 				<key>phone_number</key>
 				<array>
@@ -59,7 +59,7 @@
 			<dict>
 				<key>name</key>
 				<string>刘一斌</string>
-				<key>icon</key>
+				<key>birthday</key>
 				<string>tab_w_1</string>
 				<key>phone_number</key>
 				<array>
@@ -69,7 +69,7 @@
 			<dict>
 				<key>name</key>
 				<string>刘总</string>
-				<key>icon</key>
+				<key>birthday</key>
 				<string>tab_w_1</string>
 				<key>phone_number</key>
 				<array>
@@ -79,7 +79,7 @@
 			<dict>
 				<key>name</key>
 				<string>强东刘</string>
-				<key>icon</key>
+				<key>birthday</key>
 				<string>tab_w_1</string>
 				<key>phone_number</key>
 				<array>

@@ -15,21 +15,24 @@ import Contacts
 class CTChooseNewerController: UITableViewController {
     
     let store = CNContactStore()
+    var contactDt : [Customer] = [] // phone contacts data
+    var localDbContact : [Customers] = []
+    var groupsInDb : [Group] = []
+    var newCustomer : [Customer ] = []
     
-    lazy var contactDt : [Customer] =  { [unowned self] in
-        print("loading contact")
-        var cust : [Customer] = []
-        self.store.requestAccess(for: .contacts ) {
-            (isRight , error) in
-            if isRight {
-                self.loadContactData()
-                
-            } else {
-                print("no right")
-            }
-        }
-        return cust
-    }()
+//    lazy var contactDt : [Customer] =  { [unowned self] in
+//        print("loading contact")
+//        var cust : [Customer] = []
+//        self.store.requestAccess(for: .contacts ) {
+//            (isRight , error) in
+//            if isRight {
+//                self.loadContactData()
+//            } else {
+//                print("no right")
+//            }
+//        }
+//        return cust
+//    }()
     
     let cellId = "contactsCell"
     
@@ -43,61 +46,27 @@ class CTChooseNewerController: UITableViewController {
         self.navigationItem.title = "新的客户"
         self.tableView.dataSource = self
         self.tableView.delegate  = self
-        self.tableView.register( TableViewCell.self , forCellReuseIdentifier: cellId)
+        self.tableView.register(UINib(nibName: String(describing: PersonContactCell.self), bundle: nil), forCellReuseIdentifier: cellId)
         
-//        self.tableView.register(UINib(nibName: String(describing: TableViewCell.self), bundle: nil), forCellReuseIdentifier: cellId)
         // init contacts data
-        
+        findNewCustomer()
     }
     
-    func loadContactData() -> Void {
-        let status = CNContactStore.authorizationStatus(for: .contacts)
-        guard status == .authorized else {
-            NSLog(" auth failed !")
-            return
+    func findNewCustomer(){
+        for cd in self.contactDt {
+            if !ContactCommon.isContain(ctm: cd , target: self.localDbContact ){
+               self.newCustomer.append(cd)
+            }
         }
-        var dt : [Customer] = []
-        let keys = [ CNContactFamilyNameKey,CNContactGivenNameKey, CNContactJobTitleKey , CNContactDepartmentNameKey,CNContactNoteKey, CNContactPhoneNumbersKey,
-                     CNContactEmailAddressesKey, CNContactPostalAddressesKey,
-                     CNContactDatesKey, CNContactInstantMessageAddressesKey ,
-                     CNContactNicknameKey , CNContactOrganizationNameKey , ]
-        
-        let request = CNContactFetchRequest(keysToFetch: keys as [CNKeyDescriptor])
-        
-        do {
-            try store.enumerateContacts(with: request, usingBlock: {
-                (contact : CNContact, stop : UnsafeMutablePointer<ObjCBool>) -> Void in                let firstName = contact.givenName
-                let lastName = contact.familyName
-                let nickName = contact.nickname
-                let org = contact.organizationName
-//                let jobTitle = contact.jobTitle
-                var pNumber : [String] = []
-//                NSLog("[\(firstName),\(lastName),\(nickName),\(org),\(jobTitle)]")
-                for phone in contact.phoneNumbers {
-                    if phone.label != nil {
-//                        let label = CNLabeledValue<NSString>.localizedString(forLabel: phone.label!)
-                        let value = phone.value.stringValue
-                        pNumber.append(value)
-//                        NSLog("\(label):\(value)")
-                    }
-                }
-                let tmpDetail = ["name" : lastName+firstName , "phone_number" :pNumber , "icon" : lastName , "nick_name" : nickName , "time" : org] as [String : Any]
-                dt.append(Customer.init(dict: tmpDetail as [String : AnyObject] ))
-            })
-        } catch {
-            NSLog(error as! String)
-        }
-        self.contactDt = dt
-        self.tableView.reloadData()
+        NSLog("new customer's page , find \(self.newCustomer.count) new person")
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
 
     // MARK: - Table view data source
-
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
@@ -109,13 +78,58 @@ class CTChooseNewerController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellId , for: indexPath) as! TableViewCell
-        NSLog("----\(contactDt)")
-        cell.textLabel?.text = self.contactDt[indexPath.row].name
-        cell.detailTextLabel?.text = self.contactDt[indexPath.row].phone_number?[0]
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellId , for: indexPath) as! PersonContactCell
+        var tmpCustomer : Customer
+        var flag = false
+        if indexPath.row >= self.newCustomer.count {
+            tmpCustomer = self.contactDt[indexPath.row - newCustomer.count]
+        }else {
+            tmpCustomer = self.newCustomer[indexPath.row]
+            flag = true
+        }
+        
+        let userName = tmpCustomer.name
+        let index = userName?.index( (userName?.startIndex)! , offsetBy:1)
+        let cString = userName?.substring(to: index! )
+        
+        cell.picName.setTitle( cString , for: .normal )
+        cell.picName.backgroundColor = ContactCommon.sampleColor[ indexPath.row % ContactCommon.count ]
+        cell.name.text = userName
+        if flag {
+            cell.acception.setTitle( "添加" , for: .normal )
+            cell.acception.setTitleColor(UIColor.white , for: .normal )
+//            cell.acception.addTarget( self , action: #selector() , for: UIControlEvents.touchDown)
+        }else {
+            cell.acception.setTitle( "已添加" , for: .normal )
+            cell.acception.setTitleColor(UIColor.gray, for:.normal )
+            cell.acception.backgroundColor = UIColor.white
+        }
+        if (tmpCustomer.phone_number?.count)! > 0{
+            cell.phoneNumber?.text = tmpCustomer.phone_number?[0]
+        }else {
+            cell.phoneNumber?.text = ""
+        }
+        
         return cell
     }
 
+    // for user add new customer to app db , and choose the group
+    func chooseGroup() {
+        let alertController = UIAlertController(title: "选择分组", message: "为新朋友选择分组！", preferredStyle: .alert)
+//        let groupTable = UITableView.init()
+//        for g in self.groupsInDb {
+//            
+//        }
+        let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
+        let okAction = UIAlertAction(title: "好的", style: .default, handler: {
+            action in
+            
+        })
+        alertController.addAction(cancelAction)
+        alertController.addAction(okAction)
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {

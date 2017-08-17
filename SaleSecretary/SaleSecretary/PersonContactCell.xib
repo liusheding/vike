@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="PersonContactCell" customModule="SaleSecretary" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="381" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="381" height="43.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lnk-tX-bWm">
+                        <rect key="frame" x="62" y="5" width="176" height="20"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <attributedString key="attributedText">
+                            <fragment content="Label">
+                                <attributes>
+                                    <font key="NSFont" size="16" name="PingFangSC-Regular"/>
+                                </attributes>
+                            </fragment>
+                        </attributedString>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fi7-UI-ZDd">
+                        <rect key="frame" x="62" y="25" width="196" height="16"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <attributedString key="attributedText">
+                            <fragment content="Label">
+                                <attributes>
+                                    <color key="NSColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    <font key="NSFont" size="13" name="PingFangSC-Regular"/>
+                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                </attributes>
+                            </fragment>
+                        </attributedString>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="MZL-kP-i7C">
+                        <rect key="frame" x="266" y="6" width="50" height="50"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="1QP-cN-p0e">
+                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                            </stackView>
+                        </subviews>
+                    </stackView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VNR-ie-vFP">
+                        <rect key="frame" x="324" y="9" width="52" height="25"/>
+                        <color key="backgroundColor" red="0.0039215686274509803" green="0.70588235294117641" blue="0.078431372549019607" alpha="1" colorSpace="calibratedRGB"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <state key="normal">
+                            <color key="titleColor" red="0.98229456719999997" green="0.98235905170000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </state>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                <integer key="value" value="5"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J03-BF-tkn">
+                        <rect key="frame" x="10" y="4" width="36" height="36"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="36" id="g9Z-l8-CIK"/>
+                            <constraint firstAttribute="height" constant="36" id="imf-4u-fFa"/>
+                        </constraints>
+                        <color key="tintColor" red="0.98229456719999997" green="0.98235905170000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                <integer key="value" value="18"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="J03-BF-tkn" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" symbolic="YES" id="93Q-XY-3O7"/>
+                    <constraint firstAttribute="trailing" secondItem="VNR-ie-vFP" secondAttribute="trailing" constant="5" id="Gk4-jW-czh"/>
+                    <constraint firstItem="J03-BF-tkn" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="4" id="H85-MX-J7b"/>
+                    <constraint firstItem="J03-BF-tkn" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="Hec-Mt-mOj"/>
+                    <constraint firstAttribute="bottom" secondItem="VNR-ie-vFP" secondAttribute="bottom" constant="10" id="I28-RK-wQS"/>
+                    <constraint firstItem="J03-BF-tkn" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="LDy-YT-qpm"/>
+                    <constraint firstItem="VNR-ie-vFP" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="9" id="NGX-Qh-YhO"/>
+                    <constraint firstItem="J03-BF-tkn" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="3.5" id="R3T-DC-ziP"/>
+                    <constraint firstItem="VNR-ie-vFP" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="324" id="ans-Ug-jCa"/>
+                    <constraint firstAttribute="bottom" secondItem="J03-BF-tkn" secondAttribute="bottom" constant="4" id="fbN-Uq-8aB"/>
+                </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="93Q-XY-3O7"/>
+                        <exclude reference="LDy-YT-qpm"/>
+                        <exclude reference="R3T-DC-ziP"/>
+                        <exclude reference="fbN-Uq-8aB"/>
+                    </mask>
+                </variation>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="acception" destination="VNR-ie-vFP" id="h5s-IQ-b4F"/>
+                <outlet property="name" destination="lnk-tX-bWm" id="bGf-Ub-7nW"/>
+                <outlet property="phoneNumber" destination="fi7-UI-ZDd" id="gXh-1m-A4f"/>
+                <outlet property="picName" destination="J03-BF-tkn" id="BmW-Wl-kvY"/>
+            </connections>
+            <point key="canvasLocation" x="-242.5" y="71"/>
+        </tableViewCell>
+    </objects>
+</document>

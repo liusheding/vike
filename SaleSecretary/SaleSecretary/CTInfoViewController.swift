@@ -41,12 +41,12 @@ extension CTInfoViewController : UITableViewDelegate , UITableViewDataSource {
     
     func createCTInfoCell(indexPath:IndexPath , data : CTCustomerDetailInfoViewController ) -> UITableViewCell{
         let cell = UITableViewCell(style: UITableViewCellStyle.value1, reuseIdentifier: "cell")
-        let dataCell = [data.userInfo.name , data.userInfo.phone_number?[0] , data.userInfo.icon , data.userInfo.nick_name , data.userInfo.time]
+        let dataCell = [data.userInfo.name ?? "" , data.userInfo.phone_number?[0] ?? "" , data.userInfo.company , data.userInfo.nick_name ?? "" , data.userInfo.birthday] as [Any]
         switch indexPath.section {
         case 0:
             let i = indexPath.row
             cell.textLabel?.text = self.infoPate[i]
-            cell.detailTextLabel?.text = dataCell[i]
+            cell.detailTextLabel?.text = dataCell[i] as? String
         case 1:
             cell.textLabel?.text = "称谓"
             cell.detailTextLabel?.text = "xxxx"

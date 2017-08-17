@@ -18,7 +18,6 @@
 		6615BF541F33F9A60052879B /* CustomSMSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6615BF531F33F9A60052879B /* CustomSMSViewController.swift */; };
 		6615BF5C1F3413210052879B /* ContactTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6615BF581F3413210052879B /* ContactTableViewController.swift */; };
 		6615BF661F3413420052879B /* CustomerHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6615BF611F3413420052879B /* CustomerHeaderView.swift */; };
-		6615BF681F3413420052879B /* CustomersCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6615BF631F3413420052879B /* CustomersCell.xib */; };
 		6615BF6B1F34134C0052879B /* customerList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6615BF691F34134C0052879B /* customerList.plist */; };
 		6615BF6C1F34134C0052879B /* CustomerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6615BF6A1F34134C0052879B /* CustomerModel.swift */; };
 		6615BF6E1F3413EA0052879B /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6615BF6D1F3413EA0052879B /* TableViewCell.swift */; };
@@ -122,6 +121,12 @@
 		E7B2A2711F39FE76001D8C61 /* CTInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B2A26E1F39FE76001D8C61 /* CTInfoViewController.swift */; };
 		E7B2A2721F39FE76001D8C61 /* CTrailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B2A26F1F39FE76001D8C61 /* CTrailViewController.swift */; };
 		E7B2A2741F39FE97001D8C61 /* CTCustomerDetailInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B2A2731F39FE97001D8C61 /* CTCustomerDetailInfoView.swift */; };
+		E7D2ABD21F457AA4000123A5 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D2ABD11F457AA4000123A5 /* Models.swift */; };
+		E7D2ABD61F457AC7000123A5 /* PersonContactCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D2ABD31F457AC7000123A5 /* PersonContactCell.swift */; };
+		E7D2ABD71F457AC7000123A5 /* PersonContactCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7D2ABD41F457AC7000123A5 /* PersonContactCell.xib */; };
+		E7D2ABD81F457AC7000123A5 /* TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7D2ABD51F457AC7000123A5 /* TableViewCell.xib */; };
+		E7D2ABDB1F457B00000123A5 /* CustomerDBOp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D2ABDA1F457B00000123A5 /* CustomerDBOp.swift */; };
+		E7D2ABDD1F457B14000123A5 /* DateFormatterUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D2ABDC1F457B14000123A5 /* DateFormatterUtils.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -169,7 +174,6 @@
 		6615BF531F33F9A60052879B /* CustomSMSViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSMSViewController.swift; sourceTree = "<group>"; };
 		6615BF581F3413210052879B /* ContactTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactTableViewController.swift; sourceTree = "<group>"; };
 		6615BF611F3413420052879B /* CustomerHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerHeaderView.swift; sourceTree = "<group>"; };
-		6615BF631F3413420052879B /* CustomersCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomersCell.xib; sourceTree = "<group>"; };
 		6615BF691F34134C0052879B /* customerList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = customerList.plist; sourceTree = "<group>"; };
 		6615BF6A1F34134C0052879B /* CustomerModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerModel.swift; sourceTree = "<group>"; };
 		6615BF6D1F3413EA0052879B /* TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
@@ -281,6 +285,12 @@
 		E7B2A26E1F39FE76001D8C61 /* CTInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CTInfoViewController.swift; sourceTree = "<group>"; };
 		E7B2A26F1F39FE76001D8C61 /* CTrailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CTrailViewController.swift; sourceTree = "<group>"; };
 		E7B2A2731F39FE97001D8C61 /* CTCustomerDetailInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CTCustomerDetailInfoView.swift; sourceTree = "<group>"; };
+		E7D2ABD11F457AA4000123A5 /* Models.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		E7D2ABD31F457AC7000123A5 /* PersonContactCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonContactCell.swift; sourceTree = "<group>"; };
+		E7D2ABD41F457AC7000123A5 /* PersonContactCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PersonContactCell.xib; sourceTree = "<group>"; };
+		E7D2ABD51F457AC7000123A5 /* TableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TableViewCell.xib; sourceTree = "<group>"; };
+		E7D2ABDA1F457B00000123A5 /* CustomerDBOp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerDBOp.swift; sourceTree = "<group>"; };
+		E7D2ABDC1F457B14000123A5 /* DateFormatterUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateFormatterUtils.swift; sourceTree = "<group>"; };
 		E9B097EE912BE08E90307C3D5DBEAA47 /* SaleSecretaryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaleSecretaryTests.swift; sourceTree = "<group>"; };
 		F62447EA9409681F76292A514C7312A9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FB20A214877D05C6E7E1ECF3F9E4A391 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -445,6 +455,7 @@
 		6615BF561F3412FB0052879B /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				E7D2ABD11F457AA4000123A5 /* Models.swift */,
 				6615BF691F34134C0052879B /* customerList.plist */,
 				6615BF6A1F34134C0052879B /* CustomerModel.swift */,
 			);
@@ -454,6 +465,7 @@
 		662D6A451F317755001C1FB1 /* Contacts */ = {
 			isa = PBXGroup;
 			children = (
+				E7D2ABD91F457AE5000123A5 /* DB */,
 				6615BF561F3412FB0052879B /* Model */,
 				6615BF551F3412EF0052879B /* Controller */,
 				662D6A461F317781001C1FB1 /* View */,
@@ -464,11 +476,13 @@
 		662D6A461F317781001C1FB1 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				E7D2ABD31F457AC7000123A5 /* PersonContactCell.swift */,
+				E7D2ABD41F457AC7000123A5 /* PersonContactCell.xib */,
+				E7D2ABD51F457AC7000123A5 /* TableViewCell.xib */,
 				E754DC961F3D4E4B0025DBBE /* AddNewCustomerCell.swift */,
 				E7B2A2731F39FE97001D8C61 /* CTCustomerDetailInfoView.swift */,
 				6615BF6D1F3413EA0052879B /* TableViewCell.swift */,
 				6615BF611F3413420052879B /* CustomerHeaderView.swift */,
-				6615BF631F3413420052879B /* CustomersCell.xib */,
 				662D6A471F3177BA001C1FB1 /* AddNewCustomersCell.xib */,
 				E75435731F34640E00BDE8C6 /* CustomerPopUpView.swift */,
 			);
@@ -505,6 +519,7 @@
 		66B602F31F2F25F9002A55E6 /* Others */ = {
 			isa = PBXGroup;
 			children = (
+				E7D2ABDC1F457B14000123A5 /* DateFormatterUtils.swift */,
 				66AB59131F3D54AF005FB30F /* CollapsibleTableView */,
 				E754DC981F3D4E5A0025DBBE /* GetContactUtils.swift */,
 				66AB59071F3C65CE005FB30F /* JSDropDownMenu */,
@@ -712,6 +727,14 @@
 			name = View;
 			sourceTree = "<group>";
 		};
+		E7D2ABD91F457AE5000123A5 /* DB */ = {
+			isa = PBXGroup;
+			children = (
+				E7D2ABDA1F457B00000123A5 /* CustomerDBOp.swift */,
+			);
+			name = DB;
+			sourceTree = "<group>";
+		};
 		ED61F7C3F779D5B99C70346E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -852,6 +875,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				66451F0E1F330DDD009B65DD /* AppellationCellView.xib in Resources */,
+				E7D2ABD81F457AC7000123A5 /* TableViewCell.xib in Resources */,
 				664B999A1F3DBE5700968AA5 /* InfoPlist.strings in Resources */,
 				6E20ECA51F341BCD00A0F29E /* xiaohua.png in Resources */,
 				6E20ECA61F341BCD00A0F29E /* xiaoming.png in Resources */,
@@ -860,6 +884,7 @@
 				6EF2B78B1F3ECB1D00C808EE /* PayDetailCell.xib in Resources */,
 				837E4CB3CAA4F9E6F67FCD9B689A4731 /* Assets.xcassets in Resources */,
 				B57F541A2E6EE35F55BF1F726094C124 /* LaunchScreen.storyboard in Resources */,
+				E7D2ABD71F457AC7000123A5 /* PersonContactCell.xib in Resources */,
 				66B602F71F2F35CC002A55E6 /* SMSDetailView.xib in Resources */,
 				66AB590B1F3C65E8005FB30F /* ico_make.png in Resources */,
 				6E0C8CE31F2EE0A90066885F /* MessageDetail.storyboard in Resources */,
@@ -876,7 +901,6 @@
 				6615BF6B1F34134C0052879B /* customerList.plist in Resources */,
 				6EBAA5451F3C03240099DA89 /* MineViewCell.xib in Resources */,
 				6E0C8CE91F2EE0C20066885F /* MessageDetailCell.xib in Resources */,
-				6615BF681F3413420052879B /* CustomersCell.xib in Resources */,
 				66451F181F332AB8009B65DD /* PlanExecTimeCellView.xib in Resources */,
 				662D6A491F3177BA001C1FB1 /* AddNewCustomersCell.xib in Resources */,
 				E754DC931F3D4E3D0025DBBE /* ContactStoryboard.storyboard in Resources */,
@@ -981,6 +1005,7 @@
 				45BDDB34CBA326F0F1C1F3CBB472F1DE /* AppDelegate.swift in Sources */,
 				6EF2B7951F418E8600C808EE /* UserManageHeaderView.swift in Sources */,
 				66AB590C1F3C65E8005FB30F /* JSDropDownMenu.m in Sources */,
+				E7D2ABD61F457AC7000123A5 /* PersonContactCell.swift in Sources */,
 				664B998E1F3DA8CB00968AA5 /* SMSTemplate.swift in Sources */,
 				66F265411F30243100E9ECAB /* SMSMessage.swift in Sources */,
 				63FFE17B8518E311F485E78D5AC99EDF /* MessageListCell.swift in Sources */,
@@ -989,6 +1014,7 @@
 				5B61C6CC8719F793AA22DE8CE2E016A7 /* MessageViewController.swift in Sources */,
 				66B602F91F2F3BA7002A55E6 /* SMSDetailView.swift in Sources */,
 				E754DC951F3D4E3D0025DBBE /* CTChooseNewerController.swift in Sources */,
+				E7D2ABD21F457AA4000123A5 /* Models.swift in Sources */,
 				6615BF5C1F3413210052879B /* ContactTableViewController.swift in Sources */,
 				6615BF541F33F9A60052879B /* CustomSMSViewController.swift in Sources */,
 				E754DC971F3D4E4B0025DBBE /* AddNewCustomerCell.swift in Sources */,
@@ -1002,6 +1028,7 @@
 				6EF2B7871F3EC7F400C808EE /* PayViewController.swift in Sources */,
 				6647E8BF1F39C4F80053AFF3 /* PhoneSMSViewContronller.swift in Sources */,
 				6EBAA56A1F3C5B330099DA89 /* WalletDetailCell.swift in Sources */,
+				E7D2ABDD1F457B14000123A5 /* DateFormatterUtils.swift in Sources */,
 				6E0C8CE81F2EE0C20066885F /* MessageDetailCell.swift in Sources */,
 				6EF5B7041F4452E9001B0A77 /* LoginViewController.swift in Sources */,
 				6647E8C61F39C63B0053AFF3 /* SMSContentTextCell.swift in Sources */,
@@ -1044,6 +1071,7 @@
 				6EF19C5D1F3BF9E000646BCF /* MineUIViewController.swift in Sources */,
 				6E20EC971F341B5500A0F29E /* UserInfo.swift in Sources */,
 				6EBAA5611F3C43B50099DA89 /* WalletViewController.swift in Sources */,
+				E7D2ABDB1F457B00000123A5 /* CustomerDBOp.swift in Sources */,
 				6E20ECB01F39B3D300A0F29E /* MessageCache.swift in Sources */,
 				E754DC991F3D4E5A0025DBBE /* GetContactUtils.swift in Sources */,
 				6647E8CC1F3AFEE90053AFF3 /* CryptoHeader.m in Sources */,

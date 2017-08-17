@@ -11,7 +11,53 @@ import UIKit
 
 import Contacts
 
-class GetContactUtils {
+struct GetContactUtils {
+    
+    static func loadContactData() -> [Customer] {
+        let status = CNContactStore.authorizationStatus(for: .contacts)
+        guard status == .authorized else {
+            NSLog(" auth failed !")
+            return []
+        }
+        var dt : [Customer] = []
+//        let properties = ["birthday","company","gender","group_id","id","is_solar","nick_name","phone_number","name"]
+        let keys = [ CNContactFamilyNameKey,CNContactGivenNameKey, CNContactJobTitleKey , CNContactDepartmentNameKey,CNContactNoteKey, CNContactPhoneNumbersKey,
+                     CNContactEmailAddressesKey, CNContactPostalAddressesKey,
+                     CNContactDatesKey, CNContactInstantMessageAddressesKey ,
+                     CNContactNicknameKey , CNContactOrganizationNameKey , CNContactBirthdayKey ]
+        
+        let request = CNContactFetchRequest(keysToFetch: keys as [CNKeyDescriptor])
+        
+        do {
+            try CNContactStore().enumerateContacts(with: request, usingBlock: {
+                (contact : CNContact, stop : UnsafeMutablePointer<ObjCBool>) -> Void in
+                let firstName = contact.givenName
+                let lastName = contact.familyName
+                let nickName = contact.nickname
+                let company = contact.organizationName
+                let birthday  = contact.birthday?.date
+                var strBirthday = ""
+                
+                if birthday != nil {
+                    strBirthday = DateFormatterUtils.getStringFromDate(birthday!, dateFormat: "yyyy-MM-dd")
+                }
+                var pNumber : [String] = []
+                for phone in contact.phoneNumbers {
+                    if phone.label != nil {
+                        let value = phone.value.stringValue
+                        pNumber.append(value)
+                    }
+                }
+                
+                dt.append(Customer.init(birth: strBirthday , company: company , nick_name: nickName , phone_number: pNumber , name: lastName + firstName ) )
+            })
+        } catch {
+            NSLog(error as! String)
+        }
+        //self.tableView.reloadData()
+        NSLog("Get Contacts count : \(dt.count)")
+        return dt
+    }
     
     func loadContactsData() {
         //获取授权状态
@@ -91,20 +137,20 @@ class GetContactUtils {
                         print("\t\(label)：\(str)")
                     }
                 }
-                //获取纪念日
-                print("纪念日：")
-                for date in contact.dates {
-                    if date.label != nil{
-                        //获得标签名（转为能看得懂的本地标签名）
-                        let label = CNLabeledValue<NSString>.localizedString(forLabel: date.label!)
-                        //获取值
-                        let dateComponents = date.value as DateComponents
-                        let value = NSCalendar.current.date(from: dateComponents)
-                        let dateFormatter = DateFormatter()
-                        dateFormatter.dateFormat = "yyyy年MM月dd日 HH:mm:ss"
-                        print("\t\(label)：\(dateFormatter.string(from: value!))")
-                    }
-                }
+//                //获取纪念日
+//                print("纪念日：")
+//                for date in contact.dates {
+//                    if date.label != nil{
+//                        //获得标签名（转为能看得懂的本地标签名）
+//                        let label = CNLabeledValue<NSString>.localizedString(forLabel: date.label!)
+//                        //获取值
+//                        let dateComponents = date.value as DateComponents
+//                        let value = NSCalendar.current.date(from: dateComponents)
+//                        let dateFormatter = DateFormatter()
+////                        dateFormatter.dateFormat = "yyyy年MM月dd日 HH:mm:ss"
+////                        print("\t\(label)：\(dateFormatter.string(from: value!))")
+//                    }
+//                }
                 //获取即时通讯(IM)
                 print("即时通讯(IM)：")
                 for im in contact.instantMessageAddresses {
