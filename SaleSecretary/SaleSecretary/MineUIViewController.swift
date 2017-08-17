@@ -77,6 +77,9 @@ class MineUIViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 0{
+            return
+        }
         let storyBoard = UIStoryboard(name: "MineView", bundle: nil)
         let identifier = self.identifiers[indexPath.section]?[indexPath.row]
         let walletVC = storyBoard.instantiateViewController(withIdentifier: identifier!)
