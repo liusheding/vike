@@ -13,7 +13,7 @@
         <!--新增客户-->
         <scene sceneID="i2G-GD-1s0">
             <objects>
-                <viewController storyboardIdentifier="ScanResultVilewController" title="新增客户" automaticallyAdjustsScrollViewInsets="NO" hidesBottomBarWhenPushed="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="LxF-Kk-8te" customClass="ScanResultViewController" customModule="SaleSecretary" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ScanResultViewController" title="新增客户" automaticallyAdjustsScrollViewInsets="NO" hidesBottomBarWhenPushed="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="LxF-Kk-8te" customClass="ScanResultViewController" customModule="SaleSecretary" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jrY-Tp-l9D"/>
                         <viewControllerLayoutGuide type="bottom" id="BS5-Mx-UwK"/>

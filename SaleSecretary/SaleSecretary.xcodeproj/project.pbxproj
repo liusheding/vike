@@ -108,7 +108,6 @@
 		6EF5B7281F4582C1001B0A77 /* ExitViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF5B7261F4582C1001B0A77 /* ExitViewCell.swift */; };
 		6EF5B7291F4582C1001B0A77 /* ExitViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EF5B7271F4582C1001B0A77 /* ExitViewCell.xib */; };
 		6EF5B72C1F4582D0001B0A77 /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF5B72A1F4582D0001B0A77 /* HelpViewController.swift */; };
-		6EF5B72D1F4582D0001B0A77 /* InviteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF5B72B1F4582D0001B0A77 /* InviteViewController.swift */; };
 		6EF5B72F1F4582E5001B0A77 /* SetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF5B72E1F4582E5001B0A77 /* SetViewController.swift */; };
 		7D4F943E251DFCF1E855A17CA7047BAB /* ToolCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1EDAEF18CBA6F23688F9247911F93EDF /* ToolCellView.xib */; };
 		837E4CB3CAA4F9E6F67FCD9B689A4731 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F3ED2E7C36C4CC96B9B25E5F44BB6DC /* Assets.xcassets */; };
@@ -277,7 +276,6 @@
 		6EF5B7261F4582C1001B0A77 /* ExitViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExitViewCell.swift; sourceTree = "<group>"; };
 		6EF5B7271F4582C1001B0A77 /* ExitViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExitViewCell.xib; sourceTree = "<group>"; };
 		6EF5B72A1F4582D0001B0A77 /* HelpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpViewController.swift; sourceTree = "<group>"; };
-		6EF5B72B1F4582D0001B0A77 /* InviteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InviteViewController.swift; sourceTree = "<group>"; };
 		6EF5B72E1F4582E5001B0A77 /* SetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetViewController.swift; sourceTree = "<group>"; };
 		96CFA79C8767534862334D7C /* Pods_SaleSecretary.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SaleSecretary.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B427303374369F3F694A3E88B024FF52 /* SaleSecretary.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SaleSecretary.xcdatamodel; sourceTree = "<group>"; };
@@ -578,7 +576,6 @@
 			children = (
 				6EF5B72E1F4582E5001B0A77 /* SetViewController.swift */,
 				6EF5B72A1F4582D0001B0A77 /* HelpViewController.swift */,
-				6EF5B72B1F4582D0001B0A77 /* InviteViewController.swift */,
 				6EBAA56E1F3D5C190099DA89 /* BusinessRecordController.swift */,
 				6EF19C5C1F3BF9E000646BCF /* MineUIViewController.swift */,
 				6EBAA5601F3C43B50099DA89 /* WalletViewController.swift */,
@@ -1104,7 +1101,6 @@
 				E75435741F34640E00BDE8C6 /* CustomerPopUpView.swift in Sources */,
 				66AB59161F3D54F2005FB30F /* CollapsibleTableViewCell.swift in Sources */,
 				6EF19C5D1F3BF9E000646BCF /* MineUIViewController.swift in Sources */,
-				6EF5B72D1F4582D0001B0A77 /* InviteViewController.swift in Sources */,
 				6E20EC971F341B5500A0F29E /* UserInfo.swift in Sources */,
 				6EBAA5611F3C43B50099DA89 /* WalletViewController.swift in Sources */,
 				E7D2ABDB1F457B00000123A5 /* CustomerDBOp.swift in Sources */,

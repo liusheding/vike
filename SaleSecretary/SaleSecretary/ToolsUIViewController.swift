@@ -160,6 +160,8 @@ extension ToolsUIViewController: AipOcrDelegate {
     func ocr(onBankCardSuccessful result: Any!) {
         
     }
+
+    
     
     func ocr(onGeneralSuccessful resut: Any!) {
         let result: [String: Any] = resut as! [String: Any]
@@ -169,7 +171,8 @@ extension ToolsUIViewController: AipOcrDelegate {
         if  words != nil {
             let queue = OperationQueue.main
             queue.addOperation({
-                let scanvc = self.storyBoard.instantiateViewController(withIdentifier: "ScanResultVilewController")
+                let scanvc = self.storyBoard.instantiateViewController(withIdentifier: "ScanResultViewController") as! ScanResultViewController
+                
                 if self.aipVC != nil {
                     self.aipVC!.dismiss(animated: true, completion: {
                         [weak self] in
