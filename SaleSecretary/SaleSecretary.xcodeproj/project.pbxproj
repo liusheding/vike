@@ -59,6 +59,7 @@
 		66C784BC1F41B95B0067B476 /* AipBase.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 66C784B71F41B9490067B476 /* AipBase.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		66C784BD1F41B95B0067B476 /* IdcardQuality.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66C784B81F41B9490067B476 /* IdcardQuality.framework */; };
 		66C784BE1F41B95B0067B476 /* IdcardQuality.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 66C784B81F41B9490067B476 /* IdcardQuality.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		66C784C21F4527060067B476 /* QRScrollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C784C11F4527060067B476 /* QRScrollViewController.swift */; };
 		66D3D0E21F31E7C2005347D0 /* CustomerSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D3D0E11F31E7C2005347D0 /* CustomerSelectViewController.swift */; };
 		66F265411F30243100E9ECAB /* SMSMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F265401F30243100E9ECAB /* SMSMessage.swift */; };
 		6E0C8CE31F2EE0A90066885F /* MessageDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E0C8CE21F2EE0A90066885F /* MessageDetail.storyboard */; };
@@ -212,6 +213,7 @@
 		66C784B31F41B9140067B476 /* AipOcrSdk.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AipOcrSdk.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		66C784B71F41B9490067B476 /* AipBase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AipBase.framework; path = AipOcrSdk/AipBase.framework; sourceTree = "<group>"; };
 		66C784B81F41B9490067B476 /* IdcardQuality.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IdcardQuality.framework; path = AipOcrSdk/IdcardQuality.framework; sourceTree = "<group>"; };
+		66C784C11F4527060067B476 /* QRScrollViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRScrollViewController.swift; sourceTree = "<group>"; };
 		66D3D0E11F31E7C2005347D0 /* CustomerSelectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerSelectViewController.swift; sourceTree = "<group>"; };
 		66F265401F30243100E9ECAB /* SMSMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SMSMessage.swift; sourceTree = "<group>"; };
 		6B1304CBBFB165B9BCE2C5264AB48FAF /* SaleSecretaryUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaleSecretaryUITests.swift; sourceTree = "<group>"; };
@@ -669,6 +671,7 @@
 		C8FADB2F97F8DCCFB2573A6DC4E39CB6 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				66C784C11F4527060067B476 /* QRScrollViewController.swift */,
 				66AB590D1F3C65FA005FB30F /* TemplateSelectorController.swift */,
 				6647E8BD1F39C4F80053AFF3 /* PhoneSMSViewContronller.swift */,
 				6647E8BE1F39C4F80053AFF3 /* SMSPreviewController.swift */,
@@ -1033,6 +1036,7 @@
 				6EF5B6FF1F4452D3001B0A77 /* FindPwdViewController.swift in Sources */,
 				66B602FB1F301230002A55E6 /* SMSDetailController.swift in Sources */,
 				66B602F01F2F043E002A55E6 /* SMSListViewCell.swift in Sources */,
+				66C784C21F4527060067B476 /* QRScrollViewController.swift in Sources */,
 				E7B2A2741F39FE97001D8C61 /* CTCustomerDetailInfoView.swift in Sources */,
 				66B602FD1F302238002A55E6 /* Recipient.swift in Sources */,
 				E75435741F34640E00BDE8C6 /* CustomerPopUpView.swift in Sources */,

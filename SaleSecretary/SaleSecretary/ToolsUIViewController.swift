@@ -11,6 +11,7 @@ import Toast_Swift
 import AipBase
 import AipOcrSdk
 
+
 let AIP_APP_KEY = "A5BKNDgXQavsP5O2HpTXPP1X"
 
 let AIP_APP_SK = "5O2jMbVeUGBHc64DgwHHRGA6OtP2svY6"
@@ -20,6 +21,8 @@ class ToolsUIViewController : UITableViewController {
     
     
     let cellId = "toolsListID"
+    
+    let storyBoard = UIStoryboard(name: "SMSView", bundle: nil)
     
     @objc
     lazy var aip : AipOcrService = {
@@ -93,16 +96,20 @@ class ToolsUIViewController : UITableViewController {
         let row = indexPath.row
         if indexPath.section == 0 {
             // print(selectedRow?.value(forKey: "id"))
-            let storyBoard = UIStoryboard(name: "SMSView", bundle: nil)
+           
             let smsVC = storyBoard.instantiateViewController(withIdentifier: "SMSUIViewController")
             self.navigationController?.pushViewController(smsVC, animated: true)
         } else if indexPath.section == 1  && row == 0 {
             let vc = AipGeneralVC.viewController(with: self)
             // vc.delegate = self
             self.present(vc!, animated: true, completion: nil)
+        } else if indexPath.section == 1  && row == 1 {
+            // let scanvc = storyBoard.instantiateViewController(withIdentifier: "scanResultView")
+            let vc = storyBoard.instantiateViewController(withIdentifier: "qrScrollView")
+            self.navigationController?.pushViewController(vc, animated: true) // (scanvc, sender: self)
+            // self.present(vc, animated: true, completion: nil)
         } else {
             self.view.window?.rootViewController?.view.makeToast("正在研发中，敬请期待...", duration: 1.5, position: .bottom)
-
         }
         
     
@@ -125,8 +132,17 @@ class ToolsUIViewController : UITableViewController {
 extension ToolsUIViewController: AipOcrDelegate {
     
     func ocr(onGeneralSuccessful resut: Any!) {
-        print(resut)
+        let result: [String: Any] = resut as! [String: Any]
+        print("\(resut)")
+        if result["words_result"] != nil {
+            let queue = OperationQueue.main
+            
+            queue.addOperation({
+                // self.present(<#T##viewControllerToPresent: UIViewController##UIViewController#>, animated: <#T##Bool#>, completion: /<#T##(() -> Void)?##(() -> Void)?##() -> Void#>)
+            })
+        }
     }
+
     
     func ocr(onFail error: Error!) {
         print(error)
