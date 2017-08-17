@@ -19,6 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         DropDown.startListeningToKeyboard()
 //        UINavigationBar.appearance().barTintColor = APP_THEME_COLOR
+        UINavigationBar.appearance().tintColor = APP_THEME_COLOR
+        // UINavigationBar.appearance().colo
         let storyBoard = UIStoryboard(name: "Login", bundle: nil)
         let walletVC = storyBoard.instantiateViewController(withIdentifier: "LoginID")
         self.window?.rootViewController = walletVC

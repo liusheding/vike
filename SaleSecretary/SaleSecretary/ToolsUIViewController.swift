@@ -16,6 +16,11 @@ let AIP_APP_KEY = "A5BKNDgXQavsP5O2HpTXPP1X"
 
 let AIP_APP_SK = "5O2jMbVeUGBHc64DgwHHRGA6OtP2svY6"
 
+protocol ScanORCResultDelegate {
+    func processReuslt(result:[String]) -> Customer?
+}
+
+
 class ToolsUIViewController : UITableViewController {
     
     
@@ -24,13 +29,15 @@ class ToolsUIViewController : UITableViewController {
     
     let storyBoard = UIStoryboard(name: "SMSView", bundle: nil)
     
-    @objc
-    lazy var aip : AipOcrService = {
-        let _aip = AipOcrService.shard()
-        _aip?.auth(withAK: AIP_APP_KEY, andSK: AIP_APP_SK)
-        _aip?.getTokenSuccessHandler({token in print(token!)}, failHandler: {(error) in print(error ?? "")})
-        return _aip!
-    }()
+//    @objc
+//    lazy var aip : AipOcrService = {
+//        let _aip = AipOcrService.shard()
+//        _aip?.auth(withAK: AIP_APP_KEY, andSK: AIP_APP_SK)
+//        _aip?.getTokenSuccessHandler({token in print(token!)}, failHandler: {(error) in print(error ?? "")})
+//        return _aip!
+//    }()
+    
+    var aipVC: UIViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,6 +48,17 @@ class ToolsUIViewController : UITableViewController {
         // self.tableView.register(MessageListCell.self, forCellReuseIdentifier: "MessageListID")
         // CSToastManager.setQueueEnabled(true)
         // CSToastManager.setTapToDismissEnabled(true)
+        //
+        // let l = NSData(contentsOfFile: "aip.license")
+        do {
+            
+            let license = Bundle.main.path(forResource: "aip", ofType: "license")
+            let data = try Data(contentsOf: URL(fileURLWithPath: license!))
+            AipOcrService.shard().auth(withLicenseFileData: data)
+        } catch {
+            print("could not find aip.license")
+        }
+        
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -100,16 +118,17 @@ class ToolsUIViewController : UITableViewController {
             let smsVC = storyBoard.instantiateViewController(withIdentifier: "SMSUIViewController")
             self.navigationController?.pushViewController(smsVC, animated: true)
         } else if indexPath.section == 1  && row == 0 {
-            let vc = AipGeneralVC.viewController(with: self)
+            self.aipVC = AipGeneralVC.viewController(with: self)
+            // AipGeneralVC.viewController(with: <#T##AipOcrDelegate!#>)
             // vc.delegate = self
-            self.present(vc!, animated: true, completion: nil)
+            self.present(aipVC!, animated: true, completion: nil)
         } else if indexPath.section == 1  && row == 1 {
-            // let scanvc = storyBoard.instantiateViewController(withIdentifier: "scanResultView")
+            
             let vc = storyBoard.instantiateViewController(withIdentifier: "qrScrollView")
             self.navigationController?.pushViewController(vc, animated: true) // (scanvc, sender: self)
             // self.present(vc, animated: true, completion: nil)
         } else {
-            self.view.window?.rootViewController?.view.makeToast("正在研发中，敬请期待...", duration: 1.5, position: .bottom)
+            self.navigationController?.view.makeToast("正在研发中，敬请期待...", duration: 1.5, position: .bottom)
         }
         
     
@@ -131,20 +150,40 @@ class ToolsUIViewController : UITableViewController {
 
 extension ToolsUIViewController: AipOcrDelegate {
     
+    
+    
+    
+    func ocr(onIdCardSuccessful result: Any!) {
+        
+    }
+    
+    func ocr(onBankCardSuccessful result: Any!) {
+        
+    }
+    
     func ocr(onGeneralSuccessful resut: Any!) {
         let result: [String: Any] = resut as! [String: Any]
-        print("\(resut)")
-        if result["words_result"] != nil {
+        NSLog("\(resut)")
+        let words = result["words_result"]
+        
+        if  words != nil {
             let queue = OperationQueue.main
-            
             queue.addOperation({
-                // self.present(<#T##viewControllerToPresent: UIViewController##UIViewController#>, animated: <#T##Bool#>, completion: /<#T##(() -> Void)?##(() -> Void)?##() -> Void#>)
+                let scanvc = self.storyBoard.instantiateViewController(withIdentifier: "ScanResultVilewController")
+                if self.aipVC != nil {
+                    self.aipVC!.dismiss(animated: true, completion: {
+                        [weak self] in
+                        self?.navigationController?.pushViewController(scanvc, animated: true)
+                    })
+                    //self.aipVC.pushViewController(scanvc, animated: true)
+                }
+                // self.present(scanvc, animated: true)
             })
         }
     }
 
     
     func ocr(onFail error: Error!) {
-        print(error)
+       self.navigationController?.view.makeToast("识别失败，请稍后再重试！")
     }
 }

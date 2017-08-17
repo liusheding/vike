@@ -59,6 +59,10 @@
 		66C784BD1F41B95B0067B476 /* IdcardQuality.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66C784B81F41B9490067B476 /* IdcardQuality.framework */; };
 		66C784BE1F41B95B0067B476 /* IdcardQuality.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 66C784B81F41B9490067B476 /* IdcardQuality.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		66C784C21F4527060067B476 /* QRScrollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C784C11F4527060067B476 /* QRScrollViewController.swift */; };
+		66C784D11F457F290067B476 /* aip.license in Resources */ = {isa = PBXBuildFile; fileRef = 66C784D01F457F280067B476 /* aip.license */; };
+		66C784D31F457F440067B476 /* ScanResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C784D21F457F440067B476 /* ScanResultViewController.swift */; };
+		66C784D61F457F550067B476 /* ScanResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C784D41F457F550067B476 /* ScanResultCell.swift */; };
+		66C784D71F457F550067B476 /* ScanResultCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 66C784D51F457F550067B476 /* ScanResultCell.xib */; };
 		66D3D0E21F31E7C2005347D0 /* CustomerSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D3D0E11F31E7C2005347D0 /* CustomerSelectViewController.swift */; };
 		66F265411F30243100E9ECAB /* SMSMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F265401F30243100E9ECAB /* SMSMessage.swift */; };
 		6E0C8CE31F2EE0A90066885F /* MessageDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E0C8CE21F2EE0A90066885F /* MessageDetail.storyboard */; };
@@ -218,6 +222,10 @@
 		66C784B71F41B9490067B476 /* AipBase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AipBase.framework; path = AipOcrSdk/AipBase.framework; sourceTree = "<group>"; };
 		66C784B81F41B9490067B476 /* IdcardQuality.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IdcardQuality.framework; path = AipOcrSdk/IdcardQuality.framework; sourceTree = "<group>"; };
 		66C784C11F4527060067B476 /* QRScrollViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRScrollViewController.swift; sourceTree = "<group>"; };
+		66C784D01F457F280067B476 /* aip.license */ = {isa = PBXFileReference; lastKnownFileType = file; path = aip.license; sourceTree = "<group>"; };
+		66C784D21F457F440067B476 /* ScanResultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanResultViewController.swift; sourceTree = "<group>"; };
+		66C784D41F457F550067B476 /* ScanResultCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanResultCell.swift; sourceTree = "<group>"; };
+		66C784D51F457F550067B476 /* ScanResultCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScanResultCell.xib; sourceTree = "<group>"; };
 		66D3D0E11F31E7C2005347D0 /* CustomerSelectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerSelectViewController.swift; sourceTree = "<group>"; };
 		66F265401F30243100E9ECAB /* SMSMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SMSMessage.swift; sourceTree = "<group>"; };
 		6B1304CBBFB165B9BCE2C5264AB48FAF /* SaleSecretaryUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaleSecretaryUITests.swift; sourceTree = "<group>"; };
@@ -348,6 +356,7 @@
 				E1D47ACF391485904A172658C073C4CF /* AppDelegate.swift */,
 				1F3ED2E7C36C4CC96B9B25E5F44BB6DC /* Assets.xcassets */,
 				FB20A214877D05C6E7E1ECF3F9E4A391 /* Info.plist */,
+				66C784D01F457F280067B476 /* aip.license */,
 				E91976E222A3B14574B6924020DD4A84 /* LaunchScreen.storyboard */,
 				372EFD95BCC4506D668112468A0C6F18 /* SaleSecretary.xcdatamodeld */,
 				664B999C1F3DBE5700968AA5 /* InfoPlist.strings */,
@@ -387,6 +396,8 @@
 		335AFE1AFF613A74F03B490AE40CED3B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				66C784D41F457F550067B476 /* ScanResultCell.swift */,
+				66C784D51F457F550067B476 /* ScanResultCell.xib */,
 				6647E8C41F39C63B0053AFF3 /* SMSContentTextCell.swift */,
 				6647E8C51F39C63B0053AFF3 /* SMSContentTextCell.xib */,
 				1388E83064119789E4E2181C9871C9F6 /* ToolCellView.swift */,
@@ -686,6 +697,7 @@
 		C8FADB2F97F8DCCFB2573A6DC4E39CB6 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				66C784D21F457F440067B476 /* ScanResultViewController.swift */,
 				66C784C11F4527060067B476 /* QRScrollViewController.swift */,
 				66AB590D1F3C65FA005FB30F /* TemplateSelectorController.swift */,
 				6647E8BD1F39C4F80053AFF3 /* PhoneSMSViewContronller.swift */,
@@ -891,6 +903,7 @@
 				AF201728C3391AB87079CD9BA8E73001 /* Main.storyboard in Resources */,
 				66451F121F331E81009B65DD /* InscribeViewCell.xib in Resources */,
 				6EF5B7031F4452E9001B0A77 /* Login.storyboard in Resources */,
+				66C784D11F457F290067B476 /* aip.license in Resources */,
 				6E20ECA81F341BD600A0F29E /* sz.png in Resources */,
 				6EBAA5511F3C2E520099DA89 /* MineInfoCell.xib in Resources */,
 				6EBAA56B1F3C5B330099DA89 /* WalletDetailCell.xib in Resources */,
@@ -904,6 +917,7 @@
 				66451F181F332AB8009B65DD /* PlanExecTimeCellView.xib in Resources */,
 				662D6A491F3177BA001C1FB1 /* AddNewCustomersCell.xib in Resources */,
 				E754DC931F3D4E3D0025DBBE /* ContactStoryboard.storyboard in Resources */,
+				66C784D71F457F550067B476 /* ScanResultCell.xib in Resources */,
 				6647E8C71F39C63B0053AFF3 /* SMSContentTextCell.xib in Resources */,
 				7D4F943E251DFCF1E855A17CA7047BAB /* ToolCellView.xib in Resources */,
 			);
@@ -1010,6 +1024,7 @@
 				66F265411F30243100E9ECAB /* SMSMessage.swift in Sources */,
 				63FFE17B8518E311F485E78D5AC99EDF /* MessageListCell.swift in Sources */,
 				6EBAA56F1F3D5C190099DA89 /* BusinessRecordController.swift in Sources */,
+				66C784D31F457F440067B476 /* ScanResultViewController.swift in Sources */,
 				6E20ECB21F39B3DE00A0F29E /* MessageInfo.swift in Sources */,
 				5B61C6CC8719F793AA22DE8CE2E016A7 /* MessageViewController.swift in Sources */,
 				66B602F91F2F3BA7002A55E6 /* SMSDetailView.swift in Sources */,
@@ -1044,6 +1059,7 @@
 				66451F1A1F332D4E009B65DD /* PlanExecTimeCellView.swift in Sources */,
 				6E20ECA11F341B8D00A0F29E /* MessageChatController.swift in Sources */,
 				6E20EC991F341B6C00A0F29E /* ChatViewCell.swift in Sources */,
+				66C784D61F457F550067B476 /* ScanResultCell.swift in Sources */,
 				6647E8C01F39C4F80053AFF3 /* SMSPreviewController.swift in Sources */,
 				66D3D0E21F31E7C2005347D0 /* CustomerSelectViewController.swift in Sources */,
 				6615BF661F3413420052879B /* CustomerHeaderView.swift in Sources */,
