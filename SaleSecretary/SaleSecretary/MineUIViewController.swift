@@ -87,8 +87,9 @@ class MineUIViewController: UITableViewController {
     }
     
     func clickInviteBtn(){
-        print("邀请好友")
-        
+        let shareView = ShareView.init(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT))
+        shareView.showInViewController(self)
+        self.tabBarController?.tabBar.isHidden = true
     }
 
 }

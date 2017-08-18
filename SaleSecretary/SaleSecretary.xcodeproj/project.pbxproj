@@ -82,6 +82,7 @@
 		6E20ECA81F341BD600A0F29E /* sz.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E20ECA71F341BD600A0F29E /* sz.png */; };
 		6E20ECB01F39B3D300A0F29E /* MessageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E20ECAF1F39B3D300A0F29E /* MessageCache.swift */; };
 		6E20ECB21F39B3DE00A0F29E /* MessageInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E20ECB11F39B3DE00A0F29E /* MessageInfo.swift */; };
+		6E52D9851F458B560003305F /* ShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E52D9841F458B560003305F /* ShareView.swift */; };
 		6EBAA5441F3C03240099DA89 /* MineViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBAA5421F3C03240099DA89 /* MineViewCell.swift */; };
 		6EBAA5451F3C03240099DA89 /* MineViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EBAA5431F3C03240099DA89 /* MineViewCell.xib */; };
 		6EBAA54F1F3C2E480099DA89 /* MineInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBAA54E1F3C2E480099DA89 /* MineInfoCell.swift */; };
@@ -250,6 +251,7 @@
 		6E20ECA71F341BD600A0F29E /* sz.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sz.png; sourceTree = "<group>"; };
 		6E20ECAF1F39B3D300A0F29E /* MessageCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageCache.swift; sourceTree = "<group>"; };
 		6E20ECB11F39B3DE00A0F29E /* MessageInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageInfo.swift; sourceTree = "<group>"; };
+		6E52D9841F458B560003305F /* ShareView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareView.swift; sourceTree = "<group>"; };
 		6EBAA5421F3C03240099DA89 /* MineViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MineViewCell.swift; sourceTree = "<group>"; };
 		6EBAA5431F3C03240099DA89 /* MineViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MineViewCell.xib; sourceTree = "<group>"; };
 		6EBAA54E1F3C2E480099DA89 /* MineInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MineInfoCell.swift; sourceTree = "<group>"; };
@@ -611,6 +613,7 @@
 				6EF2B7881F3ECB1D00C808EE /* PayDetailCell.swift */,
 				6EF2B7891F3ECB1D00C808EE /* PayDetailCell.xib */,
 				6EF2B7941F418E8600C808EE /* UserManageHeaderView.swift */,
+				6E52D9841F458B560003305F /* ShareView.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -1065,6 +1068,7 @@
 				66AB59121F3D53AB005FB30F /* Extensions.swift in Sources */,
 				6EBAA5671F3C59340099DA89 /* WalletDetailController.swift in Sources */,
 				66451F0C1F32C4C7009B65DD /* UIColor+Hex.swift in Sources */,
+				6E52D9851F458B560003305F /* ShareView.swift in Sources */,
 				E7B2A2721F39FE76001D8C61 /* CTrailViewController.swift in Sources */,
 				6615BF6E1F3413EA0052879B /* TableViewCell.swift in Sources */,
 				6615BF6C1F34134C0052879B /* CustomerModel.swift in Sources */,
