@@ -9,52 +9,6 @@
 import UIKit
 
 class PayViewController: UIViewController {
-    @IBAction func clickbutton1(_ sender: UIButton) {
-        changeButtonColor(UIColor.white.cgColor)
-        sender.layer.backgroundColor = APP_THEME_COLOR.cgColor
-        btn1_label1.textColor = UIColor.white
-        btn1_label2.textColor = UIColor.white
-        changeMoney(0)
-    }
-    @IBAction func clickbutton2(_ sender: UIButton) {
-        changeButtonColor(UIColor.white.cgColor)
-        sender.layer.backgroundColor = APP_THEME_COLOR.cgColor
-        btn2_label1.textColor = UIColor.white
-        btn2_label2.textColor = UIColor.white
-        changeMoney(1)
-    }
-    @IBAction func clickbutton3(_ sender: UIButton) {
-        changeButtonColor(UIColor.white.cgColor)
-        sender.layer.backgroundColor = APP_THEME_COLOR.cgColor
-        btn3_label1.textColor = UIColor.white
-        btn3_label2.textColor = UIColor.white
-        changeMoney(2)
-    }
-    @IBAction func clickbutton4(_ sender: UIButton) {
-        changeButtonColor(UIColor.white.cgColor)
-        sender.layer.backgroundColor = APP_THEME_COLOR.cgColor
-        btn4_label1.textColor = UIColor.white
-        btn4_label2.textColor = UIColor.white
-        changeMoney(3)
-    }
-    @IBAction func clickbutton5(_ sender: UIButton) {
-        changeButtonColor(UIColor.white.cgColor)
-        sender.layer.backgroundColor = APP_THEME_COLOR.cgColor
-        btn5_label1.textColor = UIColor.white
-        btn5_label2.textColor = UIColor.white
-        changeMoney(4)
-    }
-    @IBAction func clickbutton6(_ sender: UIButton) {
-        changeButtonColor(UIColor.white.cgColor)
-        sender.layer.backgroundColor = APP_THEME_COLOR.cgColor
-        btn6_label1.textColor = UIColor.white
-        btn6_label2.textColor = UIColor.white
-        changeMoney(5)
-    }
-    @IBAction func clickConfirm(_ sender: UIButton) {
-        print("=====\(self.currentSel)")
-    }
-    
     @IBOutlet weak var tableView: UITableView!
     
     @IBOutlet weak var button1: UIButton!
@@ -81,7 +35,61 @@ class PayViewController: UIViewController {
     var labels:[UILabel]!
     var currentSel:Int = 0
     let PayCells = ["支付金额","支付方式"]
-    let PayCount = [0:"￥10.00",1:"￥20.00",2:"￥30.00",3:"￥49.00",4:"￥95.00",5:"￥188.00"]
+    let PayCount = [1:"￥10.00",2:"￥20.00",3:"￥30.00",4:"￥49.00",5:"￥95.00",6:"￥188.00"]
+    
+    @IBAction func clickbutton1(_ sender: UIButton) {
+        changeButtonColor(UIColor.white.cgColor)
+        sender.layer.backgroundColor = APP_THEME_COLOR.cgColor
+        btn1_label1.textColor = UIColor.white
+        btn1_label2.textColor = UIColor.white
+        changeMoney(1)
+    }
+    @IBAction func clickbutton2(_ sender: UIButton) {
+        changeButtonColor(UIColor.white.cgColor)
+        sender.layer.backgroundColor = APP_THEME_COLOR.cgColor
+        btn2_label1.textColor = UIColor.white
+        btn2_label2.textColor = UIColor.white
+        changeMoney(2)
+    }
+    @IBAction func clickbutton3(_ sender: UIButton) {
+        changeButtonColor(UIColor.white.cgColor)
+        sender.layer.backgroundColor = APP_THEME_COLOR.cgColor
+        btn3_label1.textColor = UIColor.white
+        btn3_label2.textColor = UIColor.white
+        changeMoney(3)
+    }
+    @IBAction func clickbutton4(_ sender: UIButton) {
+        changeButtonColor(UIColor.white.cgColor)
+        sender.layer.backgroundColor = APP_THEME_COLOR.cgColor
+        btn4_label1.textColor = UIColor.white
+        btn4_label2.textColor = UIColor.white
+        changeMoney(4)
+    }
+    @IBAction func clickbutton5(_ sender: UIButton) {
+        changeButtonColor(UIColor.white.cgColor)
+        sender.layer.backgroundColor = APP_THEME_COLOR.cgColor
+        btn5_label1.textColor = UIColor.white
+        btn5_label2.textColor = UIColor.white
+        changeMoney(5)
+    }
+    @IBAction func clickbutton6(_ sender: UIButton) {
+        changeButtonColor(UIColor.white.cgColor)
+        sender.layer.backgroundColor = APP_THEME_COLOR.cgColor
+        btn6_label1.textColor = UIColor.white
+        btn6_label2.textColor = UIColor.white
+        changeMoney(6)
+    }
+    @IBAction func clickConfirm(_ sender: UIButton) {
+        if self.currentSel == 0{
+            let alertController = UIAlertController(title: "提示", message: "请选择充值金额", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "好的", style: .cancel, handler: nil)
+            alertController.addAction(okAction)
+            self.present(alertController, animated: true, completion: nil)
+            return
+        }
+        wechatPay(WeixinPayModel(appID: "wx3cd741c2be80a27d", noncestr: "Hk8dsZoMOdTXGjkJ", package: "Sign=WXPay", partnerID: "1220000000", prepayID: "wx2016020000000000000000000000", sign: "B4879FFFA8B65522A04034E2D027A3B8", timestamp: Int(Date().timeIntervalSince1970)))
+        print("=====\(self.currentSel)")
+    }
     
     func changeButtonColor(_ color:CGColor){
         for btn in buttons{
@@ -92,6 +100,19 @@ class PayViewController: UIViewController {
         }
     }
     
+    //微信支付
+    func wechatPay(_ model:WeixinPayModel)
+    {
+        let req = PayReq()
+        req.partnerId = model.partnerID
+        req.prepayId = model.prepayID
+        req.nonceStr = model.noncestr
+        req.timeStamp = UInt32(model.timestamp)
+        req.package = model.package
+        req.sign = model.sign
+        WXApi.send(req)
+        
+    }
     
     func changeMoney(_ index:Int){
         self.currentSel = index

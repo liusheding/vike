@@ -106,45 +106,27 @@ class ShareView: UIView,UIScrollViewDelegate {
             return
         }
         if sender.tag == 100 {
-            sendText(text: "分享到微信好友", inScene: WXSceneSession)
+            sendLinkContent(inScene: WXSceneSession)
         }else if sender.tag == 100 + 1 {
-            sendText(text: "分享到朋友圈", inScene: WXSceneTimeline)
-//            sendImage(UIImage(named: "MyImage.png")!, inScene: WXSceneTimeline)
+            sendLinkContent(inScene: WXSceneTimeline)
         }
     }
     
-    //分享文本 inScene:WXSceneTimeline（朋友圈）、WXSceneSession（聊天界面)、WXSceneFavorite（收藏）
-    func sendText(text:String, inScene: WXScene)->Bool{
-        let req = SendMessageToWXReq()
-        req.text = text
-        req.bText = true
+    func sendLinkContent(inScene:WXScene) {
+        let message = WXMediaMessage()
+        message.title = "销小秘"
+        message.description = "握在手心里的小秘 带你走上人生巅峰"
+        message.setThumbImage(UIImage(named:"logo"))
+        
+        let ext = WXWebpageObject()
+        ext.webpageUrl = "http://www.zj.vc"
+        message.mediaObject = ext
+        
+        let req =  SendMessageToWXReq()
+        req.bText = false
+        req.message = message
         req.scene = Int32(inScene.rawValue)
-        return WXApi.send(req)
-    }
-    
-    //分享图片
-    func sendImage(image:UIImage, inScene:WXScene)->Bool{
-        let ext=WXImageObject()
-        ext.imageData=UIImagePNGRepresentation(image)
-        
-        let message=WXMediaMessage()
-        message.title=nil
-        message.description=nil
-        message.mediaObject=ext
-        message.mediaTagName="MyPic"
-        //生成缩略图
-        UIGraphicsBeginImageContext(CGSize(width: 100, height: 100))
-        image.draw(in: CGRect(x: 0, y: 0, width: 100, height: 100))
-        let thumbImage=UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        message.thumbData=UIImagePNGRepresentation(thumbImage!)
-        
-        let req=SendMessageToWXReq()
-        req.text=nil
-        req.message=message
-        req.bText=false
-        req.scene=Int32(inScene.rawValue)
-        return WXApi.send(req)
+        WXApi.send(req)
     }
     
     func showInViewController(_ viewController:UIViewController){

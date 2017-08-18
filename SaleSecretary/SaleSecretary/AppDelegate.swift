@@ -24,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,WXApiDelegate {
         let storyBoard = UIStoryboard(name: "Login", bundle: nil)
         let walletVC = storyBoard.instantiateViewController(withIdentifier: "LoginID")
         self.window?.rootViewController = walletVC
-        WXApi.registerApp("wxafadaf7b245ad46b")
+        WXApi.registerApp("wx3cd741c2be80a27d")
         NetworkUtils.refreshAipAccessToken()
         return true
     }
@@ -44,13 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,WXApiDelegate {
     
     //如果第三方程序向微信发送了sendReq的请求，那么onResp会被回调。sendReq请求调用后，会切到微信终端程序界面。
     func onResp(_ resp: BaseResp!) {
-        if resp.isKind(of: SendMessageToWXResp.self){//确保是对我们分享操作的回调
-            if resp.errCode == WXSuccess.rawValue{//分享成功
-                NSLog("分享成功")
-            }else{//分享失败
-                NSLog("分享失败，错误码：%d, 错误描述：%@", resp.errCode, resp.errStr)
-            }
-        }
+    
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

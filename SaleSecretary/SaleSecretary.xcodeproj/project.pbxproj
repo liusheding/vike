@@ -90,6 +90,7 @@
 		6E52D9941F4686F00003305F /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E52D9931F4686F00003305F /* libz.tbd */; };
 		6E52D9961F4687020003305F /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E52D9951F4687020003305F /* libc++.tbd */; };
 		6E52D9981F4687140003305F /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E52D9971F4687140003305F /* CoreTelephony.framework */; };
+		6E64C5301F46FB06001E7081 /* WeixinPayModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E64C52F1F46FB06001E7081 /* WeixinPayModel.swift */; };
 		6EBAA5441F3C03240099DA89 /* MineViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBAA5421F3C03240099DA89 /* MineViewCell.swift */; };
 		6EBAA5451F3C03240099DA89 /* MineViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EBAA5431F3C03240099DA89 /* MineViewCell.xib */; };
 		6EBAA54F1F3C2E480099DA89 /* MineInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBAA54E1F3C2E480099DA89 /* MineInfoCell.swift */; };
@@ -269,6 +270,7 @@
 		6E52D9931F4686F00003305F /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		6E52D9951F4687020003305F /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		6E52D9971F4687140003305F /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		6E64C52F1F46FB06001E7081 /* WeixinPayModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeixinPayModel.swift; sourceTree = "<group>"; };
 		6EBAA5421F3C03240099DA89 /* MineViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MineViewCell.swift; sourceTree = "<group>"; };
 		6EBAA5431F3C03240099DA89 /* MineViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MineViewCell.xib; sourceTree = "<group>"; };
 		6EBAA54E1F3C2E480099DA89 /* MineInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MineInfoCell.swift; sourceTree = "<group>"; };
@@ -628,6 +630,7 @@
 		6EF19C5A1F3BF4C000646BCF /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				6E64C52F1F46FB06001E7081 /* WeixinPayModel.swift */,
 				6EF2B7961F419F1600C808EE /* userList.plist */,
 				6EF2B7981F419FC400C808EE /* Usermodel.swift */,
 			);
@@ -1106,6 +1109,7 @@
 				E7D2ABDD1F457B14000123A5 /* DateFormatterUtils.swift in Sources */,
 				6E0C8CE81F2EE0C20066885F /* MessageDetailCell.swift in Sources */,
 				6EF5B7041F4452E9001B0A77 /* LoginViewController.swift in Sources */,
+				6E64C5301F46FB06001E7081 /* WeixinPayModel.swift in Sources */,
 				6647E8C61F39C63B0053AFF3 /* SMSContentTextCell.swift in Sources */,
 				66AB59121F3D53AB005FB30F /* Extensions.swift in Sources */,
 				6EBAA5671F3C59340099DA89 /* WalletDetailController.swift in Sources */,
