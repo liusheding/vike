@@ -101,11 +101,50 @@ class ShareView: UIView,UIScrollViewDelegate {
      分享按钮响应事件
      */
     func shareButtonClicked(_ sender:UIButton) {
-        if sender.tag == 100 {
-            print("分享到微信好友")
-        }else if sender.tag == 100 + 1 {
-            print("分享到朋友圈")
+        if WXApi.isWXAppInstalled() == false{
+            print("未安装微信")
+            return
         }
+        if sender.tag == 100 {
+            sendText(text: "分享到微信好友", inScene: WXSceneSession)
+        }else if sender.tag == 100 + 1 {
+            sendText(text: "分享到朋友圈", inScene: WXSceneTimeline)
+//            sendImage(UIImage(named: "MyImage.png")!, inScene: WXSceneTimeline)
+        }
+    }
+    
+    //分享文本 inScene:WXSceneTimeline（朋友圈）、WXSceneSession（聊天界面)、WXSceneFavorite（收藏）
+    func sendText(text:String, inScene: WXScene)->Bool{
+        let req = SendMessageToWXReq()
+        req.text = text
+        req.bText = true
+        req.scene = Int32(inScene.rawValue)
+        return WXApi.send(req)
+    }
+    
+    //分享图片
+    func sendImage(image:UIImage, inScene:WXScene)->Bool{
+        let ext=WXImageObject()
+        ext.imageData=UIImagePNGRepresentation(image)
+        
+        let message=WXMediaMessage()
+        message.title=nil
+        message.description=nil
+        message.mediaObject=ext
+        message.mediaTagName="MyPic"
+        //生成缩略图
+        UIGraphicsBeginImageContext(CGSize(width: 100, height: 100))
+        image.draw(in: CGRect(x: 0, y: 0, width: 100, height: 100))
+        let thumbImage=UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        message.thumbData=UIImagePNGRepresentation(thumbImage!)
+        
+        let req=SendMessageToWXReq()
+        req.text=nil
+        req.message=message
+        req.bText=false
+        req.scene=Int32(inScene.rawValue)
+        return WXApi.send(req)
     }
     
     func showInViewController(_ viewController:UIViewController){

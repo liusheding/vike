@@ -6,3 +6,5 @@
 #import "JSDropDownMenu.h"
 #import "JSDropDownMenu.m"
 
+#import "WXApiObject.h"
+#import "WXApi.h"

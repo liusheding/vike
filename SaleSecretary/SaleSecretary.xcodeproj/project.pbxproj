@@ -83,6 +83,12 @@
 		6E20ECB01F39B3D300A0F29E /* MessageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E20ECAF1F39B3D300A0F29E /* MessageCache.swift */; };
 		6E20ECB21F39B3DE00A0F29E /* MessageInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E20ECB11F39B3DE00A0F29E /* MessageInfo.swift */; };
 		6E52D9851F458B560003305F /* ShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E52D9841F458B560003305F /* ShareView.swift */; };
+		6E52D98E1F46869C0003305F /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E52D98D1F46869C0003305F /* libWeChatSDK.a */; };
+		6E52D9901F4686B80003305F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E52D98F1F4686B80003305F /* SystemConfiguration.framework */; };
+		6E52D9921F4686DE0003305F /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E52D9911F4686DE0003305F /* libsqlite3.0.tbd */; };
+		6E52D9941F4686F00003305F /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E52D9931F4686F00003305F /* libz.tbd */; };
+		6E52D9961F4687020003305F /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E52D9951F4687020003305F /* libc++.tbd */; };
+		6E52D9981F4687140003305F /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E52D9971F4687140003305F /* CoreTelephony.framework */; };
 		6EBAA5441F3C03240099DA89 /* MineViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBAA5421F3C03240099DA89 /* MineViewCell.swift */; };
 		6EBAA5451F3C03240099DA89 /* MineViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EBAA5431F3C03240099DA89 /* MineViewCell.xib */; };
 		6EBAA54F1F3C2E480099DA89 /* MineInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBAA54E1F3C2E480099DA89 /* MineInfoCell.swift */; };
@@ -252,6 +258,15 @@
 		6E20ECAF1F39B3D300A0F29E /* MessageCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageCache.swift; sourceTree = "<group>"; };
 		6E20ECB11F39B3DE00A0F29E /* MessageInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageInfo.swift; sourceTree = "<group>"; };
 		6E52D9841F458B560003305F /* ShareView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareView.swift; sourceTree = "<group>"; };
+		6E52D9891F4683090003305F /* WechatAuthSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WechatAuthSDK.h; sourceTree = "<group>"; };
+		6E52D98A1F4683090003305F /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
+		6E52D98B1F4683090003305F /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
+		6E52D98D1F46869C0003305F /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
+		6E52D98F1F4686B80003305F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		6E52D9911F4686DE0003305F /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
+		6E52D9931F4686F00003305F /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		6E52D9951F4687020003305F /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		6E52D9971F4687140003305F /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		6EBAA5421F3C03240099DA89 /* MineViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MineViewCell.swift; sourceTree = "<group>"; };
 		6EBAA5431F3C03240099DA89 /* MineViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MineViewCell.xib; sourceTree = "<group>"; };
 		6EBAA54E1F3C2E480099DA89 /* MineInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MineInfoCell.swift; sourceTree = "<group>"; };
@@ -333,6 +348,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6E52D9981F4687140003305F /* CoreTelephony.framework in Frameworks */,
+				6E52D9961F4687020003305F /* libc++.tbd in Frameworks */,
+				6E52D9941F4686F00003305F /* libz.tbd in Frameworks */,
+				6E52D9921F4686DE0003305F /* libsqlite3.0.tbd in Frameworks */,
+				6E52D9901F4686B80003305F /* SystemConfiguration.framework in Frameworks */,
+				6E52D98E1F46869C0003305F /* libWeChatSDK.a in Frameworks */,
 				66C784BB1F41B95B0067B476 /* AipBase.framework in Frameworks */,
 				8F857D8EE568B6B553022CDE /* Pods_SaleSecretary.framework in Frameworks */,
 				66C784B41F41B9140067B476 /* AipOcrSdk.framework in Frameworks */,
@@ -540,6 +561,7 @@
 		66B602F31F2F25F9002A55E6 /* Others */ = {
 			isa = PBXGroup;
 			children = (
+				6E52D9881F4682CC0003305F /* WeixinSDK */,
 				E7D2ABDC1F457B14000123A5 /* DateFormatterUtils.swift */,
 				66AB59131F3D54AF005FB30F /* CollapsibleTableView */,
 				E754DC981F3D4E5A0025DBBE /* GetContactUtils.swift */,
@@ -561,6 +583,16 @@
 				6E20ECA41F341BCD00A0F29E /* xiaoming.png */,
 			);
 			name = images;
+			sourceTree = "<group>";
+		};
+		6E52D9881F4682CC0003305F /* WeixinSDK */ = {
+			isa = PBXGroup;
+			children = (
+				6E52D9891F4683090003305F /* WechatAuthSDK.h */,
+				6E52D98A1F4683090003305F /* WXApi.h */,
+				6E52D98B1F4683090003305F /* WXApiObject.h */,
+			);
+			name = WeixinSDK;
 			sourceTree = "<group>";
 		};
 		6EF19C581F3BF47800646BCF /* Mine */ = {
@@ -765,6 +797,12 @@
 		ED61F7C3F779D5B99C70346E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6E52D9971F4687140003305F /* CoreTelephony.framework */,
+				6E52D9951F4687020003305F /* libc++.tbd */,
+				6E52D9931F4686F00003305F /* libz.tbd */,
+				6E52D9911F4686DE0003305F /* libsqlite3.0.tbd */,
+				6E52D98F1F4686B80003305F /* SystemConfiguration.framework */,
+				6E52D98D1F46869C0003305F /* libWeChatSDK.a */,
 				66C784B71F41B9490067B476 /* AipBase.framework */,
 				66C784B81F41B9490067B476 /* IdcardQuality.framework */,
 				66C784B31F41B9140067B476 /* AipOcrSdk.framework */,
@@ -1204,6 +1242,33 @@
 				INFOPLIST_FILE = SaleSecretary/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					"\"Alamofire\"",
+					"-framework",
+					"\"DropDown\"",
+					"-framework",
+					"\"Kingfisher\"",
+					"-framework",
+					"\"RxCocoa\"",
+					"-framework",
+					"\"RxSwift\"",
+					"-framework",
+					"\"SnapKit\"",
+					"-framework",
+					"\"SwiftyJSON\"",
+					"-framework",
+					"\"Toast_Swift\"",
+					"-framework",
+					"\"YBAttributeTextTapAction\"",
+					"-all_load",
+					"-Objc",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.zjjy.SaleSecretary;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "SaleSecretary/SaleSecretary-Bridging-Header.h";
@@ -1240,6 +1305,33 @@
 				INFOPLIST_FILE = SaleSecretary/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					"\"Alamofire\"",
+					"-framework",
+					"\"DropDown\"",
+					"-framework",
+					"\"Kingfisher\"",
+					"-framework",
+					"\"RxCocoa\"",
+					"-framework",
+					"\"RxSwift\"",
+					"-framework",
+					"\"SnapKit\"",
+					"-framework",
+					"\"SwiftyJSON\"",
+					"-framework",
+					"\"Toast_Swift\"",
+					"-framework",
+					"\"YBAttributeTextTapAction\"",
+					"-all_load",
+					"-Objc",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.zjjy.SaleSecretary;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "SaleSecretary/SaleSecretary-Bridging-Header.h";
