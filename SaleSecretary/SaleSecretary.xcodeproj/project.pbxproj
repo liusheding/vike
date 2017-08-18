@@ -63,6 +63,7 @@
 		66C784D31F457F440067B476 /* ScanResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C784D21F457F440067B476 /* ScanResultViewController.swift */; };
 		66C784D61F457F550067B476 /* ScanResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C784D41F457F550067B476 /* ScanResultCell.swift */; };
 		66C784D71F457F550067B476 /* ScanResultCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 66C784D51F457F550067B476 /* ScanResultCell.xib */; };
+		66C784D91F46DEAB0067B476 /* NLPLoadingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 66C784D81F46DEAB0067B476 /* NLPLoadingView.xib */; };
 		66D3D0E21F31E7C2005347D0 /* CustomerSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D3D0E11F31E7C2005347D0 /* CustomerSelectViewController.swift */; };
 		66F265411F30243100E9ECAB /* SMSMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F265401F30243100E9ECAB /* SMSMessage.swift */; };
 		6E0C8CE31F2EE0A90066885F /* MessageDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E0C8CE21F2EE0A90066885F /* MessageDetail.storyboard */; };
@@ -237,6 +238,7 @@
 		66C784D21F457F440067B476 /* ScanResultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanResultViewController.swift; sourceTree = "<group>"; };
 		66C784D41F457F550067B476 /* ScanResultCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanResultCell.swift; sourceTree = "<group>"; };
 		66C784D51F457F550067B476 /* ScanResultCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScanResultCell.xib; sourceTree = "<group>"; };
+		66C784D81F46DEAB0067B476 /* NLPLoadingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NLPLoadingView.xib; sourceTree = "<group>"; };
 		66D3D0E11F31E7C2005347D0 /* CustomerSelectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerSelectViewController.swift; sourceTree = "<group>"; };
 		66F265401F30243100E9ECAB /* SMSMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SMSMessage.swift; sourceTree = "<group>"; };
 		6B1304CBBFB165B9BCE2C5264AB48FAF /* SaleSecretaryUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaleSecretaryUITests.swift; sourceTree = "<group>"; };
@@ -443,6 +445,7 @@
 				66451F151F331F8E009B65DD /* InscribeViewCell.swift */,
 				66451F171F332AB8009B65DD /* PlanExecTimeCellView.xib */,
 				66451F191F332D4E009B65DD /* PlanExecTimeCellView.swift */,
+				66C784D81F46DEAB0067B476 /* NLPLoadingView.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -953,6 +956,7 @@
 				66B602F71F2F35CC002A55E6 /* SMSDetailView.xib in Resources */,
 				66AB590B1F3C65E8005FB30F /* ico_make.png in Resources */,
 				6E0C8CE31F2EE0A90066885F /* MessageDetail.storyboard in Resources */,
+				66C784D91F46DEAB0067B476 /* NLPLoadingView.xib in Resources */,
 				AF201728C3391AB87079CD9BA8E73001 /* Main.storyboard in Resources */,
 				66451F121F331E81009B65DD /* InscribeViewCell.xib in Resources */,
 				6EF5B7031F4452E9001B0A77 /* Login.storyboard in Resources */,

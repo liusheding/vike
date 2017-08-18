@@ -163,6 +163,7 @@
                                     <segment title="自定义"/>
                                     <segment title="手机号群发"/>
                                 </segments>
+                                <color key="tintColor" red="0.1065740479" green="0.77210897840000003" blue="0.1872832348" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <action selector="onSegmChange:" destination="t2W-Fu-ZeT" eventType="valueChanged" id="2Nl-Qu-Uva"/>
                                 </connections>

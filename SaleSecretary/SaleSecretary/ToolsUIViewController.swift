@@ -10,6 +10,7 @@ import UIKit
 import Toast_Swift
 import AipBase
 import AipOcrSdk
+import SwiftyJSON
 
 
 let AIP_APP_KEY = "A5BKNDgXQavsP5O2HpTXPP1X"
@@ -39,6 +40,8 @@ class ToolsUIViewController : UITableViewController {
     
     var aipVC: UIViewController?
     
+    var accessToken:String!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.tableFooterView = UIView()
@@ -50,15 +53,7 @@ class ToolsUIViewController : UITableViewController {
         // CSToastManager.setTapToDismissEnabled(true)
         //
         // let l = NSData(contentsOfFile: "aip.license")
-        do {
-            
-            let license = Bundle.main.path(forResource: "aip", ofType: "license")
-            let data = try Data(contentsOf: URL(fileURLWithPath: license!))
-            AipOcrService.shard().auth(withLicenseFileData: data)
-        } catch {
-            print("could not find aip.license")
-        }
-        
+        NetworkUtils.refreshAipSession()
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -113,21 +108,21 @@ class ToolsUIViewController : UITableViewController {
         print("\(String(describing: selectedRow))")
         let row = indexPath.row
         if indexPath.section == 0 {
-            // print(selectedRow?.value(forKey: "id"))
-           
+            // 执行计划
             let smsVC = storyBoard.instantiateViewController(withIdentifier: "SMSUIViewController")
             self.navigationController?.pushViewController(smsVC, animated: true)
         } else if indexPath.section == 1  && row == 0 {
+            // 名片扫描
             self.aipVC = AipGeneralVC.viewController(with: self)
-            // AipGeneralVC.viewController(with: <#T##AipOcrDelegate!#>)
-            // vc.delegate = self
             self.present(aipVC!, animated: true, completion: nil)
         } else if indexPath.section == 1  && row == 1 {
-            
+            // 二维码分享
             let vc = storyBoard.instantiateViewController(withIdentifier: "qrScrollView")
             self.navigationController?.pushViewController(vc, animated: true) // (scanvc, sender: self)
             // self.present(vc, animated: true, completion: nil)
         } else {
+            // 其他
+            NetworkUtils.requestNLPLexer("刘社定，湖南指尖科技有限公司，18619283902", successHandler: nil)
             self.navigationController?.view.makeToast("正在研发中，敬请期待...", duration: 1.5, position: .bottom)
         }
         
@@ -164,23 +159,26 @@ extension ToolsUIViewController: AipOcrDelegate {
     
     
     func ocr(onGeneralSuccessful resut: Any!) {
-        let result: [String: Any] = resut as! [String: Any]
-        NSLog("\(resut)")
-        let words = result["words_result"]
-        
-        if  words != nil {
+        print("\(resut)")
+        let json = JSON(resut)
+        var strWords: [String] = []
+        let words = json["words_result"].arrayValue
+        if words.count > 0 {
             let queue = OperationQueue.main
             queue.addOperation({
                 let scanvc = self.storyBoard.instantiateViewController(withIdentifier: "ScanResultViewController") as! ScanResultViewController
-                
+                for w in words {
+                    let str = w["words"].string
+                    strWords.append(str!)
+                }
+                scanvc.words = strWords
                 if self.aipVC != nil {
                     self.aipVC!.dismiss(animated: true, completion: {
                         [weak self] in
                         self?.navigationController?.pushViewController(scanvc, animated: true)
                     })
-                    //self.aipVC.pushViewController(scanvc, animated: true)
+                
                 }
-                // self.present(scanvc, animated: true)
             })
         }
     }

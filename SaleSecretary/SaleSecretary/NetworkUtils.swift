@@ -10,10 +10,17 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 import UIKit
+import AipOcrSdk
+import AipBase
 
 
 let ZJKJ_API_URL = "http://112.74.110.182:8080/zjkj-scrm-v1707/api/service.shtml"
 
+let AIP_NPL_LEXER = "https://aip.baidubce.com/rpc/2.0/nlp/v1/lexer?access_token="
+
+let AIP_TOKEN_URL = "https://aip.baidubce.com/oauth/2.0/token?grant_type=client_credentials"
+
+var AIP_ACCESS_TOKEN:String?
 
 let HEAD = "head"
 let BODY = "body"
@@ -30,6 +37,11 @@ let H_SIGN_FILEDS = [H_AGENT_NO, H_USER, H_REQ_TIME, H_REQ_TRANS_NO]
 let C_USER = "zjkj_android"
 let C_SK = "123456"
 let C_AGENT_NO = "app"
+
+let AIP_TOKEN_URL_FULL = "\(AIP_TOKEN_URL)&client_id=\(AIP_APP_KEY)&client_secret=\(AIP_APP_SK)"
+
+
+let gbkEncoding = CFStringConvertEncodingToNSStringEncoding(CFStringEncoding(CFStringEncodings.GB_18030_2000.rawValue))
 
 
 let allowedCharacterSet = (CharacterSet(charactersIn: "!*'();@&=+$,/?%#[]{}:\" ").inverted)
@@ -118,6 +130,70 @@ struct NetworkUtils {
         return encodedStr!.md5().uppercased()
     }
     
+ 
+    static func requestNLPLexer(_ text: String, successHandler:  ((_ json : JSON) -> Void)?) {
+        if AIP_ACCESS_TOKEN == nil {
+            refreshAipAccessToken()
+        }
+        var req = URLRequest(url: URL(string: AIP_NPL_LEXER + AIP_ACCESS_TOKEN!)!)
+        req.httpMethod = HTTPMethod.post.rawValue
+        req.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        let bodyStr:String = JSON(["text":  text]).rawString()!
+        print("lexer text is \(bodyStr)")
+        req.httpBody = NSString(string: bodyStr).data(using: gbkEncoding)!
+        Alamofire.request(req).responseData(completionHandler: {
+            response in
+            let result = response.result
+            switch result  {
+            case .success(let value):
+                guard response.result.value != nil else {return }
+                let uf8 = NSString(data: value, encoding: gbkEncoding)
+                let json = JSON.parse(uf8! as String)
+                print(json.rawString(.utf8, options: .init(rawValue: 0)) ?? "")
+                if successHandler != nil {
+                    successHandler!(json)
+                }
+            case .failure(let error):
+                print(error)
+            }
+        })
+    }
+    
+    public static func refreshAipSession() {
+        do {
+            let license = Bundle.main.path(forResource: "aip", ofType: "license")
+            let data = try Data(contentsOf: URL(fileURLWithPath: license!))
+            AipOcrService.shard().auth(withLicenseFileData: data)
+            // AipOcrService.shard().auth(withAK: AIP_APP_KEY, andSK: AIP_APP_SK)
+//            AipOcrService.shard().getTokenSuccessHandler({
+//                (token) in
+//                print("get aip session token: \(token ?? "")")
+//            }, failHandler: {
+//                (error) in
+//                print("could not get accesstoken, \(String(describing: error))")
+//            })
+        } catch {
+            print("could not find aip.license")
+        }
+    }
+    
+    public static func refreshAipAccessToken() {
+        let req = URLRequest(url: URL(string: AIP_TOKEN_URL_FULL)!)
+        Alamofire.request(req).responseJSON {
+            response in
+            let result = response.result
+            switch result  {
+            case .success(let value):
+                guard response.result.value != nil else {return }
+                if let aat = JSON(value)["access_token"].string {
+                    AIP_ACCESS_TOKEN = aat
+                    print("access_toen: \(aat)")
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
 }
 
 

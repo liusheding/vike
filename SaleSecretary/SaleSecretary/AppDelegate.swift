@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,WXApiDelegate {
         let walletVC = storyBoard.instantiateViewController(withIdentifier: "LoginID")
         self.window?.rootViewController = walletVC
         WXApi.registerApp("wxafadaf7b245ad46b")
-        
+        NetworkUtils.refreshAipAccessToken()
         return true
     }
     
