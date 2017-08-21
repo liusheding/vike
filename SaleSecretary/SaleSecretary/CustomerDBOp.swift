@@ -50,6 +50,13 @@ class CustomerDBOp : NSObject {
         return self.dbContact
     }
     
+    func getGroupInDb() -> [Group] {
+        if self.dbGroup.count == 0 {
+            return self.getGroup()
+        }
+        return self.dbGroup
+    }
+    
     // batch insert Customer 
     func insertCustomerArray(ctms : [Customer]) {
         if ctms.count != 0 {
