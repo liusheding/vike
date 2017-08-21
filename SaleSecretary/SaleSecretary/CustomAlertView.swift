@@ -1,11 +1,12 @@
 //
-//  CustomerPopUpView.swift
+//  CustomAlert.swift
 //  SaleSecretary
 //
-//  Created by Lutiguang on 2017/8/4.
+//  Created by Lutiguang on 2017/8/17.
 //  Copyright © 2017年 zjjy. All rights reserved.
 //
 
+import Foundation
 import UIKit
 import SnapKit
 import RxSwift
@@ -16,56 +17,54 @@ private let kActionViewHeight: CGFloat = 116    //container view height
 private let kActionButtonHeight: CGFloat = 34   //button height
 private let kFirstButtonY: CGFloat = 12 //the first button Y value
 
-class CustomerPopUpView: UIView {
+private let widthPercent : Float = 0.6
+private let heightPercent : Float = 0.5
+
+let viewBounds:CGRect = UIScreen.main.bounds
+
+private let widthAlert = viewBounds.width
+
+class CustomAlertView: UICollectionViewCell {
     weak var delegate: ActionFloatViewDelegate?
     let disposeBag = DisposeBag()
+
+    let defaultArray : [Group] = [ ]
     
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-    }
-    */
     override init (frame: CGRect) {
         super.init(frame : frame)
-        self.initContent()
+        self.initContent(dfArr: self.defaultArray)
     }
     
     convenience init () {
         self.init(frame:CGRect.zero)
-        self.initContent()
+        self.initContent(dfArr: self.defaultArray)
     }
     
     required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+        super.init(coder: aDecoder )
+        self.initContent( dfArr: self.defaultArray )
     }
     
-    fileprivate func initContent() {
+    convenience init(groups : [Group]) {
+        self.init(frame:CGRect.zero)
+        self.initContent(dfArr: groups)
+    }
+    
+    fileprivate func initContent(dfArr : [Group]) {
         self.backgroundColor = UIColor.clear
-        let actionImages = [
-            UIImage(imageLiteralResourceName: "contacts_add_friend"),
-            UIImage(imageLiteralResourceName: "contacts_add_friend"),
-            UIImage(imageLiteralResourceName: "contacts_add_groupmessage")
-        ]
-        
-        let actionTitles = [
-            "同步通讯录",
-            "分组管理",
-            "批量处理"
-        ]
         
         //Init containerView
         let containerView : UIView = UIView()
         containerView.backgroundColor = UIColor.clear
         self.addSubview(containerView)
         containerView.snp.makeConstraints { (make) -> Void in
-            make.top.equalTo(self.snp.top).offset(3)
+            make.top.equalTo(self.snp.top).offset(250)
             make.right.equalTo(self.snp.right).offset(-5)
             make.width.equalTo(kActionViewWidth)
             make.height.equalTo(kActionViewHeight)
+            
         }
-        //Init bgImageView
+        //Init bgImageView 
         let stretchInsets = UIEdgeInsetsMake(14, 6, 6, 34)
         let bubbleMaskImage = UIImage(imageLiteralResourceName: "MessageRightTopBg").resizableImage(withCapInsets: stretchInsets, resizingMode: .stretch)
         let bgImageView: UIImageView = UIImageView(image: bubbleMaskImage)
@@ -76,16 +75,14 @@ class CustomerPopUpView: UIView {
         
         //init custom buttons
         var yValue = kFirstButtonY
-        for index in 0 ..< actionImages.count {
+        for index in 0 ..< dfArr.count {
             let itemButton: UIButton = UIButton(type: .custom)
             itemButton.backgroundColor = UIColor.clear
             itemButton.titleLabel!.font = UIFont.systemFont(ofSize: 15)
             itemButton.setTitleColor(UIColor.white, for: UIControlState())
             itemButton.setTitleColor(UIColor.white, for: .highlighted)
-            itemButton.setTitle(actionTitles[index], for: .normal)
-            itemButton.setTitle(actionTitles[index], for: .highlighted)
-            itemButton.setImage(actionImages[index], for: .normal)
-            itemButton.setImage(actionImages[index], for: .highlighted)
+            itemButton.setTitle(dfArr[index].group_name, for: .normal)
+            itemButton.setTitle(dfArr[index].group_name, for: .highlighted)
             itemButton.addTarget(self, action: #selector(CustomerPopUpView.buttonTaped(_:)), for: UIControlEvents.touchUpInside)
             itemButton.contentHorizontalAlignment = .left
             itemButton.contentEdgeInsets = UIEdgeInsetsMake(0, 12, 0, 0)
@@ -99,6 +96,7 @@ class CustomerPopUpView: UIView {
                 make.width.equalTo(containerView.snp.width)
                 make.height.equalTo(kActionButtonHeight)
             }
+            
             yValue += kActionButtonHeight
         }
         //add tap to view
@@ -109,9 +107,8 @@ class CustomerPopUpView: UIView {
             }.addDisposableTo(self.disposeBag)
         
         self.isHidden = true
-       
+        
     }
-    
     func buttonTaped(_ sender: UIButton!) {
         guard let delegate = self.delegate else {
             self.hide(true)
@@ -121,7 +118,6 @@ class CustomerPopUpView: UIView {
         delegate.floatViewTapItemIndex(type)
         self.hide(true)
     }
-    
     /**
      Hide the float view
      
@@ -143,19 +139,6 @@ class CustomerPopUpView: UIView {
             self.isHidden = false
         }
     }
-}
 
 
-/**
- *  TSMessageViewController Float view delegate methods
- */
-protocol ActionFloatViewDelegate: class {
-    /**
-     Tap the item with index
-     */
-    func floatViewTapItemIndex(_ type: ActionFloatViewItemType)
-}
-
-enum ActionFloatViewItemType: Int {
-    case synContacts, managerGroup , batchOperate
 }

@@ -142,6 +142,7 @@ struct ContactCommon {
 //        UIColor.init(red: CGFloat.init(118)/max, green: CGFloat.init(171)/max, blue: CGFloat.init(240)/max, alpha: CGFloat.init(1)) ,
 //        UIColor.init(red: CGFloat.init(78)/max, green: CGFloat.init(210)/max, blue: CGFloat.init(98)/max, alpha: CGFloat.init(1))
 //    ]
+    static let THEME_COLOR = UIColor.colorWithHexString(hex: "01B414")
     static let  sampleColor = [ UIColor.colorWithHexString(hex: "feaa28") , UIColor.colorWithHexString(hex: "ff8e89") , UIColor.colorWithHexString(hex: "76abf0") , UIColor.colorWithHexString(hex: "4ec962")]
     
     static let count = sampleColor.count
@@ -168,6 +169,6 @@ struct ContactCommon {
     }
     
     static let separatorDefault = ","
-    
+    static let groupDefault : NSString = "默认"
 }
 

@@ -49,6 +49,8 @@ class ContactTableViewController: UIViewController {
 
     var contactsCells:[CustomerGroup] = []
     
+    @IBOutlet weak var searchBarLocal: UISearchBar!
+    
     @IBOutlet weak var tableView: UITableView!
     
     // MARK : about ... more bar item (float)
@@ -68,11 +70,16 @@ class ContactTableViewController: UIViewController {
         
         // add contacts  , after change loading strategy
 //        self.contactDt = GetContactUtils.loadContactData()
-        
-        NSLog("ContactTableviewController init ! \(NSHomeDirectory())")
+    
+//        NSLog("ContactTableviewController init ! \(NSHomeDirectory())")
         // mark register tablecell
         self.tableView.register(UINib(nibName: String(describing: PersonContactCell.self ), bundle: nil), forCellReuseIdentifier: cellId)
-
+        
+        //search bar information
+        self.searchBarLocal.delegate = self
+        self.searchBarLocal.setValue("取消", forKey: "_cancelButtonText")
+        self.searchBarLocal.tintColor = APP_THEME_COLOR
+        
         // init pop up view (float)
         self.ctMoreItemView = CustomerPopUpView()
         self.ctMoreItemView.delegate = self as? ActionFloatViewDelegate
@@ -279,8 +286,8 @@ extension ContactTableViewController : UITableViewDataSource, UITableViewDelegat
                 
                 break
             case .managerGroup:
-//                self.contextDb.storeGroup(id: 0, group_name: "默认")
-//                self.contextDb.insertCustomer(ctms: Customer.init(birth: "1988-12-10", company: "指尖科技", nick_name: "paopao", phone_number: ["18910893322"], name: "hanpaopao"))
+                let cg = self.contextDb.getContacts2Group()
+                NSLog("0000000+++\(cg.count)")
                 break
             case .batchOperate :
                 let g = self.contextDb.getGroup()
@@ -373,5 +380,22 @@ extension ContactTableViewController : UITableViewDataSource, UITableViewDelegat
         // Pass the selected object to the new view controller.
     }
     */
-
+}
+extension ContactTableViewController: UISearchBarDelegate {
+    // 搜索触发事件，点击虚拟键盘上的search按钮时触发此方法
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+    }
+    
+    // 书签按钮触发事件
+    func searchBarBookmarkButtonClicked(_ searchBar: UISearchBar) {
+        print("搜索历史")
+    }
+    
+    // 取消按钮触发事件
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        // 搜索内容置空
+        searchBar.text = ""
+        self.tableView.reloadData()
+    }
 }

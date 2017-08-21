@@ -144,6 +144,10 @@
 		E7D2ABD81F457AC7000123A5 /* TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7D2ABD51F457AC7000123A5 /* TableViewCell.xib */; };
 		E7D2ABDB1F457B00000123A5 /* CustomerDBOp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D2ABDA1F457B00000123A5 /* CustomerDBOp.swift */; };
 		E7D2ABDD1F457B14000123A5 /* DateFormatterUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D2ABDC1F457B14000123A5 /* DateFormatterUtils.swift */; };
+		E7D2AC2F1F4A7A2B000123A5 /* AddCustomerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D2AC2E1F4A7A2B000123A5 /* AddCustomerViewController.swift */; };
+		E7D2AC351F4A7A48000123A5 /* AddingCustomViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D2AC301F4A7A48000123A5 /* AddingCustomViewCell.swift */; };
+		E7D2AC361F4A7A48000123A5 /* AddingCustomViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7D2AC311F4A7A48000123A5 /* AddingCustomViewCell.xib */; };
+		E7D2AC371F4A7A48000123A5 /* CustomAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D2AC321F4A7A48000123A5 /* CustomAlertView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -328,6 +332,10 @@
 		E7D2ABD51F457AC7000123A5 /* TableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TableViewCell.xib; sourceTree = "<group>"; };
 		E7D2ABDA1F457B00000123A5 /* CustomerDBOp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerDBOp.swift; sourceTree = "<group>"; };
 		E7D2ABDC1F457B14000123A5 /* DateFormatterUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateFormatterUtils.swift; sourceTree = "<group>"; };
+		E7D2AC2E1F4A7A2B000123A5 /* AddCustomerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCustomerViewController.swift; sourceTree = "<group>"; };
+		E7D2AC301F4A7A48000123A5 /* AddingCustomViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddingCustomViewCell.swift; sourceTree = "<group>"; };
+		E7D2AC311F4A7A48000123A5 /* AddingCustomViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddingCustomViewCell.xib; sourceTree = "<group>"; };
+		E7D2AC321F4A7A48000123A5 /* CustomAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomAlertView.swift; sourceTree = "<group>"; };
 		E9B097EE912BE08E90307C3D5DBEAA47 /* SaleSecretaryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaleSecretaryTests.swift; sourceTree = "<group>"; };
 		F62447EA9409681F76292A514C7312A9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FB20A214877D05C6E7E1ECF3F9E4A391 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -487,6 +495,7 @@
 		6615BF551F3412EF0052879B /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				E7D2AC2E1F4A7A2B000123A5 /* AddCustomerViewController.swift */,
 				E754DC901F3D4E3D0025DBBE /* ContactStoryboard.storyboard */,
 				E754DC911F3D4E3D0025DBBE /* CTAddNewTableViewController.swift */,
 				E754DC921F3D4E3D0025DBBE /* CTChooseNewerController.swift */,
@@ -523,6 +532,9 @@
 		662D6A461F317781001C1FB1 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				E7D2AC301F4A7A48000123A5 /* AddingCustomViewCell.swift */,
+				E7D2AC311F4A7A48000123A5 /* AddingCustomViewCell.xib */,
+				E7D2AC321F4A7A48000123A5 /* CustomAlertView.swift */,
 				E7D2ABD31F457AC7000123A5 /* PersonContactCell.swift */,
 				E7D2ABD41F457AC7000123A5 /* PersonContactCell.xib */,
 				E7D2ABD51F457AC7000123A5 /* TableViewCell.xib */,
@@ -951,6 +963,7 @@
 				6E20ECA51F341BCD00A0F29E /* xiaohua.png in Resources */,
 				6E20ECA61F341BCD00A0F29E /* xiaoming.png in Resources */,
 				66B602F21F2F074A002A55E6 /* SMSListViewCell.xib in Resources */,
+				E7D2AC361F4A7A48000123A5 /* AddingCustomViewCell.xib in Resources */,
 				6EF2B7971F419F1600C808EE /* userList.plist in Resources */,
 				6EF2B78B1F3ECB1D00C808EE /* PayDetailCell.xib in Resources */,
 				837E4CB3CAA4F9E6F67FCD9B689A4731 /* Assets.xcassets in Resources */,
@@ -1091,6 +1104,7 @@
 				66B602F91F2F3BA7002A55E6 /* SMSDetailView.swift in Sources */,
 				E754DC951F3D4E3D0025DBBE /* CTChooseNewerController.swift in Sources */,
 				E7D2ABD21F457AA4000123A5 /* Models.swift in Sources */,
+				E7D2AC2F1F4A7A2B000123A5 /* AddCustomerViewController.swift in Sources */,
 				6615BF5C1F3413210052879B /* ContactTableViewController.swift in Sources */,
 				6615BF541F33F9A60052879B /* CustomSMSViewController.swift in Sources */,
 				E754DC971F3D4E4B0025DBBE /* AddNewCustomerCell.swift in Sources */,
@@ -1113,6 +1127,7 @@
 				6647E8C61F39C63B0053AFF3 /* SMSContentTextCell.swift in Sources */,
 				66AB59121F3D53AB005FB30F /* Extensions.swift in Sources */,
 				6EBAA5671F3C59340099DA89 /* WalletDetailController.swift in Sources */,
+				E7D2AC371F4A7A48000123A5 /* CustomAlertView.swift in Sources */,
 				66451F0C1F32C4C7009B65DD /* UIColor+Hex.swift in Sources */,
 				6E52D9851F458B560003305F /* ShareView.swift in Sources */,
 				E7B2A2721F39FE76001D8C61 /* CTrailViewController.swift in Sources */,
@@ -1138,6 +1153,7 @@
 				6E0C8CE51F2EE0B40066885F /* MessageDetailController.swift in Sources */,
 				6EF5B7051F4452E9001B0A77 /* RegisterViewController.swift in Sources */,
 				E7B2A2701F39FE76001D8C61 /* CTCustomerDetailInfoViewController.swift in Sources */,
+				E7D2AC351F4A7A48000123A5 /* AddingCustomViewCell.swift in Sources */,
 				6647E8C31F39C6160053AFF3 /* CommonSMSTableCell.swift in Sources */,
 				5F81108AF566E3AA21DC1DE8FE984ECE /* ViewController.swift in Sources */,
 				66AB59101F3C6607005FB30F /* Month.swift in Sources */,
