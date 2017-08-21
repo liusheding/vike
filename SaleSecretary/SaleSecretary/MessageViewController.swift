@@ -246,6 +246,9 @@ class MessageViewController: UITableViewController {
             let data = self.DataSource[indexPath.row] as! MessageData
             self.DataSource.removeObject(at: indexPath.row)
             msgdb.deleteMsgList(msgdata: data)
+            for detail in data.message{
+                msgdb.deleteMsgItem(msgdetail: detail)
+            }
             self.tableView!.deleteRows(at: [indexPath], with: UITableViewRowAnimation.fade)
         }
     }

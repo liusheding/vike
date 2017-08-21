@@ -118,7 +118,7 @@ class MessageDB: NSObject {
         fetchRequest.fetchLimit = 10 //限定查询结果的数量
         fetchRequest.fetchOffset = 0 //查询的偏移量
         
-        fetchRequest.predicate = NSPredicate(format: "msg_item_date=%s", argumentArray: [msgdetail.msgdate])
+        fetchRequest.predicate = NSPredicate(format: "msg_item_phone=%s", argumentArray: [msgdetail.msgphone])
         do {
             let searchResults = try context.fetch(fetchRequest)
             NSLog("numbers of deleteMsgItem \(searchResults.count)")
