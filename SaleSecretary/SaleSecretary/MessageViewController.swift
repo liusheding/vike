@@ -19,7 +19,6 @@ class MessageViewController: UITableViewController {
         let msglist = msgdb.getMsgList()
         var msgdata = [MessageData]()
         for msg in msglist{
-            
             msgdata.append(MessageData(name:msg.msg_name!, phone:msg.msg_phone!,time:msg.msg_time! as Date,mtype:Int(msg.msg_type), message:[]))
         }
         
@@ -97,6 +96,9 @@ class MessageViewController: UITableViewController {
     }
     
     override func viewDidLoad() {
+        insertMsgList()
+        insertMsgItem()
+        
         initData()
         super.viewDidLoad()
         
@@ -106,7 +108,13 @@ class MessageViewController: UITableViewController {
         self.tableView.register(UINib(nibName: String(describing: MessageListCell.self), bundle: nil), forCellReuseIdentifier: cellId)
         self.itemDataSouce = [100,4,1,0]
         
-//        insertMsgItem()
+    }
+    
+    func delectMsgList(){
+        for data in self.DataSource{
+            let d = data as! MessageData
+            msgdb.deleteMsgList(msgdata: d)
+        }
     }
     
     func delectMsgItem(){
@@ -119,16 +127,39 @@ class MessageViewController: UITableViewController {
     }
     
     func insertMsgList(){
+        let msglist = msgdb.getMsgList()
+        if msglist != []{
+            return
+        }
+        
         msgdb.insertMsgList(msgdata: MessageData(name:"指尖刘总", phone:"12345678901",time:Date(timeIntervalSinceNow:-60*60*24*2),mtype:1, message: []))
         msgdb.insertMsgList(msgdata: MessageData(name:"指尖何总", phone:"12345678902",time:Date(timeIntervalSinceNow:-60*60*24),mtype:1, message: []))
-        msgdb.insertMsgList(msgdata: MessageData(name:"待执行计划", phone:"12345678903",time:Date(timeIntervalSinceNow:-60*60*24*4),mtype:1, message: []))
+        msgdb.insertMsgList(msgdata: MessageData(name:"待执行计划", phone:"您有3个待执行计划",time:Date(timeIntervalSinceNow:-60*60*24*4),mtype:2, message: []))
         msgdb.insertMsgList(msgdata: MessageData(name:"消息通知", phone:"您有1条消息通知",time:Date(timeIntervalSinceNow:-60*60*24*3),mtype:3, message: []))
     }
     
     func insertMsgItem(){
+        let msgitem = msgdb.getMsgItem(msgphone: "12345678901")
+        if msgitem != []{
+            return
+        }
+
         msgdb.insertMsgItem(msgdetail: MessageDetail(msgtime:Date(timeIntervalSinceNow:0),msgtype:2,msgcontent:"国防部声明指出，中印边境对峙事件发生以来，中国本着最大善意，努力通过外交渠道解决当前事态。中国军队从维护两国关系大局和地区和平稳定出发，始终保持高度克制。", msgphone: "12345678901"))
         
         msgdb.insertMsgItem(msgdetail: MessageDetail(msgtime:Date(timeIntervalSinceNow:-60*60*24),msgtype:1,msgcontent:"巴基斯坦《国际新闻》网站7日报道称，据可靠消息，中国政府就印军非法越界严正警告。", msgphone: "12345678901"))
+        
+        msgdb.insertMsgItem(msgdetail: MessageDetail(msgtime:Date(timeIntervalSinceNow:0),msgtype:1,msgcontent:"国防部声明指出，中印边境对峙事件发生以来，中国本着最大善意，努力通过外交渠道解决当前事态。中国军队从维护两国关系大局和地区和平稳定出发，始终保持高度克制。", msgphone: "12345678902"))
+        
+        msgdb.insertMsgItem(msgdetail: MessageDetail(msgtime:Date(timeIntervalSinceNow:-60*60*24),msgtype:2,msgcontent:"巴基斯坦《国际新闻》网站7日报道称，据可靠消息，中国政府就印军非法越界严正警告。", msgphone: "12345678902"))
+        
+        msgdb.insertMsgItem(msgdetail: MessageDetail(msgtime:Date(timeIntervalSinceNow:0),msgtype:3,msgcontent:"国防部声明指出，中印边境对峙事件发生以来，中国本着最大善意，努力通过外交渠道解决当前事态。中国军队从维护两国关系大局和地区和平稳定出发，始终保持高度克制。", msgphone: "您有1条消息通知"))
+        
+        msgdb.insertMsgItem(msgdetail: MessageDetail(msgtime:Date(timeIntervalSinceNow:-60*60*24),msgtype:3,msgcontent:"巴基斯坦《国际新闻》网站7日报道称，据可靠消息，中国政府就印军非法越界严正警告。中国军队从维护两国关系大局和地区和平稳定出发，始终保持高度克制。", msgphone: "您有3个待执行计划"))
+        
+        msgdb.insertMsgItem(msgdetail: MessageDetail(msgtime:Date(timeIntervalSinceNow:0),msgtype:3,msgcontent:"国防部声明指出，中印边境对峙事件发生以来，中国本着最大善意，努力通过外交渠道解决当前事态。中国军队从维护两国关系大局和地区和平稳定出发，始终保持高度克制。国防部声明指出，中印边境对峙事件发生以来，中国本着最大善意，努力通过外交渠道解决当前事态。中国军队从维护两国关系大局和地区和平稳定出发，始终保持高度克制。", msgphone: "您有3个待执行计划"))
+        
+        msgdb.insertMsgItem(msgdetail: MessageDetail(msgtime:Date(timeIntervalSinceNow:-60*60*24),msgtype:3,msgcontent:"巴基斯坦《国际新闻》网站7日报道称，据可靠消息，中国政府就印军非法越界严正警告。国防部声明指出，中印边境对峙事件发生以来，中国本着最大善意，努力通过外交渠道解决当前事态。", msgphone: "您有3个待执行计划"))
+        
     }
     
     override func didReceiveMemoryWarning() {

@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -29,7 +30,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GpR-Iu-a1N">
-                        <rect key="frame" x="17" y="49" width="306" height="117"/>
+                        <rect key="frame" x="17" y="59" width="306" height="106.5"/>
                         <constraints>
                             <constraint firstAttribute="width" priority="999" constant="306" id="MAF-Zu-COS"/>
                         </constraints>
@@ -37,15 +38,14 @@
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L6E-wO-Amy">
-                        <rect key="frame" x="120" y="29" width="100" height="21"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L6E-wO-Amy">
+                        <rect key="frame" x="136" y="33" width="68" height="20.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" white="0.1438259548611111" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" alpha="0.29999999999999999" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ZpF-Ff-Z1t">
-                        <rect key="frame" x="12" y="27" width="316" height="143.5"/>
+                        <rect key="frame" x="12" y="27" width="316" height="150.5"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                     </imageView>
                 </subviews>
@@ -53,14 +53,17 @@
                     <constraint firstItem="GpR-Iu-a1N" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="17" id="0U3-Qm-ATV"/>
                     <constraint firstItem="BYi-dV-Jzt" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="0tZ-Lg-xTs"/>
                     <constraint firstAttribute="trailing" secondItem="ZpF-Ff-Z1t" secondAttribute="trailing" constant="12" id="1UD-bX-TcS"/>
+                    <constraint firstItem="L6E-wO-Amy" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="128" id="5zv-Mm-lW1"/>
                     <constraint firstAttribute="trailing" secondItem="GpR-Iu-a1N" secondAttribute="trailing" constant="17" id="BBy-t7-lFv"/>
-                    <constraint firstAttribute="bottom" secondItem="ZpF-Ff-Z1t" secondAttribute="bottom" constant="15" id="DKu-ri-GLi"/>
+                    <constraint firstAttribute="bottom" secondItem="ZpF-Ff-Z1t" secondAttribute="bottom" constant="8" id="DKu-ri-GLi"/>
                     <constraint firstAttribute="bottom" secondItem="GpR-Iu-a1N" secondAttribute="bottom" constant="20" id="EFg-9W-UcP"/>
                     <constraint firstItem="ZpF-Ff-Z1t" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="12" id="HSL-tZ-mOC"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="L6E-wO-Amy" secondAttribute="trailing" constant="128" id="M8N-uK-f0W"/>
                     <constraint firstItem="BYi-dV-Jzt" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="12" id="SVh-eu-xXB"/>
                     <constraint firstItem="ZpF-Ff-Z1t" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="27" id="WvT-GR-S0s"/>
+                    <constraint firstItem="L6E-wO-Amy" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="25" id="fnj-xs-jT1"/>
                     <constraint firstAttribute="trailing" secondItem="BYi-dV-Jzt" secondAttribute="trailing" constant="216" id="mqu-eG-YXx"/>
-                    <constraint firstItem="GpR-Iu-a1N" firstAttribute="top" secondItem="BYi-dV-Jzt" secondAttribute="bottom" constant="30" id="yp9-qP-gUI"/>
+                    <constraint firstItem="GpR-Iu-a1N" firstAttribute="top" secondItem="BYi-dV-Jzt" secondAttribute="bottom" constant="40" id="yp9-qP-gUI"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
