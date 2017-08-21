@@ -34,7 +34,7 @@ class ChatViewCell:UITableViewCell {
         let width =  self.msgItem.view.frame.size.width
         let height =  self.msgItem.view.frame.size.height
         
-        var x =  (type == ChatType.someone) ? 0 : self.frame.size.width - width -
+        var x =  (type == OTHER_TYPE) ? 0 : self.frame.size.width - width -
             self.msgItem.insets.left - self.msgItem.insets.right
         
         var y:CGFloat =  0
@@ -55,7 +55,7 @@ class ChatViewCell:UITableViewCell {
             self.avatarImage.layer.borderWidth = 1.0
             
             //别人头像，在左边，我的头像在右边
-            let avatarX =  (type == ChatType.someone) ? 2 : self.frame.size.width - 52
+            let avatarX =  (type == OTHER_TYPE) ? 2 : self.frame.size.width - 52
             
             //头像居于消息顶部
             let avatarY:CGFloat =  0
@@ -69,10 +69,10 @@ class ChatViewCell:UITableViewCell {
             if (delta > 0) {
                 y = delta
             }
-            if (type == ChatType.someone) {
+            if (type == OTHER_TYPE) {
                 x += 54
             }
-            if (type == ChatType.mine) {
+            if (type == MINE_TYPE) {
                 x -= 54
             }
         }
@@ -84,7 +84,7 @@ class ChatViewCell:UITableViewCell {
         self.addSubview(self.customView)
         
         //如果是别人的消息，在左边，如果是我输入的消息，在右边
-        if (type == ChatType.someone)
+        if (type == OTHER_TYPE)
         {
             self.bubbleImage.image = UIImage(named:("yoububble.png"))!
                 .stretchableImage(withLeftCapWidth: 21,topCapHeight:25)

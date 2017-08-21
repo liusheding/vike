@@ -58,21 +58,26 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             let proposeLength = (textField.text?.lengthOfBytes(using: String.Encoding.utf8))! - range.length + string.lengthOfBytes(using: String.Encoding.utf8)
             if proposeLength > 11 { return false }
             return true
-//        }else if password == textField{
-//            for loopIndex in 0..<length {
-//                let char = (string as NSString).character(at: loopIndex)
-//                //只能输入数字
-//                if char < 48 { return false }
-//                if char > 57 { return false }
-//                
-//                //只能输入 a~z A~Z
-//                if char < 65 {return false }
-//                if char >= 91 && char <= 112 {return false }
-//                if char >= 123 {return false }
-//            }
-//            return true
+        }else if password == textField{
+            //限制只能输入数字或字母，不能输入特殊字符
+            for loopIndex in 0..<length {
+                let char = (string as NSString).character(at: loopIndex)
+                if char < 48 { return false }
+                if char > 57 && char < 65 { return false }
+                if char >= 91 && char <= 112 {return false }
+                if char >= 123 {return false }
+            }
+            return true
         
         }else if checknum == textField{
+            //限制只能输入数字或字母，不能输入特殊字符
+            for loopIndex in 0..<length {
+                let char = (string as NSString).character(at: loopIndex)
+                if char < 48 { return false }
+                if char > 57 && char < 65 { return false }
+                if char >= 91 && char <= 112 {return false }
+                if char >= 123 {return false }
+            }
             //限制长度4
             let proposeLength = (textField.text?.lengthOfBytes(using: String.Encoding.utf8))! - range.length + string.lengthOfBytes(using: String.Encoding.utf8)
             if proposeLength > 4 { return false }

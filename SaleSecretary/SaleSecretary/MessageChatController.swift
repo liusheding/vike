@@ -23,7 +23,7 @@ class MessageChatController: UIViewController,ChatDataSource,UITextFieldDelegate
     var KeyBoardHeight:CGFloat!
     var DataSource:MessageData!
     var chattitle: String!
-    var isShowBoard:Bool!
+    var isShowBoard:Bool = false
     var keyBoardRect:CGRect!
     var sendBtn:UIButton!
     
@@ -104,6 +104,14 @@ class MessageChatController: UIViewController,ChatDataSource,UITextFieldDelegate
         
         sendBtn = sendButton
         keyBaordView = sendView
+        
+        if self.tableView.frame.height < self.tableView.viewHeight && self.Chats.count > 0{
+            let offset = CGPoint(x:0, y:self.tableView!.contentSize.height
+                - self.tableView!.bounds.size.height + 76)
+            self.tableView!.setContentOffset(offset, animated: true)
+            
+        }
+        
     }
     
     //移除监听
@@ -168,10 +176,9 @@ class MessageChatController: UIViewController,ChatDataSource,UITextFieldDelegate
     
     func sendMessage()
     {
-        //composing=false
         let sender = txtMsg
-        let thisChat =  MessageItem(body:sender!.text! as NSString, user:me, date:Date(), mtype:ChatType.mine)
-        let thatChat =  MessageItem(body:"你说的是：\(sender!.text!)" as NSString, user:you, date:Date(), mtype:ChatType.someone)
+        let thisChat =  MessageItem(body:sender!.text! as NSString, user:me, date:Date(), mtype:MINE_TYPE)
+        let thatChat =  MessageItem(body:"你说的是：\(sender!.text!)" as NSString, user:you, date:Date(), mtype:OTHER_TYPE)
         
         Chats.add(thisChat)
         Chats.add(thatChat)
@@ -183,8 +190,10 @@ class MessageChatController: UIViewController,ChatDataSource,UITextFieldDelegate
         else{
             self.tableView.frame = CGRect(x:0 , y:20 , width:SCREEN_WIDTH, height:SCREEN_HEIGHT - 76)
             }
+        if self.keyBaordView != nil && keyBoardRect != nil{
+            self.keyBaordView.frame = CGRect(x:0, y:keyBoardRect.origin.y - 56, width:SCREEN_WIDTH,  height:56)
+        }
         self.sendBtn.frame = CGRect(x: SCREEN_WIDTH - 80,y: 10,width: 72,height: 36)
-        self.keyBaordView.frame = CGRect(x:0, y:keyBoardRect.origin.y - 56, width:SCREEN_WIDTH,  height:56)
         self.txtMsg.frame = CGRect(x: 7,y: 10,width: SCREEN_WIDTH - 95,height: 36)
         scrollToRow()
         sender?.text = ""
@@ -199,16 +208,7 @@ class MessageChatController: UIViewController,ChatDataSource,UITextFieldDelegate
         }
         
         let vHeight = self.tableView.frame.height
-        
-        var num = self.Chats.count
-        var chatHeight:CGFloat = 0
-        while (num > 0) {
-            let item = self.Chats[num - 1] as! MessageItem
-            chatHeight += item.view.frame.height
-            num -= 1
-        }
-        
-        if vHeight == SCREEN_HEIGHT - 76 || vHeight > chatHeight{
+        if vHeight == SCREEN_HEIGHT - 76 || vHeight > self.tableView.viewHeight{
             return
         }
         
@@ -231,21 +231,17 @@ class MessageChatController: UIViewController,ChatDataSource,UITextFieldDelegate
         Chats = NSMutableArray()
         let message = self.DataSource.message
         var array: [MessageItem] = []
-        for msgdetail in message! as NSMutableArray {
+        for msgdetail in message as! NSMutableArray {
             let msg = msgdetail as! MessageDetail
             array.append(MessageItem(body:msg.msgcontent as NSString, user:me,  date:msg.msgdate, mtype:msg.msgtype))
         }
         Chats.addObjects(from: array)
-        
-        //set the chatDataSource
         self.tableView.chatDataSource = self
-        
-        //call the reloadData, this is actually calling your override method
         self.tableView.reloadData()
-        
         self.view.addSubview(self.tableView)
+
     }
-    
+
     func rowsForChatTable(_ tableView:TableView) -> Int
     {
         if self.Chats != nil{

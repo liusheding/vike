@@ -1,11 +1,9 @@
 import UIKit
 
 //消息类型，我的还是别人的
-enum ChatType {
-    case mine
-    case someone
-    case system
-}
+let MINE_TYPE = 1
+let OTHER_TYPE = 2
+let SYSTEM = 0
 
 class MessageItem {
     //用户信息
@@ -13,7 +11,7 @@ class MessageItem {
     //消息时间
     var date:Date
     //消息类型
-    var mtype:ChatType
+    var mtype:Int
     //内容视图，标签或者图片
     var view:UIView
     //边距
@@ -40,7 +38,7 @@ class MessageItem {
     }
     
     //构造文本消息体
-    convenience init(body:NSString, user:UserInfo, date:Date, mtype:ChatType) {
+    convenience init(body:NSString, user:UserInfo, date:Date, mtype:Int) {
         let font =  UIFont.boldSystemFont(ofSize: 15)
         
         let width =  225, height = 10000.0
@@ -60,14 +58,14 @@ class MessageItem {
         label.font = font
         label.backgroundColor = UIColor.clear
         
-        let insets:UIEdgeInsets =  (mtype == ChatType.mine ?
+        let insets:UIEdgeInsets =  (mtype == MINE_TYPE ?
             MessageItem.getTextInsetsMine() : MessageItem.getTextInsetsSomeone())
         
         self.init(user:user, date:date, mtype:mtype, view:label, insets:insets)
     }
     
     //可以传入更多的自定义视图
-    init(user:UserInfo, date:Date, mtype:ChatType, view:UIView, insets:UIEdgeInsets) {
+    init(user:UserInfo, date:Date, mtype:Int, view:UIView, insets:UIEdgeInsets) {
         self.view = view
         self.user = user
         self.date = date
@@ -76,7 +74,7 @@ class MessageItem {
     }
     
     //构造图片消息体
-    convenience init(image:UIImage, user:UserInfo,  date:Date, mtype:ChatType) {
+    convenience init(image:UIImage, user:UserInfo,  date:Date, mtype:Int) {
         var size = image.size
         //等比缩放
         if (size.width > 220) {
@@ -89,7 +87,7 @@ class MessageItem {
         imageView.layer.cornerRadius = 5.0
         imageView.layer.masksToBounds = true
         
-        let insets:UIEdgeInsets =  (mtype == ChatType.mine ?
+        let insets:UIEdgeInsets =  (mtype == MINE_TYPE ?
             MessageItem.getImageInsetsMine() : MessageItem.getImageInsetsSomeone())
         
         self.init(user:user,  date:date, mtype:mtype, view:imageView, insets:insets)

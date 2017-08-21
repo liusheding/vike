@@ -19,14 +19,15 @@ class MessageData {
     //消息类型 1-对话 2-待执行 3-通知
     var mtype:Int
     //消息内容
-    var message:NSMutableArray!
+    var message = [MessageDetail]()
     
-    init(name:String, phone:String, time:Date, mtype:Int, message:NSMutableArray) {
+    init(name:String, phone:String, time:Date, mtype:Int, message:[MessageDetail]) {
         self.name = name
         self.phone = phone
         self.mtype = mtype
         self.date = time
         self.message = message
+        
         
         let dateFormatter =  DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd hh:mm"
@@ -39,14 +40,18 @@ class MessageDetail {
     var msgdate:Date
     var msgtime:String
     //消息类型 1-自己 2-对方
-    var msgtype:ChatType
+    var msgtype:Int
     //消息内容
     var msgcontent:String
     
-    init(msgtime:Date, msgtype:ChatType, msgcontent:String) {
+    //用户电话/提示内容
+    var msgphone:String
+    
+    init(msgtime:Date, msgtype:Int, msgcontent:String, msgphone:String) {
         self.msgtype = msgtype
         self.msgdate = msgtime
         self.msgcontent = msgcontent
+        self.msgphone = msgphone
         
         let dateFormatter =  DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd hh:mm"

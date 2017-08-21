@@ -90,12 +90,26 @@ class RegisterViewController: UIViewController,UITextFieldDelegate {
             return true
         }
         else if smsCheck == textField{
+            //限制只能输入数字，不能输入特殊字符
+            for loopIndex in 0..<length {
+                let char = (string as NSString).character(at: loopIndex)
+                if char < 48 { return false }
+                if char > 57 { return false }
+            }
             //限制长度6
             let proposeLength = (textField.text?.lengthOfBytes(using: String.Encoding.utf8))! - range.length + string.lengthOfBytes(using: String.Encoding.utf8)
             if proposeLength > 6 { return false }
             return true
         }
         else if imageCheck == textField{
+            //限制只能输入数字或字母，不能输入特殊字符
+            for loopIndex in 0..<length {
+                let char = (string as NSString).character(at: loopIndex)
+                if char < 48 { return false }
+                if char > 57 && char < 65 { return false }
+                if char >= 91 && char <= 112 {return false }
+                if char >= 123 {return false }
+            }
             //限制长度4
             let proposeLength = (textField.text?.lengthOfBytes(using: String.Encoding.utf8))! - range.length + string.lengthOfBytes(using: String.Encoding.utf8)
             if proposeLength > 4 { return false }
