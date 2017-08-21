@@ -18,6 +18,8 @@ class AddCustomerViewController: UIViewController {
     
     var defaultButtonHeight : CGFloat = 0
     var currentSel : Int = -1
+    var tableViewSel : Int = -1
+    
     let contextDb = CustomerDBOp.defaultInstance()
     
     let sectionInsets = UIEdgeInsets(top: -5.0, left: 5.0, bottom: 0.0, right: 5.0)
@@ -43,8 +45,13 @@ class AddCustomerViewController: UIViewController {
     
     
     @IBAction func chooseGroupAction(_ sender: Any) {
-    
+        let g = self.groupArr[self.currentSel]
         
+        let view = self.parent as! CTChooseNewerController
+        let c = view.newCustomer[view.tableViewSel]
+        c.group_id = g.group_name!
+        self.contextDb.insertCustomer(ctms: c)
+        view.pressCancel()
     }
     
     override func viewDidLoad() {

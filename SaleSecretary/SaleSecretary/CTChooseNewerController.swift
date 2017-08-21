@@ -15,6 +15,7 @@ import Contacts
 class CTChooseNewerController: UIViewController {
     
     let store = CNContactStore()
+    var tableViewSel : Int = -1
     var contactDt : [Customer] = [] // phone contacts data
     var localDbContact : [Customers] = []
     var groupsInDb : [Group] = []
@@ -72,6 +73,7 @@ class CTChooseNewerController: UIViewController {
     }
     
     func chooseGroupView(_ sender: UIButton!) {
+        self.tableViewSel = sender.tag
         self.chooseAlertView.isHidden = false
         self.chooseAlertView.isUserInteractionEnabled = true
 //        self.chooseAlertView.backgroundColor = UIColor.white
