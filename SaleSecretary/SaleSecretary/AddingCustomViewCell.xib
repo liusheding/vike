@@ -26,6 +26,11 @@
                 </subviews>
             </view>
             <size key="customSize" width="76" height="50"/>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                    <integer key="value" value="2"/>
+                </userDefinedRuntimeAttribute>
+            </userDefinedRuntimeAttributes>
             <connections>
                 <outlet property="addingButton" destination="ivN-Dn-DXF" id="8ME-b4-sQ4"/>
             </connections>

@@ -93,11 +93,11 @@ class ContactTableViewController: UIViewController {
     
     // default read data from db , but  first time get from  phone's contacts
     func generateData() ->  [CustomerGroup] {
-        self.groupsInDb = self.contextDb.getGroup()
+        self.groupsInDb = self.contextDb.getGroupInDb()
         if self.groupsInDb.count == 0 { // first time ,  init create default group
             self.contextDb.storeGroup(id: 0, group_name: "默认")
         }
-        self.customer = self.contextDb.getCustomers()
+        self.customer = self.contextDb.getCustomerInDb()
         var result : [CustomerGroup] = []
         
         if self.contactDt.count == 0 {
@@ -109,7 +109,7 @@ class ContactTableViewController: UIViewController {
             for cd in self.contactDt {
                 self.contextDb.insertCustomer(ctms: cd)
             }
-            self.customer = self.contextDb.getCustomers()
+            self.customer = self.contextDb.getCustomerInDb()
         }else {
             
         }
@@ -263,7 +263,7 @@ extension ContactTableViewController : UITableViewDataSource, UITableViewDelegat
             case .synContacts: // read contact from iphon contacts , and add newers to default group
                 NSLog("press syn contact")
                 if self.customer.count == 0 {
-                    self.customer = self.contextDb.getCustomers()
+                    self.customer = self.contextDb.getCustomerInDb()
                 }
                 var newCustomer : [Customer] = []
                 for ct in self.contactDt {
@@ -287,12 +287,12 @@ extension ContactTableViewController : UITableViewDataSource, UITableViewDelegat
                 break
             case .managerGroup:
                 let cg = self.contextDb.getContacts2Group()
-                NSLog("0000000+++\(cg.count)")
+                NSLog("0000000+++\(cg.count) ++++++++\(self.contextDb.getGroupInDb().count)")
                 break
             case .batchOperate :
-                let g = self.contextDb.getGroup()
+                let g = self.contextDb.getGroupInDb()
                 for i in g {
-                    print("dt : \(String(describing: i.group_name))")
+                    print("dt : \(String(describing: i.group_name))---\(self.contextDb.getGroupInDb().count )")
                 }
                 break
         }

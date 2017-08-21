@@ -36,8 +36,8 @@ class CustomerDBOp : NSObject {
     
     func getContacts2Group() -> [CustomerGroup] {
         if self.contacts2Group.count == 0 {
-            for gp in self.getGroup() {
-                self.contacts2Group.append( CustomerGroup.init(customer: self.dbContact , group: gp ))
+            for gp in self.getGroupInDb() {
+                self.contacts2Group.append( CustomerGroup.init(customer: self.getCustomerInDb() , group: gp ))
             }
         }
         return self.contacts2Group
@@ -45,14 +45,14 @@ class CustomerDBOp : NSObject {
     
     func getCustomerInDb() -> [Customers] {
         if self.dbContact.count == 0 {
-            return self.getCustomers()
+            self.dbContact = self.getCustomers()
         }
         return self.dbContact
     }
     
     func getGroupInDb() -> [Group] {
         if self.dbGroup.count == 0 {
-            return self.getGroup()
+            self.dbGroup = self.getGroup()
         }
         return self.dbGroup
     }
@@ -135,19 +135,19 @@ class CustomerDBOp : NSObject {
     }
     
     func getCustomers() -> [Customers]{
-        
+        var result : [Customers] = []
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Customers")
         do {
             let searchResults = try getContext().fetch(fetchRequest)
             NSLog("numbers of \(searchResults.count)")
             
             for p in (searchResults as! [NSManagedObject]){
-                self.dbContact.append(p as! Customers)
+                result.append(p as! Customers)
             }
         } catch  {
             NSLog(error as! String)
         }
-        return self.dbContact
+        return result
     }
     
     func storeGroup( id : Int , group_name : String ){
@@ -171,18 +171,17 @@ class CustomerDBOp : NSObject {
     
     func  getGroup() -> [Group]{
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Group")
+        var result : [Group] = []
         do {
             let searchResults = try getContext().fetch(fetchRequest)
-//            NSLog("numbers of \(searchResults.count)")
             
             for p in (searchResults as! [NSManagedObject]){
-                self.dbGroup.append(p as! Group)
-//                NSLog("Group contents : \(c.objectID) [\(c.id) : \(String(describing: c.group_name))]")
+                result.append(p as! Group)
             }
         } catch  {
             NSLog(error as! String)
         }
-        return self.dbGroup
+        return result
     }
 
     
