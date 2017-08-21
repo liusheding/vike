@@ -20,6 +20,8 @@ class AddCustomerViewController: UIViewController {
     var currentSel : Int = -1
     let contextDb = CustomerDBOp.defaultInstance()
     
+    let sectionInsets = UIEdgeInsets(top: -5.0, left: 5.0, bottom: 0.0, right: 5.0)
+    
     @IBOutlet weak var collectionView: UICollectionView!
     
     @IBOutlet weak var cancelButton: UIButton!
@@ -30,11 +32,19 @@ class AddCustomerViewController: UIViewController {
         
         // init data 
         self.groupArr = self.contextDb.getGroupInDb()
+        let ad = self.groupArr[0]
+        self.groupArr.append( ad ) // the last for "Add button"
     }
     
     @IBAction func cancelAction(_ sender: Any) {
         let viewParent = self.parent as! CTChooseNewerController
         viewParent.pressCancel()
+    }
+    
+    
+    @IBAction func chooseGroupAction(_ sender: Any) {
+    
+        
     }
     
     override func viewDidLoad() {
@@ -48,6 +58,8 @@ class AddCustomerViewController: UIViewController {
         self.initSetting()
         self.collectionView?.delegate = self
         self.collectionView?.dataSource = self
+        self.collectionView.backgroundColor = UIColor.clear
+        self.view.backgroundColor = UIColor.white
         // Register cell classes
         self.collectionView.register( UINib.init(nibName: String.init(describing: AddingCustomViewCell.self ) , bundle: nil) , forCellWithReuseIdentifier: reuseIdentifier)
 
@@ -72,41 +84,51 @@ extension AddCustomerViewController  : UICollectionViewDelegate, UICollectionVie
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
         
-        return self.groupArr.count + 1  // adding button
+        return self.groupArr.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! AddingCustomViewCell
-        if indexPath.row == self.groupArr.count {
+        if indexPath.row == (self.groupArr.count-1) {
+            cell.addingButton.setTitle("", for: .normal)
             cell.addingButton.setImage(UIImage(named: "icon_tj") , for: .normal )
-//            cell.addingButton.addTarget(self , action: , for:  )
+            cell.addingButton.addTarget(self , action: #selector(self.addNewGroup) , for: .touchDown  )
         }else {
             cell.addingButton.layer.borderWidth = 1
             cell.addingButton.layer.borderColor = ContactCommon.THEME_COLOR.cgColor
             cell.addingButton.layer.cornerRadius = 3.0
+            
             cell.addingButton.setTitle( self.groupArr[indexPath.row].group_name , for: .normal)
             cell.addingButton.setTitleColor( ContactCommon.THEME_COLOR , for: .normal)
             cell.addingButton.setTitleColor( UIColor.white , for: .selected )
             cell.addingButton.setImage( UIImage(named: "") , for: .selected )
             cell.addingButton.addTarget(self , action: #selector(self.choosedButton(_:)), for: .touchDown )
+            
+            cell.addingButton.tag = indexPath.row
         }
         
         return cell
     }
     
     func choosedButton(_ sender: UIButton!) {
+        
         self.currentSel = sender.tag
         let cell = self.collectionView.cellForItem(at: [0, self.currentSel ]) as! AddingCustomViewCell
         cell.addingButton.isSelected = true
         cell.addingButton.tintColor = ContactCommon.THEME_COLOR
         cell.addingButton.backgroundColor = ContactCommon.THEME_COLOR
+        changeButtonBackGroudColor(self.currentSel)
     }
     
-    func changeButtonBackGroudColor(_ index:Int){
-        self.currentSel = index
-        let cell = self.collectionView.cellForItem(at: [0,0]) as! AddingCustomViewCell
-        
-        cell.addingButton.backgroundColor = ContactCommon.THEME_COLOR
+    func changeButtonBackGroudColor(_ indexTag:Int){
+        for i in 0  ..< self.groupArr.count - 1     {
+            if i != indexTag {
+                let cell = self.collectionView.cellForItem(at: [0, i ]) as! AddingCustomViewCell
+                cell.addingButton.isSelected = false
+                cell.addingButton.tintColor = UIColor.clear
+                cell.addingButton.backgroundColor = UIColor.clear
+            }
+        }
     }
     
     func clickConfirmButton(_ sender: UIButton!)  {
@@ -115,6 +137,7 @@ extension AddCustomerViewController  : UICollectionViewDelegate, UICollectionVie
     
     func addNewGroup() {
         let alertController = UIAlertController(title: "添加分组", message: "请输入分组名（长度限制10个字）！",preferredStyle: .alert)
+        
         
         alertController.addTextField {
             (textField: UITextField!) -> Void in
@@ -127,7 +150,15 @@ extension AddCustomerViewController  : UICollectionViewDelegate, UICollectionVie
             action in
             //也可以用下标的形式获取textField let login = alertController.textFields![0]
             let groupName = alertController.textFields!.first!
-            
+            var maxId = 0
+            for ga in self.groupArr {
+                if Int(ga.id) > maxId {
+                    maxId = Int(ga.id)
+                }
+            }
+            self.contextDb.storeGroup(id: maxId + 1, group_name: groupName.text!)
+            self.groupArr = self.contextDb.groupContentUpdate()
+            self.collectionView.reloadData()
         })
         alertController.addAction(cancelAction)
         alertController.addAction(okAction)
@@ -141,7 +172,11 @@ extension AddCustomerViewController  : UICollectionViewDelegate, UICollectionVie
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat{
-        return 5
+        return 10
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return self.sectionInsets
     }
     
     // MARK: UICollectionViewDelegate

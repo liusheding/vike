@@ -168,6 +168,12 @@ class CustomerDBOp : NSObject {
         }
     }
     
+    func groupContentUpdate() -> [Group] {
+        self.dbGroup = []
+        self.dbGroup = self.getGroup()
+        return self.dbGroup
+    }
+    
     
     func  getGroup() -> [Group]{
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Group")

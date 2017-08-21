@@ -74,16 +74,16 @@ class CTChooseNewerController: UIViewController {
     func chooseGroupView(_ sender: UIButton!) {
         self.chooseAlertView.isHidden = false
         self.chooseAlertView.isUserInteractionEnabled = true
-//        self.chooseAlertView.backgroundColor = UIColor.gray
-        
-        self.tableView.alpha = 0.5
+//        self.chooseAlertView.backgroundColor = UIColor.white
+        self.view.backgroundColor = UIColor.lightGray
+        self.tableView.alpha = 0.6
         self.tableView.isUserInteractionEnabled = false
     }
     
     func pressCancel() {
         self.chooseAlertView.isHidden = true
         self.chooseAlertView.isUserInteractionEnabled = false
-        
+        self.view.backgroundColor = UIColor.clear
         self.tableView.alpha = 1.0
         self.tableView.isUserInteractionEnabled = true
     }

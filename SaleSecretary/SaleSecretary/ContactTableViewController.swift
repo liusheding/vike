@@ -287,7 +287,9 @@ extension ContactTableViewController : UITableViewDataSource, UITableViewDelegat
                 break
             case .managerGroup:
                 let cg = self.contextDb.getContacts2Group()
-                NSLog("0000000+++\(cg.count) ++++++++\(self.contextDb.getGroupInDb().count)")
+                for c in cg {
+                    NSLog("0000000+++\(String(describing:  c.name )) ++++++++\(String(describing: c.friends?.count))")
+                }
                 break
             case .batchOperate :
                 let g = self.contextDb.getGroupInDb()
