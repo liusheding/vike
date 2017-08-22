@@ -147,7 +147,7 @@ struct ContactCommon {
     
     static let count = sampleColor.count
     
-    // confirm ctm in target or not  : name and phoneNumber
+    // confirm ctm is in target or not  : name and phoneNumber
     static func isContain(ctm : Customer , target : [Customers]) -> Bool {
         var result  = false
         if (findIndexInArray(ctm: ctm , target: target) > -1) {

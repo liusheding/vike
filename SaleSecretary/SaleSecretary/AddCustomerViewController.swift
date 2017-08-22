@@ -52,6 +52,7 @@ class AddCustomerViewController: UIViewController {
         c.group_id = g.group_name!
         self.contextDb.insertCustomer(ctms: c)
         view.pressCancel()
+        view.changeButtonStatus()
     }
     
     override func viewDidLoad() {

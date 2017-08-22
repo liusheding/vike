@@ -20,6 +20,7 @@ class CTChooseNewerController: UIViewController {
     var localDbContact : [Customers] = []
     var groupsInDb : [Group] = []
     var newCustomer : [Customer ] = []
+    var alreadyAdded : [Customer] = []
     
 //    lazy var contactDt : [Customer] =  { [unowned self] in
 //        print("loading contact")
@@ -62,6 +63,8 @@ class CTChooseNewerController: UIViewController {
         for cd in self.contactDt {
             if !ContactCommon.isContain(ctm: cd , target: self.localDbContact ){
                self.newCustomer.append(cd)
+            }else{
+                self.alreadyAdded.append(cd)
             }
         }
         NSLog("new customer's page , find \(self.newCustomer.count) new person")
@@ -90,23 +93,6 @@ class CTChooseNewerController: UIViewController {
         self.tableView.isUserInteractionEnabled = true
     }
 
-    // for user add new customer to app db , and choose the group
-    func chooseGroup(_ sender: UIButton!) {
-        let alertController = UIAlertController(title: "选择分组", message: "为新朋友选择分组！", preferredStyle: .alert)
-        let localViewController = AddCustomerViewController()
-        localViewController.groupArr = self.groupsInDb
-        alertController.addChildViewController(localViewController)
-        
-        let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
-        let okAction = UIAlertAction(title: "好的", style: .default, handler: {
-            action in
-            
-        })
-        alertController.addAction(cancelAction)
-        alertController.addAction(okAction)
-        self.present(alertController, animated: true, completion: nil)
-    }
-    
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -162,6 +148,7 @@ extension CTChooseNewerController : UITableViewDelegate , UITableViewDataSource 
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
+        NSLog(" log \(self.contactDt.count)")
         return contactDt.count
     }
     
@@ -170,22 +157,26 @@ extension CTChooseNewerController : UITableViewDelegate , UITableViewDataSource 
         var tmpCustomer : Customer
         var flag = false
         if indexPath.row >= self.newCustomer.count {
-            tmpCustomer = self.contactDt[indexPath.row - newCustomer.count]
+            tmpCustomer = self.alreadyAdded[indexPath.row - newCustomer.count]
         }else {
             tmpCustomer = self.newCustomer[indexPath.row]
             flag = true
         }
-        
         let userName = tmpCustomer.name
-        let index = userName?.index( (userName?.startIndex)! , offsetBy:1)
-        let cString = userName?.substring(to: index! )
+        var cString : String = ""
+        if !(userName?.isEmpty)! {
+            let index = userName?.index( (userName?.startIndex)! , offsetBy: 1)
+            cString = (userName?.substring(to: index! ))!
+        }
         
         cell.picName.setTitle( cString , for: .normal )
         cell.picName.backgroundColor = ContactCommon.sampleColor[ indexPath.row % ContactCommon.count ]
         cell.name.text = userName
         if flag {
             cell.acception.setTitle( "添加" , for: .normal )
+            cell.acception.setTitle("已添加", for: .disabled)
             cell.acception.setTitleColor(UIColor.white , for: .normal )
+            cell.acception.setTitleColor(UIColor.white , for: .disabled )
             cell.acception.addTarget( self , action: #selector(self.chooseGroupView(_:)) , for: UIControlEvents.touchDown)
         }else {
             cell.acception.setTitle( "已添加" , for: .normal )
@@ -199,5 +190,11 @@ extension CTChooseNewerController : UITableViewDelegate , UITableViewDataSource 
         }
         
         return cell
+    }
+    
+    func  changeButtonStatus() {
+        let cell = self.tableView.cellForRow(at: [0,self.tableViewSel]) as! PersonContactCell
+        cell.acception.isEnabled = false
+        
     }
 }

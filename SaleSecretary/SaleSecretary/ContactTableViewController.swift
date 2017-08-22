@@ -198,9 +198,12 @@ extension ContactTableViewController : UITableViewDataSource, UITableViewDelegat
             let group = self.contactsCells[ secNum ]
             let customer = group.friends?[ rowNo ]
             let userName = customer?.name
-            let index = userName?.index( (userName?.startIndex)! , offsetBy:1)
-            let cString = userName?.substring(to: index! )
-            
+            var cString : String = ""
+            if !(userName?.isEmpty)! {
+                let index = userName?.index( (userName?.startIndex)! , offsetBy: 1)
+                cString = (userName?.substring(to: index! ))!
+            }
+
             cell.name?.text = userName
             cell.phoneNumber?.text = customer?.phone_number?[0] // mutil
             cell.picName.backgroundColor = ContactCommon.sampleColor[ indexPath.row % ContactCommon.count ]
