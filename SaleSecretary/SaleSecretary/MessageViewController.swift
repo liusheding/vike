@@ -147,6 +147,26 @@ class MessageViewController: UITableViewController {
         let msglist = msgdb.getMsgList(msgphone: msgdetail.msgphone)
         let value = msglist[0].msg_unread
         msgdb.updateMsgList(msgphone: msgdetail.msgphone, key: "msg_unread", value: value + 1)
+        
+        if self.DataSource == nil{
+            return
+        }
+        //旧列表中删除
+        for data in self.DataSource as NSMutableArray{
+            let msg = data as! MessageData
+            if msg.phone == msgdetail.msgphone{
+                self.DataSource.remove(msg)
+                break
+            }
+        }
+        
+        //得到新的MessageData
+        let msgdata = msgdb.getMsgList(msgphone: msgdetail.msgphone)
+        
+        //将新data插到第一行
+        self.DataSource.insert(msgdata[0], at: 0)
+        self.tableView.reloadData()
+            
     }
     
     func insertMsgItem(){
