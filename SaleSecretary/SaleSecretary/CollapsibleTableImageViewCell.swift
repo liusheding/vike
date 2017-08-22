@@ -1,37 +1,16 @@
 //
-//  CollapsibleTableViewCell.swift
-//  ios-swift-collapsible-table-section
+//  CollapsibleTableImageViewCell.swift
+//  SaleSecretary
 //
-//  Created by Yong Su on 7/17/17.
-//  Copyright © 2017 Yong Su. All rights reserved.
+//  Created by liusheding on 2017/8/21.
+//  Copyright © 2017年 zjjy. All rights reserved.
 //
 
+import Foundation
 import UIKit
 
-public struct CollapsibleItem {
-    var name: String
-    var detail: String
-    
-    public init(name: String, detail: String) {
-        self.name = name
-        self.detail = detail
-    }
-}
 
-public struct CollapsibleSection {
-    var name: String
-    var items: [CollapsibleItem]
-    var collapsed: Bool
-    
-    public init(name: String, items: [CollapsibleItem], collapsed: Bool = true) {
-        self.name = name
-        self.items = items
-        self.collapsed = collapsed
-    }
-}
-
-
-class CollapsibleTableViewCell: UITableViewCell {
+class CollapsibleTableImageViewCell: UITableViewCell {
     
     let nameLabel = UILabel()
     let detailLabel = UILabel()
@@ -42,13 +21,24 @@ class CollapsibleTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         let marginGuide = contentView.layoutMarginsGuide
+        
+        // configure nameLabel
+        contentView.addSubview(nameLabel)
+        nameLabel.translatesAutoresizingMaskIntoConstraints = false
+        nameLabel.leadingAnchor.constraint(equalTo: marginGuide.leadingAnchor).isActive = true
+        nameLabel.topAnchor.constraint(equalTo: marginGuide.topAnchor).isActive = true
+        nameLabel.trailingAnchor.constraint(equalTo: marginGuide.trailingAnchor).isActive = true
+        nameLabel.numberOfLines = 0
+        nameLabel.font = UIFont.systemFont(ofSize: 16)
+        
+        // configure detailLabel
         contentView.addSubview(detailLabel)
         detailLabel.lineBreakMode = .byWordWrapping
         detailLabel.translatesAutoresizingMaskIntoConstraints = false
         detailLabel.leadingAnchor.constraint(equalTo: marginGuide.leadingAnchor).isActive = true
         detailLabel.bottomAnchor.constraint(equalTo: marginGuide.bottomAnchor).isActive = true
         detailLabel.trailingAnchor.constraint(equalTo: marginGuide.trailingAnchor).isActive = true
-        detailLabel.topAnchor.constraint(equalTo: marginGuide.topAnchor).isActive = true
+        detailLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 5).isActive = true
         detailLabel.numberOfLines = 0
         detailLabel.font = UIFont.systemFont(ofSize: 12)
         detailLabel.textColor = UIColor.lightGray
@@ -59,6 +49,3 @@ class CollapsibleTableViewCell: UITableViewCell {
     }
     
 }
-
-
-

@@ -29,6 +29,7 @@ class SMSAddViewController : UIViewController {
 
     @IBOutlet weak var phoneView: UIView!
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         segmentedViews = [templeteView, customerView, phoneView]
@@ -76,6 +77,8 @@ class SMSTemplateViewController : UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     @IBOutlet weak var previewBtn: UIButton!
+    
+    fileprivate var customers: [Customer]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -240,13 +243,13 @@ extension SMSTemplateViewController : UITableViewDataSource, UITableViewDelegate
     
     
     
-    func selectedRecipients(rec: [Recipient]) {
+    func selectedRecipients(rec: [Customer]) {
         // let idx = self.tableView.indexPathForSelectedRow
+        self.customers = rec
         let cell = self.tableView.cellForRow(at: [0, 0])
         let names = rec.flatMap({$0.name}).joined(separator: "、")
         cell?.textLabel?.textColor = UIColor.darkText
         cell?.textLabel?.text = names
-    
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

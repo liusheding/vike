@@ -264,6 +264,7 @@ class TamplateTableViewDelegator: NSObject ,UITableViewDataSource, UITableViewDe
     }
     
     func toggleSection(_ header: CollapsibleTableViewHeader, section: Int) {
+        
         let collapsed = !sections[section].collapsed
         
         // Toggle collapse
