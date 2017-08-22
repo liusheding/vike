@@ -21,12 +21,16 @@ class MessageData {
     //消息内容
     var message = [MessageDetail]()
     
-    init(name:String, phone:String, time:Date, mtype:Int, message:[MessageDetail]) {
+    //未读消息数量
+    var unread:Int
+    
+    init(name:String, phone:String, time:Date, mtype:Int, message:[MessageDetail], unread:Int) {
         self.name = name
         self.phone = phone
         self.mtype = mtype
         self.date = time
         self.message = message
+        self.unread = unread
         
         
         let dateFormatter =  DateFormatter()

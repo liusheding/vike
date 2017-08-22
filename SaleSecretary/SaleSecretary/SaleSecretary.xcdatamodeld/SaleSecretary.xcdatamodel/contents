@@ -26,11 +26,12 @@
         <attribute name="msg_phone" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="msg_time" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="msg_type" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="msg_unread" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
     </entity>
     <elements>
         <element name="Customers" positionX="-63" positionY="-18" width="128" height="180"/>
         <element name="Group" positionX="160" positionY="123" width="128" height="75"/>
-        <element name="MsgList" positionX="108" positionY="-9" width="128" height="103"/>
-        <element name="MsgItem" positionX="279" positionY="2" width="128" height="103"/>
+        <element name="MsgItem" positionX="279" positionY="2" width="128" height="105"/>
+        <element name="MsgList" positionX="108" positionY="-9" width="128" height="120"/>
     </elements>
 </model>
