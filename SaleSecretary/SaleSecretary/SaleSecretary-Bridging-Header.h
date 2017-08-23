@@ -8,3 +8,5 @@
 
 #import "WXApiObject.h"
 #import "WXApi.h"
+
+#import "JPUSHService.h"

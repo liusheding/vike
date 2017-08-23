@@ -26,6 +26,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate,WXApiDelegate {
         self.window?.rootViewController = walletVC
         WXApi.registerApp("wx3cd741c2be80a27d")
         NetworkUtils.refreshAipAccessToken()
+        
+        //通知类型（这里将声音、消息、提醒角标都给加上）
+        let userSettings = UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
+        if ((UIDevice.current.systemVersion as NSString).floatValue >= 8.0) {
+            //可以添加自定义categories
+            JPUSHService.register(forRemoteNotificationTypes: userSettings.types.rawValue, categories: nil)
+        }
+        else {
+            //categories 必须为nil
+            JPUSHService.register(forRemoteNotificationTypes: userSettings.types.rawValue, categories: nil)
+        }
+        
+        // 启动JPushSDK 正式发布时apsForProduction参数改为true
+        JPUSHService.setup(withOption: nil, appKey: "204a82c5075eeec5f4120a9d",channel: "AppStore", apsForProduction: false)
+        
+        JPUSHService.setBadge(0)
+        application.applicationIconBadgeNumber = 0
         return true
     }
     
@@ -46,6 +63,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate,WXApiDelegate {
     func onResp(_ resp: BaseResp!) {
     
     }
+    
+    func application(_ application: UIApplication,
+                     didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        //注册 DeviceToken
+        JPUSHService.registerDeviceToken(deviceToken)
+    }
+    
+    func application(_ application: UIApplication,
+                     didReceiveRemoteNotification userInfo: [AnyHashable : Any],
+                     fetchCompletionHandler
+        completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        //增加IOS 7的支持
+        JPUSHService.handleRemoteNotification(userInfo)
+        completionHandler(UIBackgroundFetchResult.newData)
+        
+        JPUSHService.setBadge(0)
+        application.applicationIconBadgeNumber = 0
+    }
+    
+    func application(_ application: UIApplication,
+                     didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        //可选
+        NSLog("did Fail To Register For Remote Notifications With Error: \(error)")
+    }
 
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -63,6 +104,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate,WXApiDelegate {
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        JPUSHService.setBadge(0)
+        application.applicationIconBadgeNumber = 0
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
