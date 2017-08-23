@@ -76,7 +76,7 @@ class TableView:UITableView,UITableViewDelegate, UITableViewDataSource
                         self.bubbleSection.add(currentSection)
                     }
                     if self.bubbleSection.count > 0{
-                        (self.bubbleSection[self.bubbleSection.count-1] as AnyObject).add(data)
+                        (self.bubbleSection[self.bubbleSection.count-1] as! NSMutableArray).add(data)
                     }
                     
                     last = datestr
@@ -88,7 +88,7 @@ class TableView:UITableView,UITableViewDelegate, UITableViewDataSource
         //滑向最后一部分
         if self.bubbleSection.count > 0{
             let secno = self.bubbleSection.count - 1
-            let indexPath =  IndexPath(row:(self.bubbleSection[secno] as AnyObject).count,section:secno)
+            let indexPath =  IndexPath(row:(self.bubbleSection[secno] as! NSMutableArray).count,section:secno)
             self.scrollToRow(at: indexPath,at:UITableViewScrollPosition.bottom,animated:true)
         }
         
@@ -123,7 +123,7 @@ class TableView:UITableView,UITableViewDelegate, UITableViewDataSource
             return 1
         }
         
-        return (self.bubbleSection[section] as AnyObject).count+1
+        return (self.bubbleSection[section] as! NSMutableArray).count+1
     }
     
     //用于确定单元格的高度，如果此方法实现得不对，单元格与单元格之间会错位
