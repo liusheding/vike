@@ -79,7 +79,7 @@ class CustomerPopUpView: UIView {
         for index in 0 ..< actionImages.count {
             let itemButton: UIButton = UIButton(type: .custom)
             itemButton.backgroundColor = UIColor.clear
-            itemButton.titleLabel!.font = UIFont.systemFont(ofSize: 15)
+            itemButton.titleLabel!.font = UIFont.systemFont(ofSize: 16)
             itemButton.setTitleColor(UIColor.white, for: UIControlState())
             itemButton.setTitleColor(UIColor.white, for: .highlighted)
             itemButton.setTitle(actionTitles[index], for: .normal)

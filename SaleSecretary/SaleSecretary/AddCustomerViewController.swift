@@ -12,13 +12,15 @@ private let reuseIdentifier = "Cell"
 
 class AddCustomerViewController: UIViewController {
 
-    var groupArr : [Group] = []
+    var groupArr : [MemGroup] = []
+    let addIconTag : MemGroup = MemGroup.init(id: 0, gn: "")
     let defaultFontSize : CGFloat  = 16
     let defaultBottomTopHeight : CGFloat = 25
     
     var defaultButtonHeight : CGFloat = 0
     var currentSel : Int = -1
-    var tableViewSel : Int = -1
+    let defaultLeftRight : CGFloat = 10
+//    var tableViewSel : Int = -1
     
     let contextDb = CustomerDBOp.defaultInstance()
     
@@ -30,12 +32,10 @@ class AddCustomerViewController: UIViewController {
     @IBOutlet weak var confirmButton: UIButton!
     
     func initSetting() {
-        self.collectionView.layer.borderColor = UIColor.gray.cgColor
         
         // init data 
-        self.groupArr = self.contextDb.getGroupInDb()
-        let ad = self.groupArr[0]
-        self.groupArr.append( ad ) // the last for "Add button"
+        self.groupArr = MemGroup.toMemGroup(dbGroup: self.contextDb.getGroupInDb())
+        self.groupArr.append( self.addIconTag ) // the last for "Add button"
     }
     
     @IBAction func cancelAction(_ sender: Any) {
@@ -49,10 +49,14 @@ class AddCustomerViewController: UIViewController {
         
         let view = self.parent as! CTChooseNewerController
         let c = view.newCustomer[view.tableViewSel]
-        c.group_id = g.group_name!
+        c.group_id = g.group_name
         self.contextDb.insertCustomer(ctms: c)
         view.pressCancel()
         view.changeButtonStatus()
+        
+        if view.tableDelegate != nil {
+            view.tableDelegate?.reloadTableViewData()
+        }
     }
     
     override func viewDidLoad() {
@@ -61,8 +65,7 @@ class AddCustomerViewController: UIViewController {
         //init height
         self.defaultButtonHeight = (ContactCommon.groupDefault).size(attributes: [NSFontAttributeName:UIFont.systemFont(ofSize: self.defaultFontSize )]).height + self.defaultBottomTopHeight
         
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
+        self.collectionView.layer.borderColor = UIColor.gray.cgColor
         self.initSetting()
         self.collectionView?.delegate = self
         self.collectionView?.dataSource = self
@@ -100,7 +103,10 @@ extension AddCustomerViewController  : UICollectionViewDelegate, UICollectionVie
         if indexPath.row == (self.groupArr.count-1) {
             cell.addingButton.setTitle("", for: .normal)
             cell.addingButton.setImage(UIImage(named: "icon_tj") , for: .normal )
+            cell.addingButton.tintColor = ContactCommon.THEME_COLOR
             cell.addingButton.addTarget(self , action: #selector(self.addNewGroup) , for: .touchDown  )
+            cell.addingButton.frame = CGRect.init(x: 5, y: 5, width: cell.addingButton.frame.width + self.defaultLeftRight , height: cell.addingButton.frame.height)
+            
         }else {
             cell.addingButton.layer.borderWidth = 1
             cell.addingButton.layer.borderColor = ContactCommon.THEME_COLOR.cgColor
@@ -111,10 +117,10 @@ extension AddCustomerViewController  : UICollectionViewDelegate, UICollectionVie
             cell.addingButton.setTitleColor( UIColor.white , for: .selected )
             cell.addingButton.setImage( UIImage(named: "") , for: .selected )
             cell.addingButton.addTarget(self , action: #selector(self.choosedButton(_:)), for: .touchDown )
-            
+            cell.addingButton.frame = CGRect.init(x: 5 , y: 5, width: ( self.groupArr[indexPath.row].group_name as NSString ).size(attributes: [NSFontAttributeName:UIFont.systemFont(ofSize: self.defaultFontSize )]).width + self.defaultLeftRight , height: cell.addingButton.frame.height)
             cell.addingButton.tag = indexPath.row
         }
-        
+//        cell.backgroundColor = UIColor.red
         return cell
     }
     
@@ -149,8 +155,6 @@ extension AddCustomerViewController  : UICollectionViewDelegate, UICollectionVie
         
         alertController.addTextField {
             (textField: UITextField!) -> Void in
-//            textField.placeholder = "用户名"
-//            textField.
         }
         
         let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
@@ -165,7 +169,8 @@ extension AddCustomerViewController  : UICollectionViewDelegate, UICollectionVie
                 }
             }
             self.contextDb.storeGroup(id: maxId + 1, group_name: groupName.text!)
-            self.groupArr = self.contextDb.groupContentUpdate()
+            self.groupArr = MemGroup.toMemGroup(dbGroup: self.contextDb.getGroupInDb())
+            self.groupArr.append( self.addIconTag )
             self.collectionView.reloadData()
         })
         alertController.addAction(cancelAction)
@@ -173,10 +178,14 @@ extension AddCustomerViewController  : UICollectionViewDelegate, UICollectionVie
         self.present(alertController, animated: true, completion: nil)
     }
     
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = ( self.groupArr[indexPath.row].group_name! as NSString ).size(attributes: [NSFontAttributeName:UIFont.systemFont(ofSize: self.defaultFontSize )]).width
-//        NSLog("size : \(width) ---- \(self.defaultButtonHeight)")
-        return CGSize(width: width + 40 , height: self.defaultButtonHeight )
+        let width = ( self.groupArr[indexPath.row].group_name as NSString ).size(attributes: [NSFontAttributeName:UIFont.systemFont(ofSize: self.defaultFontSize )]).width
+        var tmp : CGFloat = 20
+        if indexPath.row == self.groupArr.count - 1 {
+            tmp = 47
+        }
+        return CGSize(width: width + tmp , height: self.defaultButtonHeight )
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat{

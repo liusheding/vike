@@ -39,7 +39,7 @@ class Customer : NSObject{
         self.company = ""
         self.birthday = ""
         self.gender = 1
-        self.group_id = "默认"
+        self.group_id = ContactCommon.groupDefault as String
         self.id =  0
         self.is_solar = true
     }
@@ -55,7 +55,7 @@ class Customer : NSObject{
         self.birthday = birth
         self.is_solar = true
         self.id = 0
-        self.group_id = "默认"
+        self.group_id = ContactCommon.groupDefault as String
         self.gender = 1
     }
     
@@ -74,6 +74,33 @@ class Customer : NSObject{
     override func  setValue(_ value: Any?, forUndefinedKey key: String) { }
     
    }
+
+class MemGroup{
+    
+    var id :          Int
+    var group_name :  String
+    
+    init() {
+        self.id = 0
+        self.group_name = ContactCommon.groupDefault as String
+    }
+    
+    init(id: Int , gn : String){
+        self.id = id
+        self.group_name  = gn
+    }
+    
+    static func toMemGroup( dbGroup : [Group]) -> [MemGroup] {
+        var result : [MemGroup] = []
+        if dbGroup.count > 0 {
+            for dbg in dbGroup {
+                result.append( MemGroup.init(id: Int(dbg.id) , gn: dbg.group_name!))
+            }
+        }
+        return result
+    }
+    
+}
 
 
 class CustomerGroup:NSObject {
@@ -169,6 +196,6 @@ struct ContactCommon {
     }
     
     static let separatorDefault = ","
-    static let groupDefault : NSString = "默认"
+    static let groupDefault : NSString = "默认分组"
 }
 

@@ -36,6 +36,7 @@ class CTChooseNewerController: UIViewController {
 //        return cust
 //    }()
     
+    var tableDelegate : ContactTableViewDelegate?
     let cellId = "contactsCell"
     
     @IBOutlet weak var chooseAlertView: UIView!
@@ -176,9 +177,11 @@ extension CTChooseNewerController : UITableViewDelegate , UITableViewDataSource 
             cell.acception.setTitle( "添加" , for: .normal )
             cell.acception.setTitle("已添加", for: .disabled)
             cell.acception.setTitleColor(UIColor.white , for: .normal )
-            cell.acception.setTitleColor(UIColor.white , for: .disabled )
+            cell.acception.setTitleColor(UIColor.gray , for: .disabled )
+            cell.acception.backgroundColor = ContactCommon.THEME_COLOR
             cell.acception.addTarget( self , action: #selector(self.chooseGroupView(_:)) , for: UIControlEvents.touchDown)
         }else {
+            cell.selectionStyle = .none
             cell.acception.setTitle( "已添加" , for: .normal )
             cell.acception.setTitleColor(UIColor.gray, for:.normal )
             cell.acception.backgroundColor = UIColor.white
@@ -195,6 +198,7 @@ extension CTChooseNewerController : UITableViewDelegate , UITableViewDataSource 
     func  changeButtonStatus() {
         let cell = self.tableView.cellForRow(at: [0,self.tableViewSel]) as! PersonContactCell
         cell.acception.isEnabled = false
+        cell.acception.backgroundColor = UIColor.white
         
     }
 }

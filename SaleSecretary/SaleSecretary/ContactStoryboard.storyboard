@@ -9,6 +9,54 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Manager Group Controller-->
+        <scene sceneID="XBj-CW-Dyj">
+            <objects>
+                <viewController storyboardIdentifier="managerGroup" useStoryboardIdentifierAsRestorationIdentifier="YES" id="T7V-Fn-INd" customClass="CTManagerGroupController" customModule="SaleSecretary" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="mnA-cc-FCG"/>
+                        <viewControllerLayoutGuide type="bottom" id="ALu-uS-LDd"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="aTh-bh-Tzt">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="baO-vk-FU5">
+                                <rect key="frame" x="0.0" y="25" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem title="分组管理" id="efP-Yy-C0A">
+                                        <barButtonItem key="leftBarButtonItem" title="取消" id="OCz-t7-xdw">
+                                            <connections>
+                                                <action selector="cancelAction:" destination="T7V-Fn-INd" id="V15-wB-UnP"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" title="确定" id="z73-0G-j5k">
+                                            <connections>
+                                                <action selector="confirmAction:" destination="T7V-Fn-INd" id="SEE-I5-oBI"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Wlx-pj-drO">
+                                <rect key="frame" x="0.0" y="69" width="375" height="598"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="cancelButton" destination="OCz-t7-xdw" id="6uj-OT-gmS"/>
+                        <outlet property="confirmButton" destination="z73-0G-j5k" id="Qzh-Xb-iHy"/>
+                        <outlet property="localTableView" destination="Wlx-pj-drO" id="xdg-7q-ic4"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nh8-ue-CFi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1018.4" y="-953.07346326836591"/>
+        </scene>
         <!--通讯录-->
         <scene sceneID="XJL-yY-JzK">
             <objects>
@@ -129,7 +177,9 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <inset key="titleEdgeInsets" minX="0.0" minY="50" maxX="0.0" maxY="0.0"/>
-                                <state key="normal" title="轨迹" backgroundImage="icon_gj"/>
+                                <state key="normal" title="轨迹" backgroundImage="icon_gj">
+                                    <color key="titleColor" red="0.0039215686269999999" green="0.70588235290000001" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tmt-lq-Sml">
                                 <rect key="frame" x="58" y="130" width="30" height="31"/>
@@ -137,7 +187,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <inset key="titleEdgeInsets" minX="0.0" minY="50" maxX="0.0" maxY="0.0"/>
                                 <state key="normal" title="短信" backgroundImage="icon_dx">
-                                    <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleColor" red="0.0039215686269999999" green="0.70588235290000001" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YSw-RB-AIY">
@@ -146,7 +196,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <inset key="titleEdgeInsets" minX="0.0" minY="50" maxX="0.0" maxY="0.0"/>
                                 <state key="normal" title="电话" backgroundImage="icon_dh">
-                                    <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleColor" red="0.0039215686269999999" green="0.70588235290000001" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                             </button>
                             <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IM2-1c-e5F">
@@ -261,8 +311,11 @@
         <!--Add Customer View Controller-->
         <scene sceneID="TZz-VM-1uf">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="0BY-Kp-MX3" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="sBW-2E-kYg" customClass="AddCustomerViewController" customModule="SaleSecretary" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="aYe-AY-9WT"/>
+                        <viewControllerLayoutGuide type="bottom" id="jEF-pD-9Us"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="IIr-rY-Sac">
                         <rect key="frame" x="0.0" y="0.0" width="310" height="240"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -278,7 +331,7 @@
                                 <rect key="frame" x="24" y="55" width="270" height="128"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="5" minimumInteritemSpacing="2" id="rz2-Zu-Rcm">
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="3" minimumInteritemSpacing="2" id="rz2-Zu-Rcm">
                                     <size key="itemSize" width="64" height="47"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -329,6 +382,7 @@
                         <outlet property="confirmButton" destination="WoY-uH-OYH" id="2gd-NI-cYU"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0BY-Kp-MX3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1963.2" y="690.85457271364328"/>
         </scene>

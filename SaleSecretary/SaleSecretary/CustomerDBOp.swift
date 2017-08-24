@@ -34,32 +34,40 @@ class CustomerDBOp : NSObject {
         return appDelegate.persistentContainer.viewContext
     }
     
-    func getContacts2Group() -> [CustomerGroup] {
-        if self.contacts2Group.count == 0 {
-            for gp in self.getGroupInDb() {
-                self.contacts2Group.append( CustomerGroup.init(customer: self.getCustomerInDb() , group: gp ))
+    // while flag is true , read data again
+    func getContacts2Group(_ flag: Bool = false) -> [CustomerGroup] {
+        if ( self.contacts2Group.count == 0 ) || flag {
+            self.contacts2Group.removeAll()
+            let tmpGp = self.getGroupInDb(true)
+            let tmp = self.getCustomerInDb(true)
+            for gp in tmpGp {
+                self.contacts2Group.append( CustomerGroup.init(customer: tmp , group: gp ))
             }
         }
         return self.contacts2Group
     }
     
-    func getCustomerInDb() -> [Customers] {
-        if self.dbContact.count == 0 {
+    //
+    func getCustomerInDb(_ flag: Bool = false) -> [Customers] {
+        if ( flag || self.dbContact.count == 0 ){
             self.dbContact = self.getCustomers()
         }
         return self.dbContact
     }
     
-    func getGroupInDb() -> [Group] {
-        if self.dbGroup.count == 0 {
+    func getGroupInDb( _ flag: Bool = false ) -> [Group] {
+        if ( flag || self.dbGroup.count == 0 )  {
             self.dbGroup = self.getGroup()
+            if self.dbGroup.count == 0 {
+                self.storeGroup(id: 0, group_name: ContactCommon.groupDefault as String )
+            }
         }
         return self.dbGroup
     }
     
     // batch insert Customer 
     func insertCustomerArray(ctms : [Customer]) {
-        if ctms.count != 0 {
+        if ctms.count > 0 {
             for c in ctms {
                 insertCustomer(ctms: c)
             }
@@ -129,6 +137,7 @@ class CustomerDBOp : NSObject {
             for p in searchResults  {
                 context.delete(p)
             }
+            try! context.save()
         } catch  {
             NSLog(error as! String)
         }
@@ -150,6 +159,33 @@ class CustomerDBOp : NSObject {
         return result
     }
     
+    func changeCustomerGroup(group : [MemGroup])  {
+        if group.count > 0 {
+            var strArray : [String]  = []
+            
+            for g in group {
+                strArray.append(g.group_name)
+            }
+            let context = getContext()
+            let fetchRequest = NSFetchRequest<Customers>(entityName: "Customers")
+            //        fetchRequest.fetchLimit = 10 //限定查询结果的数量
+            fetchRequest.fetchOffset = 0 //查询的偏移量
+            
+            fetchRequest.predicate = NSPredicate(format: "group_id in %@", argumentArray: [ strArray ])
+            do {
+                let searchResults = try context.fetch(fetchRequest)
+                NSLog("numbers of delete \(searchResults.count)")
+                
+                for p in searchResults  {
+                    p.group_id = ContactCommon.groupDefault as String
+                }
+                try context.save()
+            } catch  {
+                NSLog(error as! String)
+            }
+        }
+    }
+    
     func storeGroup( id : Int , group_name : String ){
         let context = getContext()
         // 定义一个entity，这个entity一定要在xcdatamodeld中做好定义
@@ -168,12 +204,56 @@ class CustomerDBOp : NSObject {
         }
     }
     
-    func groupContentUpdate() -> [Group] {
-        self.dbGroup = []
-        self.dbGroup = self.getGroup()
-        return self.dbGroup
+    func storeGroupArray(gArray : [MemGroup]) {
+        if gArray.count > 0 {
+            for g in gArray {
+                self.storeGroup(id: Int(g.id) , group_name: g.group_name)
+            }
+        }
     }
     
+    func deleteGroup(g:MemGroup)  {
+        let context = getContext()
+        let fetchRequest = NSFetchRequest<Group>(entityName: "Group")
+//        fetchRequest.fetchLimit = 10 //限定查询结果的数量
+//        fetchRequest.fetchOffset = 0 //查询的偏移量
+        
+        fetchRequest.predicate = NSPredicate(format: "group_name=%s", argumentArray: [g.group_name ])
+        do {
+            let searchResults = try context.fetch(fetchRequest)
+            NSLog("numbers of delete \(searchResults.count)")
+            
+            for p in searchResults  {
+                context.delete(p)
+            }
+            
+        } catch  {
+            NSLog(error as! String)
+        }
+    }
+    
+    func deleteGroupArray(gArray : [MemGroup]) {
+        if gArray.count > 0 {
+            var strArray : [String] = []
+            for g in gArray {
+                strArray.append(g.group_name)
+            }
+            let context = getContext()
+            let fetchRequest = NSFetchRequest<Group>(entityName: "Group")
+            
+            fetchRequest.predicate = NSPredicate(format: "group_name  in %@", argumentArray: [strArray])
+            do {
+                let searchResults = try context.fetch(fetchRequest)
+                NSLog("numbers of delete \(searchResults.count)")
+                
+                for p in searchResults  {
+                    context.delete(p)
+                }
+            } catch  {
+                NSLog(error as! String)
+            }
+        }
+    }
     
     func  getGroup() -> [Group]{
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Group")

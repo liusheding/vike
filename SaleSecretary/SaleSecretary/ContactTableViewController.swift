@@ -15,6 +15,7 @@ class ContactTableViewController: UIViewController {
     let headIdentifier = "headView"
     let cellId = "PersonContactCell"
     let newCellId = "NewCell"
+    let storyboardLocal = UIStoryboard(name: "ContactStoryboard" , bundle: nil)
     var customer : [Customers] = []  // contacts information in local db
     var groupsInDb : [Group] = []
     // read contacts information from user's iphone contact
@@ -58,7 +59,6 @@ class ContactTableViewController: UIViewController {
     
     @IBAction func ctFloatMoreBar(_ sender: Any) {
         self.ctMoreItemView.hide(!self.ctMoreItemView.isHidden)
-        NSLog(" push ctFloatMoreBar")
     }
     
     override func viewDidLoad() {
@@ -88,35 +88,26 @@ class ContactTableViewController: UIViewController {
             make.edges.equalTo(UIEdgeInsetsMake(64, 0, 0, 0))
         }
         
-        self.contactsCells =   generateData() // load customer data
+        self.contactsCells = self.contextDb.getContacts2Group( true ) // load customer data
+        self.generateData()
     }
     
     // default read data from db , but  first time get from  phone's contacts
-    func generateData() ->  [CustomerGroup] {
-        self.groupsInDb = self.contextDb.getGroupInDb()
-        if self.groupsInDb.count == 0 { // first time ,  init create default group
-            self.contextDb.storeGroup(id: 0, group_name: "默认")
-        }
-        self.customer = self.contextDb.getCustomerInDb()
-        var result : [CustomerGroup] = []
+    func generateData() {
+        self.groupsInDb = self.contextDb.getGroupInDb(true)
+        self.customer = self.contextDb.getCustomerInDb(true)
         
         if self.contactDt.count == 0 {
             self.contactDt = GetContactUtils.loadContactData()
         }
         
         // validate local costomer size , because the first time spcial
-        if customer.count == 0 { // only first or delete all app customer's data
+        if self.customer.count == 0 { // only first or delete all app customer's data
             for cd in self.contactDt {
                 self.contextDb.insertCustomer(ctms: cd)
             }
-            self.customer = self.contextDb.getCustomerInDb()
-        }else {
-            
+            self.customer = self.contextDb.getCustomerInDb(true)
         }
-        for gp in self.groupsInDb {
-            result.append( CustomerGroup.init(customer: self.customer, group: gp ))
-        }
-        return result
     }
     
     override func didReceiveMemoryWarning() {
@@ -150,7 +141,7 @@ extension ContactTableViewController : UITableViewDataSource, UITableViewDelegat
         if section == 0 {
             return 10
         }else {
-            return 5
+            return 1
         }
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -207,13 +198,11 @@ extension ContactTableViewController : UITableViewDataSource, UITableViewDelegat
             cell.name?.text = userName
             cell.phoneNumber?.text = customer?.phone_number?[0] // mutil
             cell.picName.backgroundColor = ContactCommon.sampleColor[ indexPath.row % ContactCommon.count ]
-//            cell.picName.set
             
             cell.picName.setTitle(cString , for: .normal )
             cell.acception.backgroundColor = UIColor.white
             return cell
         }
-//        return cell
     }
     
     func clickedGroupTitle(headerView: CustomerHeaderView) {
@@ -222,11 +211,12 @@ extension ContactTableViewController : UITableViewDataSource, UITableViewDelegat
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let storyboardLocal = UIStoryboard(name: "ContactStoryboard" , bundle: nil)
+        
         if indexPath.section == 0 {
             let detailPage = storyboardLocal.instantiateViewController(withIdentifier: "newAddCustomer") as! CTChooseNewerController
             self.contactDt = GetContactUtils.loadContactData()
             tableView.deselectRow(at: indexPath, animated: false)
+            detailPage.tableDelegate = self
             detailPage.contactDt = self.contactDt
             detailPage.localDbContact = self.customer
             detailPage.groupsInDb = self.groupsInDb
@@ -276,23 +266,25 @@ extension ContactTableViewController : UITableViewDataSource, UITableViewDelegat
                 }
                 if newCustomer.count > 0 {
                     self.contextDb.insertCustomerArray(ctms: newCustomer)
+                    self.contactsCells = self.contextDb.getContacts2Group(true)
+                    self.customer = self.contextDb.getCustomerInDb()
                 }
                 
                 // information notice
                 let alertController = UIAlertController(title: "同步通讯录成功!新增\(newCustomer.count)个用户", message: nil, preferredStyle: .alert)
                 //显示提示框
                 self.present(alertController, animated: true, completion: nil)
+                self.tableView.reloadData()
                 //两秒钟后自动消失
                 DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
                     self.presentedViewController?.dismiss(animated: false, completion: nil)
                 }
                 
                 break
-            case .managerGroup:
-                let cg = self.contextDb.getContacts2Group()
-                for c in cg {
-                    NSLog("0000000+++\(String(describing:  c.name )) ++++++++\(String(describing: c.friends?.count))")
-                }
+            case .managerGroup:  // 对分组进行增删改
+                let detailPage = storyboardLocal.instantiateViewController(withIdentifier: "managerGroup") as! CTManagerGroupController
+                detailPage.contactsTableviewDelegate = self
+                self.present(detailPage, animated: true, completion: nil)
                 break
             case .batchOperate :
                 let g = self.contextDb.getGroupInDb()
@@ -339,40 +331,10 @@ extension ContactTableViewController : UITableViewDataSource, UITableViewDelegat
         return [delete, changeGroup]
     }
     
-    
-//    func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
-//        return "删除"
-//    }
-//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-//        if editingStyle == .delete {
-//            print("删除事件.....")
-//        }
-//    }
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
     /*
     // Override to support rearranging the table view.
     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
 
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
     }
     */
 
@@ -403,4 +365,15 @@ extension ContactTableViewController: UISearchBarDelegate {
         searchBar.text = ""
         self.tableView.reloadData()
     }
+}
+
+extension ContactTableViewController : ContactTableViewDelegate {
+    
+    func reloadTableViewData( ){
+        self.contactsCells = self.contextDb.getContacts2Group(true)
+        self.customer = self.contextDb.getCustomerInDb()
+        self.groupsInDb  = self.contextDb.getGroupInDb()
+        self.tableView.reloadData()
+    }
+    
 }
