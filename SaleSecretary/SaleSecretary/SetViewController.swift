@@ -10,8 +10,8 @@ import UIKit
 
 class SetViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
-    let titles = ["个人资料", "账户安全", "退出登录"]
-    let identifiers = ["mineInfoID", "securityID"]
+    let titles = ["个人资料", "修改密码", "退出登录"]
+    let identifiers = ["mineInfoID", "changePwdID"]
     let cellId = "exitViewCell"
 
     override func viewDidLoad() {
@@ -24,6 +24,8 @@ class SetViewController: UIViewController {
         
         self.tableView.register(UINib(nibName: String(describing: ExitViewCell.self), bundle: nil), forCellReuseIdentifier: cellId)
     }
+    
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -35,8 +37,7 @@ extension SetViewController: UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return CGFloat(50)
     }
-    
-    
+
     func numberOfSections(in tableView: UITableView) -> Int {
         return self.titles.count
     }
@@ -61,6 +62,7 @@ extension SetViewController: UITableViewDelegate,UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         if indexPath.section == self.titles.count - 1{
             print("退出登录")
         }else{

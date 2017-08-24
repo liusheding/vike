@@ -58,6 +58,7 @@ extension HelpViewController: UITableViewDelegate,UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         let storyBoard = UIStoryboard(name: "MineView", bundle: nil)
         if indexPath.row < self.identifiers.count{
             let identifier = self.identifiers[indexPath.row]
