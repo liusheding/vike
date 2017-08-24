@@ -40,13 +40,13 @@ class ChatViewCell:UITableViewCell {
         var y:CGFloat =  0
         
         //显示用户头像
-        if (self.msgItem.user.username != "")
+        if (self.msgItem.user.username != "" && self.msgItem.user.avatar != "")
         {
             
             let thisUser =  self.msgItem.user
             //self.avatarImage.removeFromSuperview()
             
-            let imageName = thisUser.avatar != "" ? thisUser.avatar : "noAvatar.png"
+            let imageName = thisUser.avatar
             self.avatarImage = UIImageView(image:UIImage(named:imageName))
             
             self.avatarImage.layer.cornerRadius = 9.0

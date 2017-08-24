@@ -18,13 +18,7 @@ class MessageViewController: UITableViewController {
         let msglist = msgdb.getAllMsgList()
         var msgdata = [MessageData]()
         for msg in msglist{
-            let msgitem = msgdb.getMsgItem(msgphone: msg.msg_phone!)
-            var msgitems = [MessageDetail]()
-            for item in msgitem{
-                msgitems.append(MessageDetail(msgtime:item.msg_item_time! as Date, msgtype:Int(item.msg_item_type), msgcontent:item.msg_item_content!, msgphone:item.msg_item_phone!))
-            }
-            
-            msgdata.append(MessageData(name:msg.msg_name!, phone:msg.msg_phone!,time:msg.msg_time! as Date,mtype:Int(msg.msg_type), message:msgitems, unread:Int(msg.msg_unread)))
+            msgdata.append(MessageData(name:msg.msg_name!, phone:msg.msg_phone!,time:msg.msg_time! as Date,mtype:Int(msg.msg_type), message:[], unread:Int(msg.msg_unread)))
         }
         
         DataSource=NSMutableArray()
@@ -48,7 +42,7 @@ class MessageViewController: UITableViewController {
         return nil
     }
     
-    //按日期排序方法
+    //消息列表按日期排序方法
     func sortDate(_ m1: Any, m2: Any) -> ComparisonResult {
         if((m1 as! MessageData).date.timeIntervalSince1970 < (m2 as! MessageData).date.timeIntervalSince1970)
         {
@@ -237,6 +231,16 @@ class MessageViewController: UITableViewController {
         data.unread = 0
         cell.setCellContnet(data.unread)
         msgdb.updateMsgList(msgphone: data.phone, key: "msg_unread", value: 0)
+        
+        let msgitem = msgdb.getMsgItem(msgphone: data.phone)
+        var msgitems = [MessageDetail]()
+        for item in msgitem{
+            msgitems.append(MessageDetail(msgtime:item.msg_item_time! as Date, msgtype:Int(item.msg_item_type), msgcontent:item.msg_item_content!, msgphone:item.msg_item_phone!))
+            }
+        data.message = msgitems.sorted { (s1, s2) -> Bool in
+            if(s1.msgdate.timeIntervalSince1970 < s2.msgdate.timeIntervalSince1970){return true}
+            else{return false}
+        }
         
         if (cell.mtype == 1){
             let controller = MessageChatController()

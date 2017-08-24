@@ -779,7 +779,6 @@
 		C5DB8245E853880567A8AA818CFA3A83 /* Message */ = {
 			isa = PBXGroup;
 			children = (
-				6E1A740C1F4AF20A009B7D33 /* MessageDB.swift */,
 				38219B296459F1D229EAB903EB8BBE63 /* Controller */,
 				D6C569A3304F1DE766B6A3CB9DE86D18 /* Model */,
 				DECB3B49B2471C7E9EB1FAB06DEB0BDF /* View */,
@@ -818,6 +817,7 @@
 		D6C569A3304F1DE766B6A3CB9DE86D18 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				6E1A740C1F4AF20A009B7D33 /* MessageDB.swift */,
 				6E20ECB11F39B3DE00A0F29E /* MessageInfo.swift */,
 				6E20EC961F341B5500A0F29E /* UserInfo.swift */,
 				6E20EC941F341B4500A0F29E /* MessageItem.swift */,
