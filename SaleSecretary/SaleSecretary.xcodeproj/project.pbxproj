@@ -82,9 +82,6 @@
 		6E20EC9D1F341B7D00A0F29E /* TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E20EC9B1F341B7D00A0F29E /* TableView.swift */; };
 		6E20ECA01F341B8D00A0F29E /* MessageChat.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E20EC9E1F341B8D00A0F29E /* MessageChat.storyboard */; };
 		6E20ECA11F341B8D00A0F29E /* MessageChatController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E20EC9F1F341B8D00A0F29E /* MessageChatController.swift */; };
-		6E20ECA51F341BCD00A0F29E /* xiaohua.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E20ECA31F341BCD00A0F29E /* xiaohua.png */; };
-		6E20ECA61F341BCD00A0F29E /* xiaoming.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E20ECA41F341BCD00A0F29E /* xiaoming.png */; };
-		6E20ECA81F341BD600A0F29E /* sz.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E20ECA71F341BD600A0F29E /* sz.png */; };
 		6E20ECB21F39B3DE00A0F29E /* MessageInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E20ECB11F39B3DE00A0F29E /* MessageInfo.swift */; };
 		6E52D9851F458B560003305F /* ShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E52D9841F458B560003305F /* ShareView.swift */; };
 		6E52D98E1F46869C0003305F /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E52D98D1F46869C0003305F /* libWeChatSDK.a */; };
@@ -276,9 +273,6 @@
 		6E20EC9B1F341B7D00A0F29E /* TableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableView.swift; sourceTree = "<group>"; };
 		6E20EC9E1F341B8D00A0F29E /* MessageChat.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MessageChat.storyboard; sourceTree = "<group>"; };
 		6E20EC9F1F341B8D00A0F29E /* MessageChatController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageChatController.swift; sourceTree = "<group>"; };
-		6E20ECA31F341BCD00A0F29E /* xiaohua.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = xiaohua.png; sourceTree = "<group>"; };
-		6E20ECA41F341BCD00A0F29E /* xiaoming.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = xiaoming.png; sourceTree = "<group>"; };
-		6E20ECA71F341BD600A0F29E /* sz.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sz.png; sourceTree = "<group>"; };
 		6E20ECB11F39B3DE00A0F29E /* MessageInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageInfo.swift; sourceTree = "<group>"; };
 		6E52D9841F458B560003305F /* ShareView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareView.swift; sourceTree = "<group>"; };
 		6E52D9891F4683090003305F /* WechatAuthSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WechatAuthSDK.h; sourceTree = "<group>"; };
@@ -428,7 +422,6 @@
 		0EA0B277261348029FDB9BAE2CF16043 /* SaleSecretary */ = {
 			isa = PBXGroup;
 			children = (
-				6E8110CB1F4D0F620021788A /* SaleSecretary.entitlements */,
 				6EF5B6FA1F44528F001B0A77 /* Login */,
 				6EF19C581F3BF47800646BCF /* Mine */,
 				662D6A451F317755001C1FB1 /* Contacts */,
@@ -441,6 +434,7 @@
 				FB20A214877D05C6E7E1ECF3F9E4A391 /* Info.plist */,
 				66C784D01F457F280067B476 /* aip.license */,
 				E91976E222A3B14574B6924020DD4A84 /* LaunchScreen.storyboard */,
+				6E8110CB1F4D0F620021788A /* SaleSecretary.entitlements */,
 				372EFD95BCC4506D668112468A0C6F18 /* SaleSecretary.xcdatamodeld */,
 				664B999C1F3DBE5700968AA5 /* InfoPlist.strings */,
 			);
@@ -635,16 +629,6 @@
 			name = Others;
 			sourceTree = "<group>";
 		};
-		6E20ECA21F341BB000A0F29E /* images */ = {
-			isa = PBXGroup;
-			children = (
-				6E20ECA71F341BD600A0F29E /* sz.png */,
-				6E20ECA31F341BCD00A0F29E /* xiaohua.png */,
-				6E20ECA41F341BCD00A0F29E /* xiaoming.png */,
-			);
-			name = images;
-			sourceTree = "<group>";
-		};
 		6E52D9881F4682CC0003305F /* WeixinSDK */ = {
 			isa = PBXGroup;
 			children = (
@@ -796,7 +780,6 @@
 			isa = PBXGroup;
 			children = (
 				6E1A740C1F4AF20A009B7D33 /* MessageDB.swift */,
-				6E20ECA21F341BB000A0F29E /* images */,
 				38219B296459F1D229EAB903EB8BBE63 /* Controller */,
 				D6C569A3304F1DE766B6A3CB9DE86D18 /* Model */,
 				DECB3B49B2471C7E9EB1FAB06DEB0BDF /* View */,
@@ -1030,8 +1013,6 @@
 				66451F0E1F330DDD009B65DD /* AppellationCellView.xib in Resources */,
 				E7D2ABD81F457AC7000123A5 /* TableViewCell.xib in Resources */,
 				664B999A1F3DBE5700968AA5 /* InfoPlist.strings in Resources */,
-				6E20ECA51F341BCD00A0F29E /* xiaohua.png in Resources */,
-				6E20ECA61F341BCD00A0F29E /* xiaoming.png in Resources */,
 				66B602F21F2F074A002A55E6 /* SMSListViewCell.xib in Resources */,
 				E7D2AC361F4A7A48000123A5 /* AddingCustomViewCell.xib in Resources */,
 				6EF2B7971F419F1600C808EE /* userList.plist in Resources */,
@@ -1047,7 +1028,6 @@
 				66451F121F331E81009B65DD /* InscribeViewCell.xib in Resources */,
 				6EF5B7031F4452E9001B0A77 /* Login.storyboard in Resources */,
 				66C784D11F457F290067B476 /* aip.license in Resources */,
-				6E20ECA81F341BD600A0F29E /* sz.png in Resources */,
 				6EBAA5511F3C2E520099DA89 /* MineInfoCell.xib in Resources */,
 				6EBAA56B1F3C5B330099DA89 /* WalletDetailCell.xib in Resources */,
 				6E20ECA01F341B8D00A0F29E /* MessageChat.storyboard in Resources */,

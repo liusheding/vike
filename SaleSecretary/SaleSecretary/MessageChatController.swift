@@ -225,8 +225,8 @@ class MessageChatController: UIViewController,ChatDataSource,UITextFieldDelegate
         
         //创建一个重用的单元格
         self.tableView!.register(ChatViewCell.self, forCellReuseIdentifier: "ChatCell")
-        me = UserInfo(name:"" ,logo:("xiaoming.png"))
-        you  = UserInfo(name:"", logo:("xiaohua.png"))
+        me = UserInfo(name:"" ,logo:(""))
+        you  = UserInfo(name:"", logo:(""))
         
         Chats = NSMutableArray()
         let message = self.DataSource.message
