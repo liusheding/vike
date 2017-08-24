@@ -38,6 +38,7 @@
 		6647E8CC1F3AFEE90053AFF3 /* CryptoHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 6647E8CB1F3AFEE90053AFF3 /* CryptoHeader.m */; };
 		664B998E1F3DA8CB00968AA5 /* SMSTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 664B998D1F3DA8CB00968AA5 /* SMSTemplate.swift */; };
 		664B999A1F3DBE5700968AA5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 664B999C1F3DBE5700968AA5 /* InfoPlist.strings */; };
+		669A33951F4EBF4400C61F3B /* AppUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669A33941F4EBF4400C61F3B /* AppUser.swift */; };
 		66AB590B1F3C65E8005FB30F /* ico_make.png in Resources */ = {isa = PBXBuildFile; fileRef = 66AB59081F3C65E8005FB30F /* ico_make.png */; };
 		66AB590C1F3C65E8005FB30F /* JSDropDownMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 66AB590A1F3C65E8005FB30F /* JSDropDownMenu.m */; };
 		66AB590E1F3C65FA005FB30F /* TemplateSelectorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AB590D1F3C65FA005FB30F /* TemplateSelectorController.swift */; };
@@ -231,6 +232,7 @@
 		664B999B1F3DBE5700968AA5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		664B999D1F3DBE5900968AA5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		664B999E1F3DBE5A00968AA5 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		669A33941F4EBF4400C61F3B /* AppUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppUser.swift; sourceTree = "<group>"; };
 		66AB59081F3C65E8005FB30F /* ico_make.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ico_make.png; sourceTree = "<group>"; };
 		66AB59091F3C65E8005FB30F /* JSDropDownMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSDropDownMenu.h; sourceTree = "<group>"; };
 		66AB590A1F3C65E8005FB30F /* JSDropDownMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSDropDownMenu.m; sourceTree = "<group>"; };
@@ -468,6 +470,7 @@
 		334FA7D8DDBF4687976EF258B32793F5 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				669A33941F4EBF4400C61F3B /* AppUser.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1206,6 +1209,7 @@
 				6E20EC9C1F341B7D00A0F29E /* TableHeaderViewCell.swift in Sources */,
 				A1388B73E89097D71FE47270B8861FF9 /* ToolsUIViewController.swift in Sources */,
 				66AB590E1F3C65FA005FB30F /* TemplateSelectorController.swift in Sources */,
+				669A33951F4EBF4400C61F3B /* AppUser.swift in Sources */,
 				6E0C8CE51F2EE0B40066885F /* MessageDetailController.swift in Sources */,
 				6E1A740D1F4AF20A009B7D33 /* MessageDB.swift in Sources */,
 				6EF5B7051F4452E9001B0A77 /* RegisterViewController.swift in Sources */,

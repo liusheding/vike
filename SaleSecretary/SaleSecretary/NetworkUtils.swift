@@ -71,7 +71,37 @@ extension String {
 
 struct NetworkUtils {
     
-    static func postBackEnd(_ method: String, body: [String: Any], handler: ((_ json : JSON) -> Void)?) {
+    static func postBackEnd(_ method: String, body: [String: Any], handler: ((_ json : JSON) -> Void)?) -> DataRequest {
+        let bodyStr = createBody(method, body: body)
+        print(bodyStr)
+        var req = URLRequest(url: URL(string: ZJKJ_API_URL)!)
+        req.httpMethod = HTTPMethod.post.rawValue
+        req.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        req.httpBody = bodyStr.data(using: .utf8)! as Data
+        return Alamofire.request(req).responseJSON {
+            response in
+            let result = response.result
+            print(result)
+            switch result  {
+            case .success(let value):
+                guard response.result.value != nil else {return }
+                let json = JSON(value)
+                let code = json["head"]["error_code"].string
+                if code != "0" {
+                    defaultFailureHandler(json["head"]["error_msg"].string)
+                    return
+                }
+                if handler != nil {
+                    handler!(json)
+                }
+            case .failure(let error):
+                defaultFailureHandler("\(error)")
+            }
+        }
+    }
+    
+    static func postBackEnd(_ method: String, body: [String: Any], successHandler: ((_ json : JSON) -> Void)?,
+                            failedHandler: ((_ result: Error) -> Void)? ) {
         let bodyStr = createBody(method, body: body)
         print(bodyStr)
         var req = URLRequest(url: URL(string: ZJKJ_API_URL)!)
@@ -84,11 +114,11 @@ struct NetworkUtils {
             switch result  {
             case .success(let value):
                 guard response.result.value != nil else {return }
-                if handler != nil {
-                    handler!(JSON(value))
+                if successHandler != nil {
+                    successHandler!(JSON(value))
                 }
             case .failure(let error):
-                print(error)
+                failedHandler!(error)
             }
         }
     }
@@ -108,7 +138,7 @@ struct NetworkUtils {
         params[HEAD] = head
         head[H_SIGN] = generateSign(params: params)
         params[HEAD] = head
-        let str = JSON(params).rawString(.utf8, options: JSONSerialization.WritingOptions.init(rawValue: 0))!
+        let str = JSON(params).rawString(.utf8, options: .init(rawValue: 0))!
         return str
     }
     
@@ -194,6 +224,14 @@ struct NetworkUtils {
             }
         }
     }
+    //
+    public static func defaultFailureHandler(_ msg: String? = "非常抱歉，网络发生错误了,请您稍后再试@~@,") {
+        let vc = UIApplication.topViewController()
+        let uc = UIAlertController(title: "", message: msg ?? "非常抱歉，网络发生错误了,请您稍后再试@~@,", preferredStyle: UIAlertControllerStyle.alert)
+        uc.addAction(UIAlertAction(title: "好的", style: UIAlertActionStyle.default))
+        vc?.present(uc, animated: true, completion: nil)
+    }
+
 }
 
 

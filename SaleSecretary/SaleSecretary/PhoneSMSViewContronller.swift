@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MessageUI
 
 
 class PhoneSMSViewController : UIViewController {
@@ -22,6 +23,8 @@ class PhoneSMSViewController : UIViewController {
     
     let cellId = "phoneSMSCellId"
     
+    fileprivate var customers:[Customer]?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         previewBtn.layer.cornerRadius = 5.0
@@ -30,6 +33,20 @@ class PhoneSMSViewController : UIViewController {
         self.tableView.register(UINib(nibName: "SMSContentTextCell", bundle: nil), forCellReuseIdentifier: CommonTableCell.SMSContetID)
         self.tableView.tableFooterView = UIView(frame:CGRect.zero)
 
+    }
+    
+    var messageVC: MFMessageComposeViewController?
+    
+    @IBAction func confirmAction(_ sender: Any) {
+        if MFMessageComposeViewController.canSendText() {
+            self.messageVC = MFMessageComposeViewController()
+            let contentCell = self.tableView.cellForRow(at: [1,0])
+            self.messageVC?.body = contentCell?.textLabel?.text
+            self.messageVC?.recipients = self.customers?.flatMap({cust in return cust.phone_number![0]})
+            self.messageVC?.messageComposeDelegate = self
+            self.present(messageVC!, animated: true, completion: nil)
+        }
+        
     }
     
 }
@@ -82,5 +99,34 @@ extension PhoneSMSViewController {
         return 120
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let section = indexPath.section
+        if section == 0 {
+            let custSelectVC = UIStoryboard(name: "SMSView", bundle: nil).instantiateViewController(withIdentifier: "CustomerSelectViewController") as! CustomerSelectViewController
+            custSelectVC.delegate = self
+            present(custSelectVC, animated: true) {}
+        }
+    }
+}
+
+extension PhoneSMSViewController: CustomerSelectDelegate, MFMessageComposeViewControllerDelegate {
+    
+    func selectedRecipients(rec: [Customer]) {
+        
+        // let idx = self.tableView.indexPathForSelectedRow
+        self.customers = rec
+        let cell = self.tableView.cellForRow(at: [0, 0])
+        let names = rec.flatMap({$0.name}).joined(separator: "、")
+        cell?.textLabel?.textColor = UIColor.darkText
+        cell?.textLabel?.text = names
+        
+        return
+    }
+    
+    
+    func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
+        self.messageVC?.dismiss(animated: true, completion: nil)
+    }
 }
 

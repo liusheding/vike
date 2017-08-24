@@ -638,14 +638,17 @@
                                 <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal">
                                     <attributedString key="attributedTitle">
-                                        <fragment content="预览保存">
+                                        <fragment content="确认">
                                             <attributes>
-                                                <font key="NSFont" size="18" name="STKaiti"/>
+                                                <font key="NSFont" size="17" name=".PingFangSC-Regular"/>
                                                 <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                             </attributes>
                                         </fragment>
                                     </attributedString>
                                 </state>
+                                <connections>
+                                    <action selector="confirmAction:" destination="SGL-i7-l49" eventType="touchUpInside" id="gjn-eq-XuR"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

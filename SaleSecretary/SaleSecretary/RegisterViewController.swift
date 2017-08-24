@@ -16,7 +16,41 @@ class RegisterViewController: UIViewController,UITextFieldDelegate {
     @IBOutlet weak var smsCheck: UITextField!
     @IBOutlet weak var imageCheck: UITextField!
     @IBOutlet weak var recommendCode: UITextField!
-
+    @IBOutlet weak var registerBtn: UIButton!
+    @IBOutlet weak var smsBtn: UIButton!
+    
+    var timer: Timer?
+    
+    var remaining: Int = 0 {
+        
+        willSet {
+            if newValue <= 0 {
+                self.smsBtn.isEnabled = true
+                self.smsBtn.setTitle("获取验证码", for: .normal)
+                self.isCounting = false
+            } else {
+                self.smsBtn.isEnabled = false
+                // self.smsBtn.titleLabel?.font = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
+                self.smsBtn.titleLabel?.text = "剩余\(newValue)秒"
+                self.smsBtn.setTitle("剩余\(newValue)秒", for: .disabled)
+            }
+        }
+    }
+    
+    var isCounting: Bool = false {
+        
+        willSet {
+            if newValue {
+                // 计时器
+                self.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: Selector(("countingDown")), userInfo: nil, repeats: true)
+                remaining = 30
+            } else {
+                self.timer?.invalidate()
+                self.timer = nil
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         backgroundView.layer.borderColor = UIColor.lightGray.cgColor
@@ -122,7 +156,42 @@ class RegisterViewController: UIViewController,UITextFieldDelegate {
         self.dismiss(animated: true, completion: nil)
     }
     
+    @IBAction func registerUser(_ sender: UIButton) {
+        sender.isEnabled = false
+        let phoneValue = phone.text
+        let pwdValue = password.text
+        if phoneValue == nil || phoneValue == "" || phoneValue?.lengthOfBytes(using: .utf8) != 11 || pwdValue == nil || pwdValue == "" {
+            alert("请填写正确的手机号及密码")
+            sender.isEnabled = true
+            return
+        }
+        let body = ["busi_scene": "REGISTER", "cellphoneNumber": phoneValue, "loginPwd": pwdValue]
+        let request = NetworkUtils.postBackEnd("C_USER", body: body , handler: {[weak self] (val ) in
+            self?.alert("\(val)")
+        })
+        request.response(completionHandler: {_ in sender.isEnabled = true})
+    }
+    
+    @IBAction func smsCode(_ sender: UIButton) {
+        let phoneValue:String = phone.text!
+        if Utils.isTelNumber(num: phoneValue) {
+            self.alert("请填写正确的手机号")
+            return
+        }
+        self.isCounting = true
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    func alert(_ msg: String) {
+        let uc = UIAlertController(title: "", message: msg, preferredStyle: UIAlertControllerStyle.alert)
+        uc.addAction(UIAlertAction(title: "好的", style: UIAlertActionStyle.default))
+        self.present(uc, animated: true, completion: nil)
+        return
+    }
+    
+    func countingDown() {
+        self.remaining -= 1
     }
 }

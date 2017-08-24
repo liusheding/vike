@@ -49,7 +49,7 @@ extension HelpViewController: UITableViewDelegate,UITableViewDataSource{
         let cell = UITableViewCell(style: .value1, reuseIdentifier: "helpCell")
         cell.textLabel?.text = self.titles[indexPath.row]
         if indexPath.row == self.titles.count - 1{
-            cell.detailTextLabel?.text = "400-400-400"
+            cell.detailTextLabel?.text = "400-0737-553"
             cell.selectionStyle = .none
         }else{
             cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator

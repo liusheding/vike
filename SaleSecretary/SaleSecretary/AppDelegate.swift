@@ -10,6 +10,13 @@ import UIKit
 import CoreData
 import DropDown
 
+
+
+let APP_USER_KEY = "APP_USER_ID"
+var APP_USER_ID: String?
+
+var APP_USER: AppUser?
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate,WXApiDelegate {
 
@@ -20,10 +27,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate,WXApiDelegate {
         DropDown.startListeningToKeyboard()
 //        UINavigationBar.appearance().barTintColor = APP_THEME_COLOR
         UINavigationBar.appearance().tintColor = APP_THEME_COLOR
-        // UINavigationBar.appearance().colo
-        let storyBoard = UIStoryboard(name: "Login", bundle: nil)
-        let walletVC = storyBoard.instantiateViewController(withIdentifier: "LoginID")
-        self.window?.rootViewController = walletVC
+        // UserDefaults.standard.setValue(nil, forKey: "APP_USER_ID")
+        APP_USER_ID = UserDefaults.standard.string(forKey: "APP_USER_ID")
+        if APP_USER_ID == nil {
+            let storyBoard = UIStoryboard(name: "Login", bundle: nil)
+            let walletVC = storyBoard.instantiateViewController(withIdentifier: "LoginID")
+            self.window?.rootViewController = walletVC
+        }
         WXApi.registerApp("wx3cd741c2be80a27d")
         NetworkUtils.refreshAipAccessToken()
         
