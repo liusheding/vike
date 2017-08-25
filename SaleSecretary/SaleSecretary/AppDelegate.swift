@@ -49,7 +49,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,WXApiDelegate {
         }
         
         // 启动JPushSDK 正式发布时apsForProduction参数改为true
-        JPUSHService.setup(withOption: nil, appKey: "204a82c5075eeec5f4120a9d",channel: "AppStore", apsForProduction: false)
+        JPUSHService.setup(withOption: nil, appKey: "c06a7098971e360662a2d990",channel: "AppStore", apsForProduction: false)
         
         JPUSHService.setBadge(0)
         application.applicationIconBadgeNumber = 0
