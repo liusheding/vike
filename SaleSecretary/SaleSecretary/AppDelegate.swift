@@ -31,8 +31,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate,WXApiDelegate {
         APP_USER_ID = UserDefaults.standard.string(forKey: "APP_USER_ID")
         if APP_USER_ID == nil {
             let storyBoard = UIStoryboard(name: "Login", bundle: nil)
-            let walletVC = storyBoard.instantiateViewController(withIdentifier: "LoginID")
-            self.window?.rootViewController = walletVC
+            let loginVC = storyBoard.instantiateViewController(withIdentifier: "LoginID")
+            self.window?.rootViewController = loginVC
+        } else {
+            let request = AppUser.loadFromServer(callback: { (user) in
+                AppUser.currentUser = user
+            })
         }
         WXApi.registerApp("wx3cd741c2be80a27d")
         NetworkUtils.refreshAipAccessToken()

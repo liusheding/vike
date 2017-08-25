@@ -73,7 +73,6 @@ struct NetworkUtils {
     
     static func postBackEnd(_ method: String, body: [String: Any], handler: ((_ json : JSON) -> Void)?) -> DataRequest {
         let bodyStr = createBody(method, body: body)
-        print(bodyStr)
         var req = URLRequest(url: URL(string: ZJKJ_API_URL)!)
         req.httpMethod = HTTPMethod.post.rawValue
         req.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -81,11 +80,11 @@ struct NetworkUtils {
         return Alamofire.request(req).responseJSON {
             response in
             let result = response.result
-            print(result)
             switch result  {
             case .success(let value):
                 guard response.result.value != nil else {return }
                 let json = JSON(value)
+                print(json)
                 let code = json["head"]["error_code"].string
                 if code != "0" {
                     defaultFailureHandler(json["head"]["error_msg"].string)

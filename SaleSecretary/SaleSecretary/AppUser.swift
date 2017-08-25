@@ -14,14 +14,14 @@ enum UserRole:String {
     case PTYWY = "业务员"
     case YJDLS = "一级代理商"
     case EJDLS = "二级代理商"
-    case HK    = "客户"
+    case KH    = "客户"
     
     static func fromString(str: String?) -> UserRole? {
         if str == "PTYWY" {return .PTYWY}
-        if str == "YJDLS" {return .YJDLS}
-        if str == "EJDLS" {return .EJDLS}
-        if str == "HK" {return .HK}
-        return nil
+        else if str == "YJDLS" {return .YJDLS}
+        else if str == "EJDLS" {return .EJDLS}
+        else if str == "KH" {return .KH}
+        else {return nil}
     }
 }
 
@@ -54,6 +54,7 @@ class AppUser: NSObject {
         self.name = response["name"].string
         self.cellphoneNumber = response["cellphoneNumber"].string
         self.role = UserRole.fromString(str: response["roleCode"].string)
+        self.referralCode = response["referralCode"].string
         self.body = response
     }
     

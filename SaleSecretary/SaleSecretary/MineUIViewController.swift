@@ -51,10 +51,11 @@ class MineUIViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0{
             let cell = tableView.dequeueReusableCell(withIdentifier: mineInfoID, for: indexPath) as! MineInfoCell
-            cell.name.text = "指尖小王"
-            cell.phone.text = "12345678901"
-            cell.job.text = "业务员"
-            cell.invitecode.text = "12459"
+            let user = AppUser.currentUser
+            cell.name.text = user?.name == "" ? "未知姓名" :  user?.name
+            cell.phone.text = user?.cellphoneNumber
+            cell.job.text = user?.role?.rawValue
+            cell.invitecode.text = user?.referralCode
             cell.inviteBtn.addTarget(self, action: #selector(clickInviteBtn), for: .touchUpInside)
             cell.selectionStyle = UITableViewCellSelectionStyle.none
             return cell

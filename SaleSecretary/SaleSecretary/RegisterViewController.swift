@@ -158,23 +158,24 @@ class RegisterViewController: UIViewController,UITextFieldDelegate {
     
     @IBAction func registerUser(_ sender: UIButton) {
         sender.isEnabled = false
-        let phoneValue = phone.text
-        let pwdValue = password.text
-        if phoneValue == nil || phoneValue == "" || phoneValue?.lengthOfBytes(using: .utf8) != 11 || pwdValue == nil || pwdValue == "" {
-            alert("请填写正确的手机号及密码")
+        let phoneValue = phone.text!
+        let pwdValue = password.text!
+        let nameValue = name.text!
+        if !Utils.isTelNumber(num: phoneValue) || pwdValue == "" || nameValue == "" {
+            alert("请填写正确的手机号、姓名及密码")
             sender.isEnabled = true
             return
         }
-        let body = ["busi_scene": "REGISTER", "cellphoneNumber": phoneValue, "loginPwd": pwdValue]
+        let body = ["busi_scene": "REGISTER", "cellphoneNumber": phoneValue, "loginPwd": pwdValue, "name": nameValue]
         let request = NetworkUtils.postBackEnd("C_USER", body: body , handler: {[weak self] (val ) in
-            self?.alert("\(val)")
+            self?.alert("注册成功")
         })
         request.response(completionHandler: {_ in sender.isEnabled = true})
     }
     
     @IBAction func smsCode(_ sender: UIButton) {
         let phoneValue:String = phone.text!
-        if Utils.isTelNumber(num: phoneValue) {
+        if !Utils.isTelNumber(num: phoneValue) {
             self.alert("请填写正确的手机号")
             return
         }
