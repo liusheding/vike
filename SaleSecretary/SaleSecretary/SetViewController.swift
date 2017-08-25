@@ -64,12 +64,23 @@ extension SetViewController: UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         if indexPath.section == self.titles.count - 1{
-            print("退出登录")
+            logout()
         }else{
             let storyBoard = UIStoryboard(name: "MineView", bundle: nil)
             let identifier = self.identifiers[indexPath.section]
             let walletVC = storyBoard.instantiateViewController(withIdentifier: identifier)
             self.navigationController?.pushViewController(walletVC, animated: true)
         }
+    }
+    
+    func logout() {
+        
+        let alertController = UIAlertController(title: "退出", message: "确定要退出吗？",
+                                                preferredStyle: .actionSheet)
+        let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
+        let deleteAction = UIAlertAction(title: "退出登录", style: .destructive, handler: {_ in AppUser.logout()})
+        alertController.addAction(cancelAction)
+        alertController.addAction(deleteAction)
+        self.present(alertController, animated: true, completion: nil)
     }
 }

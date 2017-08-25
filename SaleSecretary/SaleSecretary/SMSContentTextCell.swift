@@ -10,6 +10,7 @@ import UIKit
 
 class SMSContentTextCell: UITableViewCell {
     
+    @IBOutlet weak var textView: UITextView!
     
     override func awakeFromNib() {
         super.awakeFromNib()

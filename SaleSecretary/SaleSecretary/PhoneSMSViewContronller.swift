@@ -40,8 +40,8 @@ class PhoneSMSViewController : UIViewController {
     @IBAction func confirmAction(_ sender: Any) {
         if MFMessageComposeViewController.canSendText() {
             self.messageVC = MFMessageComposeViewController()
-            let contentCell = self.tableView.cellForRow(at: [1,0])
-            self.messageVC?.body = contentCell?.textLabel?.text
+            let contentCell = self.tableView.cellForRow(at: [1,0]) as! SMSContentTextCell
+            self.messageVC?.body =  contentCell.textView.text
             self.messageVC?.recipients = self.customers?.flatMap({cust in return cust.phone_number![0]})
             self.messageVC?.messageComposeDelegate = self
             self.present(messageVC!, animated: true, completion: nil)

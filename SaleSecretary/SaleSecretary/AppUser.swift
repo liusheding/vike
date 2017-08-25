@@ -62,6 +62,15 @@ class AppUser: NSObject {
     var body: JSON?
     
     
+    public static func loadFromServer(callback: @escaping ((AppUser)-> Void) ) -> DataRequest? {
+        let id:String? = UserDefaults.standard.string(forKey: APP_USER_KEY)
+        if let _id = id {
+            return fromId(id: _id, callback: callback)
+        }
+        return nil
+    }
+    
+    
     public static func fromId(id: String, callback: @escaping ((AppUser)-> Void)) -> DataRequest? {
         let body:[String: Any] = ["busi_scene": "USER_INFO", "id": id]
         
@@ -82,6 +91,15 @@ class AppUser: NSObject {
             let user = AppUser(response: response)
             callback(user)
         })
+    }
+    
+    
+    public static func logout() {
+        APP_USER_ID = nil
+        UserDefaults.standard.setValue(nil, forKey: APP_USER_KEY)
+        let storyBoard = UIStoryboard(name: "Login", bundle: nil)
+        let loginVC = storyBoard.instantiateViewController(withIdentifier: "LoginID")
+        UIApplication.shared.delegate?.window??.rootViewController = loginVC
     }
     
     
