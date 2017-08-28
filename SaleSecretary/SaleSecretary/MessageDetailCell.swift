@@ -19,7 +19,7 @@ class MessageDetailCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = UITableViewCellSelectionStyle.none
-        self.imageview.image = UIImage(named: "bg_chat.png")
+        self.imageview.image = UIImage(named: "bg_chat")
         self.imageview.superview?.sendSubview(toBack: self.imageview)
     }
 

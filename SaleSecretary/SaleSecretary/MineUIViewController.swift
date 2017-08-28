@@ -87,6 +87,17 @@ class MineUIViewController: UITableViewController {
         self.navigationController?.pushViewController(walletVC, animated: true)
     }
     
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?
+    {
+        var vHeight = 20
+        if section == 0{
+            vHeight = 10
+        }
+        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: Int(tableView.bounds.size.width), height: vHeight))
+        headerView.backgroundColor = UIColor.clear
+        return headerView
+    }
+    
     func clickInviteBtn(){
         let shareView = ShareView.init(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT))
         shareView.showInViewController(self)

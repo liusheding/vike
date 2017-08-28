@@ -19,8 +19,8 @@
                 <rect key="frame" x="0.0" y="0.0" width="340" height="185.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BYi-dV-Jzt">
-                        <rect key="frame" x="114" y="5" width="112" height="14"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BYi-dV-Jzt">
+                        <rect key="frame" x="35" y="5" width="81" height="14"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="14" id="9ot-lW-k8L"/>
                             <constraint firstAttribute="width" priority="999" constant="98" id="r82-eD-VL2"/>
@@ -44,9 +44,11 @@
                         <color key="textColor" white="0.1438259548611111" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" alpha="0.29999999999999999" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ZpF-Ff-Z1t">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ZpF-Ff-Z1t">
                         <rect key="frame" x="12" y="27" width="316" height="143.5"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                    </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_time" highlightedImage="icon_time" translatesAutoresizingMaskIntoConstraints="NO" id="08T-EW-ufX">
+                        <rect key="frame" x="10" y="4" width="20" height="20"/>
                     </imageView>
                 </subviews>
                 <constraints>
@@ -55,17 +57,22 @@
                     <constraint firstAttribute="trailing" secondItem="ZpF-Ff-Z1t" secondAttribute="trailing" constant="12" id="1UD-bX-TcS"/>
                     <constraint firstItem="L6E-wO-Amy" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="128" id="5zv-Mm-lW1"/>
                     <constraint firstAttribute="trailing" secondItem="GpR-Iu-a1N" secondAttribute="trailing" constant="17" id="BBy-t7-lFv"/>
+                    <constraint firstItem="BYi-dV-Jzt" firstAttribute="leading" secondItem="08T-EW-ufX" secondAttribute="trailing" constant="5" id="D47-iq-QDm"/>
                     <constraint firstAttribute="bottom" secondItem="ZpF-Ff-Z1t" secondAttribute="bottom" constant="15" id="DKu-ri-GLi"/>
                     <constraint firstAttribute="bottom" secondItem="GpR-Iu-a1N" secondAttribute="bottom" constant="27" id="EFg-9W-UcP"/>
                     <constraint firstItem="ZpF-Ff-Z1t" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="12" id="HSL-tZ-mOC"/>
+                    <constraint firstItem="08T-EW-ufX" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="4" id="L0S-ja-m1h"/>
                     <constraint firstAttribute="trailingMargin" secondItem="L6E-wO-Amy" secondAttribute="trailing" constant="128" id="M8N-uK-f0W"/>
-                    <constraint firstItem="BYi-dV-Jzt" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="114" id="SVh-eu-xXB"/>
+                    <constraint firstItem="BYi-dV-Jzt" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="35" id="SVh-eu-xXB"/>
                     <constraint firstItem="ZpF-Ff-Z1t" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="27" id="WvT-GR-S0s"/>
                     <constraint firstItem="L6E-wO-Amy" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="25" id="fnj-xs-jT1"/>
-                    <constraint firstAttribute="trailing" secondItem="BYi-dV-Jzt" secondAttribute="trailing" constant="114" id="mqu-eG-YXx"/>
+                    <constraint firstAttribute="trailing" secondItem="BYi-dV-Jzt" secondAttribute="trailing" constant="224" id="mqu-eG-YXx"/>
+                    <constraint firstItem="GpR-Iu-a1N" firstAttribute="top" secondItem="08T-EW-ufX" secondAttribute="bottom" constant="35" id="rUQ-UE-oO3"/>
+                    <constraint firstItem="08T-EW-ufX" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="t8t-W3-oEG"/>
                     <constraint firstItem="GpR-Iu-a1N" firstAttribute="top" secondItem="BYi-dV-Jzt" secondAttribute="bottom" constant="40" id="yp9-qP-gUI"/>
                 </constraints>
             </tableViewCellContentView>
+            <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <connections>
                 <outlet property="cellcontent" destination="GpR-Iu-a1N" id="I91-I6-BdJ"/>
                 <outlet property="celltime" destination="BYi-dV-Jzt" id="RuN-Tg-nUy"/>
@@ -75,4 +82,7 @@
             <point key="canvasLocation" x="41" y="92"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="icon_time" width="19" height="19"/>
+    </resources>
 </document>
