@@ -123,6 +123,11 @@ class PayViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let bgView = UIView(frame:CGRect(x: 0,y: 65,width: UIScreen.main.bounds.size.width,height: 200))
+        bgView.backgroundColor = UIColor.white
+        self.view.addSubview(bgView)
+        self.view.sendSubview(toBack: bgView)
+        
         buttons = [button1, button2, button3, button4, button5, button6]
         labels = [btn1_label1, btn1_label2, btn2_label1, btn2_label2, btn3_label1, btn3_label2, btn4_label1, btn4_label2, btn5_label1, btn5_label2, btn6_label1, btn6_label2]
         

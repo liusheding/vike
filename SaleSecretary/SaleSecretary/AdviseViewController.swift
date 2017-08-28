@@ -17,24 +17,23 @@ class AdviseViewController: UIViewController {
         super.viewDidLoad()
         
         let bgView = UIView(frame:CGRect(x: 0,y: 75,width: UIScreen.main.bounds.size.width,height: 160))
-        bgView.layer.borderWidth = 1
-        bgView.layer.borderColor = UIColor.groupTableViewBackground.cgColor //边框颜色
+        bgView.backgroundColor = UIColor.white
         
-        let textView = UITextView(frame:CGRect(x: 10,y: 10,width: UIScreen.main.bounds.size.width - 20,height: 130))
+        let textView = UITextView(frame:CGRect(x: 0,y: 0,width: UIScreen.main.bounds.size.width,height: 130))
         textView.font = UIFont.systemFont(ofSize: 15)
         textView.returnKeyType = UIReturnKeyType.send
         
         textView.delegate = self
         textView.isScrollEnabled = true
         
-        self.placeholderLabel.frame = CGRect(x:5, y:5, width:UIScreen.main.bounds.size.width - 20, height:20)
+        self.placeholderLabel.frame = CGRect(x:5, y:5, width:UIScreen.main.bounds.size.width, height:20)
         self.placeholderLabel.font = UIFont.systemFont(ofSize: 15)
         self.placeholderLabel.text = "描述问题出现的情况或者操作步骤"
         self.placeholderLabel.textColor = UIColor.darkGray
         textView.addSubview(self.placeholderLabel)
         bgView.addSubview(textView)
         
-        self.wordcount.frame = CGRect(x:UIScreen.main.bounds.size.width - 80, y:145, width:70, height:10)
+        self.wordcount.frame = CGRect(x:UIScreen.main.bounds.size.width - 80, y:140, width:70, height:10)
         self.wordcount.font = UIFont.systemFont(ofSize: 13)
         self.wordcount.text = "0/1000"
         self.wordcount.textColor = UIColor.darkGray

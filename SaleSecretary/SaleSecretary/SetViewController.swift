@@ -18,7 +18,7 @@ class SetViewController: UIViewController {
         super.viewDidLoad()
         
         tableView.tableFooterView = UIView()
-        tableView.separatorColor = UIColor.groupTableViewBackground
+        tableView.backgroundColor = UIColor.groupTableViewBackground
         tableView.delegate = self
         tableView.dataSource = self
         
@@ -48,6 +48,13 @@ extension SetViewController: UITableViewDelegate,UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 10
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?
+    {
+        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: 10))
+        headerView.backgroundColor = UIColor.clear
+        return headerView
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
