@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Toast_Swift
 import SwiftyJSON
 
 enum NLPWordNE: String {
@@ -80,7 +79,7 @@ class ScanResultViewController: UIViewController, ScanORCResultDelegate {
         for w in words! { //识别的前文本处理
             var s = w.replacingOccurrences(of: " ", with: "")
             if s.lengthOfBytes(using: .utf8) < 2 { continue }
-            s += " "
+            s += ","
             str += s
         }
         print(str)

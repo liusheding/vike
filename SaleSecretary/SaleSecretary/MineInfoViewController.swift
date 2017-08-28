@@ -22,6 +22,7 @@ class MineInfoViewController: UIViewController {
         name.textColor = UIColor.darkGray
         phone.textColor = UIColor.darkGray
         job.textColor = UIColor.darkGray
+        let user = AppUser.currentUser
         name.text = "指尖小王"
         phone.text = "12345678901"
         job.text = "业务员"

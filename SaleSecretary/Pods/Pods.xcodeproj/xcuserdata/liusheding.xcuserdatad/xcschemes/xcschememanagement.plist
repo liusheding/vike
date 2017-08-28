@@ -19,6 +19,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>MBProgressHUD.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-SaleSecretary.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -44,11 +49,6 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Toast-Swift.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>YBAttributeTextTapAction.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -57,7 +57,7 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>0CD5F1CBAE043A79970C36328FA5AA2D</key>
+		<key>17C52C13C4418F1B7583D7D543028FCC</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -67,12 +67,32 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>41FA54D12162DAD51D02FC58A2CD5034</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>491F83BD660AE38A6A1E6495E033ED3F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>4FC74C37BCD3EBA7AFB3888004A2893A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>5168099F2EBFC99A707C03C9EADE01A5</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>70990A7E00733E92C986B988E7773FB2</key>
+		<key>62BFF90944B16F1F5A87D63B4A95BE68</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>65E9FA9E79D1EED12615EFA4722F0681</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -82,27 +102,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>940B2990CEA0638605FE37573184A6AA</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>ADC5A0FEEE7019BA38D35E3EADB58751</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>C07C600F5418394F1AF65EE7D77F7A47</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>CB6E3030E15CC59A79C168DF9E16EFC1</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>D2E86F00075E1A92E7CEF03246EDD86D</key>
+		<key>9A195FF55DF0BA918A9C922309F3462E</key>
 		<dict>
 			<key>primary</key>
 			<true/>

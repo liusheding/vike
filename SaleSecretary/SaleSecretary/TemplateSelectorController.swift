@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import MBProgressHUD
 
 class TemplateSelectorController: UIViewController {
     

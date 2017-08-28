@@ -628,6 +628,7 @@
 				66C7848F1F41B1760067B476 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		FFDAF4321E49C9EF00AB65B7 /* Build configuration list for PBXProject "AipOcrSdk" */ = {
 			isa = XCConfigurationList;

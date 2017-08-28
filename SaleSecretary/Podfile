@@ -11,5 +11,5 @@ target "SaleSecretary" do
     pod 'SnapKit', '3.0.2'
     pod 'DropDown'
     pod 'YBAttributeTextTapAction'
-    pod 'Toast-Swift', '~> 2.0.0'
+    pod 'MBProgressHUD', '~> 1.0.0'
 end

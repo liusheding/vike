@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Toast_Swift
 import AipBase
 import AipOcrSdk
 import SwiftyJSON
@@ -123,7 +122,7 @@ class ToolsUIViewController : UITableViewController {
         } else {
             // 其他
             NetworkUtils.requestNLPLexer("刘社定，湖南指尖科技有限公司，18619283902", successHandler: nil)
-            self.navigationController?.view.makeToast("正在研发中，敬请期待...", duration: 1.5, position: .bottom)
+            // self.navigationController?.view.makeToast("正在研发中，敬请期待...", duration: 1.5, position: .bottom)
         }
         
     
@@ -185,6 +184,6 @@ extension ToolsUIViewController: AipOcrDelegate {
 
     
     func ocr(onFail error: Error!) {
-       self.navigationController?.view.makeToast("识别失败，请稍后再重试！")
+        // self.navigationController?.view.makeToast("识别失败，请稍后再重试！")
     }
 }
