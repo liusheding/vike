@@ -53,7 +53,7 @@ class WalletDetailController: UITableViewController {
         }else{
             cell.money.textColor = UIColor.black
         }
-        
+        cell.selectionStyle = .none
         return cell
     }
 

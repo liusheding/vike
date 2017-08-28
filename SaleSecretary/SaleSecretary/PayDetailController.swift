@@ -45,7 +45,7 @@ class PayDetailController: UITableViewController {
         cell.title.text = self.RecordData[indexPath.row]["title"]
         cell.time.text = self.RecordData[indexPath.row]["time"]
         cell.money.text = self.RecordData[indexPath.row]["record"]
-        
+        cell.selectionStyle = .none
         return cell
     }
 }
