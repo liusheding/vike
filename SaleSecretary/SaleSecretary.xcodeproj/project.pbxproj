@@ -115,6 +115,7 @@
 		6EF19C5D1F3BF9E000646BCF /* MineUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF19C5C1F3BF9E000646BCF /* MineUIViewController.swift */; };
 		6EF2A1EA1F4EDD4F0059DB59 /* ChangePwdController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF2A1E91F4EDD4F0059DB59 /* ChangePwdController.swift */; };
 		6EF2A1EC1F4EDD710059DB59 /* MineInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF2A1EB1F4EDD710059DB59 /* MineInfoViewController.swift */; };
+		6EF2A1EE1F5017D60059DB59 /* AdviseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF2A1ED1F5017D60059DB59 /* AdviseViewController.swift */; };
 		6EF2B7851F3EC7B400C808EE /* PayDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF2B7841F3EC7B400C808EE /* PayDetailController.swift */; };
 		6EF2B7871F3EC7F400C808EE /* PayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF2B7861F3EC7F400C808EE /* PayViewController.swift */; };
 		6EF2B78A1F3ECB1D00C808EE /* PayDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF2B7881F3ECB1D00C808EE /* PayDetailCell.swift */; };
@@ -315,6 +316,7 @@
 		6EF19C5C1F3BF9E000646BCF /* MineUIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MineUIViewController.swift; sourceTree = "<group>"; };
 		6EF2A1E91F4EDD4F0059DB59 /* ChangePwdController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePwdController.swift; sourceTree = "<group>"; };
 		6EF2A1EB1F4EDD710059DB59 /* MineInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MineInfoViewController.swift; sourceTree = "<group>"; };
+		6EF2A1ED1F5017D60059DB59 /* AdviseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdviseViewController.swift; sourceTree = "<group>"; };
 		6EF2B7841F3EC7B400C808EE /* PayDetailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PayDetailController.swift; sourceTree = "<group>"; };
 		6EF2B7861F3EC7F400C808EE /* PayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PayViewController.swift; sourceTree = "<group>"; };
 		6EF2B7881F3ECB1D00C808EE /* PayDetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PayDetailCell.swift; sourceTree = "<group>"; };
@@ -684,6 +686,7 @@
 				6EF2B7841F3EC7B400C808EE /* PayDetailController.swift */,
 				6EF2B7861F3EC7F400C808EE /* PayViewController.swift */,
 				6EF2B78E1F41390B00C808EE /* UserManageViewController.swift */,
+				6EF2A1ED1F5017D60059DB59 /* AdviseViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -1196,6 +1199,7 @@
 				E7B2A2721F39FE76001D8C61 /* CTrailViewController.swift in Sources */,
 				6615BF6E1F3413EA0052879B /* TableViewCell.swift in Sources */,
 				6615BF6C1F34134C0052879B /* CustomerModel.swift in Sources */,
+				6EF2A1EE1F5017D60059DB59 /* AdviseViewController.swift in Sources */,
 				6EF2B78F1F41390B00C808EE /* UserManageViewController.swift in Sources */,
 				6647E8C91F3AEDCE0053AFF3 /* NetworkUtils.swift in Sources */,
 				6EBAA54F1F3C2E480099DA89 /* MineInfoCell.swift in Sources */,
