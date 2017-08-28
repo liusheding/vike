@@ -116,7 +116,7 @@ class ShareView: UIView,UIScrollViewDelegate {
         let message = WXMediaMessage()
         message.title = "销小秘"
         message.description = "握在手心里的小秘 带你走上人生巅峰"
-        message.setThumbImage(UIImage(named:"logo"))
+        message.setThumbImage(UIImage(named:"logo_xxm"))
         
         let ext = WXWebpageObject()
         ext.webpageUrl = "http://www.zj.vc"

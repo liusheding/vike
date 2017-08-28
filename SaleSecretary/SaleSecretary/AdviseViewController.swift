@@ -21,7 +21,7 @@ class AdviseViewController: UIViewController {
         bgView.layer.borderColor = UIColor.groupTableViewBackground.cgColor //边框颜色
         
         let textView = UITextView(frame:CGRect(x: 10,y: 10,width: UIScreen.main.bounds.size.width - 20,height: 130))
-        textView.font = UIFont.boldSystemFont(ofSize: 15)
+        textView.font = UIFont.systemFont(ofSize: 15)
         textView.returnKeyType = UIReturnKeyType.send
         
         textView.delegate = self

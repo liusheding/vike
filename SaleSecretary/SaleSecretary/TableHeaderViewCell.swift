@@ -36,7 +36,7 @@ class TableHeaderViewCell:UITableViewCell
         self.label = UILabel(frame:CGRect(x: CGFloat((UIScreen.main.bounds.size.width - self.frame.size.width) / 2), y: CGFloat(-8), width: self.frame.size.width, height: height))
         
         self.label.text = text
-        self.label.font = UIFont.boldSystemFont(ofSize: 15)
+        self.label.font = UIFont.systemFont(ofSize: 15)
         
         self.label.textAlignment = NSTextAlignment.center
         self.label.shadowOffset = CGSize(width: 0, height: 1)
