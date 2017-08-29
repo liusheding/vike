@@ -26,11 +26,19 @@ class UserManageViewController: UIViewController {
         searchBar.setValue("取消", forKey: "_cancelButtonText")
         searchBar.tintColor = APP_THEME_COLOR
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellId)
+        
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "新增客户", style: .plain, target: self, action: #selector(clickAddBtn))
 
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    func clickAddBtn(){
+        let storyBoard = UIStoryboard(name: "MineView", bundle: nil)
+        let walletVC = storyBoard.instantiateViewController(withIdentifier: "addUserID")
+        self.navigationController?.pushViewController(walletVC, animated: true)
     }
     
     // 构造数据 [ 0 : A , 1: B ] B:[ 0: a , 1: b ]
@@ -99,17 +107,30 @@ extension UserManageViewController: UITableViewDelegate, UITableViewDataSource, 
 //        cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
         
         cell.accessoryView = UIView(frame: CGRect(x: 0, y: 0, width: 48, height: 48))
-        let callButton = UIButton(frame:CGRect(x: 18,y:15,width: 18,height: 18))
-        callButton.setBackgroundImage(UIImage(named:"icon_bh"), for: .normal)
-        callButton.addTarget(self, action: #selector(clickCallBtn), for: .touchUpInside)
-        cell.accessoryView?.addSubview(callButton)
+        let callImage = UIImageView(image:UIImage(named:"icon_bh"))
+        callImage.frame = CGRect(x: 32, y: 15, width: 16, height: 18)
+        cell.accessoryView?.addSubview(callImage)
         return cell
     }
     
-    func clickCallBtn(_ sender:UIButton){
-        print("1111111111")
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let group = self.contactsCells[indexPath.section]
+        let customer = group.friends?[indexPath.row] as? User
+        let phone = customer?.phone
+        if phone! == ""{
+            return
+        }
+        let urlString = "tel://\(phone!)"
+        if let url = URL(string: urlString) {
+            //根据iOS系统版本，分别处理
+            if #available(iOS 10, *) {
+                UIApplication.shared.open(url, options: [:],completionHandler: {(success) in})
+            } else {
+                UIApplication.shared.openURL(url)
+            }
+        }
     }
-    
 }
 
 extension UserManageViewController: UISearchBarDelegate {

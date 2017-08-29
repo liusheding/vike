@@ -171,6 +171,24 @@
             </objects>
             <point key="canvasLocation" x="236" y="895"/>
         </scene>
+        <!--新增客户-->
+        <scene sceneID="7UE-KE-vCo">
+            <objects>
+                <tableViewController storyboardIdentifier="addUserID" title="新增客户" id="5tf-fJ-kqh" customClass="AddUserViewController" customModule="SaleSecretary" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="R33-pl-uiD">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <connections>
+                            <outlet property="dataSource" destination="5tf-fJ-kqh" id="TAz-bR-SRn"/>
+                            <outlet property="delegate" destination="5tf-fJ-kqh" id="G07-EQ-cB6"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MH1-Mg-hUJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1212" y="1648"/>
+        </scene>
         <!--个人资料-->
         <scene sceneID="yem-OK-zSW">
             <objects>
