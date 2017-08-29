@@ -90,9 +90,9 @@ class MineUIViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?
     {
-        var vHeight = 20
+        var vHeight = 10
         if section == 0{
-            vHeight = 10
+            vHeight = 5
         }
         let headerView = UIView(frame: CGRect(x: 0, y: 0, width: Int(tableView.bounds.size.width), height: vHeight))
         headerView.backgroundColor = UIColor.clear
