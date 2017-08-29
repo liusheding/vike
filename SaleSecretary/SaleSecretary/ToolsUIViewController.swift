@@ -98,7 +98,7 @@ class ToolsUIViewController : UITableViewController {
         // cell.setValue(dict?["id"], forKey: "id")
         cell.imageView?.image = UIImage(named: (dict!["image"]!))
         cell.textLabel?.text = dict!["label"]
-        cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
+        cell.textLabel?.font = UIFont.systemFont(ofSize: 17)
         // cell.toolLabel.text = dict!["label"]
         cell.accessoryType = .disclosureIndicator
         return cell
