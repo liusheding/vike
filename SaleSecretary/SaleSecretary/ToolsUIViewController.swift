@@ -97,6 +97,7 @@ class ToolsUIViewController : UITableViewController {
         // 
         // cell.setValue(dict?["id"], forKey: "id")
         cell.imageView?.image = UIImage(named: (dict!["image"]!))
+        // cell.imageView?.sizeThatFits(<#T##size: CGSize##CGSize#>)
         cell.textLabel?.text = dict!["label"]
         cell.textLabel?.font = UIFont.systemFont(ofSize: 17)
         // cell.toolLabel.text = dict!["label"]
@@ -106,9 +107,9 @@ class ToolsUIViewController : UITableViewController {
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == 0 {
-            return 10
+            return 5
         } else {
-            return 20
+            return 10
         }
         
     }

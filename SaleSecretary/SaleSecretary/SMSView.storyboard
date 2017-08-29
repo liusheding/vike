@@ -137,11 +137,12 @@
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="moreBarItem" destination="pe4-hy-7Yb" id="TLv-b2-nM6"/>
+                        <outlet property="tableView" destination="eww-Ql-xQB" id="UV4-hz-AhK"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JOl-yu-qsL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-692" y="-188"/>
+            <point key="canvasLocation" x="-791" y="-188"/>
         </scene>
         <!--添加短信计划-->
         <scene sceneID="wsI-Ot-Y1S">

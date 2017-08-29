@@ -12,7 +12,7 @@ import RxSwift
 import RxCocoa
 
 private let kActionViewWidth: CGFloat = 140   //container view width
-private let kActionViewHeight: CGFloat = 116    //container view height
+private let kActionViewHeight: CGFloat = 34   //container view height
 private let kActionButtonHeight: CGFloat = 34   //button height
 private let kFirstButtonY: CGFloat = 12 //the first button Y value
 
@@ -73,11 +73,12 @@ class CustomerPopUpView: UIView {
         let containerView : UIView = UIView()
         containerView.backgroundColor = UIColor.clear
         self.addSubview(containerView)
+        
         containerView.snp.makeConstraints { (make) -> Void in
             make.top.equalTo(self.snp.top).offset(3)
             make.right.equalTo(self.snp.right).offset(-5)
             make.width.equalTo(kActionViewWidth)
-            make.height.equalTo(kActionViewHeight)
+            make.height.equalTo(kActionViewHeight * CGFloat(titles.count) + CGFloat(14))
         }
         //Init bgImageView
         let stretchInsets = UIEdgeInsetsMake(14, 6, 6, 34)

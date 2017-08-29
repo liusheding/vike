@@ -17,15 +17,14 @@ class SMSUIViewController : UITableViewController {
     
     fileprivate var cellId = "SMSListCell"
     
-    
     @IBOutlet weak var moreBarItem: UIBarButtonItem!
     
-    let moreDrop = DropDown()
+    var moreDrop: CustomerPopUpView!
     
     
     @IBAction func moreActions(_ sender: UIBarButtonItem) {
-        moreDrop.show()
-        
+        print("tapped")
+        self.moreDrop.hide(!self.moreDrop.isHidden)
     }
     
     
@@ -36,6 +35,10 @@ class SMSUIViewController : UITableViewController {
         
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        self.moreDrop.hide(true)
+    }
     
     
     var images = ["pic_qf", "pic_zdy", "pic_jjr"]
@@ -69,13 +72,38 @@ class SMSUIViewController : UITableViewController {
 extension SMSUIViewController  {
     
     
+    static func visibleWindow() -> UIWindow? {
+        var currentWindow = UIApplication.shared.keyWindow
+        
+        if currentWindow == nil {
+            let frontToBackWindows = Array(UIApplication.shared.windows.reversed())
+            
+            for window in frontToBackWindows {
+                if window.windowLevel == UIWindowLevelNormal {
+                    currentWindow = window
+                    break
+                }
+            }
+        }
+        
+        return currentWindow
+    }
+    
     fileprivate func setUp() {
         self.tableView.tableFooterView = UIView()
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        self.tableView.backgroundColor = APP_BACKGROUND_COLOR
+        self.view.backgroundColor = APP_BACKGROUND_COLOR
         self.tableView.register(UINib(nibName: "SMSListViewCell", bundle: nil), forCellReuseIdentifier: cellId)
-        moreDrop.anchorView = self.moreBarItem
+        // moreDrop.anchorView = self.moreBarItem
         let appearance = DropDown.appearance()
+        self.moreDrop =  CustomerPopUpView(titles: ["新的执行计划", "短信模板"], images: ["icon_xjzxjh", "icon_mlmb"])
+        let window = SMSUIViewController.visibleWindow()
+        window?.addSubview(moreDrop)
+        self.moreDrop.snp.makeConstraints { (make) -> Void in
+            make.edges.equalTo(UIEdgeInsetsMake(64, 0, 0, 0))
+        }
         appearance.backgroundColor = UIColor(white: 1, alpha: 1)
         appearance.selectionBackgroundColor = UIColor(red: 0.6494, green: 0.8155, blue: 1.0, alpha: 0.2)
         //		appearance.separatorColor = UIColor(white: 0.7, alpha: 0.8)
@@ -85,25 +113,26 @@ extension SMSUIViewController  {
         appearance.shadowRadius = 25
         appearance.animationduration = 0.25
         appearance.textColor = .darkGray
-        moreDrop.dataSource = ["新建执行计划", "模板目录"]
-        moreDrop.selectionAction = { [unowned self] (index, item) in
-            print("click \(index), \(item) ")
-            if index == 0 {
-                self.performSegue(withIdentifier: "addMsgSchedule", sender: self)
-            } else if index == 1 {
-//                NetworkUtils.postBackEnd("R_BASE_TXL_CUS_GROUP", body: ["id" : "15dc14f554af466f99b946cc495bd772"]) {
-//                    json in
-//                    print("call back : \(json)")
-//                }
-                let vc = UIStoryboard(name: "SMSView", bundle: nil).instantiateViewController(withIdentifier: "TemplateSelectorController") as! TemplateSelectorController
-                self.navigationController?.pushViewController(vc, animated: true)
-            }
-        }
+        moreDrop.delegate = self
+//        moreDrop.dataSource = ["新建执行计划", "模板目录"]
+//        moreDrop.selectionAction = { [unowned self] (index, item) in
+//            print("click \(index), \(item) ")
+//            if index == 0 {
+//                self.performSegue(withIdentifier: "addMsgSchedule", sender: self)
+//            } else if index == 1 {
+////                NetworkUtils.postBackEnd("R_BASE_TXL_CUS_GROUP", body: ["id" : "15dc14f554af466f99b946cc495bd772"]) {
+////                    json in
+////                    print("call back : \(json)")
+////                }
+//                let vc = UIStoryboard(name: "SMSView", bundle: nil).instantiateViewController(withIdentifier: "TemplateSelectorController") as! TemplateSelectorController
+//                self.navigationController?.pushViewController(vc, animated: true)
+//            }
+//        }
         
     }
 }
 
-extension SMSUIViewController  {
+extension SMSUIViewController {
     
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -132,9 +161,9 @@ extension SMSUIViewController  {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+         tableView.deselectRow(at: indexPath, animated: true)
         self.performSegue(withIdentifier: "showSMSDetailRel", sender: tableView.cellForRow(at: indexPath))
         // self.performSegue(withIdentifier: <#T##String#>, sender: <#T##Any?#>)
-        print("select cell \(indexPath)")
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -142,4 +171,21 @@ extension SMSUIViewController  {
         return 1
     }
     
+}
+
+extension SMSUIViewController: ActionFloatViewDelegate {
+    func floatViewTapItemIndex(_ type: ActionFloatViewItemType) {
+        switch type.rawValue {
+        case 0:
+            self.performSegue(withIdentifier: "addMsgSchedule", sender: self)
+            break
+        case 1:
+            let vc = UIStoryboard(name: "SMSView", bundle: nil).instantiateViewController(withIdentifier: "TemplateSelectorController") as! TemplateSelectorController
+            self.navigationController?.pushViewController(vc, animated: true)
+            break
+        default:
+            print("unexcepted tap action")
+            break
+        }
+    }
 }
