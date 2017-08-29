@@ -29,14 +29,14 @@ class AdviseViewController: UIViewController {
         self.placeholderLabel.frame = CGRect(x:5, y:5, width:UIScreen.main.bounds.size.width, height:20)
         self.placeholderLabel.font = UIFont.systemFont(ofSize: 15)
         self.placeholderLabel.text = "描述问题出现的情况或者操作步骤"
-        self.placeholderLabel.textColor = UIColor.darkGray
+        self.placeholderLabel.textColor = UIColor.lightGray
         textView.addSubview(self.placeholderLabel)
         bgView.addSubview(textView)
         
         self.wordcount.frame = CGRect(x:UIScreen.main.bounds.size.width - 80, y:140, width:70, height:10)
         self.wordcount.font = UIFont.systemFont(ofSize: 13)
         self.wordcount.text = "0/1000"
-        self.wordcount.textColor = UIColor.darkGray
+        self.wordcount.textColor = UIColor.lightGray
         self.wordcount.textAlignment = .right
         bgView.addSubview(self.wordcount)
         

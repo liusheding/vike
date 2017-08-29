@@ -38,7 +38,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         backgroundView.layer.borderColor = UIColor.lightGray.cgColor
         phone.borderStyle = .none
+        phone.placeholder = "手机号"
         password.borderStyle = .none
+        password.placeholder = "密码"
         password.isSecureTextEntry=true
         // checknum.borderStyle = .none
         

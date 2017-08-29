@@ -21,12 +21,17 @@ class FindPwdViewController: UIViewController,UITextFieldDelegate {
         backgroundView.layer.borderColor = UIColor.lightGray.cgColor
         
         phone.borderStyle = .none
+        phone.placeholder = "手机号"
         password.borderStyle = .none
+        password.placeholder = "重置密码"
         confirmPwd.borderStyle = .none
+        confirmPwd.placeholder = "确认密码"
         password.isSecureTextEntry=true
         confirmPwd.isSecureTextEntry=true
         smsCheck.borderStyle = .none
+        smsCheck.placeholder = "短信验证码"
         imageCheck.borderStyle = .none
+        imageCheck.placeholder = "图形验证码"
         
         phone.delegate = self
         smsCheck.delegate = self

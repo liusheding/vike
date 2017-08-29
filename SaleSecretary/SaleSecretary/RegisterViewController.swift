@@ -56,12 +56,18 @@ class RegisterViewController: UIViewController,UITextFieldDelegate {
         backgroundView.layer.borderColor = UIColor.lightGray.cgColor
         
         phone.borderStyle = .none
+        phone.placeholder = "手机号"
         name.borderStyle = .none
+        name.placeholder = "姓名"
         password.borderStyle = .none
+        password.placeholder = "密码"
         password.isSecureTextEntry=true
         smsCheck.borderStyle = .none
+        smsCheck.placeholder = "短信验证码"
         imageCheck.borderStyle = .none
+        imageCheck.placeholder = "图形验证码"
         recommendCode.borderStyle = .none
+        recommendCode.placeholder = "推荐码"
         
         phone.delegate = self
         smsCheck.delegate = self
