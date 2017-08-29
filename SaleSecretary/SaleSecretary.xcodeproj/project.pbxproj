@@ -39,6 +39,7 @@
 		664B998E1F3DA8CB00968AA5 /* SMSTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 664B998D1F3DA8CB00968AA5 /* SMSTemplate.swift */; };
 		664B999A1F3DBE5700968AA5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 664B999C1F3DBE5700968AA5 /* InfoPlist.strings */; };
 		669A33951F4EBF4400C61F3B /* AppUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669A33941F4EBF4400C61F3B /* AppUser.swift */; };
+		669A33971F54F94B00C61F3B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669A33961F54F94B00C61F3B /* Constants.swift */; };
 		66AB590B1F3C65E8005FB30F /* ico_make.png in Resources */ = {isa = PBXBuildFile; fileRef = 66AB59081F3C65E8005FB30F /* ico_make.png */; };
 		66AB590C1F3C65E8005FB30F /* JSDropDownMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 66AB590A1F3C65E8005FB30F /* JSDropDownMenu.m */; };
 		66AB590E1F3C65FA005FB30F /* TemplateSelectorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AB590D1F3C65FA005FB30F /* TemplateSelectorController.swift */; };
@@ -236,6 +237,7 @@
 		664B999D1F3DBE5900968AA5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		664B999E1F3DBE5A00968AA5 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		669A33941F4EBF4400C61F3B /* AppUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppUser.swift; sourceTree = "<group>"; };
+		669A33961F54F94B00C61F3B /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		66AB59081F3C65E8005FB30F /* ico_make.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ico_make.png; sourceTree = "<group>"; };
 		66AB59091F3C65E8005FB30F /* JSDropDownMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSDropDownMenu.h; sourceTree = "<group>"; };
 		66AB590A1F3C65E8005FB30F /* JSDropDownMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSDropDownMenu.m; sourceTree = "<group>"; };
@@ -637,6 +639,7 @@
 				6647E8CB1F3AFEE90053AFF3 /* CryptoHeader.m */,
 				6647E8CA1F3AFEE80053AFF3 /* SaleSecretary-Bridging-Header.h */,
 				66AB59111F3D53AB005FB30F /* Extensions.swift */,
+				669A33961F54F94B00C61F3B /* Constants.swift */,
 			);
 			name = Others;
 			sourceTree = "<group>";
@@ -1154,6 +1157,7 @@
 				6E20EC951F341B4500A0F29E /* MessageItem.swift in Sources */,
 				E754DC941F3D4E3D0025DBBE /* CTAddNewTableViewController.swift in Sources */,
 				66BF592B1F3075E800154E8C /* SMSAddViewController.swift in Sources */,
+				669A33971F54F94B00C61F3B /* Constants.swift in Sources */,
 				6EBAA5441F3C03240099DA89 /* MineViewCell.swift in Sources */,
 				45BDDB34CBA326F0F1C1F3CBB472F1DE /* AppDelegate.swift in Sources */,
 				6EF2B7951F418E8600C808EE /* UserManageHeaderView.swift in Sources */,

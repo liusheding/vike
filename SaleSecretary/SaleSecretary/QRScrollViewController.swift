@@ -71,6 +71,7 @@ extension QRScrollViewController: UIScrollViewDelegate {
         let index = offsetX / width
         
         // print("scrollViewDidEndDecelerating,\(width), \(offsetX), \(index)")
+        // scrollView.inputView?.backgroundColor = UIColor.groupTableViewBackground
         
         self.pageControl.currentPage = Int(index)
         

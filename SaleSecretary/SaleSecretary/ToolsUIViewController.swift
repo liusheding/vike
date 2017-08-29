@@ -10,6 +10,7 @@ import UIKit
 import AipBase
 import AipOcrSdk
 import SwiftyJSON
+import MBProgressHUD
 
 
 let AIP_APP_KEY = "A5BKNDgXQavsP5O2HpTXPP1X"
@@ -46,6 +47,8 @@ class ToolsUIViewController : UITableViewController {
         self.tableView.tableFooterView = UIView()
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        self.view.backgroundColor = APP_BACKGROUND_COLOR
+        self.tableView.backgroundColor = APP_BACKGROUND_COLOR
         self.tableView.register(UINib(nibName: String(describing: ToolCellView.self), bundle: nil), forCellReuseIdentifier: cellId)
         // self.tableView.register(MessageListCell.self, forCellReuseIdentifier: "MessageListID")
         // CSToastManager.setQueueEnabled(true)
@@ -56,7 +59,7 @@ class ToolsUIViewController : UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return CGFloat(60)
+        return CGFloat(55)
     }
     
     
@@ -69,6 +72,12 @@ class ToolsUIViewController : UITableViewController {
         return (self.toolCells[section]?.count)!
     }
     
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
+        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: Int(tableView.bounds.size.width), height: 10))
+        headerView.backgroundColor = UIColor.clear
+        return headerView
+    }
     
     
     private var toolCells = [
@@ -83,12 +92,15 @@ class ToolsUIViewController : UITableViewController {
         // _ = curIdx(sec: secNum)
         let rowNo = indexPath.row
         let dict = self.toolCells[secNum]?[rowNo]
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! ToolCellView
+        let cell = UITableViewCell(style: .default, reuseIdentifier: cellId)
         // cell.setValue(value: dict?["id"], forKey: "id")
         // 
         // cell.setValue(dict?["id"], forKey: "id")
-        cell.toolImage.image = UIImage(named: (dict!["image"]!))
-        cell.toolLabel.text = dict!["label"]
+        cell.imageView?.image = UIImage(named: (dict!["image"]!))
+        cell.textLabel?.text = dict!["label"]
+        cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
+        // cell.toolLabel.text = dict!["label"]
+        cell.accessoryType = .disclosureIndicator
         return cell
     }
     
@@ -97,6 +109,24 @@ class ToolsUIViewController : UITableViewController {
             return 10
         } else {
             return 20
+        }
+        
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        if section == 2 {
+            return 5
+        }
+        return 0
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        if section == 2 {
+            let footView = UIView(frame: CGRect(x: 0, y: 0, width: Int(tableView.bounds.size.width), height: 5))
+            footView.backgroundColor = UIColor.clear
+            return footView
+        } else {
+            return nil
         }
         
     }
@@ -121,11 +151,17 @@ class ToolsUIViewController : UITableViewController {
             // self.present(vc, animated: true, completion: nil)
         } else {
             // 其他
-            NetworkUtils.requestNLPLexer("刘社定，湖南指尖科技有限公司，18619283902", successHandler: nil)
+            // NetworkUtils.requestNLPLexer("刘社定，湖南指尖科技有限公司，18619283902", successHandler: nil)
             // self.navigationController?.view.makeToast("正在研发中，敬请期待...", duration: 1.5, position: .bottom)
+            
+            let view = UIApplication.topViewController()?.view
+            let hub = MBProgressHUD.showAdded(to: view!, animated: true)
+            hub.mode = MBProgressHUDMode.text
+            hub.label.text = "正在研发中，敬请期待..."
+            // hub.offset = CGPoint(x: 0, y: MBProgressMaxOffset - 100)
+            hub.show(animated: true)
+            hub.hide(animated: true, afterDelay: 1.5)
         }
-        
-    
     }
     
     private func curIdx(sec: Int) -> Int {

@@ -24,4 +24,3 @@ extension UIColor {
     }
 }
 
-public let APP_THEME_COLOR = UIColor(valueRGB: 0x01B414)

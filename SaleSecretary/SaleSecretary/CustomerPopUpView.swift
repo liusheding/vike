@@ -29,31 +29,45 @@ class CustomerPopUpView: UIView {
     */
     override init (frame: CGRect) {
         super.init(frame : frame)
-        self.initContent()
+        self.initContent(titles: [], images: [])
     }
     
-    convenience init () {
+    convenience init (titles: [String], images: [String]) {
         self.init(frame:CGRect.zero)
-        self.initContent()
+        self.initContent(titles: titles, images: images)
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
-    fileprivate func initContent() {
+    fileprivate func initContent(titles: [String], images: [String]) {
         self.backgroundColor = UIColor.clear
-        let actionImages = [
-            UIImage(imageLiteralResourceName: "contacts_add_friend"),
-            UIImage(imageLiteralResourceName: "contacts_add_friend"),
-            UIImage(imageLiteralResourceName: "contacts_add_groupmessage")
-        ]
+        var actionImages: [UIImage] = []
+        for i in images {
+            actionImages.append(UIImage(imageLiteralResourceName: i))
+        }
+        //  UIImage(imageLiteralResourceName: "contacts_add_friend"),
+        //  UIImage(imageLiteralResourceName: "contacts_add_friend"),
+        //  UIImage(imageLiteralResourceName: "contacts_add_groupmessage")
         
-        let actionTitles = [
-            "同步通讯录",
-            "分组管理",
-            "批量处理"
-        ]
+        //        let actionTitles = [
+        //            "同步通讯录",
+        //            "分组管理",
+        //            "批量处理"
+        //        ]
+        let actionTitles: [String] = titles
+//        let actionImages = [
+//            UIImage(imageLiteralResourceName: "contacts_add_friend"),
+//            UIImage(imageLiteralResourceName: "contacts_add_friend"),
+//            UIImage(imageLiteralResourceName: "contacts_add_groupmessage")
+//        ]
+//        
+//        let actionTitles = [
+//            "同步通讯录",
+//            "分组管理",
+//            "批量处理"
+//        ]
         
         //Init containerView
         let containerView : UIView = UIView()

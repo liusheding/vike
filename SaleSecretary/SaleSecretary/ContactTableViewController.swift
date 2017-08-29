@@ -81,7 +81,15 @@ class ContactTableViewController: UIViewController {
         self.searchBarLocal.tintColor = APP_THEME_COLOR
         
         // init pop up view (float)
-        self.ctMoreItemView = CustomerPopUpView()
+        
+        //  UIImage(imageLiteralResourceName: "contacts_add_friend"),
+        //  UIImage(imageLiteralResourceName: "contacts_add_friend"),
+        //  UIImage(imageLiteralResourceName: "contacts_add_groupmessage")
+        
+        let imagesResouces = ["contacts_add_friend", "contacts_add_friend", "contacts_add_groupmessage"]
+        let actionTitles = ["同步通讯录", "分组管理", "批量处理"]
+        
+        self.ctMoreItemView = CustomerPopUpView(titles: actionTitles, images: imagesResouces)
         self.ctMoreItemView.delegate = self as? ActionFloatViewDelegate
         self.view.addSubview(self.ctMoreItemView)
         self.ctMoreItemView.snp.makeConstraints { (make) -> Void in
