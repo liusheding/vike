@@ -576,7 +576,7 @@
                             <constraint firstItem="KyA-xF-w0S" firstAttribute="bottom" secondItem="yh5-P5-vqY" secondAttribute="top" id="zD0-Ng-D0o"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="模板" id="y6H-sQ-h1k">
+                    <navigationItem key="navigationItem" title="短信模板" id="y6H-sQ-h1k">
                         <barButtonItem key="rightBarButtonItem" title="确认" id="4Xe-Cw-EWi">
                             <connections>
                                 <action selector="confirmSelection:" destination="2VU-kh-fcd" id="Wb9-IM-HM4"/>

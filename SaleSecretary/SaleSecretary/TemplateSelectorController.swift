@@ -9,6 +9,27 @@
 import UIKit
 import MBProgressHUD
 
+//var sections: [Section] = [
+//    Section(name: "七夕节", items:[
+//        Item(name:"", detail: txt),
+//        Item(name:"", detail: txt),
+//        Item(name:"", detail: txt),
+//        Item(name:"", detail: txt)
+//        ]),
+//    Section(name: "中秋节", items:[
+//        Item(name:"", detail: txt),
+//        Item(name:"", detail: txt),
+//        Item(name:"", detail: txt)
+//        ]),
+//    Section(name: "国庆节", items:[
+//        Item(name:"", detail: txt),
+//        Item(name:"", detail: txt),
+//        Item(name:"", detail: txt)
+//        ])
+//]
+
+var templateSections: [Section] = []
+
 class TemplateSelectorController: UIViewController {
     
    
@@ -29,13 +50,26 @@ class TemplateSelectorController: UIViewController {
     
     let months: [Month] = Month.allYear()
     
-    let smsTypes = ["祝福类", "营销类", "自定义"]
+    var smsTypes:[[String]]?  {
+        get {
+            let _json = NetworkUtils.getDictionary(key: "DXMBLX")?.dictionaryValue
+            if let json = _json  {
+                let keys:[String] = [""] + json.flatMap({(key, _) in return key})
+                let values:[String] = ["全部"] + json.flatMap({(_, value) in return value.stringValue})
+                return [keys, values]
+            }
+            return [[""], ["全部"]]
+        }
+    }
     
     lazy var menus: [[Any]] = { [unowned self] in
-        return [self.months, self.smsTypes]
+        return [self.months, self.smsTypes![1]]
     }()
     
     var indexForColumTypes: Int = 0
+    
+    // var sections:[Section] = []
+    
     
     
     
@@ -48,6 +82,7 @@ class TemplateSelectorController: UIViewController {
     //
     var tableCanSelected: Bool = false
 
+    
     
     
     override func viewDidLoad() {
@@ -74,6 +109,7 @@ class TemplateSelectorController: UIViewController {
         if !tableCanSelected {
             self.confirmBtn.title = nil
         }
+        self.loadData()
         
     }
     
@@ -97,6 +133,23 @@ class TemplateSelectorController: UIViewController {
     
     }
     
+    func loadData() {
+        
+        if templateSections.count > 0 { return }
+        
+        let hub: MBProgressHUD = MBProgressHUD.showAdded(to: self.view, animated: true)
+        
+        hub.label.text = "正在加载中..."
+        
+        DispatchQueue.global(qos: .userInitiated).async {
+            sleep(3)
+            let request = NetworkUtils.postBackEnd("R_PAGED_QUERY_DXMB", body: ["pageSize": "20"]) {
+                json in
+                print(json)
+            }
+            request.response(completionHandler: { _ in hub.hide(animated: true)})
+        }
+    }
     
     
 }
@@ -195,35 +248,13 @@ class TamplateTableViewDelegator: NSObject ,UITableViewDataSource, UITableViewDe
     
     var selectedPath : IndexPath?
     
-    var sections: [Section] = [
-        Section(name: "七夕节", items:[
-            Item(name:"", detail: txt),
-            Item(name:"", detail: txt),
-            Item(name:"", detail: txt),
-            Item(name:"", detail: txt)
-        ]),
-        Section(name: "中秋节", items:[
-            Item(name:"", detail: txt),
-            Item(name:"", detail: txt),
-            Item(name:"", detail: txt)
-        ]),
-        Section(name: "我的模板", items:[
-            Item(name:"", detail: txt),
-            Item(name:"", detail: txt),
-            Item(name:"", detail: txt)
-        ])
-    ]
-    
-    let unSelectedImage = UIImageView(image: UIImage(named: "ico_wxz"))
-    let doSelectedImage = UIImageView(image: UIImage(named: "ico_xz_1"))
-    
     public init(_ tableView : UITableView, controller: TemplateSelectorController) {
         self.tableView = tableView
         self.controller = controller
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return sections.count
+        return templateSections.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -231,14 +262,13 @@ class TamplateTableViewDelegator: NSObject ,UITableViewDataSource, UITableViewDe
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return sections[section].collapsed ? 0 : sections[section].items.count
+        return templateSections[section].collapsed ? 0 : templateSections[section].items.count
     }
     
     // Cell
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: CollapsibleTableViewCell = CollapsibleTableViewCell(style: .subtitle , reuseIdentifier: "cell")
-        
-        let item: Item = sections[indexPath.section].items[indexPath.row]
+        let item: Item = templateSections[indexPath.section].items[indexPath.row]
         cell.backgroundColor = UIColor.clear
         // cell.nameLabel.text = item.name
         cell.detailLabel.text = item.detail
@@ -254,21 +284,18 @@ class TamplateTableViewDelegator: NSObject ,UITableViewDataSource, UITableViewDe
     // Header
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "header") as? CollapsibleTableViewHeader ?? CollapsibleTableViewHeader(reuseIdentifier: "header")
-        
-        header.titleLabel.text = sections[section].name
+        header.titleLabel.text = templateSections[section].name
         header.arrowLabel.text = ">"
-        header.setCollapsed(sections[section].collapsed)
+        header.setCollapsed(templateSections[section].collapsed)
         header.section = section
         header.delegate = self
         return header
     }
     
     func toggleSection(_ header: CollapsibleTableViewHeader, section: Int) {
-        
-        let collapsed = !sections[section].collapsed
-        
+        let collapsed = !templateSections[section].collapsed
         // Toggle collapse
-        sections[section].collapsed = collapsed
+        templateSections[section].collapsed = collapsed
         header.setCollapsed(collapsed)
         
         tableView.reloadSections(NSIndexSet(index: section) as IndexSet, with: .automatic)

@@ -12,6 +12,7 @@ import SwiftyJSON
 import UIKit
 import AipOcrSdk
 import AipBase
+import MBProgressHUD
 
 
 let ZJKJ_API_URL = "http://112.74.110.182:8080/zjkj-scrm-v1707/api/service.shtml"
@@ -39,6 +40,7 @@ let C_SK = "123456"
 let C_AGENT_NO = "app"
 
 let AIP_TOKEN_URL_FULL = "\(AIP_TOKEN_URL)&client_id=\(AIP_APP_KEY)&client_secret=\(AIP_APP_SK)"
+
 
 
 let gbkEncoding = CFStringConvertEncodingToNSStringEncoding(CFStringEncoding(CFStringEncodings.GB_18030_2000.rawValue))
@@ -94,7 +96,7 @@ struct NetworkUtils {
                     handler!(json)
                 }
             case .failure(let error):
-                defaultFailureHandler("\(error)")
+                defaultFailureHandler()
             }
         }
     }
@@ -230,7 +232,28 @@ struct NetworkUtils {
         uc.addAction(UIAlertAction(title: "好的", style: UIAlertActionStyle.default))
         vc?.present(uc, animated: true, completion: nil)
     }
-
+    
+    
+    public static func requestDictionary() {
+        let _ = postBackEnd("R_BASE_DATA_DIC", body: ["code": "SYS_CONSTANT"], handler: {
+            value in
+            SYS_DATA_DICTIONARY = value["body"]["data"].arrayValue
+        })
+    }
+    
+    
+    public static func getDictionary(key: String) -> JSON? {
+        if SYS_DATA_DICTIONARY == nil {return nil}
+        let dictionary = SYS_DATA_DICTIONARY!
+        for data in dictionary {
+            let k = data["key"].stringValue
+            if k == key {
+                return JSON.parse(data["val"].stringValue)
+            }
+        }
+        return nil
+    }
 }
 
+var SYS_DATA_DICTIONARY: [JSON]?
 

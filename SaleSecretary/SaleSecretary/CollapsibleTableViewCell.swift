@@ -40,7 +40,8 @@ class CollapsibleTableViewCell: UITableViewCell {
     // MARK: Initalizers
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
+        self.backgroundColor = UIColor.white
+        self.contentView.backgroundColor = UIColor.white
         let marginGuide = contentView.layoutMarginsGuide
         contentView.addSubview(detailLabel)
         detailLabel.lineBreakMode = .byWordWrapping

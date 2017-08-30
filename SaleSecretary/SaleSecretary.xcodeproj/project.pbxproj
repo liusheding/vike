@@ -66,6 +66,7 @@
 		66C784D61F457F550067B476 /* ScanResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C784D41F457F550067B476 /* ScanResultCell.swift */; };
 		66C784D71F457F550067B476 /* ScanResultCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 66C784D51F457F550067B476 /* ScanResultCell.xib */; };
 		66C784D91F46DEAB0067B476 /* NLPLoadingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 66C784D81F46DEAB0067B476 /* NLPLoadingView.xib */; };
+		66D001061F569E8A00F005FC /* EmptyContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 66D001051F569E8A00F005FC /* EmptyContentView.xib */; };
 		66D3D0E21F31E7C2005347D0 /* CustomerSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D3D0E11F31E7C2005347D0 /* CustomerSelectViewController.swift */; };
 		66EFA9CB1F4BD9DD0027011F /* CollapsibleImageHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EFA9C91F4BD9DD0027011F /* CollapsibleImageHeaderView.swift */; };
 		66EFA9CC1F4BD9DD0027011F /* CollapsibleTableImageViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EFA9CA1F4BD9DD0027011F /* CollapsibleTableImageViewCell.swift */; };
@@ -269,6 +270,7 @@
 		66C784D41F457F550067B476 /* ScanResultCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanResultCell.swift; sourceTree = "<group>"; };
 		66C784D51F457F550067B476 /* ScanResultCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScanResultCell.xib; sourceTree = "<group>"; };
 		66C784D81F46DEAB0067B476 /* NLPLoadingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NLPLoadingView.xib; sourceTree = "<group>"; };
+		66D001051F569E8A00F005FC /* EmptyContentView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmptyContentView.xib; sourceTree = "<group>"; };
 		66D3D0E11F31E7C2005347D0 /* CustomerSelectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerSelectViewController.swift; sourceTree = "<group>"; };
 		66EFA9C91F4BD9DD0027011F /* CollapsibleImageHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollapsibleImageHeaderView.swift; sourceTree = "<group>"; };
 		66EFA9CA1F4BD9DD0027011F /* CollapsibleTableImageViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollapsibleTableImageViewCell.swift; sourceTree = "<group>"; };
@@ -519,6 +521,7 @@
 				66451F171F332AB8009B65DD /* PlanExecTimeCellView.xib */,
 				66451F191F332D4E009B65DD /* PlanExecTimeCellView.swift */,
 				66C784D81F46DEAB0067B476 /* NLPLoadingView.xib */,
+				66D001051F569E8A00F005FC /* EmptyContentView.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -1078,6 +1081,7 @@
 				6EF5B7291F4582C1001B0A77 /* ExitViewCell.xib in Resources */,
 				6615BF6B1F34134C0052879B /* customerList.plist in Resources */,
 				6EBAA5451F3C03240099DA89 /* MineViewCell.xib in Resources */,
+				66D001061F569E8A00F005FC /* EmptyContentView.xib in Resources */,
 				6E0C8CE91F2EE0C20066885F /* MessageDetailCell.xib in Resources */,
 				66451F181F332AB8009B65DD /* PlanExecTimeCellView.xib in Resources */,
 				662D6A491F3177BA001C1FB1 /* AddNewCustomersCell.xib in Resources */,

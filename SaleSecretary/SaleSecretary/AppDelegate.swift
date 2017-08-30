@@ -57,19 +57,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate,WXApiDelegate {
         
         JPUSHService.setBadge(0)
         application.applicationIconBadgeNumber = 0
-        
-        switch CNContactStore.authorizationStatus(for: .contacts) {
-        case .notDetermined:
-            CNContactStore().requestAccess(for: .contacts){succeeded, err in
-                guard err == nil && succeeded else{
-                    print("sorry , can not get permission! ")
-                    return
+        // 请求通讯录
+        DispatchQueue.global(qos: .userInteractive).async {
+            switch CNContactStore.authorizationStatus(for: .contacts) {
+            case .notDetermined:
+                CNContactStore().requestAccess(for: .contacts){succeeded, err in
+                    guard err == nil && succeeded else{
+                        print("sorry , can not get permission! ")
+                        return
+                    }
                 }
+            default:
+                print("Not handled")
             }
-        default:
-            print("Not handled")
         }
-        
+        // 后端加载数据字典
+        DispatchQueue.global(qos: .background).async {
+            NetworkUtils.requestDictionary()
+        }
         
         return true
     }
