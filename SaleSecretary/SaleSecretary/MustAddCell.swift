@@ -15,6 +15,8 @@ class MustAddCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         inputtext.borderStyle = .none
+        inputtext.adjustsFontSizeToFitWidth = true  //当文字超出文本框宽度时，自动调整文字大小
+        inputtext.minimumFontSize = 14  //最小可缩小的字号
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

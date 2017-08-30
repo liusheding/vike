@@ -97,6 +97,14 @@ class AddUserViewController: UITableViewController {
         }
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 0 && indexPath.row == 5{
+            let shooseView = ChooseDateView.init(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT))
+            shooseView.showInViewController(self)
+
+        }
+    }
+    
     func clickSaveBtn(){
         for (index, text) in inputtext.enumerated(){
             if index == 0 && text.text! == ""{
