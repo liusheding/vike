@@ -25,9 +25,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate,WXApiDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         DropDown.startListeningToKeyboard()
-//        UINavigationBar.appearance().barTintColor = APP_THEME_COLOR
         UINavigationBar.appearance().tintColor = APP_THEME_COLOR
-        // UserDefaults.standard.setValue(nil, forKey: "APP_USER_ID")
+        
+        //读取用户信息
         APP_USER_ID = UserDefaults.standard.string(forKey: "APP_USER_ID")
         if APP_USER_ID == nil {
             let storyBoard = UIStoryboard(name: "Login", bundle: nil)
@@ -38,7 +38,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate,WXApiDelegate {
                 AppUser.currentUser = user
             }
         }
+        // 微信注册
         WXApi.registerApp("wx3cd741c2be80a27d")
+        // 获取
         NetworkUtils.refreshAipAccessToken()
         
         //通知类型（这里将声音、消息、提醒角标都给加上）

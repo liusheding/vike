@@ -8,6 +8,7 @@
 
 import UIKit
 import MBProgressHUD
+import SwiftyJSON
 
 //var sections: [Section] = [
 //    Section(name: "七夕节", items:[
@@ -28,7 +29,7 @@ import MBProgressHUD
 //        ])
 //]
 
-var templateSections: [Section] = []
+fileprivate var templateSections: [Section] = []
 
 class TemplateSelectorController: UIViewController {
     
@@ -68,10 +69,6 @@ class TemplateSelectorController: UIViewController {
     
     var indexForColumTypes: Int = 0
     
-    // var sections:[Section] = []
-    
-    
-    
     
     // 模板tableview代理，需要跟UISearchBar分开
     var templateViewDelegate: TamplateTableViewDelegator?
@@ -81,9 +78,11 @@ class TemplateSelectorController: UIViewController {
     
     //
     var tableCanSelected: Bool = false
-
     
     
+    fileprivate var currentMonth: Int = 13
+    
+    fileprivate var currentType: Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -135,23 +134,48 @@ class TemplateSelectorController: UIViewController {
     
     func loadData() {
         
-        if templateSections.count > 0 { return }
-        
         let hub: MBProgressHUD = MBProgressHUD.showAdded(to: self.view, animated: true)
-        
         hub.label.text = "正在加载中..."
-        
         DispatchQueue.global(qos: .userInitiated).async {
-            sleep(3)
-            let request = NetworkUtils.postBackEnd("R_PAGED_QUERY_DXMB", body: ["pageSize": "20"]) {
-                json in
-                print(json)
+            [unowned self] in
+            var body: [String: Any] = [:]
+            if self.currentMonth != 12 {
+                body["month"] = String(self.currentMonth + 1)
             }
-            request.response(completionHandler: { _ in hub.hide(animated: true)})
+            if self.currentType != 0 {
+                body["type"] = self.smsTypes?[0][self.currentType]
+            }
+            let request = NetworkUtils.postBackEnd("R_QUERY_DXMB", body: body) {
+                json in
+                let array:[JSON]? = json["body"].array
+                templateSections = self.toSections(array)
+            }
+            request.response(completionHandler: { _ in
+                hub.hide(animated: true)
+                self.tableView.reloadData()
+            })
         }
     }
     
-    
+    func toSections(_ array: [JSON]?) -> [Section] {
+        var _sec:[Section] = []
+        if let arr = array {
+            for s in arr {
+                let name = s["name"].stringValue
+                let list = s["list"].arrayValue
+                var items: [Item] = []
+                for item in list {
+                    items.append(Item(name: "", detail: item["content"].stringValue))
+                }
+                _sec.append(Section(name: name, items: items))
+            }
+        }
+        return _sec
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        templateSections = []
+    }
 }
 
 extension TemplateSelectorController: JSDropDownMenuDataSource, JSDropDownMenuDelegate {
@@ -206,10 +230,22 @@ extension TemplateSelectorController: JSDropDownMenuDataSource, JSDropDownMenuDe
     }
     
     func menu(_ menu: JSDropDownMenu!, didSelectRowAt indexPath: JSIndexPath!) {
+        var needReload = false
         if indexPath.column == 1 {
             self.indexForColumTypes = indexPath.row
+            if indexPath.row != self.currentType {
+                self.currentType = indexPath.row
+                needReload = true
+            }
+        } else {
+            if indexPath.row != self.currentMonth {
+                self.currentMonth = indexPath.row
+                needReload = true
+            }
         }
-        print(indexPath)
+        if needReload {
+            self.loadData()
+        }
     }
 }
 

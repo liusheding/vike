@@ -79,6 +79,7 @@ struct NetworkUtils {
         req.httpMethod = HTTPMethod.post.rawValue
         req.setValue("application/json", forHTTPHeaderField: "Content-Type")
         req.httpBody = bodyStr.data(using: .utf8)! as Data
+        req.timeoutInterval = 10
         return Alamofire.request(req).responseJSON {
             response in
             let result = response.result
@@ -95,7 +96,7 @@ struct NetworkUtils {
                 if handler != nil {
                     handler!(json)
                 }
-            case .failure(let error):
+            case .failure(_):
                 defaultFailureHandler()
             }
         }
