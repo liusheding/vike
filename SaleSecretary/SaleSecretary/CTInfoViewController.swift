@@ -49,10 +49,10 @@ extension CTInfoViewController : UITableViewDelegate , UITableViewDataSource {
             cell.detailTextLabel?.text = dataCell[i] as? String
         case 1:
             cell.textLabel?.text = "称谓"
-            cell.detailTextLabel?.text = "xxxx"
+            cell.detailTextLabel?.text = data.userInfo.nick_name
         case 2:
             cell.textLabel?.text = "分组"
-            cell.detailTextLabel?.text = "9999"
+            cell.detailTextLabel?.text = data.userInfo.group_id
         case 3:
             cell.textLabel?.text = "删除"
             cell.detailTextLabel?.text = "delete"

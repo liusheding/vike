@@ -54,10 +54,8 @@ class CustomerHeaderView: UITableViewHeaderFooterView {
     }
     
     func clickGroupTitle() {
-        print("点击了组按钮！！！")
         self.friendGroup.isOpen = !(self.friendGroup.isOpen!)
         delegate?.clickedGroupTitle(headerView: self)
-        NSLog("end clickGroupTitle")
     }
     
     required init?(coder aDecoder: NSCoder) {

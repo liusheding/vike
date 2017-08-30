@@ -11,15 +11,6 @@ import UIKit
 class TableViewCell: UITableViewCell {
 
     @IBOutlet weak var picButton: UIButton!
-    
-//    class func cellWithTableView(tableView:UITableView) -> TableViewCell {
-//        let cellID = "tableViewCell"
-//        var cell = tableView.dequeueReusableCell(withIdentifier: cellID)
-//        if cell == nil {
-//            cell = TableViewCell.init(style: UITableViewCellStyle.subtitle , reuseIdentifier: cellID)
-//        }
-//        return cell as! TableViewCell
-//    }
 
     var customerData:Customer? {
         didSet {
@@ -29,15 +20,6 @@ class TableViewCell: UITableViewCell {
             self.detailTextLabel?.text = customerData!.phone_number?[0]
         }
     }
-    
-    
-//    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-//        super.init(style: style , reuseIdentifier: reuseIdentifier)
-//    }
-//    
-//    required init?(coder aDecoder: NSCoder) {
-//        fatalError("init(coder:) has not been implemented")
-//    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
