@@ -80,7 +80,7 @@ class TemplateSelectorController: UIViewController {
     var tableCanSelected: Bool = false
     
     
-    fileprivate var currentMonth: Int = 13
+    fileprivate var currentMonth: Int = 12
     
     fileprivate var currentType: Int = 0
     

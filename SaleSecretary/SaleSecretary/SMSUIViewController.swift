@@ -9,7 +9,7 @@
 import UIKit
 import Foundation
 import DropDown
-import os.log
+import MBProgressHUD
 
 class SMSUIViewController : UITableViewController {
     
@@ -98,7 +98,7 @@ extension SMSUIViewController  {
         self.tableView.register(UINib(nibName: "SMSListViewCell", bundle: nil), forCellReuseIdentifier: cellId)
         // moreDrop.anchorView = self.moreBarItem
         let appearance = DropDown.appearance()
-        self.moreDrop =  CustomerPopUpView(titles: ["新的执行计划", "短信模板"], images: ["icon_xjzxjh", "icon_mlmb"])
+        self.moreDrop =  CustomerPopUpView(titles: ["新的执行计划", "短信模板", "我的模板"], images: ["icon_xjzxjh", "icon_mlmb", "icon_mlmb"])
         let window = SMSUIViewController.visibleWindow()
         window?.addSubview(moreDrop)
         self.moreDrop.snp.makeConstraints { (make) -> Void in
@@ -183,6 +183,11 @@ extension SMSUIViewController: ActionFloatViewDelegate {
             let vc = UIStoryboard(name: "SMSView", bundle: nil).instantiateViewController(withIdentifier: "TemplateSelectorController") as! TemplateSelectorController
             self.navigationController?.pushViewController(vc, animated: true)
             break
+        case 2:
+            let hub = MBProgressHUD.showAdded(to: self.view, animated: true)
+            hub.mode = MBProgressHUDMode.text
+            hub.label.text = "我的模板正在紧张研发中，敬请期待。"
+            hub.hide(animated: true, afterDelay: 1.5)
         default:
             print("unexcepted tap action")
             break
