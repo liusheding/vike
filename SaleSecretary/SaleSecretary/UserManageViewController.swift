@@ -27,7 +27,7 @@ class UserManageViewController: UIViewController {
         searchBar.tintColor = APP_THEME_COLOR
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellId)
         
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "新增客户", style: .plain, target: self, action: #selector(clickAddBtn))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "•••", style: .plain, target: self, action: #selector(clickAddBtn))
 
     }
 
@@ -52,8 +52,9 @@ class UserManageViewController: UIViewController {
 extension UserManageViewController: UITableViewDelegate, UITableViewDataSource, UMHeaderViewDelegate {
     
     func clickedGroupTitle(headerView: UserManageHeaderView){
-        let section = NSIndexSet.init(index: headerView.tag) as IndexSet
-        self.tableView.reloadSections(section, with: .automatic)
+//        let section = NSIndexSet.init(index: headerView.tag) as IndexSet
+//        self.tableView.reloadSections(section, with: .automatic)
+        self.tableView.reloadData()
     }
     
     // 每次点击headerView时，改变group的isOpen参数，然后刷新tableview，显示或者隐藏好友信息
@@ -62,7 +63,7 @@ extension UserManageViewController: UITableViewDelegate, UITableViewDataSource, 
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-       return 0
+       return 1
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
