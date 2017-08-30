@@ -16,7 +16,7 @@ class AdviseViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let bgView = UIView(frame:CGRect(x: 0,y: 75,width: UIScreen.main.bounds.size.width,height: 160))
+        let bgView = UIView(frame:CGRect(x: 0,y: 70,width: UIScreen.main.bounds.size.width,height: 160))
         bgView.backgroundColor = UIColor.white
         
         let textView = UITextView(frame:CGRect(x: 0,y: 0,width: UIScreen.main.bounds.size.width,height: 130))

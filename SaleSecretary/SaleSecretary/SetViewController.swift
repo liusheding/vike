@@ -47,6 +47,9 @@ extension SetViewController: UITableViewDelegate,UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if section == 0{
+            return 5
+        }
         return 10
     }
     
