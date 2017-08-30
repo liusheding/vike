@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="j2D-Lg-Ac9">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="j2D-Lg-Ac9">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -43,6 +43,14 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <containerView hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vrj-Fu-iTW">
+                                <rect key="frame" x="30" y="220" width="310" height="240"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <segue destination="3At-dc-Zcb" kind="embed" id="0ZU-Av-1GL"/>
+                                </connections>
+                            </containerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -56,13 +64,15 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="通讯录" id="dbW-jO-H8g">
-                        <barButtonItem key="rightBarButtonItem" image="icon_nav" id="E4w-7h-yCJ">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="E4w-7h-yCJ">
+                            <color key="tintColor" red="0.0039215686269999999" green="0.70588235290000001" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="ctFloatMoreBar:" destination="sEa-Fs-Ett" id="Ce3-HC-u4K"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="chooseGroup" destination="vrj-Fu-iTW" id="3JC-s3-oaU"/>
                         <outlet property="ctMoreBar" destination="E4w-7h-yCJ" id="yYA-I3-Bpa"/>
                         <outlet property="searchBarLocal" destination="szd-wR-P8q" id="Wog-UL-wg0"/>
                         <outlet property="searchDisplayController" destination="BN2-Hc-KJp" id="ha9-P4-kqq"/>
@@ -235,9 +245,81 @@
             </objects>
             <point key="canvasLocation" x="588" y="-418.74062968515744"/>
         </scene>
+        <!--Change Group View Controller-->
+        <scene sceneID="n6A-xL-mmz">
+            <objects>
+                <viewController id="3At-dc-Zcb" customClass="CTChangeGroupViewController" customModule="SaleSecretary" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="zOX-0j-joL"/>
+                        <viewControllerLayoutGuide type="bottom" id="zqn-Ne-g0u"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="AnX-RL-dXg">
+                        <rect key="frame" x="0.0" y="0.0" width="310" height="240"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="分组选择" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nge-aR-KxS">
+                                <rect key="frame" x="58" y="15" width="190" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="f5e-uU-P7O">
+                                <rect key="frame" x="21" y="51" width="270" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="3" minimumInteritemSpacing="2" id="Xom-Yo-lBu">
+                                    <size key="itemSize" width="64" height="47"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="m0v-cF-v5B">
+                                        <rect key="frame" x="0.0" y="0.0" width="64" height="47"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="64" height="47"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </view>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dhz-G3-Mcl">
+                                <rect key="frame" x="68" y="195" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="取消">
+                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="cancelAction:" destination="3At-dc-Zcb" eventType="touchUpInside" id="HMN-Kh-SxU"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NLj-pE-SQZ">
+                                <rect key="frame" x="197" y="195" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="确定">
+                                    <color key="titleColor" red="0.0039215686269999999" green="0.70588235290000001" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="chooseGroupAction:" destination="3At-dc-Zcb" eventType="touchUpInside" id="MLP-2j-CvY"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="cancelButton" destination="Dhz-G3-Mcl" id="xYf-Xe-siy"/>
+                        <outlet property="collectionView" destination="f5e-uU-P7O" id="ggt-BB-UUX"/>
+                        <outlet property="confirmButton" destination="NLj-pE-SQZ" id="0QY-O3-qLB"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ycl-Wr-fVp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2558" y="-656"/>
+        </scene>
     </scenes>
     <resources>
-        <image name="icon_nav" width="23" height="5"/>
         <image name="tab_gj_1" width="20" height="20"/>
         <image name="tab_txl_1" width="20" height="20"/>
         <image name="tab_w_1" width="20" height="20"/>

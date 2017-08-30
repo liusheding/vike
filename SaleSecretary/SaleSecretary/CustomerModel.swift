@@ -19,7 +19,7 @@ class Customer : NSObject{
     var phone_number: [String]?
     var nick_name:    String? // nick name
     var is_solar :    Bool
-    var id :          Int
+    var id :          String
     var group_id :    String
     var gender :      Int   // 0:feman 1:man
     var company :     String
@@ -40,21 +40,21 @@ class Customer : NSObject{
         self.birthday = ""
         self.gender = 1
         self.group_id = ContactCommon.groupDefault as String
-        self.id =  0
+        self.id =  ""
         self.is_solar = true
     }
     
     /* 
      * default : [ gender : 1 , group_id : "默认" , id : 0 , is_solar : true ]
      */
-    init( birth : String , company:String , nick_name:String  , phone_number : [String] , name:String ) {
+    init( birth : String , company:String , nick_name:String  , phone_number : [String] , name:String , id : String ) {
         self.name = name
         self.phone_number = phone_number
         self.nick_name = nick_name
         self.company = company
         self.birthday = birth
         self.is_solar = true
-        self.id = 0
+        self.id = id
         self.group_id = ContactCommon.groupDefault as String
         self.gender = 1
     }
@@ -65,7 +65,7 @@ class Customer : NSObject{
         self.company = ctm.company!
         self.gender = Int(ctm.gender)
         self.group_id = ctm.group_id!
-        self.id = Int(ctm.id)
+        self.id = ctm.id!
         self.is_solar = ctm.is_solar
         self.nick_name = ctm.nick_name
         self.phone_number = ctm.phone_number?.components(separatedBy: ",")

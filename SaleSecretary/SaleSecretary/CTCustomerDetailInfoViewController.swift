@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MessageUI
 
 class CTCustomerDetailInfoViewController: UIViewController {
 
@@ -20,6 +21,7 @@ class CTCustomerDetailInfoViewController: UIViewController {
     
     @IBOutlet weak var customerTrail: UIView!
     
+    var messageVC: MFMessageComposeViewController?
     var segmentView : [UIView] = []
     
     @IBAction func changeSegment(_ sender: Any) {
@@ -49,6 +51,26 @@ class CTCustomerDetailInfoViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    
+    @IBAction func clickCallPhone(_ sender: Any) {
+    
+//        let callWebView = UIWebView()
+//        callWebView.loadRequest(URLRequest(url:URL(string: "tel:\(10086)")!))
+//        self.view.addSubview(callWebView)
+        //2.有提示
+        UIApplication.shared.open(URL(string: "telprompt://"+(self.userInfo.phone_number?[0])!)! , options: [:], completionHandler: nil)
+        
+    }
+    
+    @IBAction func clickMessageButton(_ sender: Any) {
+        if MFMessageComposeViewController.canSendText() {
+            self.messageVC = MFMessageComposeViewController()
+            self.messageVC?.recipients = [(self.userInfo.phone_number?[0])!]
+            self.messageVC?.messageComposeDelegate = self
+            self.present(messageVC!, animated: true, completion: nil)
+        }
+    }
 
     func showSelectedView(_ idx : Int) {
         for (i, e) in segmentView.enumerated() {
@@ -66,5 +88,11 @@ class CTCustomerDetailInfoViewController: UIViewController {
         print(self.segments.frame)
     }
 
+}
+
+extension CTCustomerDetailInfoViewController : MFMessageComposeViewControllerDelegate{
+    func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
+        self.messageVC?.dismiss(animated: true, completion: nil)
+    }
 }
 

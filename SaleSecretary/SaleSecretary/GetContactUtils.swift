@@ -12,6 +12,13 @@ import UIKit
 import Contacts
 
 struct GetContactUtils {
+
+    static let contactStore = CNContactStore()
+    
+    static let keys = [ CNContactFamilyNameKey,CNContactGivenNameKey, CNContactJobTitleKey , CNContactDepartmentNameKey,CNContactNoteKey, CNContactPhoneNumbersKey,
+                 CNContactEmailAddressesKey, CNContactPostalAddressesKey,
+                 CNContactDatesKey, CNContactInstantMessageAddressesKey ,
+                 CNContactNicknameKey , CNContactOrganizationNameKey , CNContactBirthdayKey , CNContactIdentifierKey ]
     
     static func loadContactData() -> [Customer] {
         let status = CNContactStore.authorizationStatus(for: .contacts)
@@ -20,13 +27,7 @@ struct GetContactUtils {
             return []
         }
         var dt : [Customer] = []
-//        let properties = ["birthday","company","gender","group_id","id","is_solar","nick_name","phone_number","name"]
-        let keys = [ CNContactFamilyNameKey,CNContactGivenNameKey, CNContactJobTitleKey , CNContactDepartmentNameKey,CNContactNoteKey, CNContactPhoneNumbersKey,
-                     CNContactEmailAddressesKey, CNContactPostalAddressesKey,
-                     CNContactDatesKey, CNContactInstantMessageAddressesKey ,
-                     CNContactNicknameKey , CNContactOrganizationNameKey , CNContactBirthdayKey ]
-        
-        let request = CNContactFetchRequest(keysToFetch: keys as [CNKeyDescriptor])
+        let request = CNContactFetchRequest(keysToFetch: self.keys as [CNKeyDescriptor])
         
         do {
             try CNContactStore().enumerateContacts(with: request, usingBlock: {
@@ -37,7 +38,7 @@ struct GetContactUtils {
                 let company = contact.organizationName
                 let birthday  = contact.birthday?.date
                 var strBirthday = ""
-                
+                let identifier = contact.identifier
                 if birthday != nil {
                     strBirthday = DateFormatterUtils.getStringFromDate(birthday!, dateFormat: "yyyy-MM-dd")
                 }
@@ -49,7 +50,7 @@ struct GetContactUtils {
                     }
                 }
                 
-                dt.append(Customer.init(birth: strBirthday , company: company , nick_name: nickName , phone_number: pNumber , name: lastName + firstName ) )
+                dt.append(Customer.init(birth: strBirthday , company: company , nick_name: nickName , phone_number: pNumber , name: lastName + firstName , id : identifier) )
             })
         } catch {
             NSLog(error as! String)
@@ -57,6 +58,53 @@ struct GetContactUtils {
         //self.tableView.reloadData()
         NSLog("Get Contacts count : \(dt.count)")
         return dt
+    }
+    
+    
+    static func secondWay2GetContactData() -> [Customer] {
+        var arrContacts = [CNContact]()
+        var allContainers: [CNContainer] = []
+        
+        do {
+            allContainers = try contactStore.containers(matching: nil)
+        } catch {
+            print("Error fetching containers")
+        }
+        // Iterate all containers and append their contacts to our results array
+        for container in allContainers {
+            let fetchPredicate = CNContact.predicateForContactsInContainer(withIdentifier: container.identifier)
+            
+            do {
+                let containerResults = try contactStore.unifiedContacts(matching: fetchPredicate, keysToFetch: self.keys as [CNKeyDescriptor])
+                arrContacts.append(contentsOf: containerResults)
+            } catch {
+                print("Error fetching results for container")
+            }
+        }
+        
+        return toCustomer(contact: arrContacts)
+    }
+    
+    static func toCustomer(contact : [CNContact]) -> [Customer] {
+        var result = [Customer]()
+        if contact.count > 0 {
+            for c in contact {
+                var pNumber : [String] = []
+                for phone in c.phoneNumbers {
+                    if phone.label != nil {
+                        let value = phone.value.stringValue
+                        pNumber.append(value)
+                    }
+                }
+                let birthday  = c.birthday?.date
+                var strBirthday = ""
+                if birthday != nil {
+                    strBirthday = DateFormatterUtils.getStringFromDate(birthday!, dateFormat: "yyyy-MM-dd")
+                }
+                result.append(Customer.init(birth:  strBirthday , company: c.organizationName , nick_name: c.nickname , phone_number: pNumber , name: c.familyName+c.givenName , id: c.identifier))
+            }
+        }
+        return  result
     }
     
     func loadContactsData() {

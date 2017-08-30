@@ -159,6 +159,42 @@ class CustomerDBOp : NSObject {
         return result
     }
     
+    func queryByIdentifer(id : String) -> Bool {
+        var flag = false
+        
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Customers")
+        fetchRequest.predicate = NSPredicate(format: "id=%s", argumentArray: [id])
+        
+        do {
+            let searchResults = try getContext().fetch(fetchRequest)
+            if searchResults.count > 0 {
+                flag = true
+            }
+        } catch  {
+            NSLog(error as! String)
+        }
+        return flag
+    }
+    
+    func updateById(id : String , newGroup : String)  {
+        let context = getContext()
+        let fetchRequest = NSFetchRequest<Customers>(entityName: "Customers")
+        fetchRequest.fetchOffset = 0 //查询的偏移量
+        
+        fetchRequest.predicate = NSPredicate(format: "id = %@", argumentArray: [ id ])
+        do {
+            let searchResults = try context.fetch(fetchRequest)
+            NSLog("numbers of delete \(searchResults.count)")
+            
+            for p in searchResults  {
+                p.group_id = newGroup
+            }
+            try context.save()
+        } catch  {
+            NSLog(error as! String)
+        }
+    }
+    
     func changeCustomerGroup(group : [MemGroup])  {
         if group.count > 0 {
             var strArray : [String]  = []

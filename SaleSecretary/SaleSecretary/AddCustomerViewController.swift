@@ -18,7 +18,7 @@ class AddCustomerViewController: UIViewController {
     let defaultBottomTopHeight : CGFloat = 25
     
     var defaultButtonHeight : CGFloat = 0
-    var currentSel : Int = -1
+    var currentSel : Int = 0
     let defaultLeftRight : CGFloat = 10
 //    var tableViewSel : Int = -1
     
@@ -41,10 +41,13 @@ class AddCustomerViewController: UIViewController {
     @IBAction func cancelAction(_ sender: Any) {
         let viewParent = self.parent as! CTChooseNewerController
         viewParent.pressCancel()
+        if viewParent.tableDelegate != nil {
+            viewParent.tableDelegate?.reloadTableViewData()
+        }
     }
     
-    
     @IBAction func chooseGroupAction(_ sender: Any) {
+        
         let g = self.groupArr[self.currentSel]
         
         let view = self.parent as! CTChooseNewerController
@@ -71,6 +74,8 @@ class AddCustomerViewController: UIViewController {
         self.collectionView?.dataSource = self
         self.collectionView.backgroundColor = UIColor.clear
         self.view.backgroundColor = UIColor.white
+        self.view.layer.cornerRadius = 10
+        
         // Register cell classes
         self.collectionView.register( UINib.init(nibName: String.init(describing: AddingCustomViewCell.self ) , bundle: nil) , forCellWithReuseIdentifier: reuseIdentifier)
 
@@ -100,6 +105,7 @@ extension AddCustomerViewController  : UICollectionViewDelegate, UICollectionVie
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! AddingCustomViewCell
+        
         if indexPath.row == (self.groupArr.count-1) {
             cell.addingButton.setTitle("", for: .normal)
             cell.addingButton.setImage(UIImage(named: "icon_tj") , for: .normal )
@@ -108,6 +114,16 @@ extension AddCustomerViewController  : UICollectionViewDelegate, UICollectionVie
             cell.addingButton.frame = CGRect.init(x: 5, y: 5, width: cell.addingButton.frame.width + self.defaultLeftRight , height: cell.addingButton.frame.height)
             
         }else {
+            if indexPath.row == 0 {
+                cell.addingButton.isSelected = true
+                cell.addingButton.tintColor = ContactCommon.THEME_COLOR
+                cell.addingButton.backgroundColor = ContactCommon.THEME_COLOR
+            }else {
+                cell.addingButton.isSelected = false
+                cell.addingButton.tintColor = UIColor.clear
+                cell.addingButton.backgroundColor = UIColor.clear
+            }
+            
             cell.addingButton.layer.borderWidth = 1
             cell.addingButton.layer.borderColor = ContactCommon.THEME_COLOR.cgColor
             cell.addingButton.layer.cornerRadius = 3.0
@@ -115,10 +131,14 @@ extension AddCustomerViewController  : UICollectionViewDelegate, UICollectionVie
             cell.addingButton.setTitle( self.groupArr[indexPath.row].group_name , for: .normal)
             cell.addingButton.setTitleColor( ContactCommon.THEME_COLOR , for: .normal)
             cell.addingButton.setTitleColor( UIColor.white , for: .selected )
-            cell.addingButton.setImage( UIImage(named: "") , for: .selected )
-            cell.addingButton.addTarget(self , action: #selector(self.choosedButton(_:)), for: .touchDown )
             cell.addingButton.frame = CGRect.init(x: 5 , y: 5, width: ( self.groupArr[indexPath.row].group_name as NSString ).size(attributes: [NSFontAttributeName:UIFont.systemFont(ofSize: self.defaultFontSize )]).width + self.defaultLeftRight , height: cell.addingButton.frame.height)
             cell.addingButton.tag = indexPath.row
+            cell.addingButton.removeTarget(self, action: #selector(self.addNewGroup), for: .touchDown )
+            cell.addingButton.addTarget(self , action: #selector(self.choosedButton(_:)), for: .touchDown )
+        
+            cell.addingButton.setImage(UIImage.init(), for: .normal )
+            cell.addingButton.imageView?.isHidden = true
+            
         }
 //        cell.backgroundColor = UIColor.red
         return cell
@@ -145,10 +165,6 @@ extension AddCustomerViewController  : UICollectionViewDelegate, UICollectionVie
         }
     }
     
-    func clickConfirmButton(_ sender: UIButton!)  {
-        
-    }
-    
     func addNewGroup() {
         let alertController = UIAlertController(title: "添加分组", message: "请输入分组名（长度限制10个字）！",preferredStyle: .alert)
         
@@ -169,7 +185,7 @@ extension AddCustomerViewController  : UICollectionViewDelegate, UICollectionVie
                 }
             }
             self.contextDb.storeGroup(id: maxId + 1, group_name: groupName.text!)
-            self.groupArr = MemGroup.toMemGroup(dbGroup: self.contextDb.getGroupInDb())
+            self.groupArr = MemGroup.toMemGroup(dbGroup: self.contextDb.getGroupInDb(true))
             self.groupArr.append( self.addIconTag )
             self.collectionView.reloadData()
         })

@@ -22,19 +22,7 @@ class CTChooseNewerController: UIViewController {
     var newCustomer : [Customer ] = []
     var alreadyAdded : [Customer] = []
     
-//    lazy var contactDt : [Customer] =  { [unowned self] in
-//        print("loading contact")
-//        var cust : [Customer] = []
-//        self.store.requestAccess(for: .contacts ) {
-//            (isRight , error) in
-//            if isRight {
-//                self.loadContactData()
-//            } else {
-//                print("no right")
-//            }
-//        }
-//        return cust
-//    }()
+    let contextDb  = CustomerDBOp.defaultInstance()
     
     var tableDelegate : ContactTableViewDelegate?
     let cellId = "contactsCell"
@@ -60,14 +48,17 @@ class CTChooseNewerController: UIViewController {
         findNewCustomer()
     }
     
+    // throw query in db
     func findNewCustomer(){
+        print("++++++++++++++++\(Date.init())")
         for cd in self.contactDt {
-            if !ContactCommon.isContain(ctm: cd , target: self.localDbContact ){
+            if !self.contextDb.queryByIdentifer(id: cd.id){
                self.newCustomer.append(cd)
             }else{
                 self.alreadyAdded.append(cd)
             }
         }
+        print("end --- ++++++++++++++++\(Date.init())")
         NSLog("new customer's page , find \(self.newCustomer.count) new person")
     }
     
@@ -80,7 +71,6 @@ class CTChooseNewerController: UIViewController {
         self.tableViewSel = sender.tag
         self.chooseAlertView.isHidden = false
         self.chooseAlertView.isUserInteractionEnabled = true
-//        self.chooseAlertView.backgroundColor = UIColor.white
         self.view.backgroundColor = UIColor.lightGray
         self.tableView.alpha = 0.6
         self.tableView.isUserInteractionEnabled = false
@@ -93,41 +83,6 @@ class CTChooseNewerController: UIViewController {
         self.tableView.alpha = 1.0
         self.tableView.isUserInteractionEnabled = true
     }
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
 
     /*
     // MARK: - Navigation

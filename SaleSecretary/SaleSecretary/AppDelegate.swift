@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 import DropDown
-
+import Contacts
 
 
 let APP_USER_KEY = "APP_USER_ID"
@@ -34,9 +34,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate,WXApiDelegate {
             let loginVC = storyBoard.instantiateViewController(withIdentifier: "LoginID")
             self.window?.rootViewController = loginVC
         } else {
-            let request = AppUser.loadFromServer(callback: { (user) in
+            let request = AppUser.loadFromServer() { (user) in
                 AppUser.currentUser = user
-            })
+            }
         }
         WXApi.registerApp("wx3cd741c2be80a27d")
         NetworkUtils.refreshAipAccessToken()
@@ -57,6 +57,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate,WXApiDelegate {
         
         JPUSHService.setBadge(0)
         application.applicationIconBadgeNumber = 0
+        
+        switch CNContactStore.authorizationStatus(for: .contacts) {
+        case .notDetermined:
+            CNContactStore().requestAccess(for: .contacts){succeeded, err in
+                guard err == nil && succeeded else{
+                    print("sorry , can not get permission! ")
+                    return
+                }
+            }
+        default:
+            print("Not handled")
+        }
+        
+        
         return true
     }
     
