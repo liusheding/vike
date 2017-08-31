@@ -17,10 +17,7 @@ class TakeoutMoneyViewController: UIViewController {
     @IBAction func clickSubmit(_ sender: UIButton) {
         let str = textfield.text!
         if str == ""{
-            let alertController = UIAlertController(title: "提示", message: "请填写提现金额", preferredStyle: .alert)
-            let okAction = UIAlertAction(title: "好的", style: .cancel, handler: nil)
-            alertController.addAction(okAction)
-            self.present(alertController, animated: true, completion: nil)
+            showAlert("请填写提现金额")
             return
         }
         let startindex = str.index(str.startIndex, offsetBy: 1)
@@ -31,12 +28,22 @@ class TakeoutMoneyViewController: UIViewController {
         
         let array = str.components(separatedBy: ".")
         if startchar == "." || endchar == "." || array.count > 2{
-            let alertController = UIAlertController(title: "提示", message: "请填写正确的金额", preferredStyle: .alert)
-            let okAction = UIAlertAction(title: "好的", style: .cancel, handler: nil)
-            alertController.addAction(okAction)
-            self.present(alertController, animated: true, completion: nil)
+            showAlert("请填写正确的金额")
             return
         }
+        
+        if (str as NSString).floatValue > (lastmoney.text! as NSString).floatValue{
+            showAlert("余额不足")
+            return
+
+        }
+    }
+    
+    func showAlert(_ message:String){
+        let alertController = UIAlertController(title: "提示", message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "好的", style: .cancel, handler: nil)
+        alertController.addAction(okAction)
+        self.present(alertController, animated: true, completion: nil)
     }
 
     override func viewDidLoad() {
