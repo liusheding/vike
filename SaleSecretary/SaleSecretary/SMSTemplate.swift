@@ -19,5 +19,4 @@ class SMSTemplate {
         self.id = id
         self.content = content
     }
-    
 }

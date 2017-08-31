@@ -84,6 +84,9 @@ class TemplateSelectorController: UIViewController {
     
     fileprivate var currentType: Int = 0
     
+    
+    var emptyView: EmptyContentView?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.menu = JSDropDownMenu(origin: CGPoint(x: 0, y: 108), andHeight: 45)
@@ -133,7 +136,9 @@ class TemplateSelectorController: UIViewController {
     }
     
     func loadData() {
-        
+        if self.emptyView != nil {
+            self.emptyView?.dismiss()
+        }
         let hub: MBProgressHUD = MBProgressHUD.showAdded(to: self.view, animated: true)
         hub.label.text = "正在加载中..."
         DispatchQueue.global(qos: .userInitiated).async {
@@ -149,6 +154,10 @@ class TemplateSelectorController: UIViewController {
                 json in
                 let array:[JSON]? = json["body"].array
                 templateSections = self.toSections(array)
+                if templateSections.count == 0 {
+                    self.emptyView = EmptyContentView.init(frame: self.tableView.frame)
+                    self.emptyView?.showInView(self.view)
+                }
             }
             request.response(completionHandler: { _ in
                 hub.hide(animated: true)
@@ -305,7 +314,6 @@ class TamplateTableViewDelegator: NSObject ,UITableViewDataSource, UITableViewDe
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: CollapsibleTableViewCell = CollapsibleTableViewCell(style: .subtitle , reuseIdentifier: "cell")
         let item: Item = templateSections[indexPath.section].items[indexPath.row]
-        cell.backgroundColor = UIColor.clear
         // cell.nameLabel.text = item.name
         cell.detailLabel.text = item.detail
         if controller.tableCanSelected {
@@ -346,6 +354,7 @@ class TamplateTableViewDelegator: NSObject ,UITableViewDataSource, UITableViewDe
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
         let cell = tableView.cellForRow(at: indexPath)
         if controller.tableCanSelected {
             cell?.accessoryType = .disclosureIndicator

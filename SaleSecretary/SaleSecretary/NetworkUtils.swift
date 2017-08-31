@@ -46,7 +46,7 @@ let AIP_TOKEN_URL_FULL = "\(AIP_TOKEN_URL)&client_id=\(AIP_APP_KEY)&client_secre
 let gbkEncoding = CFStringConvertEncodingToNSStringEncoding(CFStringEncoding(CFStringEncodings.GB_18030_2000.rawValue))
 
 
-let allowedCharacterSet = (CharacterSet(charactersIn: "!*'();@&=+$,/?%#[]{}:\" ").inverted)
+let allowedCharacterSet = (CharacterSet(charactersIn: "!*'();@&=+$,/?%#[]{}:\"\\ ").inverted)
 
 extension String {
     

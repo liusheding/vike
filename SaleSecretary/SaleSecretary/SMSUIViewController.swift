@@ -10,6 +10,7 @@ import UIKit
 import Foundation
 import DropDown
 import MBProgressHUD
+import SwiftyJSON
 
 class SMSUIViewController : UITableViewController {
     
@@ -21,6 +22,7 @@ class SMSUIViewController : UITableViewController {
     
     var moreDrop: CustomerPopUpView!
     
+    var emptyView: EmptyContentView?
     
     @IBAction func moreActions(_ sender: UIBarButtonItem) {
         print("tapped")
@@ -32,7 +34,7 @@ class SMSUIViewController : UITableViewController {
         print("invoke SMSUIViewController.viewDidLoad()")
         super.viewDidLoad()
         self.setUp()
-        
+        self.loadData()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -40,10 +42,10 @@ class SMSUIViewController : UITableViewController {
         self.moreDrop.hide(true)
     }
     
+    var schedules: [MessageSchedule] = []
     
-    var images = ["pic_qf", "pic_zdy", "pic_jjr"]
-    
-    var labels = ["节日快乐，你个傻逼", "labels", "testing"]
+    var images: [String:String] = ["0":"pic_qf", "1": "pic_zdy", "2": "pic_jjr"]
+
     
     open var formatter : DateFormatter = DateFormatter()
     
@@ -55,17 +57,27 @@ class SMSUIViewController : UITableViewController {
        return [str, str, str]
     }()
     
-    
-//    lazy var tableView : UITableView =  {
-//        var t = UITableView()
-//        t.dataSource = self
-//        t.delegate = self
-//        t.tableFooterView = UIView()
-//        t.backgroundColor = UIColor.groupTableViewBackground
-//        return t
-//    }()
-    
-    
+    func loadData() {
+        emptyView?.dismiss()
+        Utils.showLoadingHUB(view: self.view, completion: { hub in
+            let request = MessageSchedule.loadMySchedules({
+                json in
+                
+            })
+            request?.response(completionHandler: {
+                _ in
+                hub.hide(animated: true, afterDelay: 0.3)
+                if self.schedules.count == 0 {
+                    self.emptyView = EmptyContentView.init(frame: self.tableView.frame)
+                    self.emptyView?.textLabel.text = "您还没有执行计划，点击右上角去新建一个吧～"
+                    self.emptyView?.textLabel.numberOfLines = 2
+                    self.emptyView?.showInView(self.view)
+                } else {
+                    self.tableView.reloadData()
+                }
+            })
+        })
+    }
     
 }
 
@@ -142,17 +154,18 @@ extension SMSUIViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // print("only one row ")
-        return 3
+        return self.schedules.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! SMSListViewCell
-        
-        cell.imageLabel.image = UIImage(named: images[indexPath.row])
-        cell.contentLabel.text = labels[indexPath.row]
-        cell.timeLabel.text = times[indexPath.row]
-        
+        let row = indexPath.row
+        let schedule = self.schedules[row]
+        cell.imageLabel.image = UIImage(named: images[schedule.type]!)
+        cell.contentLabel.text = schedule.content
+        cell.contentLabel.numberOfLines = 2
+        cell.timeLabel.text = schedule.executeTime
         return cell
     }
     
@@ -171,6 +184,7 @@ extension SMSUIViewController {
         return 1
     }
     
+    
 }
 
 extension SMSUIViewController: ActionFloatViewDelegate {
@@ -184,6 +198,18 @@ extension SMSUIViewController: ActionFloatViewDelegate {
             self.navigationController?.pushViewController(vc, animated: true)
             break
         case 2:
+//            var body:[String: Any] = [:]
+//            body["userId"] = APP_USER_ID
+//            body["planType"] = "0"
+//            // body["content"] = "【称 谓】，不是每朵白云，都会带来真情；不是每个拥抱，都会面带微笑；不是每次思念，都能立刻兑现；不是每个朋友，都在身边守候；不是每个日子，都逢良辰吉时。国庆节到了，愿你节日快乐！【签名】"
+//            body["content"] = " "
+//            body["dateExecuteYj"] = ""
+//            body["dxtdId"] = ""
+//            let yld = [["sjhm": "18519283902","cw":"刘总","qm":"小刘"]]
+//            let yl = JSON(yld)
+//            let str = yl.rawString(.utf8, options: .init(rawValue: 0))
+//            body["yl"] = "2017/10/01"
+//            NetworkUtils.postBackEnd("C_DXJH", body: body, handler: {_ in })
             let hub = MBProgressHUD.showAdded(to: self.view, animated: true)
             hub.mode = MBProgressHUDMode.text
             hub.label.text = "我的模板正在紧张研发中，敬请期待。"
