@@ -23,9 +23,10 @@ class MineInfoViewController: UIViewController {
         phone.textColor = UIColor.darkGray
         job.textColor = UIColor.darkGray
         let user = AppUser.currentUser
-        name.text = "指尖小王"
-        phone.text = "12345678901"
-        job.text = "业务员"
+        name.text = user?.name
+        phone.text = user?.cellphoneNumber
+        job.text = user?.role?.rawValue
+        invite.text = user?.referralCode
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "保存", style: .plain, target: self, action: #selector(clickSaveBtn))
         
