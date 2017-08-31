@@ -14,7 +14,9 @@ class WalletViewController: UIViewController {
     @IBOutlet weak var getout: UILabel!
     
     @IBAction func takeoutbtn(_ sender: UIButton) {
-        print("22222222")
+        let storyBoard = UIStoryboard(name: "MineView", bundle: nil)
+        let controller = storyBoard.instantiateViewController(withIdentifier: "takeoutID")
+        self.present(controller, animated: true, completion: nil)
     }
 
     override func viewDidLoad() {

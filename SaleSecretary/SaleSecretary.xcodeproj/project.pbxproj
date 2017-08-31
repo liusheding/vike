@@ -120,6 +120,7 @@
 		6EE116DA1F555E98009601C7 /* AddUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE116D81F555E98009601C7 /* AddUserCell.swift */; };
 		6EE116DB1F555E98009601C7 /* AddUserCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EE116D91F555E98009601C7 /* AddUserCell.xib */; };
 		6EE116DF1F566D45009601C7 /* ChooseDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE116DE1F566D45009601C7 /* ChooseDateView.swift */; };
+		6EE116E11F57BB36009601C7 /* TakeoutMoneyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE116E01F57BB36009601C7 /* TakeoutMoneyViewController.swift */; };
 		6EF19C5D1F3BF9E000646BCF /* MineUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF19C5C1F3BF9E000646BCF /* MineUIViewController.swift */; };
 		6EF2A1EA1F4EDD4F0059DB59 /* ChangePwdController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF2A1E91F4EDD4F0059DB59 /* ChangePwdController.swift */; };
 		6EF2A1EC1F4EDD710059DB59 /* MineInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF2A1EB1F4EDD710059DB59 /* MineInfoViewController.swift */; };
@@ -330,6 +331,7 @@
 		6EE116D81F555E98009601C7 /* AddUserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddUserCell.swift; sourceTree = "<group>"; };
 		6EE116D91F555E98009601C7 /* AddUserCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddUserCell.xib; sourceTree = "<group>"; };
 		6EE116DE1F566D45009601C7 /* ChooseDateView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseDateView.swift; sourceTree = "<group>"; };
+		6EE116E01F57BB36009601C7 /* TakeoutMoneyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TakeoutMoneyViewController.swift; sourceTree = "<group>"; };
 		6EF19C5C1F3BF9E000646BCF /* MineUIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MineUIViewController.swift; sourceTree = "<group>"; };
 		6EF2A1E91F4EDD4F0059DB59 /* ChangePwdController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePwdController.swift; sourceTree = "<group>"; };
 		6EF2A1EB1F4EDD710059DB59 /* MineInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MineInfoViewController.swift; sourceTree = "<group>"; };
@@ -709,6 +711,7 @@
 				6EF2B78E1F41390B00C808EE /* UserManageViewController.swift */,
 				6EF2A1ED1F5017D60059DB59 /* AdviseViewController.swift */,
 				6EE116CE1F5553D7009601C7 /* AddUserViewController.swift */,
+				6EE116E01F57BB36009601C7 /* TakeoutMoneyViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -1276,6 +1279,7 @@
 				6EF2A1EA1F4EDD4F0059DB59 /* ChangePwdController.swift in Sources */,
 				6EF19C5D1F3BF9E000646BCF /* MineUIViewController.swift in Sources */,
 				6E20EC971F341B5500A0F29E /* UserInfo.swift in Sources */,
+				6EE116E11F57BB36009601C7 /* TakeoutMoneyViewController.swift in Sources */,
 				6EBAA5611F3C43B50099DA89 /* WalletViewController.swift in Sources */,
 				E7D2ABDB1F457B00000123A5 /* CustomerDBOp.swift in Sources */,
 				E754DC991F3D4E5A0025DBBE /* GetContactUtils.swift in Sources */,
