@@ -13,6 +13,8 @@ class MessageViewController: UITableViewController {
     var DataSource:NSMutableArray!
     let cellId = "MessageListID"
     let msgdb = MessageDB.defaultInstance()
+    let planPhone = "10001" //待执行计划预设的电话号码
+    let notifyPhone = "10002" //消息通知预设的电话号码
     
     func initData(){
         let msglist = msgdb.getAllMsgList()
@@ -139,8 +141,8 @@ class MessageViewController: UITableViewController {
         
         msgdb.insertMsgList(msgdata: MessageData(name:"指尖刘总", phone:"12345678901",time:Date(timeIntervalSinceNow:-60*60*24*2),mtype:1, message: [], unread:0))
         msgdb.insertMsgList(msgdata: MessageData(name:"指尖何总", phone:"12345678902",time:Date(timeIntervalSinceNow:-60*60*24),mtype:1, message: [], unread:0))
-        msgdb.insertMsgList(msgdata: MessageData(name:"待执行计划", phone:"您有3个待执行计划",time:Date(timeIntervalSinceNow:-60*60*24*4),mtype:2, message: [], unread:0))
-        msgdb.insertMsgList(msgdata: MessageData(name:"消息通知", phone:"您有1条消息通知",time:Date(timeIntervalSinceNow:-60*60*24*3),mtype:3, message: [], unread:0))
+        msgdb.insertMsgList(msgdata: MessageData(name:"待执行计划", phone:planPhone,time:Date(timeIntervalSinceNow:-60*60*24*4),mtype:2, message: [], unread:0))
+        msgdb.insertMsgList(msgdata: MessageData(name:"消息通知", phone:notifyPhone,time:Date(timeIntervalSinceNow:-60*60*24*3),mtype:3, message: [], unread:0))
     }
     
     func insertMsg(msgdetail: MessageDetail){
@@ -184,13 +186,13 @@ class MessageViewController: UITableViewController {
         
         insertMsg(msgdetail: MessageDetail(msgtime:Date(timeIntervalSinceNow:-60*60*24),msgtype:2,msgcontent:"巴基斯坦《国际新闻》网站7日报道称，据可靠消息，中国政府就印军非法越界严正警告。", msgphone: "12345678902"))
         
-        insertMsg(msgdetail: MessageDetail(msgtime:Date(timeIntervalSinceNow:0),msgtype:3,msgcontent:"国防部声明指出，中印边境对峙事件发生以来，中国本着最大善意，努力通过外交渠道解决当前事态。中国军队从维护两国关系大局和地区和平稳定出发，始终保持高度克制。", msgphone: "您有1条消息通知"))
+        insertMsg(msgdetail: MessageDetail(msgtime:Date(timeIntervalSinceNow:0),msgtype:3,msgcontent:"国防部声明指出，中印边境对峙事件发生以来，中国本着最大善意，努力通过外交渠道解决当前事态。中国军队从维护两国关系大局和地区和平稳定出发，始终保持高度克制。", msgphone: notifyPhone))
         
-        insertMsg(msgdetail: MessageDetail(msgtime:Date(timeIntervalSinceNow:-60*60*24),msgtype:3,msgcontent:"巴基斯坦《国际新闻》网站7日报道称，据可靠消息，中国政府就印军非法越界严正警告。中国军队从维护两国关系大局和地区和平稳定出发，始终保持高度克制。", msgphone: "您有3个待执行计划"))
+        insertMsg(msgdetail: MessageDetail(msgtime:Date(timeIntervalSinceNow:-60*60*24),msgtype:3,msgcontent:"巴基斯坦《国际新闻》网站7日报道称，据可靠消息，中国政府就印军非法越界严正警告。中国军队从维护两国关系大局和地区和平稳定出发，始终保持高度克制。", msgphone: planPhone))
         
-        insertMsg(msgdetail: MessageDetail(msgtime:Date(timeIntervalSinceNow:0),msgtype:3,msgcontent:"国防部声明指出，中印边境对峙事件发生以来，中国本着最大善意，努力通过外交渠道解决当前事态。中国军队从维护两国关系大局和地区和平稳定出发，始终保持高度克制。国防部声明指出，中印边境对峙事件发生以来，中国本着最大善意，努力通过外交渠道解决当前事态。中国军队从维护两国关系大局和地区和平稳定出发，始终保持高度克制。", msgphone: "您有3个待执行计划"))
+        insertMsg(msgdetail: MessageDetail(msgtime:Date(timeIntervalSinceNow:0),msgtype:3,msgcontent:"国防部声明指出，中印边境对峙事件发生以来，中国本着最大善意，努力通过外交渠道解决当前事态。中国军队从维护两国关系大局和地区和平稳定出发，始终保持高度克制。国防部声明指出，中印边境对峙事件发生以来，中国本着最大善意，努力通过外交渠道解决当前事态。中国军队从维护两国关系大局和地区和平稳定出发，始终保持高度克制。", msgphone: planPhone))
         
-        insertMsg(msgdetail: MessageDetail(msgtime:Date(timeIntervalSinceNow:-60*60*24),msgtype:3,msgcontent:"巴基斯坦《国际新闻》网站7日报道称，据可靠消息，中国政府就印军非法越界严正警告。国防部声明指出，中印边境对峙事件发生以来，中国本着最大善意，努力通过外交渠道解决当前事态。", msgphone: "您有3个待执行计划"))
+        insertMsg(msgdetail: MessageDetail(msgtime:Date(timeIntervalSinceNow:-60*60*24),msgtype:3,msgcontent:"巴基斯坦《国际新闻》网站7日报道称，据可靠消息，中国政府就印军非法越界严正警告。国防部声明指出，中印边境对峙事件发生以来，中国本着最大善意，努力通过外交渠道解决当前事态。", msgphone: planPhone))
     }
     
     override func didReceiveMemoryWarning() {
@@ -214,6 +216,19 @@ class MessageViewController: UITableViewController {
         let data = self.DataSource[indexPath.row] as! MessageData
         cell.cellname.text = data.name
         cell.cellphone.text = data.phone
+        if data.phone == planPhone{
+            if data.unread == 0{
+                cell.cellphone.text = "目前没有新的待执行计划"
+            }else{
+                cell.cellphone.text = "您有\(data.unread)个待执行计划"
+            }
+        }else if data.phone == notifyPhone{
+            if data.unread == 0{
+                cell.cellphone.text = "目前没有新的消息通知"
+            }else{
+                cell.cellphone.text = "您有\(data.unread)条新消息通知"
+            }
+        }
         cell.celltime.text = data.time
         cell.mtype = data.mtype
         cell.setCellContnet(data.unread)
@@ -238,6 +253,12 @@ class MessageViewController: UITableViewController {
         data.unread = 0
         cell.setCellContnet(data.unread)
         msgdb.updateMsgList(msgphone: data.phone, key: "msg_unread", value: 0)
+        
+        if data.phone == planPhone{
+            cell.cellphone.text = "目前没有新的待执行计划"
+        }else if data.phone == notifyPhone{
+            cell.cellphone.text = "目前没有新的消息通知"
+        }
         
         let msgitem = msgdb.getMsgItem(msgphone: data.phone)
         var msgitems = [MessageDetail]()
