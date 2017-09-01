@@ -465,42 +465,6 @@
             </objects>
             <point key="canvasLocation" x="917.60000000000002" y="1647.5262368815593"/>
         </scene>
-        <!--产品动态-->
-        <scene sceneID="U5X-iC-bhC">
-            <objects>
-                <viewController storyboardIdentifier="newsID" title="产品动态" id="Hvc-UQ-j1M" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="VgS-SJ-Whr"/>
-                        <viewControllerLayoutGuide type="bottom" id="Nei-a8-PDu"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="JFD-au-Kh9">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="AZv-UT-RZX" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2351" y="336"/>
-        </scene>
-        <!--欢迎页-->
-        <scene sceneID="aT9-Pi-kiC">
-            <objects>
-                <viewController storyboardIdentifier="welcomeID" title="欢迎页" id="JFJ-HA-eSg" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="QCW-rM-WGB"/>
-                        <viewControllerLayoutGuide type="bottom" id="D5d-QV-Dvf"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="r4x-mf-qac">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="NCW-l0-mjz" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3428" y="336"/>
-        </scene>
         <!--新手指南-->
         <scene sceneID="jUV-1V-0CM">
             <objects>
@@ -517,7 +481,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uO1-aj-60f" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2350" y="1236"/>
+            <point key="canvasLocation" x="2348" y="895"/>
         </scene>
         <!--问题反馈-->
         <scene sceneID="2BP-sT-2hc">
@@ -542,7 +506,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fop-Vi-7qR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3428" y="1235.5322338830586"/>
+            <point key="canvasLocation" x="3142" y="895"/>
         </scene>
         <!--帮助-->
         <scene sceneID="15R-s4-RsH">
@@ -557,7 +521,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="4E3-pH-9zO">
-                                <rect key="frame" x="0.0" y="196" width="375" height="250"/>
+                                <rect key="frame" x="0.0" y="196" width="375" height="150"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>

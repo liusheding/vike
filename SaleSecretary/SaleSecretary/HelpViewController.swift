@@ -11,8 +11,8 @@ import UIKit
 class HelpViewController: UIViewController {
     @IBOutlet weak var version: UILabel!
     @IBOutlet weak var tableView: UITableView!
-    let titles = ["产品动态", "欢迎页", "新手指南", "问题反馈", "服务热线"]
-    let identifiers = ["newsID", "welcomeID", "guideID", "problemID"]
+    let titles = ["新手指南", "问题反馈", "服务热线"]
+    let identifiers = ["guideID", "problemID"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
