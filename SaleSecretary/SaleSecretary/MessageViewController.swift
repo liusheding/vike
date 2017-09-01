@@ -18,13 +18,20 @@ class MessageViewController: UITableViewController {
         let msglist = msgdb.getAllMsgList()
         var msgdata = [MessageData]()
         for msg in msglist{
-            msgdata.append(MessageData(name:msg.msg_name!, phone:msg.msg_phone!,time:msg.msg_time! as Date,mtype:Int(msg.msg_type), message:[], unread:Int(msg.msg_unread)))
+            let phonenumber = getPhoneNumber(msg.msg_phone!)
+            msgdata.append(MessageData(name:msg.msg_name!, phone:phonenumber,time:msg.msg_time! as Date,mtype:Int(msg.msg_type), message:[], unread:Int(msg.msg_unread)))
         }
         
         DataSource=NSMutableArray()
         DataSource.addObjects(from: msgdata)
         DataSource.sort(comparator: sortDate)
     
+    }
+    
+    func getPhoneNumber(_ phone:String) -> String{
+        let endindex = phone.index(phone.endIndex, offsetBy: -11)
+        let phonenumber = phone.substring(to: endindex)
+        return phonenumber
     }
     
     //根据新消息的手机号得到对应的cell
@@ -119,7 +126,7 @@ class MessageViewController: UITableViewController {
         for data in self.DataSource{
             let d = data as! MessageData
             for dd in d.message{
-                msgdb.deleteMsgItem(msgdetail: dd)
+                msgdb.deleteMsgItem(msgphone: dd.msgphone)
             }
         }
     }
@@ -164,7 +171,7 @@ class MessageViewController: UITableViewController {
     }
     
     func insertMsgItem(){
-        let msgitem = msgdb.getMsgItem(msgphone: "12345678901")
+        let msgitem = msgdb.getAllMsgItem()
         if msgitem != []{
             return
         }
@@ -235,7 +242,8 @@ class MessageViewController: UITableViewController {
         let msgitem = msgdb.getMsgItem(msgphone: data.phone)
         var msgitems = [MessageDetail]()
         for item in msgitem{
-            msgitems.append(MessageDetail(msgtime:item.msg_item_time! as Date, msgtype:Int(item.msg_item_type), msgcontent:item.msg_item_content!, msgphone:item.msg_item_phone!))
+            let phonenumber = getPhoneNumber(item.msg_item_phone!)
+            msgitems.append(MessageDetail(msgtime:item.msg_item_time! as Date, msgtype:Int(item.msg_item_type), msgcontent:item.msg_item_content!, msgphone:phonenumber))
             }
         data.message = msgitems.sorted { (s1, s2) -> Bool in
             if(s1.msgdate.timeIntervalSince1970 < s2.msgdate.timeIntervalSince1970){return true}
@@ -274,9 +282,7 @@ class MessageViewController: UITableViewController {
         if editingStyle == UITableViewCellEditingStyle.delete {
             let data = self.DataSource[indexPath.row] as! MessageData
             self.DataSource.removeObject(at: indexPath.row)
-            for detail in data.message{
-                msgdb.deleteMsgItem(msgdetail: detail)
-            }
+            msgdb.deleteMsgItem(msgphone: data.phone)
             msgdb.deleteMsgList(msgdata: data)
             self.tableView!.deleteRows(at: [indexPath], with: UITableViewRowAnimation.fade)
         }

@@ -28,8 +28,9 @@ class MessageDB: NSObject {
         let entity = NSEntityDescription.entity(forEntityName: "MsgList", in: context)
         let message = NSManagedObject(entity: entity!, insertInto: context)
         
+        message.setValue(AppUser.currentUser?.cellphoneNumber, forKey: "msg_owner")
         message.setValue(msgdata.name, forKey: "msg_name")
-        message.setValue(msgdata.phone, forKey: "msg_phone")
+        message.setValue(msgdata.phone + (AppUser.currentUser?.cellphoneNumber)!, forKey: "msg_phone")
         message.setValue(msgdata.date, forKey: "msg_time")
         message.setValue(msgdata.mtype, forKey: "msg_type")
         
@@ -46,7 +47,7 @@ class MessageDB: NSObject {
         fetchRequest.fetchLimit = 10 //限定查询结果的数量
         fetchRequest.fetchOffset = 0 //查询的偏移量
         
-        fetchRequest.predicate = NSPredicate(format: "msg_phone = %s", argumentArray: [msgdata.phone])
+        fetchRequest.predicate = NSPredicate(format: "msg_phone = %s", argumentArray: [msgdata.phone+(AppUser.currentUser?.cellphoneNumber)!])
         
         do {
             let searchResults = try context.fetch(fetchRequest)
@@ -70,7 +71,7 @@ class MessageDB: NSObject {
         let fetchRequest = NSFetchRequest<MsgList>(entityName: "MsgList")
         fetchRequest.fetchLimit = 10 //限定查询结果的数量
         fetchRequest.fetchOffset = 0 //查询的偏移量
-        fetchRequest.predicate = NSPredicate(format: "msg_phone=%s", argumentArray: [msgphone])
+        fetchRequest.predicate = NSPredicate(format: "msg_phone=%s", argumentArray: [msgphone+(AppUser.currentUser?.cellphoneNumber)!])
         do {
             let searchResults = try context.fetch(fetchRequest)
             for p in searchResults  {
@@ -93,7 +94,7 @@ class MessageDB: NSObject {
         fetchRequest.fetchLimit = 10 //限定查询结果的数量
         fetchRequest.fetchOffset = 0 //查询的偏移量
         
-        fetchRequest.predicate = NSPredicate(format: "msg_phone=%s", argumentArray: [msgphone])
+        fetchRequest.predicate = NSPredicate(format: "msg_phone=%s", argumentArray: [msgphone+(AppUser.currentUser?.cellphoneNumber)!])
         
         do {
             let searchResults = try getContext().fetch(fetchRequest)
@@ -111,6 +112,8 @@ class MessageDB: NSObject {
         var result : [MsgList] = []
         fetchRequest.fetchLimit = 10 //限定查询结果的数量
         fetchRequest.fetchOffset = 0 //查询的偏移量
+        fetchRequest.predicate = NSPredicate(format: "msg_owner=%s", argumentArray: [AppUser.currentUser?.cellphoneNumber])
+        
         do {
             let searchResults = try getContext().fetch(fetchRequest)
             for p in (searchResults as! [NSManagedObject]){
@@ -129,7 +132,7 @@ class MessageDB: NSObject {
         let message = NSManagedObject(entity: entity!, insertInto: context)
         
         message.setValue(msgdetail.msgdate, forKey: "msg_item_time")
-        message.setValue(msgdetail.msgphone, forKey: "msg_item_phone")
+        message.setValue(msgdetail.msgphone + (AppUser.currentUser?.cellphoneNumber)!, forKey: "msg_item_phone")
         message.setValue(msgdetail.msgcontent, forKey: "msg_item_content")
         message.setValue(msgdetail.msgtype, forKey: "msg_item_type")
         
@@ -140,13 +143,13 @@ class MessageDB: NSObject {
         }
     }
     
-    func deleteMsgItem(msgdetail: MessageDetail){
+    func deleteMsgItem(msgphone: String){
         let context = getContext()
         let fetchRequest = NSFetchRequest<MsgItem>(entityName: "MsgItem")
         fetchRequest.fetchLimit = 10 //限定查询结果的数量
         fetchRequest.fetchOffset = 0 //查询的偏移量
         
-        fetchRequest.predicate = NSPredicate(format: "msg_item_phone=%s", argumentArray: [msgdetail.msgphone])
+        fetchRequest.predicate = NSPredicate(format: "msg_item_phone=%s", argumentArray: [msgphone+(AppUser.currentUser?.cellphoneNumber)!])
         do {
             let searchResults = try context.fetch(fetchRequest)
             for p in searchResults  {
@@ -168,7 +171,7 @@ class MessageDB: NSObject {
         let fetchRequest = NSFetchRequest<MsgItem>(entityName: "MsgItem")
         fetchRequest.fetchLimit = 10 //限定查询结果的数量
         fetchRequest.fetchOffset = 0 //查询的偏移量
-        fetchRequest.predicate = NSPredicate(format: "msg_item_phone=%s", argumentArray: [msgphone])
+        fetchRequest.predicate = NSPredicate(format: "msg_item_phone=%s", argumentArray: [msgphone+(AppUser.currentUser?.cellphoneNumber)!])
         do {
             let searchResults = try context.fetch(fetchRequest)
             for p in searchResults  {
@@ -191,7 +194,24 @@ class MessageDB: NSObject {
         fetchRequest.fetchLimit = 10 //限定查询结果的数量
         fetchRequest.fetchOffset = 0 //查询的偏移量
         
-        fetchRequest.predicate = NSPredicate(format: "msg_item_phone=%s", argumentArray: [msgphone])
+        fetchRequest.predicate = NSPredicate(format: "msg_item_phone=%s", argumentArray: [msgphone+(AppUser.currentUser?.cellphoneNumber)!])
+        
+        do {
+            let searchResults = try getContext().fetch(fetchRequest)
+            for p in (searchResults as! [NSManagedObject]){
+                result.append(p as! MsgItem)
+            }
+        } catch  {
+            NSLog(error as! String)
+        }
+        return result
+    }
+    
+    func getAllMsgItem() -> [MsgItem]{
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "MsgItem")
+        var result : [MsgItem] = []
+        fetchRequest.fetchLimit = 10 //限定查询结果的数量
+        fetchRequest.fetchOffset = 0 //查询的偏移量
         
         do {
             let searchResults = try getContext().fetch(fetchRequest)
