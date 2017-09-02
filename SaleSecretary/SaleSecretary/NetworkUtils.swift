@@ -15,7 +15,7 @@ import AipBase
 import MBProgressHUD
 
 
-let ZJKJ_API_URL = "http://112.74.110.182:8080/zjkj-scrm-v1707/api/service.shtml"
+let ZJKJ_API_URL = "http://xm.malaoduan.com/api/service.shtml"
 
 let AIP_NPL_LEXER = "https://aip.baidubce.com/rpc/2.0/nlp/v1/lexer?access_token="
 
