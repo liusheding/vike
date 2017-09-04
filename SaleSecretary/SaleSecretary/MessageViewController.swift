@@ -27,7 +27,6 @@ class MessageViewController: UITableViewController {
         DataSource=NSMutableArray()
         DataSource.addObjects(from: msgdata)
         DataSource.sort(comparator: sortDate)
-    
     }
     
     func getPhoneNumber(_ phone:String) -> String{
@@ -63,6 +62,17 @@ class MessageViewController: UITableViewController {
         }
     }
     
+    func showDotOnItem(){
+        let msglist = msgdb.getAllMsgList()
+        for msg in msglist{
+            if msg.msg_unread > 0{
+                self.removeBadgeOnItemIndex(index: 2)
+                self.showDotOnItemIndex(index: 2)
+                return
+            }
+        }
+    }
+    
     //显示小红点
     func showDotOnItemIndex(index:Int) {
         let tabBar = self.tabBarController?.tabBar
@@ -85,14 +95,6 @@ class MessageViewController: UITableViewController {
         if let view = tabBar?.viewWithTag(888) {
             view.removeFromSuperview()
         }
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        self.removeBadgeOnItemIndex(index: 2)
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        self.showDotOnItemIndex(index: 2)
     }
     
     func string2json(_ str:String) -> JSON? {
@@ -150,6 +152,9 @@ class MessageViewController: UITableViewController {
         let msglist = msgdb.getMsgList(msgphone: msgdetail.msgphone)
         let value = msglist[0].msg_unread
         msgdb.updateMsgList(msgphone: msgdetail.msgphone, key: "msg_unread", value: value + 1)
+       
+        self.removeBadgeOnItemIndex(index: 2)
+        self.showDotOnItemIndex(index: 2)
         
         if self.DataSource == nil{
             return
@@ -253,6 +258,20 @@ class MessageViewController: UITableViewController {
         data.unread = 0
         cell.setCellContnet(data.unread)
         msgdb.updateMsgList(msgphone: data.phone, key: "msg_unread", value: 0)
+        
+        var flag = false
+        
+        for data in self.DataSource{
+            let d = data as! MessageData
+            if d.unread > 0{
+                flag = true
+                break
+            }
+        }
+        
+        if flag == false{
+            self.removeBadgeOnItemIndex(index: 2)
+        }
         
         if data.phone == planPhone{
             cell.cellphone.text = "目前没有新的待执行计划"
