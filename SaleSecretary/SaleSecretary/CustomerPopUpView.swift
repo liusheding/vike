@@ -172,5 +172,5 @@ protocol ActionFloatViewDelegate: class {
 }
 
 enum ActionFloatViewItemType: Int {
-    case synContacts, managerGroup , batchOperate
+    case addNewCustomer , synContacts, managerGroup , batchOperate
 }

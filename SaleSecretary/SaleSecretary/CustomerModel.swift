@@ -164,6 +164,8 @@ class CustomerGroup:NSObject {
 
 struct ContactCommon {
     static let max = 255.0
+    
+    static let defaultLength : Int = 10
 //    static let sampleColor = [UIColor.init(red: CGFloat.init(254.0/max), green: CGFloat.init(170)/max, blue: CGFloat.init(40)/max, alpha: CGFloat.init(1)) ,
 //                 UIColor.init(red: CGFloat.init(255)/max, green: CGFloat.init(142)/max, blue: CGFloat.init(137)/max, alpha: CGFloat.init(1)) ,
 //        UIColor.init(red: CGFloat.init(118)/max, green: CGFloat.init(171)/max, blue: CGFloat.init(240)/max, alpha: CGFloat.init(1)) ,
@@ -197,5 +199,36 @@ struct ContactCommon {
     
     static let separatorDefault = ","
     static let groupDefault : NSString = "默认分组"
+    
+    static func limitedLength(str : String) -> Bool {
+        var flag = false
+        if str.characters.count > 0 && str.characters.count <= ContactCommon.defaultLength {
+            flag = true
+        }
+        return flag
+    }
+    
+    static func isExistInGroup(newName :String , group : [MemGroup]) -> Bool{
+        var flag = false
+        for g in group {
+            if g.group_name == newName {
+                flag = true
+                break
+            }
+        }
+        return flag
+    }
+    
+    static func validateGroupName(newName :String , group : [MemGroup]) -> String {
+        var msg = ""
+        if !limitedLength(str: newName){
+            msg = "输入字数过长"
+        }
+        if isExistInGroup(newName: newName, group: group){
+            msg = "您输入组名重复，请重新输入！"
+        }
+        return msg
+    }
+    
 }
 

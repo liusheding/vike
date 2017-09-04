@@ -78,7 +78,6 @@ class AddCustomerViewController: UIViewController {
         
         // Register cell classes
         self.collectionView.register( UINib.init(nibName: String.init(describing: AddingCustomViewCell.self ) , bundle: nil) , forCellWithReuseIdentifier: reuseIdentifier)
-
     }
 
     override func didReceiveMemoryWarning() {
@@ -183,6 +182,13 @@ extension AddCustomerViewController  : UICollectionViewDelegate, UICollectionVie
                 if Int(ga.id) > maxId {
                     maxId = Int(ga.id)
                 }
+            }
+            let msg = ContactCommon.validateGroupName(newName: groupName.text!, group: self.groupArr)
+            if msg.characters.count > 0 {
+                let uc = UIAlertController(title: "警告", message: msg, preferredStyle: UIAlertControllerStyle.alert)
+                uc.addAction(UIAlertAction(title: "好的", style: UIAlertActionStyle.default))
+                self.present( uc , animated: true, completion: nil)
+                return
             }
             self.contextDb.storeGroup(id: maxId + 1, group_name: groupName.text!)
             self.groupArr = MemGroup.toMemGroup(dbGroup: self.contextDb.getGroupInDb(true))

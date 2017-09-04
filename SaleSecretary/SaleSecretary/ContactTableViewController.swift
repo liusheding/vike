@@ -90,8 +90,8 @@ class ContactTableViewController: UIViewController {
         self.searchBarLocal.setValue("取消", forKey: "_cancelButtonText")
         self.searchBarLocal.tintColor = APP_THEME_COLOR
         
-        let imagesResouces = ["icon_tbtxl", "icon_fzgl", "icon_plcz"]
-        let actionTitles = ["同步通讯录", "分组管理", "批量处理"]
+        let imagesResouces = ["contacts_add_friend" ,"icon_tbtxl", "icon_fzgl", "icon_plcz"]
+        let actionTitles = ["新增客户" ,"同步通讯录", "分组管理", "批量处理"]
         
         self.ctMoreItemView = CustomerPopUpView(titles: actionTitles, images: imagesResouces)
         self.ctMoreItemView.delegate = self as? ActionFloatViewDelegate
@@ -167,6 +167,10 @@ class ContactTableViewController: UIViewController {
         self.ctMoreItemView.hide(true)
         self.chooseGroup.isHidden = true
         
+    }
+    override func viewWillAppear(_ animated: Bool) {
+//        self.viewWillAppear(animated)
+        self.reloadTableViewData()
     }
     
     func pressCancel() {
@@ -301,6 +305,11 @@ extension ContactTableViewController : UITableViewDataSource, UITableViewDelegat
     func floatViewTapItemIndex(_ type: ActionFloatViewItemType) {
         NSLog("floatViewTapItemIndex:\(type)")
         switch type {
+        case .addNewCustomer:
+            let sboard = UIStoryboard(name: "MineView" , bundle: nil)
+            let detailPage = sboard.instantiateViewController(withIdentifier: "addUserID") as! AddUserViewController
+            self.navigationController?.pushViewController(detailPage, animated: true )
+            break
         case .synContacts: // read contact from iphon contacts , and add newers to default group
             NSLog("press syn contact")
             if self.customer.count == 0 {
@@ -329,7 +338,6 @@ extension ContactTableViewController : UITableViewDataSource, UITableViewDelegat
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
                 self.presentedViewController?.dismiss(animated: false, completion: nil)
             }
-            
             break
         case .managerGroup:  // 对分组进行增删改
             let detailPage = storyboardLocal.instantiateViewController(withIdentifier: "managerGroup") as! CTManagerGroupController
@@ -337,21 +345,11 @@ extension ContactTableViewController : UITableViewDataSource, UITableViewDelegat
             self.present(detailPage, animated: true, completion: nil)
             break
         case .batchOperate :
-            let g = self.contextDb.getGroupInDb()
-            for i in g {
-                print("dt : \(String(describing: i.group_name))---\(self.contextDb.getGroupInDb().count )")
-            }
+            let detailPage = storyboardLocal.instantiateViewController(withIdentifier: "batchProcess") as! BatchProcessViewController
+            self.navigationController?.pushViewController(detailPage, animated: true)
             break
         }
     }
-    
-    /*
-     // Override to support conditional editing of the table view.
-     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-     // Return false if you do not want the specified item to be editable.
-     return true
-     }
-     */
     
     // left slide
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {

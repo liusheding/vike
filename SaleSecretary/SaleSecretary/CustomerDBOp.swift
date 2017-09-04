@@ -126,10 +126,9 @@ class CustomerDBOp : NSObject {
     func deleteCustomer(cust : Customer){
         let context = getContext()
         let fetchRequest = NSFetchRequest<Customers>(entityName: "Customers")
-        fetchRequest.fetchLimit = 10 //限定查询结果的数量
         fetchRequest.fetchOffset = 0 //查询的偏移量
         
-        fetchRequest.predicate = NSPredicate(format: "user_name = %s and phone_number=%s", argumentArray: [cust.name ?? "" , cust.phone_number?.joined(separator: ContactCommon.separatorDefault ) ?? ""])
+        fetchRequest.predicate = NSPredicate(format: "id = %s ", argumentArray: [ cust.id ])
         do {
             let searchResults = try context.fetch(fetchRequest)
             NSLog("numbers of delete \(searchResults.count)")
@@ -140,6 +139,30 @@ class CustomerDBOp : NSObject {
             try! context.save()
         } catch  {
             NSLog(error as! String)
+        }
+    }
+    
+    func batchDeleteCustomer(cust : [Customer]) {
+        if cust.count > 0 {
+            var ids : [String] = []
+            for c in cust {
+                ids.append(c.id)
+            }
+            let context = getContext()
+            let fetchRequest = NSFetchRequest<Customers>(entityName: "Customers")
+            fetchRequest.fetchOffset = 0 //查询的偏移量
+            
+            fetchRequest.predicate = NSPredicate(format: "id in %s ", argumentArray: [ ids ])
+            do {
+                let searchResults = try context.fetch(fetchRequest)
+                
+                for p in searchResults  {
+                    context.delete(p)
+                }
+                try! context.save()
+            } catch  {
+                NSLog(error as! String)
+            }
         }
     }
     
@@ -192,6 +215,32 @@ class CustomerDBOp : NSObject {
             try context.save()
         } catch  {
             NSLog(error as! String)
+        }
+    }
+    
+    func batchChangeCustomerGroup(cust : [Customer] , group : Group) {
+        if cust.count > 0 {
+            var ids : [String] = []
+            for c in cust {
+                ids.append(c.id)
+            }
+            let context = getContext()
+            let fetchRequest = NSFetchRequest<Customers>(entityName: "Customers")
+            //        fetchRequest.fetchLimit = 10 //限定查询结果的数量
+            fetchRequest.fetchOffset = 0 //查询的偏移量
+            
+            fetchRequest.predicate = NSPredicate(format: "id in %@", argumentArray: [ ids ])
+            do {
+                let searchResults = try context.fetch(fetchRequest)
+                NSLog("numbers of delete \(searchResults.count)")
+                
+                for p in searchResults  {
+                    p.group_id = group.group_name
+                }
+                try context.save()
+            } catch  {
+                NSLog(error as! String)
+            }
         }
     }
     

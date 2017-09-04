@@ -12,17 +12,17 @@ protocol ContactTableViewDelegate {
     func reloadTableViewData( )
 }
 
-class CTManagerGroupController: UIViewController {
+class CTManagerGroupController: UIViewController  {
 
     let managerGroup = "managerGroupCell"
     let contactDb : CustomerDBOp = CustomerDBOp.defaultInstance()
+    
     var group : [MemGroup] = []
     
     var deleteGroup : [MemGroup] = []
     var addedGroup : [MemGroup]  = []
     
     var contactsTableviewDelegate : ContactTableViewDelegate?
-    
     
     @IBOutlet weak var cancelButton: UIBarButtonItem!
     
@@ -42,8 +42,6 @@ class CTManagerGroupController: UIViewController {
         self.localTableView.register( UITableViewCell.self, forCellReuseIdentifier: self.managerGroup )
         self.localTableView.tableFooterView = UIView()
 
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
 
     override func didReceiveMemoryWarning() {
@@ -83,10 +81,9 @@ class CTManagerGroupController: UIViewController {
         if self.contactsTableviewDelegate != nil {
            self.contactsTableviewDelegate?.reloadTableViewData()
         }
-        
         self.dismiss(animated: true, completion: nil)
     }
-
+    
 }
 
 extension CTManagerGroupController : UITableViewDelegate , UITableViewDataSource{
@@ -105,28 +102,29 @@ extension CTManagerGroupController : UITableViewDelegate , UITableViewDataSource
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: managerGroup , for: indexPath)
-        cell.selectionStyle = .none
+        
         if indexPath.row == 0 {
             cell.imageView?.image = UIImage(named: "icon_tj")
             cell.textLabel?.text = "添加分组"
             cell.imageView?.isUserInteractionEnabled = true
-            let imgClick = UITapGestureRecognizer(target: self, action: #selector(addGroup(_:)))
+            let imgClick = UITapGestureRecognizer(target: self, action: #selector(addGroup))
             cell.imageView?.addGestureRecognizer(imgClick)
+            let btn = UIButton.init(frame: CGRect(x: 0 , y: 0  , width: SCREEN_WIDTH , height: 44 ))
+            btn.backgroundColor = UIColor.clear
+            btn.addTarget(self, action: #selector(self.addGroup), for: .touchUpInside)
+            cell.addSubview(btn)
         }else {
             cell.textLabel?.text = self.group[indexPath.row-1].group_name
+            cell.selectionStyle = .none
         }
         
         return cell
     }
     
-    func addGroup(_ sender : UIButton!)  {
+    func addGroup()  {
         let alertController = UIAlertController(title: "添加分组", message: "请输入分组名（长度限制10个字）！",preferredStyle: .alert)
-        
-        
         alertController.addTextField {
             (textField: UITextField!) -> Void in
-            //            textField.placeholder = "用户名"
-            //            textField.
         }
         
         let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
@@ -140,7 +138,15 @@ extension CTManagerGroupController : UITableViewDelegate , UITableViewDataSource
                     maxId = Int(ga.id)
                 }
             }
+            let msg = ContactCommon.validateGroupName(newName: groupName.text!, group: self.group)
+            if msg.characters.count > 0 {
+                let uc = UIAlertController(title: "警告", message: msg, preferredStyle: UIAlertControllerStyle.alert)
+                uc.addAction(UIAlertAction(title: "好的", style: UIAlertActionStyle.default))
+                self.present( uc , animated: true, completion: nil)
+                return
+            }
             let tmpGp = MemGroup( id: maxId + 1 , gn: groupName.text!)
+            
             self.addedGroup.append(tmpGp)
             self.group.append(tmpGp)
             self.localTableView.reloadData()
@@ -159,6 +165,11 @@ extension CTManagerGroupController : UITableViewDelegate , UITableViewDataSource
         }
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row == 0 {
+            self.addGroup()
+        }
+    }
     
     //返回编辑类型，滑动删除
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {

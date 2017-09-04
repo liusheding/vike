@@ -160,6 +160,8 @@
 		E754DC951F3D4E3D0025DBBE /* CTChooseNewerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E754DC921F3D4E3D0025DBBE /* CTChooseNewerController.swift */; };
 		E754DC971F3D4E4B0025DBBE /* AddNewCustomerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E754DC961F3D4E4B0025DBBE /* AddNewCustomerCell.swift */; };
 		E754DC991F3D4E5A0025DBBE /* GetContactUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E754DC981F3D4E5A0025DBBE /* GetContactUtils.swift */; };
+		E75CA6EA1F5D054C00C92F14 /* BatchProcessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E75CA6E91F5D054C00C92F14 /* BatchProcessViewController.swift */; };
+		E75CA6EC1F5D055900C92F14 /* CTChooseGroupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E75CA6EB1F5D055900C92F14 /* CTChooseGroupController.swift */; };
 		E7B2A2701F39FE76001D8C61 /* CTCustomerDetailInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B2A26D1F39FE76001D8C61 /* CTCustomerDetailInfoViewController.swift */; };
 		E7B2A2711F39FE76001D8C61 /* CTInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B2A26E1F39FE76001D8C61 /* CTInfoViewController.swift */; };
 		E7B2A2721F39FE76001D8C61 /* CTrailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B2A26F1F39FE76001D8C61 /* CTrailViewController.swift */; };
@@ -377,6 +379,8 @@
 		E754DC921F3D4E3D0025DBBE /* CTChooseNewerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CTChooseNewerController.swift; sourceTree = "<group>"; };
 		E754DC961F3D4E4B0025DBBE /* AddNewCustomerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNewCustomerCell.swift; sourceTree = "<group>"; };
 		E754DC981F3D4E5A0025DBBE /* GetContactUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetContactUtils.swift; sourceTree = "<group>"; };
+		E75CA6E91F5D054C00C92F14 /* BatchProcessViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BatchProcessViewController.swift; sourceTree = "<group>"; };
+		E75CA6EB1F5D055900C92F14 /* CTChooseGroupController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CTChooseGroupController.swift; sourceTree = "<group>"; };
 		E7B2A26D1F39FE76001D8C61 /* CTCustomerDetailInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CTCustomerDetailInfoViewController.swift; sourceTree = "<group>"; };
 		E7B2A26E1F39FE76001D8C61 /* CTInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CTInfoViewController.swift; sourceTree = "<group>"; };
 		E7B2A26F1F39FE76001D8C61 /* CTrailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CTrailViewController.swift; sourceTree = "<group>"; };
@@ -568,6 +572,8 @@
 		6615BF551F3412EF0052879B /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				E75CA6EB1F5D055900C92F14 /* CTChooseGroupController.swift */,
+				E75CA6E91F5D054C00C92F14 /* BatchProcessViewController.swift */,
 				E7412BC01F5659C500AF9F9E /* CTChangeGroupViewController.swift */,
 				E7DB1FE11F4EB9A6002DD96D /* CTManagerGroupController.swift */,
 				E7D2AC2E1F4A7A2B000123A5 /* AddCustomerViewController.swift */,
@@ -1192,6 +1198,7 @@
 			files = (
 				6E20EC951F341B4500A0F29E /* MessageItem.swift in Sources */,
 				E754DC941F3D4E3D0025DBBE /* CTAddNewTableViewController.swift in Sources */,
+				E75CA6EA1F5D054C00C92F14 /* BatchProcessViewController.swift in Sources */,
 				66BF592B1F3075E800154E8C /* SMSAddViewController.swift in Sources */,
 				669A33971F54F94B00C61F3B /* Constants.swift in Sources */,
 				6EBAA5441F3C03240099DA89 /* MineViewCell.swift in Sources */,
@@ -1287,6 +1294,7 @@
 				6EF2A1EA1F4EDD4F0059DB59 /* ChangePwdController.swift in Sources */,
 				6EF19C5D1F3BF9E000646BCF /* MineUIViewController.swift in Sources */,
 				6E20EC971F341B5500A0F29E /* UserInfo.swift in Sources */,
+				E75CA6EC1F5D055900C92F14 /* CTChooseGroupController.swift in Sources */,
 				6EE116E11F57BB36009601C7 /* TakeoutMoneyViewController.swift in Sources */,
 				6EBAA5611F3C43B50099DA89 /* WalletViewController.swift in Sources */,
 				E7D2ABDB1F457B00000123A5 /* CustomerDBOp.swift in Sources */,
