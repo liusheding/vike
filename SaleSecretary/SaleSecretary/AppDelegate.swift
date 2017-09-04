@@ -36,6 +36,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate,WXApiDelegate {
         } else {
             let request = AppUser.loadFromServer() { (user) in
                 AppUser.currentUser = user
+                do {
+                    let msgcontroller = try self.window?.rootViewController?.childViewControllers[2].childViewControllers[0] as! MessageViewController
+                        msgcontroller.showDotOnItem()
+                }catch{
+                    print(error)
+                }
             }
         }
         // 微信注册
