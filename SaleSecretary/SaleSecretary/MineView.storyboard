@@ -715,13 +715,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="50" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="eXe-Ys-ZBv">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="50" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="eXe-Ys-ZBv">
                                 <rect key="frame" x="0.0" y="100" width="375" height="567"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="eXe-Ys-ZBv" secondAttribute="trailing" id="GrQ-lU-02c"/>
+                            <constraint firstItem="eXe-Ys-ZBv" firstAttribute="top" secondItem="BpZ-oq-iGP" secondAttribute="top" constant="100" id="gmA-5v-ywv"/>
+                            <constraint firstItem="eXe-Ys-ZBv" firstAttribute="leading" secondItem="BpZ-oq-iGP" secondAttribute="leading" id="meY-WK-YXB"/>
+                            <constraint firstAttribute="bottom" secondItem="eXe-Ys-ZBv" secondAttribute="bottom" id="wyS-Jp-MAc"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="tableView" destination="eXe-Ys-ZBv" id="vfr-tP-mMh"/>
