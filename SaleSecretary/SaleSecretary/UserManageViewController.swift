@@ -132,6 +132,17 @@ extension UserManageViewController: UITableViewDelegate, UITableViewDataSource, 
             }
         }
     }
+    
+    // left slide
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let freeze = UITableViewRowAction(style: .normal, title: "冻结账号") { action, index in
+            print("===冻结账号====")
+            
+        }
+        freeze.backgroundColor = UIColor.red
+        
+        return [freeze]
+    }
 }
 
 extension UserManageViewController: UISearchBarDelegate {
