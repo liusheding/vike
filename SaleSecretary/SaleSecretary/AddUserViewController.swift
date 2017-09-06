@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AddUserViewController: UITableViewController {
+class AddUserViewController: UITableViewController,UITextFieldDelegate {
     let icons = ["icon_sjh", "icon_xm", "icon_zw", "icon_mm"]
     let titles = ["手机号", "姓名", "职务", "密码"]
     let cellId = "addCell"
@@ -77,11 +77,32 @@ class AddUserViewController: UITableViewController {
             cell.inputtext.placeholder = self.titles[indexPath.row]
             if indexPath.row == 0{
                 cell.inputtext.keyboardType = .phonePad
+                cell.inputtext.delegate = self
+            }else if indexPath.row ==  3{
+                cell.inputtext.isSecureTextEntry = true
             }
+            
             self.inputtext.append(cell.inputtext)
             return cell
         }
         
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let length = string.lengthOfBytes(using: String.Encoding.utf8)
+        if self.inputtext[0] == textField {
+            //限制只能输入数字，不能输入特殊字符
+            for loopIndex in 0..<length {
+                let char = (string as NSString).character(at: loopIndex)
+                if char < 48 { return false }
+                if char > 57 { return false }
+            }
+            //限制长度11
+            let proposeLength = (textField.text?.lengthOfBytes(using: String.Encoding.utf8))! - range.length + string.lengthOfBytes(using: String.Encoding.utf8)
+            if proposeLength > 11 { return false }
+            return true
+        }
+        return true
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
