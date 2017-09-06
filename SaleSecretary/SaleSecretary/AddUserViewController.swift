@@ -65,7 +65,7 @@ class AddUserViewController: UITableViewController,UITextFieldDelegate {
             let cell = UITableViewCell(style: .value1, reuseIdentifier: "accountCell")
             cell.imageView?.image = UIImage(named: (self.icons[indexPath.row]))
             cell.textLabel?.text = self.titles[indexPath.row]
-            cell.textLabel?.font = UIFont.systemFont(ofSize: 14)
+            cell.textLabel?.font = UIFont.systemFont(ofSize: 16)
             cell.textLabel?.textColor = UIColor(colorLiteralRed: 199.0/255.0, green: 199.0/255.0, blue: 205.0/255.0, alpha: 1)
             cell.accessoryType = .disclosureIndicator
             cell.selectionStyle = .none
