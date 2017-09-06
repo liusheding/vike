@@ -15,33 +15,46 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nOw-bw-uV2">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nOw-bw-uV2">
                     <rect key="frame" x="70" y="11" width="277" height="21"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="277" id="y1q-wg-7wO"/>
+                    </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="giZ-Fr-rzA">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="giZ-Fr-rzA">
                     <rect key="frame" x="70" y="34" width="268" height="21"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="10"/>
                     <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon_gd" translatesAutoresizingMaskIntoConstraints="NO" id="wwY-IV-bZZ">
-                    <rect key="frame" x="352" y="19" width="10" height="17"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_gd" translatesAutoresizingMaskIntoConstraints="NO" id="wwY-IV-bZZ">
+                    <rect key="frame" x="355" y="19" width="7" height="17"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Z6m-cL-BnA">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Z6m-cL-BnA">
                     <rect key="frame" x="6" y="5" width="50" height="50"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <accessibility key="accessibilityConfiguration">
                 <accessibilityTraits key="traits" adjustable="YES"/>
             </accessibility>
+            <constraints>
+                <constraint firstItem="nOw-bw-uV2" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="11" id="0bp-wX-mYu"/>
+                <constraint firstItem="Z6m-cL-BnA" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="5" id="5Il-1Y-eHq"/>
+                <constraint firstItem="nOw-bw-uV2" firstAttribute="leading" secondItem="giZ-Fr-rzA" secondAttribute="leading" id="8ab-hF-PLB"/>
+                <constraint firstItem="wwY-IV-bZZ" firstAttribute="leading" secondItem="nOw-bw-uV2" secondAttribute="trailing" constant="8" symbolic="YES" id="JFG-Qj-xI7"/>
+                <constraint firstItem="Z6m-cL-BnA" firstAttribute="bottom" secondItem="giZ-Fr-rzA" secondAttribute="bottom" id="JRb-xe-0z3"/>
+                <constraint firstItem="Z6m-cL-BnA" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="6" id="LgN-OX-mna"/>
+                <constraint firstItem="nOw-bw-uV2" firstAttribute="leading" secondItem="Z6m-cL-BnA" secondAttribute="trailing" constant="14" id="Nz5-Qv-TbA"/>
+                <constraint firstItem="wwY-IV-bZZ" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="19" id="Svn-Cz-htn"/>
+                <constraint firstItem="giZ-Fr-rzA" firstAttribute="top" secondItem="nOw-bw-uV2" secondAttribute="bottom" constant="2" id="Z90-zI-f7b"/>
+                <constraint firstAttribute="bottom" secondItem="wwY-IV-bZZ" secondAttribute="bottom" constant="24" id="g97-3y-JNL"/>
+                <constraint firstAttribute="trailing" secondItem="wwY-IV-bZZ" secondAttribute="trailing" constant="13" id="n8T-DJ-8kq"/>
+                <constraint firstItem="Z6m-cL-BnA" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="wqk-Id-ME3"/>
+            </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>

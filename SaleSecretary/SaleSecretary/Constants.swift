@@ -7,8 +7,6 @@
 //
 
 import Foundation
-
-
 // app tint color
 public let APP_THEME_COLOR = UIColor(valueRGB: 0x01B414)
 // APP 背景色
@@ -17,3 +15,5 @@ public let APP_BACKGROUND_COLOR = UIColor.groupTableViewBackground
 public let APP_DETAIL_TEXT_COLOR = UIColor(valueRGB: 0x999999)
 // 正文文本色值
 public let APP_MAIN_TEXT_COLOR = UIColor(valueRGB: 0x333333)
+// 最多选择的客户
+public let MAX_CUSTOMER_NUMBER = 100

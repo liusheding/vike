@@ -45,7 +45,6 @@ class SMSUIViewController : UITableViewController {
     var schedules: [MessageSchedule] = []
     
     var images: [String:String] = ["0":"pic_qf", "1": "pic_zdy", "2": "pic_jjr"]
-
     
     open var formatter : DateFormatter = DateFormatter()
     
@@ -61,12 +60,8 @@ class SMSUIViewController : UITableViewController {
         emptyView?.dismiss()
         Utils.showLoadingHUB(view: self.view, completion: { hub in
             let request = MessageSchedule.loadMySchedules({
-                json in
-                
-            })
-            request?.response(completionHandler: {
-                _ in
-                hub.hide(animated: true, afterDelay: 0.3)
+                msgs in
+                self.schedules = msgs
                 if self.schedules.count == 0 {
                     self.emptyView = EmptyContentView.init(frame: self.tableView.frame)
                     self.emptyView?.textLabel.text = "您还没有执行计划，点击右上角去新建一个吧～"
@@ -75,6 +70,10 @@ class SMSUIViewController : UITableViewController {
                 } else {
                     self.tableView.reloadData()
                 }
+            })
+            request?.response(completionHandler: {
+                _ in
+                hub.hide(animated: true, afterDelay: 0.3)
             })
         })
     }
@@ -164,8 +163,7 @@ extension SMSUIViewController {
         let schedule = self.schedules[row]
         cell.imageLabel.image = UIImage(named: images[schedule.type]!)
         cell.contentLabel.text = schedule.content
-        cell.contentLabel.numberOfLines = 2
-        cell.timeLabel.text = schedule.executeTime
+        cell.timeLabel.text = "执行时间：" + schedule.executeTime
         return cell
     }
     
@@ -174,8 +172,8 @@ extension SMSUIViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-         tableView.deselectRow(at: indexPath, animated: true)
-        self.performSegue(withIdentifier: "showSMSDetailRel", sender: tableView.cellForRow(at: indexPath))
+        tableView.deselectRow(at: indexPath, animated: true)
+        self.performSegue(withIdentifier: "showSMSDetailRel", sender: self.schedules[indexPath.row])
         // self.performSegue(withIdentifier: <#T##String#>, sender: <#T##Any?#>)
     }
     
@@ -188,6 +186,14 @@ extension SMSUIViewController {
 }
 
 extension SMSUIViewController: ActionFloatViewDelegate {
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showSMSDetailRel" {
+            let vc = segue.destination as! SMSDetailViewController
+            vc.schedule = sender as! MessageSchedule
+        }
+    }
+    
     func floatViewTapItemIndex(_ type: ActionFloatViewItemType) {
         switch type.rawValue {
         case 0:
@@ -201,14 +207,13 @@ extension SMSUIViewController: ActionFloatViewDelegate {
 //            var body:[String: Any] = [:]
 //            body["userId"] = APP_USER_ID
 //            body["planType"] = "0"
-//            // body["content"] = "【称 谓】，不是每朵白云，都会带来真情；不是每个拥抱，都会面带微笑；不是每次思念，都能立刻兑现；不是每个朋友，都在身边守候；不是每个日子，都逢良辰吉时。国庆节到了，愿你节日快乐！【签名】"
-//            body["content"] = " "
-//            body["dateExecuteYj"] = ""
+//            body["content"] = "[销小秘]【称谓】，不是每朵白云，都会带来真情；不是每个拥抱，都会面带微笑；不是每次思念，都能立刻兑现；不是每个朋友，都在身边守候；不是每个日子，都逢良辰吉时。rua 国庆节到了，愿你节日快乐！【签名】"
+//            body["dateExecuteYj"] = "2017/10/01"
 //            body["dxtdId"] = ""
 //            let yld = [["sjhm": "18519283902","cw":"刘总","qm":"小刘"]]
 //            let yl = JSON(yld)
 //            let str = yl.rawString(.utf8, options: .init(rawValue: 0))
-//            body["yl"] = "2017/10/01"
+//            body["yl"] = str
 //            NetworkUtils.postBackEnd("C_DXJH", body: body, handler: {_ in })
             let hub = MBProgressHUD.showAdded(to: self.view, animated: true)
             hub.mode = MBProgressHUDMode.text
