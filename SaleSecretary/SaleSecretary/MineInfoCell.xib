@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -58,19 +59,27 @@
                         <rect key="frame" x="12" y="72" width="20" height="20"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
-                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nt8-j0-zOm">
-                        <rect key="frame" x="306" y="39" width="43" height="27"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nt8-j0-zOm">
+                        <rect key="frame" x="312" y="39" width="43" height="27"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="43" id="Mj4-OQ-DcN"/>
+                            <constraint firstAttribute="height" constant="27" id="hVq-E2-MmV"/>
+                        </constraints>
                         <state key="normal" title="Button" image="icon_hyyq"/>
                     </button>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="会员邀请" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bf6-M9-Qya">
-                        <rect key="frame" x="296" y="65" width="65" height="21"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="会员邀请" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bf6-M9-Qya">
+                        <rect key="frame" x="303.5" y="65" width="57.5" height="17"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="bf6-M9-Qya" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="57" id="5n4-TL-6oI"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="bf6-M9-Qya" secondAttribute="trailing" constant="14" id="QPx-Qp-GJA"/>
+                    <constraint firstItem="nt8-j0-zOm" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="31" id="WlI-Cs-2N7"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="nt8-j0-zOm" secondAttribute="trailing" constant="20" id="Zt3-vf-P72"/>
+                </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="inviteBtn" destination="nt8-j0-zOm" id="ny5-2K-2RJ"/>
