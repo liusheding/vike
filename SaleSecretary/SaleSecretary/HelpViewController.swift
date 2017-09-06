@@ -49,7 +49,7 @@ extension HelpViewController: UITableViewDelegate,UITableViewDataSource{
         let cell = UITableViewCell(style: .value1, reuseIdentifier: "helpCell")
         cell.textLabel?.text = self.titles[indexPath.row]
         if indexPath.row == self.titles.count - 1{
-            cell.detailTextLabel?.text = "400-0737-553"
+            cell.detailTextLabel?.text = "400-073-7553"
         }else{
             cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
         }
@@ -64,7 +64,7 @@ extension HelpViewController: UITableViewDelegate,UITableViewDataSource{
             let walletVC = storyBoard.instantiateViewController(withIdentifier: identifier)
             self.navigationController?.pushViewController(walletVC, animated: true)
         }else{
-            let urlString = "tel://400-0737-553"
+            let urlString = "tel://400-073-7553"
             if let url = URL(string: urlString) {
                 //根据iOS系统版本，分别处理
                 if #available(iOS 10, *) {

@@ -124,7 +124,7 @@ extension TakeoutMoneyViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .value1, reuseIdentifier: "payCell")
+        let cell = UITableViewCell(style: .value1, reuseIdentifier: "takeCell")
         cell.textLabel?.text = "仅限使用本人银行卡提现"
         cell.textLabel?.font = UIFont.systemFont(ofSize: 13)
         cell.textLabel?.textColor = UIColor.darkGray

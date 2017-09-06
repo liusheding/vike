@@ -9,7 +9,6 @@
 import UIKit
 
 class AddUserCell: UITableViewCell {
-    @IBOutlet weak var title: UILabel!
     @IBOutlet weak var inputtext: UITextField!
 
     override func awakeFromNib() {

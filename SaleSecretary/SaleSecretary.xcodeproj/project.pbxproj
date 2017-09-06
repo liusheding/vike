@@ -117,8 +117,6 @@
 		6EBAA56B1F3C5B330099DA89 /* WalletDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EBAA5691F3C5B330099DA89 /* WalletDetailCell.xib */; };
 		6EBAA56F1F3D5C190099DA89 /* BusinessRecordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBAA56E1F3D5C190099DA89 /* BusinessRecordController.swift */; };
 		6EE116CF1F5553D7009601C7 /* AddUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE116CE1F5553D7009601C7 /* AddUserViewController.swift */; };
-		6EE116D61F555C3A009601C7 /* MustAddCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE116D41F555C3A009601C7 /* MustAddCell.swift */; };
-		6EE116D71F555C3A009601C7 /* MustAddCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EE116D51F555C3A009601C7 /* MustAddCell.xib */; };
 		6EE116DA1F555E98009601C7 /* AddUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE116D81F555E98009601C7 /* AddUserCell.swift */; };
 		6EE116DB1F555E98009601C7 /* AddUserCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EE116D91F555E98009601C7 /* AddUserCell.xib */; };
 		6EE116DF1F566D45009601C7 /* ChooseDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE116DE1F566D45009601C7 /* ChooseDateView.swift */; };
@@ -133,7 +131,6 @@
 		6EF2B78B1F3ECB1D00C808EE /* PayDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EF2B7891F3ECB1D00C808EE /* PayDetailCell.xib */; };
 		6EF2B78F1F41390B00C808EE /* UserManageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF2B78E1F41390B00C808EE /* UserManageViewController.swift */; };
 		6EF2B7951F418E8600C808EE /* UserManageHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF2B7941F418E8600C808EE /* UserManageHeaderView.swift */; };
-		6EF2B7971F419F1600C808EE /* userList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6EF2B7961F419F1600C808EE /* userList.plist */; };
 		6EF2B7991F419FC400C808EE /* Usermodel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF2B7981F419FC400C808EE /* Usermodel.swift */; };
 		6EF5B6FF1F4452D3001B0A77 /* FindPwdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF5B6FE1F4452D3001B0A77 /* FindPwdViewController.swift */; };
 		6EF5B7031F4452E9001B0A77 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6EF5B7001F4452E9001B0A77 /* Login.storyboard */; };
@@ -332,8 +329,6 @@
 		6EBAA5691F3C5B330099DA89 /* WalletDetailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WalletDetailCell.xib; sourceTree = "<group>"; };
 		6EBAA56E1F3D5C190099DA89 /* BusinessRecordController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BusinessRecordController.swift; sourceTree = "<group>"; };
 		6EE116CE1F5553D7009601C7 /* AddUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddUserViewController.swift; sourceTree = "<group>"; };
-		6EE116D41F555C3A009601C7 /* MustAddCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MustAddCell.swift; sourceTree = "<group>"; };
-		6EE116D51F555C3A009601C7 /* MustAddCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MustAddCell.xib; sourceTree = "<group>"; };
 		6EE116D81F555E98009601C7 /* AddUserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddUserCell.swift; sourceTree = "<group>"; };
 		6EE116D91F555E98009601C7 /* AddUserCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddUserCell.xib; sourceTree = "<group>"; };
 		6EE116DE1F566D45009601C7 /* ChooseDateView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseDateView.swift; sourceTree = "<group>"; };
@@ -348,7 +343,6 @@
 		6EF2B7891F3ECB1D00C808EE /* PayDetailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PayDetailCell.xib; sourceTree = "<group>"; };
 		6EF2B78E1F41390B00C808EE /* UserManageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserManageViewController.swift; sourceTree = "<group>"; };
 		6EF2B7941F418E8600C808EE /* UserManageHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserManageHeaderView.swift; sourceTree = "<group>"; };
-		6EF2B7961F419F1600C808EE /* userList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = userList.plist; sourceTree = "<group>"; };
 		6EF2B7981F419FC400C808EE /* Usermodel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Usermodel.swift; sourceTree = "<group>"; };
 		6EF5B6FE1F4452D3001B0A77 /* FindPwdViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindPwdViewController.swift; sourceTree = "<group>"; };
 		6EF5B7001F4452E9001B0A77 /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
@@ -731,7 +725,6 @@
 			isa = PBXGroup;
 			children = (
 				6E64C52F1F46FB06001E7081 /* WeixinPayModel.swift */,
-				6EF2B7961F419F1600C808EE /* userList.plist */,
 				6EF2B7981F419FC400C808EE /* Usermodel.swift */,
 			);
 			name = Model;
@@ -753,8 +746,6 @@
 				6EF2B7891F3ECB1D00C808EE /* PayDetailCell.xib */,
 				6EF2B7941F418E8600C808EE /* UserManageHeaderView.swift */,
 				6E52D9841F458B560003305F /* ShareView.swift */,
-				6EE116D41F555C3A009601C7 /* MustAddCell.swift */,
-				6EE116D51F555C3A009601C7 /* MustAddCell.xib */,
 				6EE116D81F555E98009601C7 /* AddUserCell.swift */,
 				6EE116D91F555E98009601C7 /* AddUserCell.xib */,
 			);
@@ -1070,10 +1061,8 @@
 				66451F0E1F330DDD009B65DD /* AppellationCellView.xib in Resources */,
 				E7D2ABD81F457AC7000123A5 /* TableViewCell.xib in Resources */,
 				664B999A1F3DBE5700968AA5 /* InfoPlist.strings in Resources */,
-				6EE116D71F555C3A009601C7 /* MustAddCell.xib in Resources */,
 				66B602F21F2F074A002A55E6 /* SMSListViewCell.xib in Resources */,
 				E7D2AC361F4A7A48000123A5 /* AddingCustomViewCell.xib in Resources */,
-				6EF2B7971F419F1600C808EE /* userList.plist in Resources */,
 				6EF2B78B1F3ECB1D00C808EE /* PayDetailCell.xib in Resources */,
 				837E4CB3CAA4F9E6F67FCD9B689A4731 /* Assets.xcassets in Resources */,
 				B57F541A2E6EE35F55BF1F726094C124 /* LaunchScreen.storyboard in Resources */,
@@ -1265,7 +1254,6 @@
 				66EFA9CB1F4BD9DD0027011F /* CollapsibleImageHeaderView.swift in Sources */,
 				E7DB1FE21F4EB9A6002DD96D /* CTManagerGroupController.swift in Sources */,
 				66451F161F331F8E009B65DD /* InscribeViewCell.swift in Sources */,
-				6EE116D61F555C3A009601C7 /* MustAddCell.swift in Sources */,
 				6EF5B72C1F4582D0001B0A77 /* HelpViewController.swift in Sources */,
 				53E56F706EB9015CA4B22F2CB85E21EB /* ToolCellView.swift in Sources */,
 				6E20EC9C1F341B7D00A0F29E /* TableHeaderViewCell.swift in Sources */,
