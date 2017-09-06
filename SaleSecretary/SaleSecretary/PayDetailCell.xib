@@ -29,9 +29,8 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AzU-S3-Tfw">
-                        <rect key="frame" x="293" y="15" width="73" height="21"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AzU-S3-Tfw">
+                        <rect key="frame" x="316" y="15" width="42" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" red="0.0039215686269999999" green="0.70588235290000001" blue="0.078431372550000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
@@ -44,6 +43,10 @@
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="AzU-S3-Tfw" secondAttribute="trailing" constant="10" id="JGP-Nr-QOi"/>
+                    <constraint firstItem="AzU-S3-Tfw" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="POd-Vo-Ksv"/>
+                </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="money" destination="AzU-S3-Tfw" id="9Vi-Hc-dmB"/>
