@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 class UserManageViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
@@ -14,6 +15,7 @@ class UserManageViewController: UIViewController {
     
     let cellId = "userDetailID"
     let headIdentifier = "UMheadView"
+    lazy var contactsCells = [UserGroup]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,18 +37,41 @@ class UserManageViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        loading()
+    }
+    
+    func loading(){
+        let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
+        hud.label.text = "正在加载中..."
+        
+        DispatchQueue.global(qos: .userInitiated).async {
+            let body = ["khjlTjm": AppUser.currentUser?.referralCode as Any, "pageSize": "1000"]
+            let request = NetworkUtils.postBackEnd("R_PAGED_QUERY_ME_YHGL", body: body) {
+                json in
+                let jsondata = json["body"]["obj"]
+                // 构造数据
+                self.contactsCells =  {
+                    var friendsModelArray = [UserGroup]()
+                    friendsModelArray = UserGroup.dictModel(jsondata: jsondata)
+                    return friendsModelArray
+                }()
+                
+            }
+            request.response(completionHandler: { _ in
+                hud.hide(animated: true)
+                self.tableView.reloadData()
+            })
+        }
+    }
+    
     func clickAddBtn(){
         let storyBoard = UIStoryboard(name: "MineView", bundle: nil)
         let walletVC = storyBoard.instantiateViewController(withIdentifier: "addUserID")
         self.navigationController?.pushViewController(walletVC, animated: true)
     }
     
-    // 构造数据 [ 0 : A , 1: B ] B:[ 0: a , 1: b ]
-    lazy var contactsCells:[UserGroup] =  {
-        var friendsModelArray = [UserGroup]()
-        friendsModelArray = UserGroup.dictModel()
-        return friendsModelArray
-    }()
 }
 
 extension UserManageViewController: UITableViewDelegate, UITableViewDataSource, UMHeaderViewDelegate {
@@ -136,7 +161,8 @@ extension UserManageViewController: UITableViewDelegate, UITableViewDataSource, 
     // left slide
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let freeze = UITableViewRowAction(style: .normal, title: "冻结账号") { action, index in
-            print("===冻结账号====")
+            let group = self.contactsCells[indexPath.section]
+            let customer = group.friends?[indexPath.row] as? User
             
         }
         freeze.backgroundColor = UIColor.red

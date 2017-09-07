@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 class AddUserViewController: UITableViewController,UITextFieldDelegate {
     let icons = ["icon_sjh", "icon_xm", "icon_zw", "icon_mm"]
@@ -137,8 +138,27 @@ class AddUserViewController: UITableViewController,UITextFieldDelegate {
             alert("密码不能为空")
             return
         }
+        let phone = inputtext[0].text
+        let name = inputtext[1].text
+        let pwd = inputtext[2].text
+        let role = cell?.textLabel?.text
+        let roles = ["一级代理商":"YJDLS", "二级代理商":"EJDLS", "客户":"KH"]
+        self.navigationItem.rightBarButtonItem?.isEnabled = false
+        let body = ["busi_scene":"OPEN_ACCOUNT", "cellphoneNumber":phone, "loginPwd":pwd, "name":name, "roleCode":roles[role!], "referralCode":AppUser.currentUser?.referralCode]
         
-        print("=====Save======")
+        let request = NetworkUtils.postBackEnd("C_USER", body: body , handler: {[weak self] (val ) in
+            let hub = MBProgressHUD.showAdded(to: (self?.view)!, animated: true)
+            hub.mode = MBProgressHUDMode.text
+            hub.label.text = "注册成功"
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
+                hub.hide(animated: true)
+                self?.navigationController?.popViewController(animated: true)
+            }
+            
+        })
+        request.response(completionHandler: {_ in
+            self.navigationItem.rightBarButtonItem?.isEnabled = true
+        })
     }
     
     func alert(_ msg: String) {
@@ -149,23 +169,22 @@ class AddUserViewController: UITableViewController,UITextFieldDelegate {
     }
     
     func chooseRole() {
-//        if AppUser.currentUser?.role?.rawValue == "客户"{
-//            return
-//        }
-//        
+        if AppUser.currentUser?.role == .KH{
+            return
+        }
+
         let alertController = UIAlertController(title: "", message: "选择账号申请人职务",preferredStyle: .actionSheet)
         let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
         alertController.addAction(cancelAction)
-//        
-//        var roles = [String]()
-//        if AppUser.currentUser?.role?.rawValue == "业务员"{
-//            roles = ["一级代理", "二级代理", "客户"]
-//        }else if AppUser.currentUser?.role?.rawValue == "一级代理"{
-//            roles = ["二级代理", "客户"]
-//        } else if AppUser.currentUser?.role?.rawValue == "二级代理"{
-//            roles = ["客户"]
-//        }
-        let roles = ["一级代理", "二级代理", "客户"]
+        
+        var roles = [String]()
+        if AppUser.currentUser?.role == .PTYWY{
+            roles = ["一级代理商", "二级代理商", "客户"]
+        }else if AppUser.currentUser?.role == .YJDLS{
+            roles = ["二级代理商", "客户"]
+        } else if AppUser.currentUser?.role == .EJDLS{
+            roles = ["客户"]
+        }
         for role in roles{
             let roleAction = UIAlertAction(title: role, style: .destructive, handler: {_ in self.showRole(role)})
             alertController.addAction(roleAction)

@@ -7,11 +7,13 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 class User : NSObject{
     var name: String?
     var phone: String?
-    let properties = ["name", "phone"]
+    var userid: String?
+    let properties = ["name", "phone", "userid"]
     
     override var description: String {
         let dict = dictionaryWithValues(forKeys: properties)
@@ -25,6 +27,7 @@ class User : NSObject{
     override init () {
         self.name =  ""
         self.phone = ""
+        self.userid = ""
     }
     override func  setValue(_ value: Any?, forUndefinedKey key: String) { }
     
@@ -57,27 +60,63 @@ class UserGroup:NSObject {
     
     override func  setValue(_ value: Any?, forUndefinedKey key: String) { }
     
-    class func dictModel() -> [UserGroup] {
-        let list = [
-            ["name":"一级代理", "isOpen":0, "friends":[
-                ["name":"马云", "phone":"13111111111"],
-                ["name":"马化腾", "phone":"13222222222"]
-                ]
-            ],
-            ["name":"二级代理", "isOpen":0, "friends":[
-                ["name":"李彦宏", "phone":"13333333333"],
-                ["name":"王健林", "phone":"13444444444"]
-                ]
-            ],
-            ["name":"客户", "isOpen":0, "friends":[
-                ["name":"王思聪", "phone":"13555555555"],
-                ["name":"李嘉诚", "phone":"13666666666"]
-                ]
-            ],
+    class func dictModel(jsondata:JSON) -> [UserGroup] {
+        var list = [
+            ["name":"一级代理商", "isOpen":0, "friends":[]],
+            ["name":"二级代理商", "isOpen":0, "friends":[]],
+            ["name":"客户", "isOpen":0, "friends":[]],
         ]
         
+        if AppUser.currentUser?.role == .YJDLS{
+            list = [
+                ["name":"二级代理商", "isOpen":0, "friends":[]],
+                ["name":"客户", "isOpen":0, "friends":[]],
+            ]
+        } else if AppUser.currentUser?.role == .EJDLS{
+            list = [
+                ["name":"客户", "isOpen":0, "friends":[]],
+            ]
+        }
+        
+        for data in jsondata.array!{
+            if AppUser.currentUser?.role == .PTYWY{
+                if data["roleCode"].stringValue == "YJDLS"{
+                    var fir = list[0]["friends"] as! Array<[String:String]>
+                    fir.append(["name":data["name"].stringValue, "phone":data["cellphoneNumber"].stringValue, "userid":data["id"].stringValue])
+                    list[0]["friends"] = fir
+                }
+                else if data["roleCode"].stringValue == "EJDLS"{
+                    var fir = list[1]["friends"] as! Array<[String:String]>
+                    fir.append(["name":data["name"].stringValue, "phone":data["cellphoneNumber"].stringValue, "userid":data["id"].stringValue])
+                    list[1]["friends"] = fir
+                }
+                else if data["roleCode"].stringValue == "KH"{
+                    var fir = list[2]["friends"] as! Array<[String:String]>
+                    fir.append(["name":data["name"].stringValue, "phone":data["cellphoneNumber"].stringValue, "userid":data["id"].stringValue])
+                    list[2]["friends"] = fir
+                }
+            }
+            else if AppUser.currentUser?.role == .YJDLS{
+                if data["roleCode"].stringValue == "EJDLS"{
+                    var fir = list[0]["friends"] as! Array<[String:String]>
+                    fir.append(["name":data["name"].stringValue, "phone":data["cellphoneNumber"].stringValue, "userid":data["id"].stringValue])
+                    list[0]["friends"] = fir
+                }
+                else if data["roleCode"].stringValue == "KH"{
+                    var fir = list[1]["friends"] as! Array<[String:String]>
+                    fir.append(["name":data["name"].stringValue, "phone":data["cellphoneNumber"].stringValue, "userid":data["id"].stringValue])
+                    list[1]["friends"] = fir
+                }
+            }
+            else if AppUser.currentUser?.role == .EJDLS{
+                var fir = list[0]["friends"] as! Array<[String:String]>
+                fir.append(["name":data["name"].stringValue, "phone":data["cellphoneNumber"].stringValue, "userid":data["id"].stringValue])
+                list[0]["friends"] = fir
+            }
+        }
         var models = [UserGroup]()
         for dict in list {
+            print(dict)
             models.append(UserGroup(dict: dict as! [String : AnyObject]))
         }
         return models

@@ -12,7 +12,7 @@ class MineUIViewController: UITableViewController {
     let labelCellId = "mineListID"
     let mineInfoID = "mineinfoID"
     
-    let identifiers = [1:["onlinepayID"], 2:["userManageID"], 3:["walletView"], 4:["businessRecord"], 5:["setViewID", "helpViewID"]]
+    var identifiers = [1:["onlinepayID"], 2:["userManageID"], 3:["walletView"], 4:["businessRecord"], 5:["setViewID", "helpViewID"]]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,15 +22,17 @@ class MineUIViewController: UITableViewController {
         self.tableView.register(UINib(nibName: String(describing: MineViewCell.self), bundle: nil), forCellReuseIdentifier: labelCellId)
         self.tableView.register(UINib(nibName: String(describing: MineInfoCell.self), bundle: nil), forCellReuseIdentifier: mineInfoID)
         
-//        if AppUser.currentUser?.role?.rawValue == "客户"{
-//            self.mineCells = [
-//                0: [["label": "", "image": "", "id":""]],
-//                1: [["label": "短信充值", "image": "icon_w_dx", "id":"dx"]],
-//                2: [["label": "钱包", "image": "icon_w_qb", "id":"qb"]],
-//                3: [["label": "短信发送统计", "image": "icon_w_dxtj", "id":"dxtj"]],
-//                4: [["label": "设置", "image": "icon_w_sz", "id":"sz"], ["label": "帮助", "image": "icon_w_bz", "id":"bz"]],
-//            ]
-//        }
+        if AppUser.currentUser?.role == .KH{
+            self.mineCells = [
+                0: [["label": "", "image": "", "id":""]],
+                1: [["label": "短信充值", "image": "icon_w_dx", "id":"dx"]],
+                2: [["label": "钱包", "image": "icon_w_qb", "id":"qb"]],
+                3: [["label": "短信发送统计", "image": "icon_w_dxtj", "id":"dxtj"]],
+                4: [["label": "设置", "image": "icon_w_sz", "id":"sz"], ["label": "帮助", "image": "icon_w_bz", "id":"bz"]],
+            ]
+            
+            self.identifiers = [1:["onlinepayID"], 2:["walletView"], 3:["businessRecord"], 4:["setViewID", "helpViewID"]]
+        }
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
