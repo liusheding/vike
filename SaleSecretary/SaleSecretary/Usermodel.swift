@@ -10,7 +10,7 @@ import UIKit
 import SwiftyJSON
 
 class User : NSObject{
-    var name: String?
+    var name: String!
     var phone: String?
     var userid: String?
     let properties = ["name", "phone", "userid"]
@@ -54,6 +54,9 @@ class UserGroup:NSObject {
         for friendDict in self.friends! {
             let friend = User.init(dict: friendDict as! [String : AnyObject])
             friends.append(friend)
+        }
+        friends.sort { (s1, s2) -> Bool in
+            s1.name < s2.name
         }
         self.friends = friends
     }
@@ -114,6 +117,7 @@ class UserGroup:NSObject {
                 list[0]["friends"] = fir
             }
         }
+        
         var models = [UserGroup]()
         for dict in list {
             print(dict)

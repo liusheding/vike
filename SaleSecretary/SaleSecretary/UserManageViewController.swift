@@ -30,6 +30,8 @@ class UserManageViewController: UIViewController {
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellId)
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "•••", style: .plain, target: self, action: #selector(clickAddBtn))
+        
+        self.tableView.register(UINib(nibName: String(describing: UserDetailCell.self), bundle: nil), forCellReuseIdentifier: cellId)
 
     }
 
@@ -120,22 +122,22 @@ extension UserManageViewController: UITableViewDelegate, UITableViewDataSource, 
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: cellId)
-        
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! UserDetailCell
         let secNum = indexPath.section
         let group = self.contactsCells[secNum]
         let customer = group.friends?[indexPath.row] as? User
         
-        cell.textLabel?.text = customer?.name
-        cell.detailTextLabel?.text = customer?.phone
-        cell.imageView?.image = UIImage(named: "pic_xkh")
+        let userName = customer?.name
+        var cString : String = ""
+        if !(userName?.isEmpty)! {
+            let index = userName?.index( (userName?.startIndex)! , offsetBy: 1)
+            cString = (userName?.substring(to: index! ))!
+        }
         
-//        cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
-        
-        cell.accessoryView = UIView(frame: CGRect(x: 0, y: 0, width: 48, height: 48))
-        let callImage = UIImageView(image:UIImage(named:"icon_bh"))
-        callImage.frame = CGRect(x: 32, y: 15, width: 16, height: 18)
-        cell.accessoryView?.addSubview(callImage)
+        cell.name?.text = userName
+        cell.phone?.text = customer?.phone
+        cell.picName.backgroundColor = ContactCommon.sampleColor[ indexPath.row % ContactCommon.count ]
+        cell.picName.setTitle(cString , for: .normal )
         return cell
     }
     
