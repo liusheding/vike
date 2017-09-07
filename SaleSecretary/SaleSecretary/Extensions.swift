@@ -65,19 +65,27 @@ struct Utils {
         }
     }
     
-    static func showLoadingHUB(view: UIView?, completion: ((MBProgressHUD)-> Void)?) {
+    static func showLoadingHUB(view: UIView?, msg: String = "正在加载中...", completion: ((MBProgressHUD)-> Void)?) {
         var v = view
         if v == nil {
             v = UIApplication.topViewController()?.view
         }
         let hub = MBProgressHUD.showAdded(to: v!, animated: true)
-        hub.label.text = "正在加载中..."
+        hub.label.text = msg
         if completion != nil {
              completion!(hub)
         } else {
             hub.hide(animated: true, afterDelay: 1.5)
         }
        
+    }
+    
+    static func alert(_ msg: String) {
+        let uc = UIAlertController(title: "", message: msg, preferredStyle: UIAlertControllerStyle.alert)
+        uc.addAction(UIAlertAction(title: "好的", style: UIAlertActionStyle.default))
+        let vc = UIApplication.topViewController()
+        vc?.present(uc, animated: true, completion: nil)
+        return
     }
     
 }

@@ -13,7 +13,9 @@ class CustomerModel: NSObject {
     
 }
 
-class Customer : NSObject{
+
+
+class Customer : NSObject {
     
     var name:         String?
     var phone_number: [String]?
@@ -31,6 +33,14 @@ class Customer : NSObject{
         let dict = dictionaryWithValues(forKeys: properties)
         return ("\(dict)")
     }
+    
+    static public func == (lhs: Customer, rhs: Customer) -> Bool {
+        return true
+    }
+    
+//    static func == (l: Customer, r: Customer) -> Bool {
+//        return l.phone_number![0] == r.phone_number![0]
+//    }
     
     override init() {
         self.name = ""

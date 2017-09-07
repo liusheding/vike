@@ -10,6 +10,31 @@ import Foundation
 import SwiftyJSON
 import Alamofire
 
+class MsgKH: NSObject {
+    
+    var cw: String!
+    var sjhm: String!
+    var qm: String?
+    
+    override init() {
+        super.init()
+    }
+    
+    init(json: JSON) {
+        super.init()
+        self.cw = json["cw"].stringValue
+        self.sjhm = json["sjhm"].stringValue
+        self.qm = json["qm"].string
+    }
+    
+    init(customer: Customer) {
+        super.init()
+        self.cw = customer.name
+        self.sjhm = customer.phone_number?[0]
+        self.qm = ""
+    }
+    
+}
 
 
 class MessageSchedule: NSObject {
@@ -26,7 +51,9 @@ class MessageSchedule: NSObject {
     
     var createTime: String?
     
- 
+    var customers: [MsgKH] = []
+    
+    var userSign:String = ""
     
     override init() {
         super.init()
@@ -40,8 +67,22 @@ class MessageSchedule: NSObject {
         self.type = json["planType"].stringValue
         self.executeTime = json["dateExecuteYj"].stringValue
         self.createTime = json["dateCreate"].stringValue
+        if let cust = json["xzkh"].string  {
+            if cust.isEmpty {return}
+            let obj = JSON.parse(cust).arrayValue
+            for  o in obj {
+                self.customers.append(MsgKH(json: o))
+            }
+        }
     }
     
+    public func addCustomer(customer: Customer) {
+        self.customers.append(MsgKH(customer: customer))
+    }
+    
+    public func addCustomer(json: JSON) {
+        self.customers.append(MsgKH(json: json))
+    }
     
     static func loadMySchedules(_ completion: @escaping (([MessageSchedule]) -> Void)) -> DataRequest? {
         if APP_USER_ID == nil {return nil}
@@ -59,6 +100,39 @@ class MessageSchedule: NSObject {
         }
         return request
     }
+    
+    func update(_ completion: @escaping ((JSON) -> Void)) -> DataRequest? {
+        var body:[String: Any] = [:]
+        body["userId"] = APP_USER_ID
+        body["planType"] = "0"
+        body["content"] = self.content
+        body["dateExecuteYj"] = self.executeTime
+        body["autograph"] = AppUser.currentUser?.name
+        body["id"] = self.id
+        body["dxtdId"] = ""
+        var yld:[[String:String]] = []
+        for c in self.customers {
+            yld.append(["sjhm": c.sjhm, "cw": c.cw, "qm": userSign])
+        }
+        let yl = JSON(yld)
+        let str = yl.rawString(.utf8, options: .init(rawValue: 0))
+        body["yl"] = str
+        let request = NetworkUtils.postBackEnd("U_DXJH", body: body, handler: {json in
+            completion(json["body"])
+        })
+        return request
+    }
+    
+    func delete(_ completion: @escaping ((JSON) -> Void)) -> DataRequest? {
+        var body:[String: Any] = [:]
+        body["ids"] = self.id
+        let request = NetworkUtils.postBackEnd("D_DXJH", body: body, handler: {json in
+            completion(json["body"])
+        })
+        return request
+    }
+    
+//static
     
     
 }

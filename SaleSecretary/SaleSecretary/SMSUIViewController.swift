@@ -34,11 +34,16 @@ class SMSUIViewController : UITableViewController {
         print("invoke SMSUIViewController.viewDidLoad()")
         super.viewDidLoad()
         self.setUp()
+        // self.loadData()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         self.loadData()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillAppear(true)
+        super.viewWillDisappear(true)
         self.moreDrop.hide(true)
     }
     
@@ -163,7 +168,7 @@ extension SMSUIViewController {
         let schedule = self.schedules[row]
         cell.imageLabel.image = UIImage(named: images[schedule.type]!)
         cell.contentLabel.text = schedule.content
-        cell.timeLabel.text = "执行时间：" + schedule.executeTime
+        cell.timeLabel.text = schedule.executeTime
         return cell
     }
     
@@ -204,17 +209,6 @@ extension SMSUIViewController: ActionFloatViewDelegate {
             self.navigationController?.pushViewController(vc, animated: true)
             break
         case 2:
-//            var body:[String: Any] = [:]
-//            body["userId"] = APP_USER_ID
-//            body["planType"] = "0"
-//            body["content"] = "[销小秘]【称谓】，不是每朵白云，都会带来真情；不是每个拥抱，都会面带微笑；不是每次思念，都能立刻兑现；不是每个朋友，都在身边守候；不是每个日子，都逢良辰吉时。rua 国庆节到了，愿你节日快乐！【签名】"
-//            body["dateExecuteYj"] = "2017/10/01"
-//            body["dxtdId"] = ""
-//            let yld = [["sjhm": "18519283902","cw":"刘总","qm":"小刘"]]
-//            let yl = JSON(yld)
-//            let str = yl.rawString(.utf8, options: .init(rawValue: 0))
-//            body["yl"] = str
-//            NetworkUtils.postBackEnd("C_DXJH", body: body, handler: {_ in })
             let hub = MBProgressHUD.showAdded(to: self.view, animated: true)
             hub.mode = MBProgressHUDMode.text
             hub.label.text = "我的模板正在紧张研发中，敬请期待。"

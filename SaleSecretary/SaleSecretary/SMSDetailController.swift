@@ -25,7 +25,19 @@ class SMSDetailViewController : UIViewController {
     
     @IBOutlet weak var dateBtn: UIButton!
     
-    var receiptions: [String] = ["德华", "社定", "黄总", "185"]
+    var executeTime: String! {
+        
+        didSet {
+            self.schedule.executeTime = self.executeTime
+        }
+    }
+    
+    var receiptions: [MsgKH] = [] {
+        
+        didSet {
+            self.numberLabel.text = "总共\(self.receiptions.count)人"
+        }
+    }
     
     override func viewDidLoad() {
         textContentView.sizeThatFits(CGSize(width: textContentView.frame.width, height:300))
@@ -39,6 +51,9 @@ class SMSDetailViewController : UIViewController {
         self.colletions.isUserInteractionEnabled = true
         self.loadSchedule()
         self.view.backgroundColor = UIColor.groupTableViewBackground
+        self.dateBtn.titleLabel?.textAlignment = .right
+        self.dateBtn.setTitle(schedule.executeTime, for: .normal)
+        self.numberLabel.text = "总共\(self.receiptions.count)人"
     }
     
     @IBOutlet weak var numberLabel: UILabel!
@@ -46,20 +61,70 @@ class SMSDetailViewController : UIViewController {
     public func loadSchedule() {
         let _ = NetworkUtils.postBackEnd("R_BASE_DXJH", body: ["id": schedule.id!], handler: {
             json in
+            self.schedule = MessageSchedule(json: json["body"])
+            self.receiptions = self.schedule.customers
+            self.colletions.reloadSections([0])
         })
     }
     
     @IBAction func dataBtnTapped(_ sender: UIButton) {
+        let shooseView = ChooseDateView.init(frame: self.view.frame)
+        shooseView.delegate = self
+        // self.view.addSubview(shooseView)
+        shooseView.showInView(self.view)
     }
+    
     @IBAction func saveBtnTapped(_ sender: UIButton) {
+        if self.receiptions.count == 0 {
+            Utils.alert("至少有一名短信客户")
+            return
+        }
+        sender.isEnabled = false
+        sender.setTitle("保存中", for: .disabled)
+        Utils.showLoadingHUB(view: self.view, msg: "保存中...", completion: {hub in
+            self.schedule.customers = self.receiptions
+            let _ = self.schedule.update() {[unowned self]
+                json in
+                hub.hide(animated: true)
+                let vc = self.navigationController?.viewControllers
+                self.navigationController?.popToViewController((vc?[(vc?.count)! - 2])!, animated: true)
+            }
+        })
+    }
+    
+    @IBAction func deleteTapped(_ sender: UIBarButtonItem) {
+        let alertController = UIAlertController(title: "删除短信计划", message: "删除后您还可以重新再新建一个",
+                                                preferredStyle: .actionSheet)
+        let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
+        let deleteAction = UIAlertAction(title: "确定删除", style: .destructive, handler: {_ in
+            self.schedule.delete({
+                _ in
+                Utils.showLoadingHUB(view: self.view, msg: "删除成功", completion: nil)
+                let vc = self.navigationController?.viewControllers
+                self.navigationController?.popToViewController((vc?[(vc?.count)! - 2])!, animated: true)
+            })
+        })
+        alertController.addAction(cancelAction)
+        alertController.addAction(deleteAction)
+        self.present(alertController, animated: true, completion: nil)
     }
     
 }
 
-extension SMSDetailViewController: CustomerSelectDelegate {
+extension SMSDetailViewController: CustomerSelectDelegate, ChooseDateDelegate {
     
     func selectedRecipients(rec: [Customer]) {
         
+        
+        for c in rec {
+            self.receiptions.append(MsgKH(customer: c))
+        }
+        self.colletions.reloadSections([0])
+    }
+    
+    func didchose(date: String) {
+        self.dateBtn.setTitle(date, for: .normal)
+        self.executeTime = date
     }
 }
 
@@ -115,7 +180,10 @@ extension SMSDetailViewController: UICollectionViewDelegate, UICollectionViewDat
             cell.addSubview(view)
             let label = UILabel()
             view.addSubview(label)
-            label.text = receiptions[row]
+            let name = receiptions[row].cw
+            let len = name?.characters.count
+            let idx = name?.index((name?.endIndex)!, offsetBy: len!>=2 ? -2 : -len!)
+            label.text = name?.substring(from: idx!)
             label.font = UIFont.systemFont(ofSize: 13)
             label.snp.makeConstraints({(make) in
                 make.centerY.equalToSuperview()
