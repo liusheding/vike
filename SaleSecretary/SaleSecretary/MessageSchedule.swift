@@ -55,6 +55,8 @@ class MessageSchedule: NSObject {
     
     var userSign:String = ""
     
+    var cw:String?
+    
     override init() {
         super.init()
     }
@@ -82,6 +84,10 @@ class MessageSchedule: NSObject {
     
     public func addCustomer(json: JSON) {
         self.customers.append(MsgKH(json: json))
+    }
+    
+    public func addCustomer(kh: MsgKH) {
+        self.customers.append(kh)
     }
     
     static func loadMySchedules(_ completion: @escaping (([MessageSchedule]) -> Void)) -> DataRequest? {

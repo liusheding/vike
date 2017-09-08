@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -15,22 +16,44 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="PLe-Qh-93i" id="IPk-g6-UTT">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="eg. 尊敬的客户，您好" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hE5-SA-93i">
-                        <rect key="frame" x="15" y="0.0" width="288" height="44"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="如：尊敬的客户" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hE5-SA-93i">
+                        <rect key="frame" x="15" y="0.0" width="253" height="44"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="253" id="fOS-A1-6D0"/>
+                        </constraints>
                         <nil key="textColor"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <textInputTraits key="textInputTraits"/>
                     </textField>
-                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QdP-7l-9J5">
+                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QdP-7l-9J5">
                         <rect key="frame" x="318" y="6" width="51" height="31"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </switch>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="统一称谓" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x83-kg-LDa">
+                        <rect key="frame" x="282" y="8" width="29" height="28"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                        <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="QdP-7l-9J5" firstAttribute="leading" secondItem="x83-kg-LDa" secondAttribute="trailing" constant="7" id="2wb-um-DTs"/>
+                    <constraint firstItem="x83-kg-LDa" firstAttribute="top" secondItem="IPk-g6-UTT" secondAttribute="topMargin" id="Lgb-JP-5EX"/>
+                    <constraint firstItem="x83-kg-LDa" firstAttribute="leading" secondItem="hE5-SA-93i" secondAttribute="trailing" constant="14" id="Sqh-yC-187"/>
+                    <constraint firstItem="hE5-SA-93i" firstAttribute="top" secondItem="IPk-g6-UTT" secondAttribute="top" id="TGm-7q-U44"/>
+                    <constraint firstItem="x83-kg-LDa" firstAttribute="centerY" secondItem="QdP-7l-9J5" secondAttribute="centerY" id="TgL-Ee-hYG"/>
+                    <constraint firstItem="hE5-SA-93i" firstAttribute="leading" secondItem="IPk-g6-UTT" secondAttribute="leadingMargin" constant="7" id="ZMZ-F7-m59"/>
+                    <constraint firstItem="QdP-7l-9J5" firstAttribute="centerY" secondItem="IPk-g6-UTT" secondAttribute="centerY" id="flI-t2-lqy"/>
+                    <constraint firstAttribute="trailing" secondItem="QdP-7l-9J5" secondAttribute="trailing" constant="8" id="g6m-Ju-qum"/>
+                    <constraint firstItem="hE5-SA-93i" firstAttribute="centerY" secondItem="QdP-7l-9J5" secondAttribute="centerY" id="gdV-jq-aFP"/>
+                </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="switchControl" destination="QdP-7l-9J5" id="MG6-Qx-as5"/>
+                <outlet property="textField" destination="hE5-SA-93i" id="uan-RI-35n"/>
+            </connections>
             <point key="canvasLocation" x="53.5" y="62"/>
         </tableViewCell>
     </objects>

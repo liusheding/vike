@@ -12,6 +12,7 @@ import UIKit
 class InscribeViewCell: UITableViewCell {
     
     
+    @IBOutlet weak var inscribeText: UITextField!
     
     override func awakeFromNib() {
         super.awakeFromNib()

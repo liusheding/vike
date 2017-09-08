@@ -12,11 +12,14 @@ import UIKit
 class AppellationCellView : UITableViewCell {
     
     
+    @IBOutlet weak var textField: UITextField!
+    
+    
+    @IBOutlet weak var switchControl: UISwitch!
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
     }
-    
-    
     
 }

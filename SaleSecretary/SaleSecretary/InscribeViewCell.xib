@@ -11,14 +11,14 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="detailButton" indentationWidth="10" reuseIdentifier="cellIdforInscribe" id="9GT-0U-SsU" customClass="InscribeViewCell" customModule="SaleSecretary" customModuleProvider="target">
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cellIdforInscribe" id="9GT-0U-SsU" customClass="InscribeViewCell" customModule="SaleSecretary" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9GT-0U-SsU" id="f4H-FX-EVJ" customClass="InscribeViewCell" customModule="SaleSecretary" customModuleProvider="target">
-                <rect key="frame" x="0.0" y="0.0" width="328" height="43.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="eg.您的落款" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LHe-hP-HGt">
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="您的落款" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LHe-hP-HGt">
                         <rect key="frame" x="16" y="0.0" width="304" height="44"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <nil key="textColor"/>
@@ -27,6 +27,9 @@
                     </textField>
                 </subviews>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="inscribeText" destination="LHe-hP-HGt" id="tzm-gS-jH6"/>
+            </connections>
             <point key="canvasLocation" x="-5.5" y="34"/>
         </tableViewCell>
     </objects>

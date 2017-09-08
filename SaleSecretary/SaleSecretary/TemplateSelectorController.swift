@@ -117,15 +117,13 @@ class TemplateSelectorController: UIViewController {
     
     
     @IBAction func confirmSelection(_ sender: UIBarButtonItem) {
-        let idx = self.tableView.indexPathForSelectedRow
-        if self.templateSelectorDelegate != nil {
-            if idx != nil {
-                let cell = self.tableView.cellForRow(at: idx!) as! CollapsibleTableViewCell
-                let content = cell.detailLabel.text!
-                self.templateSelectorDelegate!.didSelected(SMSTemplate("fake_id", content: content))
-                let count = self.navigationController?.viewControllers.count
-                self.navigationController?.popToViewController((self.navigationController?.viewControllers[count! - 2])!, animated: true)
-            }
+        let idx = self.templateViewDelegate?.selectedPath
+        if idx != nil {
+            let cell = self.tableView.cellForRow(at: idx!) as! CollapsibleTableViewCell
+            let content = cell.detailLabel.text!
+            self.templateSelectorDelegate!.didSelected(SMSTemplate("fake_id", content: content))
+            let count = self.navigationController?.viewControllers.count
+            self.navigationController?.popToViewController((self.navigationController?.viewControllers[count! - 2])!, animated: true)
         }
     }
     
@@ -357,15 +355,22 @@ class TamplateTableViewDelegator: NSObject ,UITableViewDataSource, UITableViewDe
         tableView.deselectRow(at: indexPath, animated: false)
         let cell = tableView.cellForRow(at: indexPath)
         if controller.tableCanSelected {
-            cell?.accessoryType = .disclosureIndicator
-            cell?.accessoryView = UIImageView(image: UIImage(named: "icon_xz_1"))
-            if selectedPath != nil {
+            if selectedPath == nil  {
+                cell?.accessoryType = .disclosureIndicator
+                cell?.accessoryView = UIImageView(image: UIImage(named: "icon_xz_1"))
+                selectedPath = indexPath
+            } else if selectedPath == indexPath {
+                cell?.accessoryView = UIImageView(image: UIImage(named: "icon_wxz"))
+                selectedPath = nil
+            } else {
+                cell?.accessoryType = .disclosureIndicator
+                cell?.accessoryView = UIImageView(image: UIImage(named: "icon_xz_1"))
                 let sCell = tableView.cellForRow(at: selectedPath!)
                 if sCell != nil {
                     sCell?.accessoryView = UIImageView(image: UIImage(named: "icon_wxz"))
                 }
+                selectedPath = indexPath
             }
-            selectedPath = indexPath
         }
     }
 }

@@ -20,6 +20,9 @@ protocol SMSMessageModifyDelegate {
     func sendMidify(_ str: String, position: SMSPosition) -> Void
 }
 
+let MSG_CW = "【称谓】"
+let MSG_QM = "【签名】"
+
 
 class SMSPreviewController : UIViewController {
     
@@ -27,6 +30,8 @@ class SMSPreviewController : UIViewController {
     @IBOutlet weak var tipsLabel: UILabel!
     
     @IBOutlet weak var tableView: UITableView!
+    
+    var schedule: MessageSchedule!
     
     lazy var msgs: [SMSMessage] = {
         let rp = Recipient(name: "刘德华", phone: "18519283902")
@@ -85,10 +90,13 @@ extension SMSPreviewController : UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell.init(style: UITableViewCellStyle.default , reuseIdentifier: "cell")
         let msg = msgs[0]
-        let text = "\(msg.title)，\(msg.content!) \(msg.inscribe)"
+        //l et text = "\(msg.title)，\(msg.content!) \(msg.inscribe)"
         cell.textLabel?.font = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
         cell.textLabel?.numberOfLines = 5
-        let attr = NSMutableAttributedString(string: text)
+        let content = schedule.content
+        let kh = schedule.customers[indexPath.row]
+        let c = content?.replacingOccurrences(of: MSG_CW, with: kh.cw).replacingOccurrences(of: MSG_QM, with: kh.qm!)
+        let attr = NSMutableAttributedString(string: c!)
         attr.addAttribute(NSForegroundColorAttributeName, value: APP_THEME_COLOR, range: NSMakeRange(0, msg.lengths[0]))
         let st = msg.lengths[0] + msg.lengths[1] + 2
         attr.addAttribute(NSForegroundColorAttributeName, value: APP_THEME_COLOR, range: NSMakeRange(st, msg.lengths[2]))
