@@ -138,11 +138,11 @@ extension UserManageViewController: UITableViewDelegate, UITableViewDataSource, 
         cell.phone?.text = customer?.phone
         
         if customer?.status == "1"{ //锁定
-            cell.name.textColor = UIColor.lightGray
-            cell.phone.textColor = UIColor.lightGray
+            cell.name.textColor = UIColor.red
+            cell.phone.textColor = UIColor.red
         }else{
             cell.name.textColor = UIColor.black
-            cell.phone.textColor = UIColor.black
+            cell.phone.textColor = UIColor.lightGray
         }
 
         
