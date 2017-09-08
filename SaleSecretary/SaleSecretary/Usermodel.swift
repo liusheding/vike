@@ -13,7 +13,8 @@ class User : NSObject{
     var name: String!
     var phone: String?
     var userid: String?
-    let properties = ["name", "phone", "userid"]
+    var status: String?
+    let properties = ["name", "phone", "userid", "status"]
     
     override var description: String {
         let dict = dictionaryWithValues(forKeys: properties)
@@ -28,6 +29,7 @@ class User : NSObject{
         self.name =  ""
         self.phone = ""
         self.userid = ""
+        self.status = ""
     }
     override func  setValue(_ value: Any?, forUndefinedKey key: String) { }
     
@@ -85,35 +87,35 @@ class UserGroup:NSObject {
             if AppUser.currentUser?.role == .PTYWY{
                 if data["roleCode"].stringValue == "YJDLS"{
                     var fir = list[0]["friends"] as! Array<[String:String]>
-                    fir.append(["name":data["name"].stringValue, "phone":data["cellphoneNumber"].stringValue, "userid":data["id"].stringValue])
+                    fir.append(["name":data["name"].stringValue, "phone":data["cellphoneNumber"].stringValue, "userid":data["id"].stringValue, "status":data["status"].stringValue])
                     list[0]["friends"] = fir
                 }
                 else if data["roleCode"].stringValue == "EJDLS"{
                     var fir = list[1]["friends"] as! Array<[String:String]>
-                    fir.append(["name":data["name"].stringValue, "phone":data["cellphoneNumber"].stringValue, "userid":data["id"].stringValue])
+                    fir.append(["name":data["name"].stringValue, "phone":data["cellphoneNumber"].stringValue, "userid":data["id"].stringValue, "status":data["status"].stringValue])
                     list[1]["friends"] = fir
                 }
                 else if data["roleCode"].stringValue == "KH"{
                     var fir = list[2]["friends"] as! Array<[String:String]>
-                    fir.append(["name":data["name"].stringValue, "phone":data["cellphoneNumber"].stringValue, "userid":data["id"].stringValue])
+                    fir.append(["name":data["name"].stringValue, "phone":data["cellphoneNumber"].stringValue, "userid":data["id"].stringValue, "status":data["status"].stringValue])
                     list[2]["friends"] = fir
                 }
             }
             else if AppUser.currentUser?.role == .YJDLS{
                 if data["roleCode"].stringValue == "EJDLS"{
                     var fir = list[0]["friends"] as! Array<[String:String]>
-                    fir.append(["name":data["name"].stringValue, "phone":data["cellphoneNumber"].stringValue, "userid":data["id"].stringValue])
+                    fir.append(["name":data["name"].stringValue, "phone":data["cellphoneNumber"].stringValue, "userid":data["id"].stringValue, "status":data["status"].stringValue])
                     list[0]["friends"] = fir
                 }
                 else if data["roleCode"].stringValue == "KH"{
                     var fir = list[1]["friends"] as! Array<[String:String]>
-                    fir.append(["name":data["name"].stringValue, "phone":data["cellphoneNumber"].stringValue, "userid":data["id"].stringValue])
+                    fir.append(["name":data["name"].stringValue, "phone":data["cellphoneNumber"].stringValue, "userid":data["id"].stringValue, "status":data["status"].stringValue])
                     list[1]["friends"] = fir
                 }
             }
             else if AppUser.currentUser?.role == .EJDLS{
                 var fir = list[0]["friends"] as! Array<[String:String]>
-                fir.append(["name":data["name"].stringValue, "phone":data["cellphoneNumber"].stringValue, "userid":data["id"].stringValue])
+                fir.append(["name":data["name"].stringValue, "phone":data["cellphoneNumber"].stringValue, "userid":data["id"].stringValue, "status":data["status"].stringValue])
                 list[0]["friends"] = fir
             }
         }

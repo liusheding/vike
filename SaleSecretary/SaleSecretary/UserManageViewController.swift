@@ -136,6 +136,16 @@ extension UserManageViewController: UITableViewDelegate, UITableViewDataSource, 
         
         cell.name?.text = userName
         cell.phone?.text = customer?.phone
+        
+        if customer?.status == "1"{ //锁定
+            cell.name.textColor = UIColor.lightGray
+            cell.phone.textColor = UIColor.lightGray
+        }else{
+            cell.name.textColor = UIColor.black
+            cell.phone.textColor = UIColor.black
+        }
+
+        
         cell.picName.backgroundColor = ContactCommon.sampleColor[ indexPath.row % ContactCommon.count ]
         cell.picName.setTitle(cString , for: .normal )
         return cell
@@ -162,9 +172,33 @@ extension UserManageViewController: UITableViewDelegate, UITableViewDataSource, 
     
     // left slide
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        let freeze = UITableViewRowAction(style: .normal, title: "冻结账号") { action, index in
-            let group = self.contactsCells[indexPath.section]
-            let customer = group.friends?[indexPath.row] as? User
+        let group = self.contactsCells[indexPath.section]
+        let customer = group.friends?[indexPath.row] as? User
+        var title = ""
+        var status = ""
+        var tips = ""
+        if customer?.status == "1"{ //锁定
+            title = "解冻账号"
+            status = "0"
+            tips = "解冻成功"
+        }else{
+            title = "冻结账号"
+            status = "1"
+            tips = "冻结成功"
+        }
+        
+        let freeze = UITableViewRowAction(style: .normal, title: title) { action, index in
+            let body = ["busi_scene":"USER_LOCK", "id":customer?.userid, "status":status]
+            let request = NetworkUtils.postBackEnd("U_USER", body: body , handler: {[weak self] (val ) in
+                let hub = MBProgressHUD.showAdded(to: (self?.view)!, animated: true)
+                hub.mode = MBProgressHUDMode.text
+                hub.label.text = tips
+                customer?.status = status
+                self?.tableView.reloadRows(at: [indexPath], with: .automatic)
+                hub.hide(animated: true, afterDelay: 1)
+            })
+            request.response(completionHandler: {_ in
+            })
             
         }
         freeze.backgroundColor = UIColor.red
