@@ -179,16 +179,14 @@ class SMSTemplateViewController : UIViewController {
         sched.userId = APP_USER_ID
         sched.content = self.content
         let appellation = self.appellationCell.textField.text
-        sched.cw = (appellation?.isEmpty)! ? nil: appellation
+        sched.cw = (!self.appellationCell.switchControl.isOn || (appellation?.isEmpty)!) ? nil: appellation
         sched.executeTime = self.executeDate
         sched.type = "0"
         let sign = self.inscribeView.inscribeText.text!
         sched.userSign = sign.isEmpty ? (AppUser.currentUser?.name)! : sign
         for c in self.customers! {
             let kh = MsgKH(customer: c)
-            if let _cw = sched.cw {
-                kh.cw = _cw
-            }
+            kh.sjhm = kh.sjhm.replacingOccurrences(of: "+86", with: "").trimmingCharacters(in: .whitespaces)
             kh.qm = sched.userSign
             sched.addCustomer(kh: kh)
         }

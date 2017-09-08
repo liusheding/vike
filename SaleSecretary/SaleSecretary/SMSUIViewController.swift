@@ -168,7 +168,8 @@ extension SMSUIViewController {
         let schedule = self.schedules[row]
         cell.imageLabel.image = UIImage(named: images[schedule.type]!)
         cell.contentLabel.text = schedule.content
-        cell.timeLabel.text = schedule.executeTime
+        cell.timeLabel.text = "执行时间：\(schedule.executeTime!)/共\(schedule.count!)条短信"
+        cell.createLabel.text = schedule.createTime
         return cell
     }
     

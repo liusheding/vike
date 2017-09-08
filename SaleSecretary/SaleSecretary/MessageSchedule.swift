@@ -55,6 +55,8 @@ class MessageSchedule: NSObject {
     
     var userSign:String = ""
     
+    var count: Int?
+    
     var cw:String?
     
     override init() {
@@ -69,6 +71,7 @@ class MessageSchedule: NSObject {
         self.type = json["planType"].stringValue
         self.executeTime = json["dateExecuteYj"].stringValue
         self.createTime = json["dateCreate"].stringValue
+        self.count = json["sendDxts"].int
         if let cust = json["xzkh"].string  {
             if cust.isEmpty {return}
             let obj = JSON.parse(cust).arrayValue
@@ -133,6 +136,31 @@ class MessageSchedule: NSObject {
         var body:[String: Any] = [:]
         body["ids"] = self.id
         let request = NetworkUtils.postBackEnd("D_DXJH", body: body, handler: {json in
+            completion(json["body"])
+        })
+        return request
+    }
+    
+    
+    func save(_ completion: @escaping ((JSON) -> Void)) -> DataRequest? {
+        var body:[String: Any] = [:]
+        body["userId"] = APP_USER_ID
+        body["planType"] = self.type
+        body["content"] = self.content
+        body["dateExecuteYj"] = self.executeTime
+        // 使用统一签名
+        if let _cw = self.cw {
+            body["autograph"] = _cw
+        }
+        body["dxtdId"] = ""
+        var yld:[[String:String]] = []
+        for c in self.customers {
+            yld.append(["sjhm": c.sjhm, "cw": c.cw, "qm": self.userSign])
+        }
+        let yl = JSON(yld)
+        let str = yl.rawString(.utf8, options: .init(rawValue: 0))
+        body["yl"] = str
+        let request = NetworkUtils.postBackEnd("C_DXJH", body: body, handler: {json in
             completion(json["body"])
         })
         return request
