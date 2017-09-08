@@ -10,3 +10,5 @@
 #import "WXApi.h"
 
 #import "JPUSHService.h"
+
+#include "ifaddrs.h"
