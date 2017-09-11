@@ -15,9 +15,9 @@ class WeixinPayModel: NSObject {
     let partnerID: String
     let prepayID: String
     let sign: String
-    let timestamp: Int
+    let timestamp: String
         
-    init(appID: String, noncestr: String, package: String, partnerID: String, prepayID: String, sign: String, timestamp: Int) {
+    init(appID: String, noncestr: String, package: String, partnerID: String, prepayID: String, sign: String, timestamp: String) {
         self.appID = appID
         self.noncestr = noncestr
         self.package = package

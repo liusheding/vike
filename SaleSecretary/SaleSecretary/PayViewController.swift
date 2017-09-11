@@ -92,25 +92,16 @@ class PayViewController: UIViewController {
             return
         }
         
-        let ipAddress = getIPAddress()
-        if ipAddress == nil{
-            let alertController = UIAlertController(title: "提示", message: "网络错误，请稍候再试", preferredStyle: .alert)
-            let okAction = UIAlertAction(title: "好的", style: .cancel, handler: nil)
-            alertController.addAction(okAction)
-            self.present(alertController, animated: true, completion: nil)
-            return
-        }
-        
-        let body = ["dxtcbId":self.TaocanId[self.currentSel]!, "paymentMethod":"0", "userId":APP_USER_ID, "spbillCreateIp":ipAddress!, "tradeType":"APP"]
+        let body = ["dxtcbId":self.TaocanId[self.currentSel]!, "paymentMethod":"0", "userId":APP_USER_ID, "tradeType":"APP"]
         let request = NetworkUtils.postBackEnd("C_ME_DXCZ", body: body) {
             json in
-            print(json)
+            let data = json["body"]
+            self.wechatPay(WeixinPayModel(appID: data["appid"].stringValue, noncestr: data["noncestr"].stringValue, package: data["package"].stringValue, partnerID: data["partnerid"].stringValue, prepayID: data["prepayid"].stringValue, sign: data["sign"].stringValue, timestamp: data["timestamp"].stringValue))
+            
             }
         request.response(completionHandler: { _ in
         
         })
-        
-//        wechatPay(WeixinPayModel(appID: "wx3cd741c2be80a27d", noncestr: "Hk8dsZoMOdTXGjkJ", package: "Sign=WXPay", partnerID: "1220000000", prepayID: "wx2016020000000000000000000000", sign: "B4879FFFA8B65522A04034E2D027A3B8", timestamp: Int(Date().timeIntervalSince1970)))
     }
     
     func changeButtonColor(_ color:CGColor){
@@ -122,42 +113,6 @@ class PayViewController: UIViewController {
         }
     }
     
-    // 获取IP地址
-    func getIPAddress() -> String? {
-        var address: String?
-        
-        // get list of all interfaces on the local machine
-        var ifaddr: UnsafeMutablePointer<ifaddrs>? = nil
-        guard getifaddrs(&ifaddr) == 0 else {
-            return nil
-        }
-        guard let firstAddr = ifaddr else {
-            return nil
-        }
-        for ifptr in sequence(first: firstAddr, next: { $0.pointee.ifa_next }) {
-            
-            let interface = ifptr.pointee
-            
-            // Check for IPV4 or IPV6 interface
-            let addrFamily = interface.ifa_addr.pointee.sa_family
-            if addrFamily == UInt8(AF_INET) || addrFamily == UInt8(AF_INET6) {
-                // Check interface name
-                let name = String(cString: interface.ifa_name)
-                if name == "en0" {
-                    
-                    // Convert interface address to a human readable string
-                    var addr = interface.ifa_addr.pointee
-                    var hostName = [CChar](repeating: 0, count: Int(NI_MAXHOST))
-                    getnameinfo(&addr, socklen_t(interface.ifa_addr.pointee.sa_len), &hostName, socklen_t(hostName.count), nil, socklen_t(0), NI_NUMERICHOST)
-                    address = String(cString: hostName)
-                }
-            }
-        }
-        
-        freeifaddrs(ifaddr)
-        return address
-    }
-    
     //微信支付
     func wechatPay(_ model:WeixinPayModel)
     {
@@ -165,7 +120,7 @@ class PayViewController: UIViewController {
         req.partnerId = model.partnerID
         req.prepayId = model.prepayID
         req.nonceStr = model.noncestr
-        req.timeStamp = UInt32(model.timestamp)
+        req.timeStamp = UInt32(model.timestamp)!
         req.package = model.package
         req.sign = model.sign
         WXApi.send(req)
