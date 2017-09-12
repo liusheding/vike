@@ -11,14 +11,51 @@ import MBProgressHUD
 
 class TakeoutMoneyViewController: UIViewController {
     var cardid:String?
+    var timer: Timer?
+    
+    var remaining: Int = 0 {
+        
+        willSet {
+            if newValue <= 0 {
+                self.getcodebtn.isEnabled = true
+                self.getcodebtn.setTitle("获取验证码", for: .normal)
+                self.isCounting = false
+            } else {
+                self.getcodebtn.isEnabled = false
+                self.getcodebtn.titleLabel?.text = "剩余\(newValue)秒"
+                self.getcodebtn.setTitle("剩余\(newValue)秒", for: .disabled)
+            }
+        }
+    }
+    
+    var isCounting: Bool = false {
+        
+        willSet {
+            if newValue {
+                // 计时器
+                self.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: Selector(("countingDown")), userInfo: nil, repeats: true)
+                remaining = 60
+            } else {
+                self.timer?.invalidate()
+                self.timer = nil
+            }
+        }
+    }
     
     @IBOutlet weak var takebtn: UIButton!
+    @IBOutlet weak var getcodebtn: UIButton!
+    @IBOutlet weak var checkcode: UITextField!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var lastmoney: UILabel!
     @IBOutlet weak var textfield: UITextField!
     @IBAction func clickTakeAll(_ sender: UIButton) {
         textfield.text = lastmoney.text
     }
+    
+    @IBAction func clickGetCodeBtn(_ sender: UIButton) {
+        self.isCounting = true
+    }
+
     @IBAction func clickSubmit(_ sender: UIButton) {
         let cell = self.tableView.cellForRow(at: [0,0])
         let bankstr = cell?.textLabel?.text
@@ -49,7 +86,12 @@ class TakeoutMoneyViewController: UIViewController {
             return
         }
         
-        self.checkCodeAlert()
+        let code = checkcode.text!
+        if code == ""{
+            showAlert("请填写短信验证码")
+            return
+        }
+        
         self.takebtn.isEnabled = false
         let body = ["txje":str, "userId": APP_USER_ID, "kbId":cardid]
         let request = NetworkUtils.postBackEnd("C_ME_TXMX", body: body , handler: {[weak self] (val ) in
@@ -66,25 +108,6 @@ class TakeoutMoneyViewController: UIViewController {
             self.takebtn.isEnabled = true
         })
         
-    }
-    
-    func checkCodeAlert(){
-        let alertController = UIAlertController(title: "系统提示",
-                                                message: "已发送短信验证码至银行预留手机号", preferredStyle: .alert)
-        alertController.addTextField {
-            (textField: UITextField!) -> Void in
-            textField.placeholder = "请输入短信验证码"
-        }
-        
-        let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
-        let okAction = UIAlertAction(title: "确定", style: .default, handler: {
-            action in
-            let code = alertController.textFields!.first!
-            
-        })
-        alertController.addAction(cancelAction)
-        alertController.addAction(okAction)
-        self.present(alertController, animated: true, completion: nil)
     }
     
     func showAlert(_ message:String){
@@ -105,9 +128,23 @@ class TakeoutMoneyViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         
+        checkcode.borderStyle = .none
+        checkcode.placeholder = "输入短信验证码"
+        
          //创建右侧按钮
         let rightButton = UIBarButtonItem(title: "银行卡管理", style: .plain, target: self, action: #selector(clickCardBtn))
         self.navigationItem.setRightBarButton(rightButton, animated: false)
+        
+        //点击空白收起键盘
+        self.view.addGestureRecognizer(UITapGestureRecognizer(target:self, action:#selector(self.handleTap(sender:))))
+    }
+    
+    func handleTap(sender: UITapGestureRecognizer) {
+        if sender.state == .ended {
+            textfield.resignFirstResponder()
+            checkcode.resignFirstResponder()
+        }
+        sender.cancelsTouchesInView = false
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -123,6 +160,10 @@ class TakeoutMoneyViewController: UIViewController {
         let storyBoard = UIStoryboard(name: "MineView", bundle: nil)
         let controller = storyBoard.instantiateViewController(withIdentifier: "cardmanageID")
         self.navigationController?.pushViewController(controller, animated: true)
+    }
+    
+    func countingDown() {
+        self.remaining -= 1
     }
 
 }

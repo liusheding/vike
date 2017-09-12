@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 class MineUIViewController: UITableViewController {
     let labelCellId = "mineListID"
@@ -117,6 +118,30 @@ class MineUIViewController: UITableViewController {
         shareView.showInViewController(self)
         self.tabBarController?.tabBar.isHidden = true
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        loading()
+    }
+    
+    func loading(){
+        let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
+        hud.label.text = "正在加载中..."
+        
+        DispatchQueue.global(qos: .userInitiated).async {
+            let body = ["busi_scene":"USER_INFO", "id": APP_USER_ID]
+            let request = NetworkUtils.postBackEnd("R_BASE_USER", body: body) {
+                json in
+                let jsondata = json["body"]
+                let cell = self.tableView.cellForRow(at: [0,0]) as! MineInfoCell
+                cell.name.text = jsondata["name"].stringValue
+            }
+            request.response(completionHandler: { _ in
+                hud.hide(animated: true)
+            })
+        }
+    }
+    
 }
 
 extension MineUIViewController: ShareViewDelegate {

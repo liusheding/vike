@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 class WalletViewController: UIViewController {
     @IBOutlet weak var remain: UILabel!
@@ -29,8 +30,25 @@ class WalletViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.remain.text = "￥" + (AppUser.currentUser?.body?["bonusKy"].stringValue)!
-        self.award.text = "￥" + (AppUser.currentUser?.body?["bonusLj"].stringValue)!
-        self.getout.text = "￥" + (AppUser.currentUser?.body?["bonusLjtx"].stringValue)!
+        loading()
+    }
+    
+    func loading(){
+        let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
+        hud.label.text = "正在加载中..."
+        
+        DispatchQueue.global(qos: .userInitiated).async {
+            let body = ["busi_scene":"USER_INFO", "id": APP_USER_ID]
+            let request = NetworkUtils.postBackEnd("R_BASE_USER", body: body) {
+                json in
+                let jsondata = json["body"]
+                self.remain.text = "￥" + jsondata["bonusKy"].stringValue
+                self.award.text = "￥" + jsondata["bonusLj"].stringValue
+                self.getout.text = "￥" + jsondata["bonusLjtx"].stringValue
+            }
+            request.response(completionHandler: { _ in
+                hud.hide(animated: true)
+            })
+        }
     }
 }

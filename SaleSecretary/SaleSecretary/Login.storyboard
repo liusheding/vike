@@ -335,16 +335,17 @@
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rIe-3d-duK">
-                                        <rect key="frame" x="224" y="162" width="83" height="30"/>
+                                        <rect key="frame" x="234" y="165" width="83" height="27"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="83" id="lPH-yg-dU6"/>
                                         </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <state key="normal" title="获取验证码">
                                             <color key="titleColor" red="0.0039215686269999999" green="0.70588235290000001" blue="0.078431372550000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                     </button>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8RP-5D-ewf">
-                                        <rect key="frame" x="38" y="162" width="183" height="30"/>
+                                        <rect key="frame" x="38" y="162" width="193" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
@@ -396,7 +397,7 @@
                                     <constraint firstItem="V2D-Mc-cKq" firstAttribute="top" secondItem="CFF-If-ZC7" secondAttribute="top" constant="12" id="GyF-mb-bQO"/>
                                     <constraint firstItem="YLp-gy-CC3" firstAttribute="top" secondItem="8RP-5D-ewf" secondAttribute="bottom" constant="8" id="KVU-HS-mJw"/>
                                     <constraint firstItem="5ZC-kh-PSr" firstAttribute="leading" secondItem="CFF-If-ZC7" secondAttribute="leading" constant="4" id="MG8-MR-aAd"/>
-                                    <constraint firstAttribute="trailing" secondItem="rIe-3d-duK" secondAttribute="trailing" constant="10" id="Pb6-sj-2JR"/>
+                                    <constraint firstAttribute="trailing" secondItem="rIe-3d-duK" secondAttribute="trailing" id="Pb6-sj-2JR"/>
                                     <constraint firstItem="sxI-n8-znY" firstAttribute="leading" secondItem="CFF-If-ZC7" secondAttribute="leading" id="TGi-5G-nQR"/>
                                     <constraint firstAttribute="bottom" secondItem="izy-ZV-KqO" secondAttribute="bottom" constant="12" id="TrO-GJ-DS7"/>
                                     <constraint firstItem="sxI-n8-znY" firstAttribute="top" secondItem="V2D-Mc-cKq" secondAttribute="bottom" constant="12" id="UL2-9b-ji9"/>
