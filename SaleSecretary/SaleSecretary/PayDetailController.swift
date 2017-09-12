@@ -7,15 +7,12 @@
 //
 
 import UIKit
+import MBProgressHUD
+import SwiftyJSON
 
 class PayDetailController: UITableViewController {
-
     let cellId = "PayDetailID"
-    let RecordData = [
-        ["title":"充值短信50条", "time":"2017-07-24", "record":"50.00"],
-        ["title":"充值短信100条", "time":"2017-07-23", "record":"95.00"],
-        ["title":"充值短信200条", "time":"2017-07-22", "record":"188.00"],
-    ]
+    var RecordData = [Dictionary<String, Any>]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +21,31 @@ class PayDetailController: UITableViewController {
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableView.register(UINib(nibName: String(describing: PayDetailCell.self), bundle: nil), forCellReuseIdentifier: cellId)
+        
+        loading()
+    }
+    
+    func loading(){
+        let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
+        hud.label.text = "正在加载中..."
+        
+        DispatchQueue.global(qos: .userInitiated).async {
+            let body = ["userId":APP_USER_ID, "pageSize":"1000"]
+            let request = NetworkUtils.postBackEnd("R_PAGED_QUERY_ME_DXCZ", body: body) {
+                json in
+                let jsondata = json["body"]["obj"]
+                self.getRecordData(jsondata: jsondata)
+                self.tableView.reloadData()
+            }
+            request.response(completionHandler: { _ in
+                hud.hide(animated: true)
+            })
+        }
+    }
+    
+    func getRecordData(jsondata:JSON){
+        for data in jsondata.array!{self.RecordData.append(["title":data["dxts"].stringValue,"time":data["orderDate"].stringValue,"record":data["paymentAmount"].stringValue])
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -42,9 +64,12 @@ class PayDetailController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! PayDetailCell
         
-        cell.title.text = self.RecordData[indexPath.row]["title"]
-        cell.time.text = self.RecordData[indexPath.row]["time"]
-        cell.money.text = self.RecordData[indexPath.row]["record"]
+        let title = self.RecordData[indexPath.row]["title"] as? String
+        cell.title.text = "充值短信\(title!)条"
+        
+        cell.time.text = self.RecordData[indexPath.row]["time"] as? String
+        let money = self.RecordData[indexPath.row]["record"] as? String
+        cell.money.text = money
         cell.selectionStyle = .none
         return cell
     }

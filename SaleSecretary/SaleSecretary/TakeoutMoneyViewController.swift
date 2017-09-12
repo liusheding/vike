@@ -7,24 +7,23 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 class TakeoutMoneyViewController: UIViewController {
+    var cardid:String?
+    
+    @IBOutlet weak var takebtn: UIButton!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var lastmoney: UILabel!
     @IBOutlet weak var textfield: UITextField!
-    @IBOutlet weak var banknum: UITextField!
     @IBAction func clickTakeAll(_ sender: UIButton) {
         textfield.text = lastmoney.text
     }
     @IBAction func clickSubmit(_ sender: UIButton) {
-        let bankstr = banknum.text!
-        if bankstr == ""{
-            showAlert("请填写本人银行卡号")
-            return
-        }
-        let bankarray = bankstr.components(separatedBy: ".")
-        if bankarray.count != 0{
-            showAlert("请填写正确的银行卡号")
+        let cell = self.tableView.cellForRow(at: [0,0])
+        let bankstr = cell?.textLabel?.text
+        if bankstr == "选择到账银行卡" || cardid == nil || cardid == ""{
+            showAlert("请选择到账银行卡")
             return
         }
         
@@ -48,8 +47,44 @@ class TakeoutMoneyViewController: UIViewController {
         if (str as NSString).floatValue > (lastmoney.text! as NSString).floatValue{
             showAlert("余额不足")
             return
-
         }
+        
+        self.checkCodeAlert()
+        self.takebtn.isEnabled = false
+        let body = ["txje":str, "userId": APP_USER_ID, "kbId":cardid]
+        let request = NetworkUtils.postBackEnd("C_ME_TXMX", body: body , handler: {[weak self] (val ) in
+            let hub = MBProgressHUD.showAdded(to: (self?.view)!, animated: true)
+            hub.mode = MBProgressHUDMode.text
+            hub.label.text = "提现申请提交成功"
+            
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
+                hub.hide(animated: true)
+                self?.navigationController?.popViewController(animated: true)
+            }
+        })
+        request.response(completionHandler: {_ in
+            self.takebtn.isEnabled = true
+        })
+        
+    }
+    
+    func checkCodeAlert(){
+        let alertController = UIAlertController(title: "系统提示",
+                                                message: "已发送短信验证码至银行预留手机号", preferredStyle: .alert)
+        alertController.addTextField {
+            (textField: UITextField!) -> Void in
+            textField.placeholder = "请输入短信验证码"
+        }
+        
+        let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
+        let okAction = UIAlertAction(title: "确定", style: .default, handler: {
+            action in
+            let code = alertController.textFields!.first!
+            
+        })
+        alertController.addAction(cancelAction)
+        alertController.addAction(okAction)
+        self.present(alertController, animated: true, completion: nil)
     }
     
     func showAlert(_ message:String){
@@ -66,49 +101,28 @@ class TakeoutMoneyViewController: UIViewController {
         textfield.keyboardType = .decimalPad
         textfield.placeholder = "请输入提现金额"
         
-        banknum.borderStyle = .none
-        banknum.keyboardType = .decimalPad
-        banknum.becomeFirstResponder()
-        banknum.placeholder = "请输入本人银行卡号"
-        
         tableView.tableFooterView = UIView()
         tableView.delegate = self
         tableView.dataSource = self
         
-        // 创建一个导航栏
-        let navBar = UINavigationBar(frame: CGRect(x:0, y:0, width:self.view.frame.size.width, height:60))
-        // 导航栏背景颜色
-        navBar.backgroundColor = UIColor.groupTableViewBackground
-        // 自定义导航栏的title，用UILabel实现
-        let titleLabel = UILabel(frame: CGRect(x:0,y:0,width:50,height:60))
-        titleLabel.text = "提现"
-        titleLabel.font = UIFont.boldSystemFont(ofSize: 17)
-        
-        // 创建导航栏组件
-        let navItem = UINavigationItem()
-        // 设置自定义的title
-        navItem.titleView = titleLabel
-        
-        // 创建左侧按钮
-        let leftButton = UIBarButtonItem(title: "取消", style: .plain, target: self, action: #selector(clickCancelBtn))
-        leftButton.setTitleTextAttributes([NSFontAttributeName: UIFont.systemFont(ofSize: 17),NSForegroundColorAttributeName: APP_THEME_COLOR],for: .normal)
-        
-        // 添加左侧按钮
-        navItem.setLeftBarButton(leftButton, animated: false)
-        navigationItem.setHidesBackButton(true, animated: false)
-        // 把导航栏组件加入导航栏
-        navBar.pushItem(navItem, animated: false)
-        
-        // 导航栏添加到view上
-        self.view.addSubview(navBar)
+         //创建右侧按钮
+        let rightButton = UIBarButtonItem(title: "银行卡管理", style: .plain, target: self, action: #selector(clickCardBtn))
+        self.navigationItem.setRightBarButton(rightButton, animated: false)
     }
-
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        lastmoney.text = (AppUser.currentUser?.body?["bonusKy"].stringValue)!
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
-    func clickCancelBtn(){
-        self.dismiss(animated: true, completion: nil)
+    func clickCardBtn(){
+        let storyBoard = UIStoryboard(name: "MineView", bundle: nil)
+        let controller = storyBoard.instantiateViewController(withIdentifier: "cardmanageID")
+        self.navigationController?.pushViewController(controller, animated: true)
     }
 
 }
@@ -125,14 +139,19 @@ extension TakeoutMoneyViewController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .value1, reuseIdentifier: "takeCell")
-        cell.textLabel?.text = "仅限使用本人银行卡提现"
-        cell.textLabel?.font = UIFont.systemFont(ofSize: 13)
+        cell.textLabel?.text = "选择到账银行卡"
+        cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
         cell.textLabel?.textColor = UIColor.darkGray
-        cell.detailTextLabel?.text = "查看可支持银行"
-        cell.detailTextLabel?.font = UIFont.systemFont(ofSize: 13)
         cell.accessoryType = .disclosureIndicator
-        
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let storyBoard = UIStoryboard(name: "MineView", bundle: nil)
+        let controller = storyBoard.instantiateViewController(withIdentifier: "choosecardID") as! ChooseCardController
+        controller.rootView = self
+        self.navigationController?.pushViewController(controller, animated: true)
     }
     
 }

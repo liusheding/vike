@@ -16,17 +16,21 @@ class WalletViewController: UIViewController {
     @IBAction func takeoutbtn(_ sender: UIButton) {
         let storyBoard = UIStoryboard(name: "MineView", bundle: nil)
         let controller = storyBoard.instantiateViewController(withIdentifier: "takeoutID")
-        self.present(controller, animated: true, completion: nil)
+        self.navigationController?.pushViewController(controller, animated: true)
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.remain.text = "￥580"
-        self.award.text = "￥100"
-        self.getout.text = "￥50"
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.remain.text = "￥" + (AppUser.currentUser?.body?["bonusKy"].stringValue)!
+        self.award.text = "￥" + (AppUser.currentUser?.body?["bonusLj"].stringValue)!
+        self.getout.text = "￥" + (AppUser.currentUser?.body?["bonusLjtx"].stringValue)!
     }
 }
