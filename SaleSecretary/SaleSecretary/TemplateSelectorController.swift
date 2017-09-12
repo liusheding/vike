@@ -121,7 +121,8 @@ class TemplateSelectorController: UIViewController {
         if idx != nil {
             let cell = self.tableView.cellForRow(at: idx!) as! CollapsibleTableViewCell
             let content = cell.detailLabel.text!
-            self.templateSelectorDelegate!.didSelected(SMSTemplate("fake_id", content: content))
+            let dxtd = cell.dxtdId
+            self.templateSelectorDelegate!.didSelected(SMSTemplate(dxtd, content: content))
             let count = self.navigationController?.viewControllers.count
             self.navigationController?.popToViewController((self.navigationController?.viewControllers[count! - 2])!, animated: true)
         }
@@ -172,7 +173,7 @@ class TemplateSelectorController: UIViewController {
                 let list = s["list"].arrayValue
                 var items: [Item] = []
                 for item in list {
-                    items.append(Item(name: "", detail: item["content"].stringValue))
+                    items.append(Item(name: item["dxtdId"].stringValue, detail: item["content"].stringValue))
                 }
                 _sec.append(Section(name: name, items: items))
             }
@@ -314,6 +315,7 @@ class TamplateTableViewDelegator: NSObject ,UITableViewDataSource, UITableViewDe
         let item: Item = templateSections[indexPath.section].items[indexPath.row]
         // cell.nameLabel.text = item.name
         cell.detailLabel.text = item.detail
+        cell.dxtdId = item.name
         if controller.tableCanSelected {
             // cell.accessoryView = UIImageView(image: UIImage(named: "ico_nr"))
             cell.accessoryType = .disclosureIndicator

@@ -36,6 +36,8 @@ class CollapsibleTableViewCell: UITableViewCell {
     let nameLabel = UILabel()
     let detailLabel = UILabel()
     
+    var dxtdId: String?
+    
     
     // MARK: Initalizers
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {

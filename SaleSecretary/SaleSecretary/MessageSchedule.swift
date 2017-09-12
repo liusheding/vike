@@ -59,6 +59,8 @@ class MessageSchedule: NSObject {
     
     var cw:String?
     
+    var dxtd: String?
+    
     override init() {
         super.init()
     }
@@ -152,7 +154,8 @@ class MessageSchedule: NSObject {
         if let _cw = self.cw {
             body["autograph"] = _cw
         }
-        body["dxtdId"] = ""
+        let td: String = self.dxtd ?? ""
+        body["dxtdId"] = td
         var yld:[[String:String]] = []
         for c in self.customers {
             yld.append(["sjhm": c.sjhm, "cw": c.cw, "qm": self.userSign])

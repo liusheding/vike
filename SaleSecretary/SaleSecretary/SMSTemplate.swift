@@ -11,11 +11,11 @@ import Foundation
 
 class SMSTemplate {
     
-    var id:String 
+    var id:String?
     
     var content: String
     
-    init(_ id: String, content: String) {
+    init(_ id: String?, content: String) {
         self.id = id
         self.content = content
     }

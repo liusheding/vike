@@ -93,7 +93,8 @@ class SMSTemplateViewController : UIViewController {
     var content: String?
     // 预计执行时间
     var executeDate: String?
-    
+    //短信通道
+    var dxtd: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -182,6 +183,7 @@ class SMSTemplateViewController : UIViewController {
         sched.cw = (!self.appellationCell.switchControl.isOn || (appellation?.isEmpty)!) ? nil: appellation
         sched.executeTime = self.executeDate
         sched.type = "0"
+        sched.dxtd = self.dxtd
         let sign = self.inscribeView.inscribeText.text!
         sched.userSign = sign.isEmpty ? (AppUser.currentUser?.name)! : sign
         for c in self.customers! {
@@ -386,6 +388,7 @@ extension SMSTemplateViewController : TemplateSelectorDelegate, ChooseDateDelega
         let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 1))
         cell?.textLabel?.text = template.content
         cell?.textLabel?.textColor = UIColor.darkText
+        self.dxtd = template.id
         self.content = template.content
     }
     
