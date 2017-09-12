@@ -9,7 +9,7 @@
 import UIKit
 import Alamofire
 import Kingfisher
-import SnapKit
+import MBProgressHUD
 
 class QRScrollViewController: UIViewController {
     
@@ -28,12 +28,14 @@ class QRScrollViewController: UIViewController {
         }
     }
     
+    @IBOutlet weak var shareItem: UIBarButtonItem!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.scrollView.delegate = self
         // let imageView = UIImageView()
         // imageView.kf.setImage(with: URL(string: qrUrls[0]))
-        self.scrollView.backgroundColor = UIColor.black
+        self.scrollView.backgroundColor = APP_BACKGROUND_COLOR
         // self.scrollView.addSubview(EmptyContentView()
         // for _i in qrUrls {
          //   self.scrollView.addSubview(_i)
@@ -55,11 +57,13 @@ class QRScrollViewController: UIViewController {
                 if cnt == nil || cnt! < 1 {
                     self.pageControl.numberOfPages = 1
                     let empty = EmptyContentView(frame: self.scrollView.frame)
-                    empty.textLabel.text = "还没有生成过二维码呢，您可以自由生成多张不同的身份名片～ 长按图片分享"
+                    empty.textLabel.text = "还没有生成过二维码呢，您可以自由生成多张不同的身份名片～"
                     empty.textLabel.numberOfLines = 3
                     empty.showInView(self.scrollView)
+                    self.shareItem.isEnabled = false
                     return
                 }
+                self.shareItem.isEnabled = true
                 let obj = json["body"]["obj"].arrayValue
                 var originX: CGFloat = 0
                 self.qrs = []
@@ -100,7 +104,6 @@ class QRScrollViewController: UIViewController {
     func longPressed(_ sender: UILongPressGestureRecognizer) {
         if sender.state == .ended {
             let o = self.objs[self.pageControl.currentPage]
-            let qr = self.qrs[self.pageControl.currentPage]
             let alertController = UIAlertController(title: "", message: "",
                                                     preferredStyle: .actionSheet)
             
@@ -192,6 +195,15 @@ extension QRScrollViewController: UIScrollViewDelegate, ShareViewDelegate {
     
     func sendLinkContent(inScene: WXScene) {
         let msg = WXMediaMessage()
+        if self.objs.count == 0 {
+            let hub = MBProgressHUD.showAdded(to: view!, animated: true)
+            hub.mode = MBProgressHUDMode.text
+            hub.label.text = "您还没有名片可以分析"
+            // hub.offset = CGPoint(x: 0, y: MBProgressMaxOffset - 100)
+            hub.show(animated: true)
+            hub.hide(animated: true, afterDelay: 1.5)
+            return
+        }
         let obj = self.objs[pageControl.currentPage]
         msg.title = "销小秘"
         msg.description = "\(obj.name!)的个人名片"

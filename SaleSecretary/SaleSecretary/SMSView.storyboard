@@ -145,6 +145,7 @@
                     <connections>
                         <outlet property="pageControl" destination="qsP-A3-9n7" id="NDq-67-ygY"/>
                         <outlet property="scrollView" destination="sxN-mb-raa" id="Rqv-28-qmG"/>
+                        <outlet property="shareItem" destination="k4Z-S5-Lks" id="ue4-LG-rdW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pl6-y8-BVB" userLabel="First Responder" sceneMemberID="firstResponder"/>
