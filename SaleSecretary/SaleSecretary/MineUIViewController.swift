@@ -113,8 +113,28 @@ class MineUIViewController: UITableViewController {
     
     func clickInviteBtn(){
         let shareView = ShareView.init(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT))
+        shareView.delegate = self
         shareView.showInViewController(self)
         self.tabBarController?.tabBar.isHidden = true
     }
+}
 
+extension MineUIViewController: ShareViewDelegate {
+    
+    func sendLinkContent(inScene: WXScene) {
+        let message = WXMediaMessage()
+        message.title = "销小秘"
+        message.description = "握在手心里的小秘 带你走上人生巅峰"
+        message.setThumbImage(UIImage(named:"logo_xxm"))
+        
+        let ext = WXWebpageObject()
+        ext.webpageUrl = "http://www.zj.vc"
+        message.mediaObject = ext
+        
+        let req =  SendMessageToWXReq()
+        req.bText = false
+        req.message = message
+        req.scene = Int32(inScene.rawValue)
+        WXApi.send(req)
+    }
 }

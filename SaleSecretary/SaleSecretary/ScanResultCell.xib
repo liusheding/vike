@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -15,25 +16,37 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Q5y-QI-RMS" id="mSh-DO-USG">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1oU-DC-oSI">
-                        <rect key="frame" x="5" y="8" width="71" height="28"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1oU-DC-oSI">
+                        <rect key="frame" x="5" y="8" width="71" height="27.5"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="71" id="9Qn-W0-KrR"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" red="0.1065740479" green="0.77210897840000003" blue="0.1872832348" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0Dw-8R-chf">
-                        <rect key="frame" x="78" y="8" width="289" height="28"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="0Dw-8R-chf">
+                        <rect key="frame" x="93" y="8" width="274" height="27.5"/>
                         <nil key="textColor"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <textInputTraits key="textInputTraits" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                     </textField>
                 </subviews>
+                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                <constraints>
+                    <constraint firstItem="0Dw-8R-chf" firstAttribute="centerY" secondItem="mSh-DO-USG" secondAttribute="centerY" id="879-EH-iwm"/>
+                    <constraint firstItem="0Dw-8R-chf" firstAttribute="top" secondItem="mSh-DO-USG" secondAttribute="topMargin" id="azj-GK-a57"/>
+                    <constraint firstItem="0Dw-8R-chf" firstAttribute="top" secondItem="1oU-DC-oSI" secondAttribute="top" id="bRp-IW-IV4"/>
+                    <constraint firstItem="1oU-DC-oSI" firstAttribute="leading" secondItem="mSh-DO-USG" secondAttribute="leadingMargin" constant="-3" id="bxD-Nk-yPQ"/>
+                    <constraint firstItem="0Dw-8R-chf" firstAttribute="bottom" secondItem="1oU-DC-oSI" secondAttribute="bottom" id="kh5-hU-e1j"/>
+                    <constraint firstItem="0Dw-8R-chf" firstAttribute="leading" secondItem="1oU-DC-oSI" secondAttribute="trailing" constant="17" id="osh-vn-joP"/>
+                    <constraint firstItem="0Dw-8R-chf" firstAttribute="trailing" secondItem="mSh-DO-USG" secondAttribute="trailingMargin" id="rwz-83-3QV"/>
+                </constraints>
             </tableViewCellContentView>
+            <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
             <connections>
                 <outlet property="label" destination="1oU-DC-oSI" id="uZW-Xg-JvT"/>
                 <outlet property="textField" destination="0Dw-8R-chf" id="Ix0-D8-p38"/>

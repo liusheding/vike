@@ -7,9 +7,50 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--新增二维码-->
+        <scene sceneID="PlC-zo-7j6">
+            <objects>
+                <viewController storyboardIdentifier="QRCodeAddViewController" title="新增二维码" useStoryboardIdentifierAsRestorationIdentifier="YES" id="wUV-xU-fff" customClass="QRCodeAddViewController" customModule="SaleSecretary" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="bIS-mw-vfg"/>
+                        <viewControllerLayoutGuide type="bottom" id="lb1-X9-eVi"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="wjr-If-Jpx">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Coy-Pd-QMG">
+                                <rect key="frame" x="16" y="64" width="343" height="454"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <color key="sectionIndexBackgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                    </view>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="新的二维码" id="0gU-x2-xl8">
+                        <barButtonItem key="backBarButtonItem" title="返回" id="GwW-iy-hKy"/>
+                        <barButtonItem key="rightBarButtonItem" title="生成名片" style="plain" id="XUv-hs-9dz">
+                            <connections>
+                                <action selector="confirmAction:" destination="wUV-xU-fff" id="Qxk-tW-gQB"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="tableView" destination="Coy-Pd-QMG" id="dCt-Ou-xt8"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cTM-ix-z1L" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-4138.3999999999996" y="-143.47826086956522"/>
+        </scene>
         <!--新增客户-->
         <scene sceneID="i2G-GD-1s0">
             <objects>
@@ -28,7 +69,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" title="新增客户" id="Cdg-Aa-nvr">
                         <barButtonItem key="rightBarButtonItem" title="确认" id="IMm-8e-Iab">
@@ -84,7 +125,19 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="我的二维码名片" id="7hC-p0-jEu">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="mgA-NU-2R9"/>
+                        <barButtonItem key="backBarButtonItem" title="返回" id="9f1-EY-hCf"/>
+                        <rightBarButtonItems>
+                            <barButtonItem style="plain" systemItem="add" id="mgA-NU-2R9">
+                                <connections>
+                                    <action selector="addNew:" destination="PiU-Oo-qKJ" id="rCd-yN-IRF"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem style="plain" systemItem="action" id="k4Z-S5-Lks">
+                                <connections>
+                                    <action selector="shareCard:" destination="PiU-Oo-qKJ" id="p2M-Ip-E72"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <nil key="simulatedBottomBarMetrics"/>

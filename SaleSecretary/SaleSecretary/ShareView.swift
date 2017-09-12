@@ -8,6 +8,11 @@
 
 import UIKit
 
+protocol ShareViewDelegate {
+    func sendLinkContent(inScene: WXScene)
+}
+
+
 class ShareView: UIView,UIScrollViewDelegate {
     fileprivate var contentHeight:CGFloat = 155
     fileprivate var topbarHeight:CGFloat = 65
@@ -17,9 +22,13 @@ class ShareView: UIView,UIScrollViewDelegate {
     fileprivate var rootVC:UIViewController!
     fileprivate var scrollView:UIScrollView!
     
+    var delegate: ShareViewDelegate?
+    
+    var hasTabBar: Bool = true
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.bgView = UIView.init(frame: CGRect(x: 0, y: 0, width: frame.width, height: frame.height-topbarHeight))
+        self.bgView = UIView.init(frame: CGRect(x: 0, y: 0, width: frame.width, height: frame.height))
         self.bgView.backgroundColor = UIColor.black
         self.bgView.alpha = 0.0
         self.addSubview(self.bgView)
@@ -106,28 +115,13 @@ class ShareView: UIView,UIScrollViewDelegate {
             return
         }
         if sender.tag == 100 {
-            sendLinkContent(inScene: WXSceneSession)
+            self.delegate?.sendLinkContent(inScene: WXSceneSession)
         }else if sender.tag == 100 + 1 {
-            sendLinkContent(inScene: WXSceneTimeline)
+            self.delegate?.sendLinkContent(inScene: WXSceneTimeline)
         }
     }
     
-    func sendLinkContent(inScene:WXScene) {
-        let message = WXMediaMessage()
-        message.title = "销小秘"
-        message.description = "握在手心里的小秘 带你走上人生巅峰"
-        message.setThumbImage(UIImage(named:"logo_xxm"))
-        
-        let ext = WXWebpageObject()
-        ext.webpageUrl = "http://www.zj.vc"
-        message.mediaObject = ext
-        
-        let req =  SendMessageToWXReq()
-        req.bText = false
-        req.message = message
-        req.scene = Int32(inScene.rawValue)
-        WXApi.send(req)
-    }
+    
     
     func showInViewController(_ viewController:UIViewController){
         self.rootVC = viewController
@@ -138,7 +132,9 @@ class ShareView: UIView,UIScrollViewDelegate {
         UIView.animate(withDuration: 0.3, animations: {
             self.bgView.alpha = 0.0
             self.contentView.frame = CGRect(x: 0, y: self.frame.height, width: self.frame.width, height: self.contentHeight)
-            self.rootVC.tabBarController?.tabBar.isHidden=false
+            if self.hasTabBar {
+                self.rootVC.tabBarController?.tabBar.isHidden=false
+            }
             
         }, completion: { (finished) in
             self.removeFromSuperview()
@@ -153,7 +149,11 @@ class ShareView: UIView,UIScrollViewDelegate {
         parentView.addSubview(self)
         UIView.animate(withDuration: 0.3, animations: {
             self.bgView.alpha = 0.4
-            self.contentView.frame = CGRect(x: 0, y: self.frame.height - self.contentHeight - self.topbarHeight, width: self.frame.width, height: self.contentHeight)
+            var y = self.frame.height - self.contentHeight
+            if self.hasTabBar {
+                y -= self.topbarHeight
+            }
+            self.contentView.frame = CGRect(x: 0, y: y, width: self.frame.width, height: self.contentHeight)
         })
         
     }

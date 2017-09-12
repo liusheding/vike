@@ -19,6 +19,7 @@ class ScanResultCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.textField.borderStyle = .none
     }
     
 }

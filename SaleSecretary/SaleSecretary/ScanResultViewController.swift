@@ -96,6 +96,7 @@ class ScanResultViewController: UIViewController, ScanORCResultDelegate {
     }
     
     // ["姓名", "称谓", "电话", "公司", "邮件" ,"地点"]
+    //TODO 
     func parseNlpResults(items: [JSON]) {
         for item in items {
             let ne = item["ne"].string!  // 命名实体类型
