@@ -26,6 +26,8 @@ class ShareView: UIView,UIScrollViewDelegate {
     
     var hasTabBar: Bool = true
     
+    var isRemoved = false
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.bgView = UIView.init(frame: CGRect(x: 0, y: 0, width: frame.width, height: frame.height))

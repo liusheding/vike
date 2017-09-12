@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import Kingfisher
+import SnapKit
 
 class QRScrollViewController: UIViewController {
     
@@ -19,6 +20,13 @@ class QRScrollViewController: UIViewController {
     var qrs: [UIImageView]!
     
     var objs: [QRCode]! = []
+    
+    var isSharing = false {
+        
+        didSet {
+            
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,10 +41,12 @@ class QRScrollViewController: UIViewController {
         // self.pageControl.numberOfPages = qrUrls.count
         // self.scrollView.contentSize = CGSize(width: maxWidth * 3, height: CGFloat)
         // self.scrollView.contentSize.width = maxWidth * 3
+        
         self.scrollView.showsHorizontalScrollIndicator = false
     }
     
     func loadImageViews() {
+        
         Utils.showLoadingHUB(view: self.scrollView, completion: {
             hub in
             let r = QRCode.getUserQRCodes() {
@@ -57,17 +67,18 @@ class QRScrollViewController: UIViewController {
                 let maxWidth = self.view.frame.width
                 for o in obj {
                     let url = o["qrCodeSrc"].string
-                    let img: UIImageView = UIImageView(frame: CGRect(x: originX, y: 0, width: maxWidth, height: maxWidth))
+                    let img: UIImageView = UIImageView(frame: CGRect(x: originX, y: -64, width: maxWidth, height: maxWidth * CGFloat(1.6667)))
                     img.isUserInteractionEnabled = true
                     let gesture = UILongPressGestureRecognizer(target: self, action: #selector(self.longPressed(_:)))
                     img.addGestureRecognizer(gesture)
-                    img.kf.setImage(with: URL(string: "http://wx1.sinaimg.cn/mw1024/817ccdaegy1fegvh9mbqnj20ku0m10vt.jpg"))
+                    img.kf.setImage(with: URL(string: url!))
                     self.qrs.append(img)
                     self.objs.append(QRCode(json: o))
                     originX += maxWidth
                 }
                 for qr in self.qrs {
                     self.scrollView.addSubview(qr)
+                    // qr.snp.makeConstraints()
                 }
                 self.pageControl.numberOfPages = cnt!
                 // self.scrollView.contentSize = CGSize(width: maxWidth * cnt, height: CGFloat)
@@ -87,7 +98,30 @@ class QRScrollViewController: UIViewController {
     }
     
     func longPressed(_ sender: UILongPressGestureRecognizer) {
-        print(sender)
+        if sender.state == .ended {
+            let o = self.objs[self.pageControl.currentPage]
+            let qr = self.qrs[self.pageControl.currentPage]
+            let alertController = UIAlertController(title: "", message: "",
+                                                    preferredStyle: .actionSheet)
+            
+            let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
+            let deleteAction = UIAlertAction(title: "删除二维码", style: .destructive, handler: {_ in
+                Utils.showLoadingHUB(view: self.view, msg: "删除中", completion: {
+                    hub in
+                    let r = o.delete({
+                        _ in
+                        Utils.alert("删除成功", handler: {_ in
+                            self.navigationController?.popViewController(animated: true)
+                        })
+                    })
+                    r.response(completionHandler: {_ in hub.hide(animated: true)})
+                })
+            })
+            alertController.addAction(cancelAction)
+            alertController.addAction(deleteAction)
+            self.present(alertController, animated: true, completion: nil)
+
+        }
     }
     
     @IBAction func shareCard(_ sender: UIBarButtonItem) {

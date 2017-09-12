@@ -32,6 +32,8 @@ class QRCode: NSObject{
     
     var qrCodeSrc: String?
     
+    var id:String?
+    
     override init() {
         super.init()
     }
@@ -48,6 +50,7 @@ class QRCode: NSObject{
         self.email = json["email"].string
         self.qrCodeSrc = json["qrCodeSrc"].string
         self.qrCodeLinkurl = json["qrCodeLinkurl"].string
+        self.id = json["id"].stringValue
     }
     
 
@@ -71,6 +74,11 @@ class QRCode: NSObject{
         body["userId"] = APP_USER_ID
         body["pageSize"] = "99"
         return NetworkUtils.postBackEnd("R_PAGED_QUERY_BUSI_CRAD", body: body, handler: callback)
+    }
+    
+    
+    func delete(_ callback: ((JSON) -> Void)?) -> DataRequest {
+        return NetworkUtils.postBackEnd("D_BUSI_CRAD", body: ["ids": self.id!], handler: callback)
     }
 }
 

@@ -80,9 +80,9 @@ struct Utils {
        
     }
     
-    static func alert(_ msg: String) {
+    static func alert(_ msg: String, handler: ((UIAlertAction) -> Void)? = nil) {
         let uc = UIAlertController(title: "", message: msg, preferredStyle: UIAlertControllerStyle.alert)
-        uc.addAction(UIAlertAction(title: "好的", style: UIAlertActionStyle.default))
+        uc.addAction(UIAlertAction(title: "好的", style: UIAlertActionStyle.default, handler: handler))
         let vc = UIApplication.topViewController()
         vc?.present(uc, animated: true, completion: nil)
         return

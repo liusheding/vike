@@ -122,6 +122,7 @@
                             <constraint firstItem="qsP-A3-9n7" firstAttribute="top" secondItem="sxN-mb-raa" secondAttribute="bottom" constant="-56" id="WT5-Pn-CFL"/>
                             <constraint firstAttribute="trailingMargin" secondItem="qsP-A3-9n7" secondAttribute="trailing" constant="64" id="bEp-hJ-PP1"/>
                             <constraint firstItem="sxN-mb-raa" firstAttribute="top" secondItem="ZGm-Nc-Vth" secondAttribute="bottom" id="l76-LB-d3h"/>
+                            <constraint firstItem="sxN-mb-raa" firstAttribute="top" secondItem="ZGm-Nc-Vth" secondAttribute="bottom" id="wfD-ew-201"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="我的二维码名片" id="7hC-p0-jEu">
