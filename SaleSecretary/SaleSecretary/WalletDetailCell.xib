@@ -20,21 +20,21 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0ZH-ls-Swz">
-                        <rect key="frame" x="12" y="6" width="230" height="21"/>
+                        <rect key="frame" x="15" y="6" width="230" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="viJ-Tg-BR2">
-                        <rect key="frame" x="12" y="30" width="230" height="21"/>
+                        <rect key="frame" x="15" y="30" width="230" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r5g-or-wdh">
-                        <rect key="frame" x="317" y="16" width="49" height="21"/>
+                        <rect key="frame" x="307" y="16" width="49" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="t8m-qA-hA9"/>
                         </constraints>
@@ -45,7 +45,7 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="r5g-or-wdh" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="8" id="Agc-QH-ATg"/>
-                    <constraint firstItem="r5g-or-wdh" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="WCg-La-cV6"/>
+                    <constraint firstItem="r5g-or-wdh" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" constant="-10" id="WCg-La-cV6"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

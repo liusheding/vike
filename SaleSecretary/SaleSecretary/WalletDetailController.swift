@@ -7,15 +7,12 @@
 //
 
 import UIKit
+import MBProgressHUD
+import SwiftyJSON
 
 class WalletDetailController: UITableViewController {
     let cellId = "WalletDetailID"
-    let RecordData = [
-                ["title":"充值短信", "time":"2017-07-24", "record":"-20"],
-                ["title":"提成收益", "time":"2017-07-23", "record":"+10"],
-                ["title":"充值短信", "time":"2017-07-22", "record":"-200"],
-                ["title":"提成收益", "time":"2017-07-21", "record":"+100"]
-                ]
+    var RecordData = [Dictionary<String, Any>]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +21,34 @@ class WalletDetailController: UITableViewController {
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableView.register(UINib(nibName: String(describing: WalletDetailCell.self), bundle: nil), forCellReuseIdentifier: cellId)
+        loading()
+    }
+    
+    func loading(){
+        let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
+        hud.label.text = "正在加载中..."
+        
+        DispatchQueue.global(qos: .userInitiated).async {
+            let body = ["userId":APP_USER_ID, "pageSize": "1000"]
+            let request = NetworkUtils.postBackEnd("R_PAGED_QUERY_ME_BONUS_DETAIL", body: body) {
+                json in
+                let jsondata = json["body"]["obj"]
+                self.getRecordData(jsondata: jsondata)
+                self.tableView.reloadData()
+            }
+            request.response(completionHandler: { _ in
+                hud.hide(animated: true)
+            })
+        }
+    }
+    
+    func getRecordData(jsondata:JSON){
+        RecordData = [Dictionary<String, Any>]()
+        for data in jsondata.array!{RecordData.append(["title":data["bonusGs"].stringValue,"time":data["dateLastUpdate"].stringValue,"record":data["bonus"].stringValue, "cztype":data["czType"].stringValue])
+        }
+        RecordData.sort { (s1, s2) -> Bool in
+            s1["time"] as! String > s2["time"] as! String
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -42,16 +67,18 @@ class WalletDetailController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! WalletDetailCell
         
-        cell.title.text = self.RecordData[indexPath.row]["title"]
-        cell.time.text = self.RecordData[indexPath.row]["time"]
-        cell.money.text = self.RecordData[indexPath.row]["record"]
-        let str = cell.money.text
-        let index = str?.index((str?.startIndex)!, offsetBy: 1)
-        let prefix = str?.substring(to: index!)
-        if prefix == "+"{
-            cell.money.textColor = APP_THEME_COLOR
-        }else{
+        cell.title.text = self.RecordData[indexPath.row]["title"] as? String
+        cell.time.text = self.RecordData[indexPath.row]["time"] as? String
+        let record = self.RecordData[indexPath.row]["record"] as? String
+        let cztype = self.RecordData[indexPath.row]["cztype"] as? String
+        cell.money.text = record!
+        cell.money.textColor = UIColor.black
+        if cztype == "TX"{
+            cell.money.text = "-" + record!
             cell.money.textColor = UIColor.black
+        }else if cztype == "TXSHSBTK"{
+            cell.money.text = "+" + record!
+            cell.money.textColor = APP_THEME_COLOR
         }
         cell.selectionStyle = .none
         return cell

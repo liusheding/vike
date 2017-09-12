@@ -44,7 +44,11 @@ class PayDetailController: UITableViewController {
     }
     
     func getRecordData(jsondata:JSON){
+        RecordData = [Dictionary<String, Any>]()
         for data in jsondata.array!{self.RecordData.append(["title":data["dxts"].stringValue,"time":data["orderDate"].stringValue,"record":data["paymentAmount"].stringValue])
+        }
+        RecordData.sort { (s1, s2) -> Bool in
+            s1["time"] as! String > s2["time"] as! String
         }
     }
     
