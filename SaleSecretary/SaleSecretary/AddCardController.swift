@@ -30,6 +30,11 @@ class AddCardController: UIViewController, UITextFieldDelegate {
             return
         }
         
+        if cardnumtext.characters.count < 16{
+            self.showAlert("银行卡号不合法")
+            return
+        }
+        
         if cardnametext == ""{
             self.showAlert("持卡人姓名不能为空")
             return
