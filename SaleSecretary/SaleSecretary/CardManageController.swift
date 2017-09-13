@@ -83,9 +83,11 @@ extension CardManageController: UITableViewDelegate, UITableViewDataSource{
         cell.textLabel?.text = self.cardData[indexPath.row]["bankname"] as? String
         cell.accessoryType = .disclosureIndicator
         let cardnum = self.cardData[indexPath.row]["cardnumber"] as? String
-        let endindex = cardnum?.index((cardnum?.endIndex)!, offsetBy: -4)
-        let endchar = cardnum?.substring(from: endindex!)
-        
+        var endchar = cardnum
+        if (cardnum?.characters.count)! > 4{
+            let endindex = cardnum?.index((cardnum?.endIndex)!, offsetBy: -4)
+            endchar = cardnum?.substring(from: endindex!)
+        }
         cell.detailTextLabel?.text = "**** **** **** " + endchar!
         return cell
     }
