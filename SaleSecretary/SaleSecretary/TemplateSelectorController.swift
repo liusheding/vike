@@ -46,6 +46,7 @@ class TemplateSelectorController: UIViewController {
     
     @IBOutlet weak var confirmBtn: UIBarButtonItem!
     
+    var searchTableView: UITableView!
     
     let menuTitles = ["月份", "短信类型"]
     
@@ -84,11 +85,12 @@ class TemplateSelectorController: UIViewController {
     
     fileprivate var currentType: Int = 0
     
-    
+    var searchResults: [Item] = []
     var emptyView: EmptyContentView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        // 选择框
         self.menu = JSDropDownMenu(origin: CGPoint(x: 0, y: 108), andHeight: 45)
         // UIColor(colorLiteralRed: <#T##Float#>, green: <#T##Float#>, blue: <#T##Float#>, alpha: <#T##Float#>)
         // UIColor.init(displayP3Red: <#T##CGFloat#>, green: <#T##CGFloat#>, blue: <#T##CGFloat#>, alpha: <#T##CGFloat#>)
@@ -101,17 +103,21 @@ class TemplateSelectorController: UIViewController {
         // self.tableView.isHidden = true
         self.view.addSubview(menu)
         self.automaticallyAdjustsScrollViewInsets = false
+        // 模板table view
         self.templateViewDelegate = TamplateTableViewDelegator(self.tableView, controller: self)
         self.tableView.estimatedRowHeight = 44.0
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.delegate = templateViewDelegate
         self.tableView.dataSource = templateViewDelegate
         self.tableView.tableFooterView = UIView()
-        
         if !tableCanSelected {
             self.confirmBtn.title = nil
         }
         self.loadData()
+        // 搜索
+        self.searchTableView = self.searchDisplayController?.searchResultsTableView
+        self.searchTableView.estimatedRowHeight = 44.0
+        self.searchTableView.rowHeight = UITableViewAutomaticDimension
         
     }
     
@@ -258,26 +264,89 @@ extension TemplateSelectorController: JSDropDownMenuDataSource, JSDropDownMenuDe
 }
 
 
-extension TemplateSelectorController: UITableViewDelegate, UITableViewDataSource {
+extension TemplateSelectorController: UITableViewDelegate, UITableViewDataSource, UISearchDisplayDelegate {
+    
+    
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return self.searchResults.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .default, reuseIdentifier: "smsTemplateSearchCell")
-        cell.textLabel?.text = txt
+        let cell = CollapsibleTableViewCell(style: .subtitle, reuseIdentifier: "smsTemplateSearchCell")
+        let item = self.searchResults[indexPath.row]
+        let textLabel = cell.detailLabel
+        textLabel.text = item.detail
+        textLabel.textColor = UIColor.black
+        cell.dxtdId = item.name
         return cell
     }
+
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        var result:[Item] = []
+        let text = self.searchBar.text
+        for sec in templateSections {
+            if sec.name.contains(text!) {
+                result += sec.items
+                continue
+            }
+            for item in sec.items {
+                if item.detail.contains(text!) {
+                    result.append(item)
+                }
+            }
+        }
+        self.searchResults = result
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let cell = tableView.cellForRow(at: indexPath) as! CollapsibleTableViewCell
+        if self.tableCanSelected {
+            let content = cell.detailLabel.text!
+            let dxtd = cell.dxtdId
+            self.templateSelectorDelegate!.didSelected(SMSTemplate(dxtd, content: content))
+            let count = self.navigationController?.viewControllers.count
+            self.navigationController?.popToViewController((self.navigationController?.viewControllers[count! - 2])!, animated: true)
+        }
+    }
+    
+    func searchDisplayController(_ controller: UISearchDisplayController, shouldReloadTableForSearch searchString: String?) -> Bool {
+        if let text = searchString {
+            var result:[Item] = []
+            for sec in templateSections {
+                if sec.name.contains(text) {
+                    result += sec.items
+                    continue
+                }
+                for item in sec.items {
+                    if item.detail.contains(text) {
+                        result.append(item)
+                    }
+                }
+            }
+            self.searchResults = result
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    
 }
 typealias Section = CollapsibleSection
 typealias Item = CollapsibleItem
 
-let txt = "七夕到，喜鹊叫，我发短信把喜报，一喜夫妻恩爱好，二喜儿女膝边绕，三喜体健毛病少，四喜平安把你照，五喜吉祥富贵抱，六喜开心没烦恼，七喜幸福指数高，七夕的短信转转好，七夕的快乐少不了！"
+let txt = "没有相关模板"
 
 
 protocol TemplateSelectorDelegate {

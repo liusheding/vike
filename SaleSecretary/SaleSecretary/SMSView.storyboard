@@ -708,11 +708,6 @@
                             <searchBar contentMode="redraw" placeholder="请输入查找模板内容" showsSearchResultsButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gGB-jL-75s">
                                 <rect key="frame" x="0.0" y="64" width="375" height="44"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="search"/>
-                                <scopeButtonTitles>
-                                    <string>节假日</string>
-                                    <string>营销类</string>
-                                    <string>我的</string>
-                                </scopeButtonTitles>
                                 <connections>
                                     <outlet property="delegate" destination="2VU-kh-fcd" id="k1J-EU-8EC"/>
                                 </connections>

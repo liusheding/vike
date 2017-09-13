@@ -54,7 +54,7 @@ class CollapsibleTableViewCell: UITableViewCell {
         detailLabel.topAnchor.constraint(equalTo: marginGuide.topAnchor).isActive = true
         detailLabel.numberOfLines = 0
         detailLabel.font = UIFont.systemFont(ofSize: 12)
-        detailLabel.textColor = UIColor.lightGray
+        detailLabel.textColor = UIColor.black
     }
     
     required init?(coder aDecoder: NSCoder) {
