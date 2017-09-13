@@ -861,6 +861,39 @@
             </objects>
             <point key="canvasLocation" x="917.60000000000002" y="1647.5262368815593"/>
         </scene>
+        <!--状态统计-->
+        <scene sceneID="wKz-Nc-A6N">
+            <objects>
+                <viewController storyboardIdentifier="smsdetailID" title="状态统计" id="lh9-8Q-TpT" customClass="SMSDetailRecordController" customModule="SaleSecretary" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="0uT-Ep-dyI"/>
+                        <viewControllerLayoutGuide type="bottom" id="FeR-B1-frP"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="xF6-wb-uJN">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="50" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ral-tR-uvW">
+                                <rect key="frame" x="0.0" y="100" width="375" height="567"/>
+                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="ral-tR-uvW" secondAttribute="bottom" id="3yi-O6-IGr"/>
+                            <constraint firstAttribute="trailing" secondItem="ral-tR-uvW" secondAttribute="trailing" id="8uM-MX-iQb"/>
+                            <constraint firstItem="ral-tR-uvW" firstAttribute="top" secondItem="xF6-wb-uJN" secondAttribute="top" constant="100" id="MRK-bu-g0N"/>
+                            <constraint firstItem="ral-tR-uvW" firstAttribute="leading" secondItem="xF6-wb-uJN" secondAttribute="leading" id="pam-61-JBL"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="ral-tR-uvW" id="Dfe-Zk-O8H"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Yij-wM-3h6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2056.8000000000002" y="1647.5262368815593"/>
+        </scene>
         <!--新手指南-->
         <scene sceneID="jUV-1V-0CM">
             <objects>
@@ -1089,10 +1122,10 @@
             </objects>
             <point key="canvasLocation" x="-1522.4000000000001" y="894.60269865067471"/>
         </scene>
-        <!--业务统计-->
+        <!--短信发送统计-->
         <scene sceneID="8N6-qZ-oeH">
             <objects>
-                <viewController storyboardIdentifier="businessRecord" title="业务统计" automaticallyAdjustsScrollViewInsets="NO" hidesBottomBarWhenPushed="YES" id="BLI-4e-wF0" customClass="BusinessRecordController" customModule="SaleSecretary" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="businessRecord" title="短信发送统计" automaticallyAdjustsScrollViewInsets="NO" hidesBottomBarWhenPushed="YES" id="BLI-4e-wF0" customClass="BusinessRecordController" customModule="SaleSecretary" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="5t0-aN-5AY"/>
                         <viewControllerLayoutGuide type="bottom" id="DwZ-3q-ps1"/>

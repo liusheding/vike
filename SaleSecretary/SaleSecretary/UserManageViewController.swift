@@ -27,7 +27,6 @@ class UserManageViewController: UIViewController {
         
         searchBar.setValue("取消", forKey: "_cancelButtonText")
         searchBar.tintColor = APP_THEME_COLOR
-        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellId)
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "•••", style: .plain, target: self, action: #selector(clickAddBtn))
         
