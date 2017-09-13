@@ -16,6 +16,7 @@ class UserManageViewController: UIViewController {
     let cellId = "userDetailID"
     let headIdentifier = "UMheadView"
     var contactsCells: [UserGroup] = [] {
+        // 在数据加载完以后 给代理赋值
         didSet {
             if self.contactsCells.count == 0 {return}
             var users: [User] = []
@@ -31,7 +32,6 @@ class UserManageViewController: UIViewController {
     }
     
     // 搜索代理
-    
     var searchDelegate: UserSearchDelegator!
     
     override func viewDidLoad() {
@@ -321,7 +321,7 @@ class UserSearchDelegator: NSObject, UITableViewDataSource, UITableViewDelegate,
             }
         }
     }
-    
+    // 监听搜索词变化
     func searchDisplayController(_ controller: UISearchDisplayController, shouldReloadTableForSearch searchString: String?) -> Bool {
         if self.originalUsers == nil || self.originalUsers?.count == 0 { return false }
         if searchString == nil { return false }
@@ -380,7 +380,7 @@ class UserSearchDelegator: NSObject, UITableViewDataSource, UITableViewDelegate,
         
         return [freeze]
     }
-    
+    // 搜索controller有修改内容，所以用户controller需要重新刷新
     func searchDisplayControllerDidEndSearch(_ controller: UISearchDisplayController) {
         self.controller.loading()
     }
