@@ -65,6 +65,12 @@ struct Utils {
         }
     }
     
+    static func inputOnlyNumbers(str: String) -> Bool {
+        let reg = "[0-9]*"
+        let predicate = NSPredicate(format: "SELF MATCHES %@", reg)
+        return predicate.evaluate(with: str)
+    }
+    
     static func showLoadingHUB(view: UIView?, msg: String = "正在加载中...", completion: ((MBProgressHUD)-> Void)?) {
         var v = view
         if v == nil {
