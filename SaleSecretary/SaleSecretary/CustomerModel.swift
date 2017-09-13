@@ -114,7 +114,7 @@ class Customer : NSObject{
     init?(cnContact: CNContact) {
         // name
         if !cnContact.isKeyAvailable(CNContactGivenNameKey) && !cnContact.isKeyAvailable(CNContactFamilyNameKey) { return nil }
-        self.name = (cnContact.givenName + cnContact.familyName).trimmingCharacters(in: CharacterSet.whitespaces)
+        self.name = ( cnContact.familyName + cnContact.givenName  ).trimmingCharacters(in: CharacterSet.whitespaces)
         // phone
         self.phone_number = []
         if cnContact.isKeyAvailable(CNContactPhoneNumbersKey) {
