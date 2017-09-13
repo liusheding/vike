@@ -52,6 +52,8 @@ class ContactTableViewController: UIViewController {
     @IBAction func ctFloatMoreBar(_ sender: Any) {
         self.ctMoreItemView.hide(!self.ctMoreItemView.isHidden)
     }
+    // 搜索字段
+    let searchDelegator: ContactSearchDelegator = ContactSearchDelegator()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -80,6 +82,12 @@ class ContactTableViewController: UIViewController {
         self.chooseGroup.layer.cornerRadius = 10
 
         self.generateData()
+        
+        // 搜索
+        self.searchDisplayController?.searchResultsDelegate = self.searchDelegator
+        self.searchDisplayController?.searchResultsDataSource = self.searchDelegator
+        self.searchDisplayController?.delegate = self.searchDelegator
+        
     }
     
     func generateData()  {
@@ -483,6 +491,34 @@ extension ContactTableViewController : ContactTableViewDelegate {
         self.customer = self.contextDb.getCustomerInDb(userId: APP_USER_ID!)
         self.groupsInDb  = self.contextDb.getGroupInDb(userId: APP_USER_ID!)
         self.tableView.reloadData()
+    }
+    
+}
+
+class ContactSearchDelegator: NSObject, UITableViewDelegate, UITableViewDataSource, UISearchDisplayDelegate {
+    
+    var customers: [Customer] = [Customer()]
+    
+    public override init() {
+        super.init()
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return customers.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell.init(style: .subtitle, reuseIdentifier: "contactSearchCell")
+        cell.textLabel?.text = "搜索结果"
+        return cell
+    }
+    
+    func searchDisplayController(_ controller: UISearchDisplayController, shouldReloadTableForSearch searchString: String?) -> Bool {
+        return false
     }
     
 }
