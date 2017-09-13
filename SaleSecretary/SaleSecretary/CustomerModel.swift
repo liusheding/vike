@@ -7,15 +7,15 @@
 //
 
 import UIKit
+import SwiftyJSON
+import Contacts
 
 class CustomerModel: NSObject {
-
+    
     
 }
 
-
-
-class Customer : NSObject {
+class Customer : NSObject{
     
     var name:         String?
     var phone_number: [String]?
@@ -26,6 +26,7 @@ class Customer : NSObject {
     var gender :      Int   // 0:feman 1:man
     var company :     String
     var birthday :    String
+    var app_userId :  String
     
     let properties = ["birthday","company","gender","group_id","id","is_solar","nick_name","phone_number","name"]
     
@@ -37,10 +38,9 @@ class Customer : NSObject {
     static public func == (lhs: Customer, rhs: Customer) -> Bool {
         return true
     }
-    
-//    static func == (l: Customer, r: Customer) -> Bool {
-//        return l.phone_number![0] == r.phone_number![0]
-//    }
+    //    static func == (l: Customer, r: Customer) -> Bool {
+    //        return l.phone_number![0] == r.phone_number![0]
+    //    }
     
     override init() {
         self.name = ""
@@ -52,9 +52,36 @@ class Customer : NSObject {
         self.group_id = ContactCommon.groupDefault as String
         self.id =  ""
         self.is_solar = true
+        self.app_userId = ""
     }
     
-    /* 
+    init( json : JSON ){
+        self.name = json["name"].stringValue
+        self.id = json["id"].stringValue
+        self.group_id = json["cusGroupId"].stringValue
+        self.phone_number = [json["cellphoneNumber"].stringValue]
+        self.birthday = json["birthday"].stringValue
+        self.nick_name = json["cw"].stringValue
+        self.is_solar = json["birthdayType"].stringValue == "1" ? true : false
+        self.gender =  0 //Int(json["sex"].stringValue)!
+        self.company = json["company"].stringValue
+        self.app_userId = APP_USER_ID!
+    }
+    
+    init( name : String , phoneNum : [String] ) {
+        self.name = name
+        self.phone_number = phoneNum
+        self.nick_name = ""
+        self.company = ""
+        self.birthday = ""
+        self.gender = 1
+        self.group_id = ContactCommon.groupDefault as String
+        self.id =  ""
+        self.is_solar = true
+        self.app_userId = APP_USER_ID!
+    }
+    
+    /*
      * default : [ gender : 1 , group_id : "默认" , id : 0 , is_solar : true ]
      */
     init( birth : String , company:String , nick_name:String  , phone_number : [String] , name:String , id : String ) {
@@ -67,6 +94,7 @@ class Customer : NSObject {
         self.id = id
         self.group_id = ContactCommon.groupDefault as String
         self.gender = 1
+        self.app_userId = APP_USER_ID!
     }
     
     init(ctm : Customers) {
@@ -79,39 +107,75 @@ class Customer : NSObject {
         self.is_solar = ctm.is_solar
         self.nick_name = ctm.nick_name
         self.phone_number = ctm.phone_number?.components(separatedBy: ",")
+        self.app_userId = ctm.app_userId!
+    }
+    
+    @available(iOS 9.0, *)
+    init?(cnContact: CNContact) {
+        // name
+        if !cnContact.isKeyAvailable(CNContactGivenNameKey) && !cnContact.isKeyAvailable(CNContactFamilyNameKey) { return nil }
+        self.name = (cnContact.givenName + cnContact.familyName).trimmingCharacters(in: CharacterSet.whitespaces)
+        // phone
+        self.phone_number = []
+        if cnContact.isKeyAvailable(CNContactPhoneNumbersKey) {
+            if cnContact.phoneNumbers.count > 0 {
+                let phone = cnContact.phoneNumbers.first?.value
+                self.phone_number?.append((phone?.stringValue)!)
+            }
+        }
+        self.nick_name = ""
+        self.company = ""
+        self.birthday = ""
+        self.gender = 1
+        self.group_id = ContactCommon.groupDefault as String
+        self.id =  ""
+        self.is_solar = true
+        self.app_userId = APP_USER_ID!
+        
     }
     
     override func  setValue(_ value: Any?, forUndefinedKey key: String) { }
     
-   }
+}
 
 class MemGroup{
     
-    var id :          Int
+    var id :          String
     var group_name :  String
+    var app_userId :  String
+    var total  : Int
     
     init() {
-        self.id = 0
+        self.id = ""
         self.group_name = ContactCommon.groupDefault as String
+        self.app_userId = APP_USER_ID!
+        self.total = 0
     }
     
-    init(id: Int , gn : String){
+    init(id: String , gn : String ){
         self.id = id
         self.group_name  = gn
+        self.app_userId = APP_USER_ID!
+        self.total = 0
+    }
+    
+    init(json : JSON) {
+        self.group_name = json["name"].stringValue
+        self.id = json["id"].stringValue
+        self.total = Int(json["cusTotal"].stringValue)!
+        self.app_userId = APP_USER_ID!
     }
     
     static func toMemGroup( dbGroup : [Group]) -> [MemGroup] {
         var result : [MemGroup] = []
         if dbGroup.count > 0 {
             for dbg in dbGroup {
-                result.append( MemGroup.init(id: Int(dbg.id) , gn: dbg.group_name!))
+                result.append( MemGroup.init(id: dbg.id! , gn: dbg.group_name! ))
             }
         }
         return result
     }
-    
 }
-
 
 class CustomerGroup:NSObject {
     var name:String?
@@ -133,58 +197,73 @@ class CustomerGroup:NSObject {
         self.name = group.group_name
     }
     
-    // MARK: - 构造函数
-//    init(dict: [String: AnyObject]) {
-//        super.init()
-//        setValuesForKeys(dict)
-//        var friends = [Customer]()
-//        for friendDict in self.friends! {
-//            let friend = Customer.init( )
-//            friends.append(friend)
-//        }
-//        self.friends = friends
-//    }
-    
     init( customer: [Customers] , group : Group ){
         self.name = group.group_name
         self.friends = [Customer]()
         for ctm in customer {
-            if ctm.group_id == self.name {
+            if ctm.group_id == group.id {
                 self.friends?.append( Customer.init(ctm: ctm))
+            }
+        }
+    }
+    
+    init(cust : [Customer] , group : MemGroup) {
+        self.name = group.group_name
+        self.friends = [Customer]()
+        for ctm in cust  {
+            if ctm.group_id == group.id {
+                self.friends?.append(ctm)
             }
         }
     }
     
     override func  setValue(_ value: Any?, forUndefinedKey key: String) { }
     
-//    class func dictModel() -> [CustomerGroup] {
-//        
-//        let path = Bundle.main.path(forResource: "customerList.plist", ofType: nil)
-//        let list = NSArray.init(contentsOfFile: path!)
-//        
-//        var models = [CustomerGroup]()
-//        for dict in list! {
-//            models.append(CustomerGroup(dict: dict as! [String : AnyObject]))
-//        }
-//        return models
-//    }
-    
 }
 
+class TrailMessage {
+    var id : String?
+    var title : String?
+    var content : String?
+    var date : String?
+    
+    init() {
+        self.id = ""
+        self.title = ""
+        self.content = ""
+        self.date = ""
+    }
+    
+    init(json : JSON) {
+        self.id = json["cusInfoId"].stringValue
+        self.title = json["title"].stringValue
+        self.content = json["content"].stringValue
+        self.date = json["date"].stringValue
+    }
+    
+    init(title : String , content : String) {
+        self.title = title
+        self.content  = content
+        self.date = DateFormatterUtils.getStringFromDate( Date.init() , dateFormat:"yyyy-MM-dd HH-mm-ss")
+        self.id = "1"
+    }
+}
 
 struct ContactCommon {
     static let max = 255.0
     
     static let defaultLength : Int = 10
-//    static let sampleColor = [UIColor.init(red: CGFloat.init(254.0/max), green: CGFloat.init(170)/max, blue: CGFloat.init(40)/max, alpha: CGFloat.init(1)) ,
-//                 UIColor.init(red: CGFloat.init(255)/max, green: CGFloat.init(142)/max, blue: CGFloat.init(137)/max, alpha: CGFloat.init(1)) ,
-//        UIColor.init(red: CGFloat.init(118)/max, green: CGFloat.init(171)/max, blue: CGFloat.init(240)/max, alpha: CGFloat.init(1)) ,
-//        UIColor.init(red: CGFloat.init(78)/max, green: CGFloat.init(210)/max, blue: CGFloat.init(98)/max, alpha: CGFloat.init(1))
-//    ]
+    
+    static let trailTitltLen : Int = 20
+    static let trailContentLen : Int = 1000
     static let THEME_COLOR = UIColor.colorWithHexString(hex: "01B414")
     static let  sampleColor = [ UIColor.colorWithHexString(hex: "feaa28") , UIColor.colorWithHexString(hex: "ff8e89") , UIColor.colorWithHexString(hex: "76abf0") , UIColor.colorWithHexString(hex: "4ec962")]
     
     static let count = sampleColor.count
+    
+    static let addUserSingle = "SINGLE"
+    static let addUserBatch = "BATCH"
+    static let defaultRequestCount = 1000
     
     // confirm ctm is in target or not  : name and phoneNumber
     static func isContain(ctm : Customer , target : [Customers]) -> Bool {
@@ -238,6 +317,16 @@ struct ContactCommon {
             msg = "您输入组名重复，请重新输入！"
         }
         return msg
+    }
+    
+    static func generateCustomerGroup(cust : [Customer] , grp : [MemGroup]) -> [CustomerGroup] {
+        var result : [CustomerGroup]  = []
+        
+        for g in grp {
+            result.append( CustomerGroup.init(cust: cust , group: g ))
+        }
+        
+        return result
     }
     
 }

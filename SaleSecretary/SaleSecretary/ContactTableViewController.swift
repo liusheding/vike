@@ -9,6 +9,9 @@
 import UIKit
 import CoreData
 import Contacts
+import MBProgressHUD
+import SwiftyJSON
+import Alamofire
 
 class ContactTableViewController: UIViewController {
     
@@ -20,37 +23,14 @@ class ContactTableViewController: UIViewController {
     var groupsInDb : [Group] = []
     var isFirstTime : Bool = false
     
-    lazy var arrContacts = [CNContact]()
+    var customerInServer : [Customer] = []
+    var groupsInServer : [MemGroup] = []
+    
+    var arrContacts = [CNContact]()
     
     var contactStore = CNContactStore()
     // read contacts information from user's iphone contact
     var contactDt : [Customer] = []
-//        { [unowned self] in
-//        print("loading contact")
-//        var cust : [Customer] = []
-////        DispatchQueue.sync(DispatchQueue)
-//        CNContactStore().requestAccess(for: .contacts ) {
-//            (isRight , error) in
-//            if isRight {
-////                cust = self.loadContactData()
-//                cust = GetContactUtils.secondWay2GetContactData()
-//            } else {
-//                let alertController = UIAlertController(title: "『销小秘』想访问您的通讯录", message: "销小秘需要访问通讯录，才能为您提供更好的服务体验！", preferredStyle: .alert)
-//                let cancelAction = UIAlertAction(title: "拒绝", style: .cancel, handler: nil)
-//                let okAction = UIAlertAction(title: "设置", style: .default, handler: {
-//                    action in
-//                    let settingUrl = NSURL(string: UIApplicationOpenSettingsURLString)! as URL
-//                    if UIApplication.shared.canOpenURL(settingUrl )
-//                    {
-//                        UIApplication.shared.open(settingUrl, options: [:], completionHandler: nil)                        }
-//                })
-//                alertController.addAction(cancelAction)
-//                alertController.addAction(okAction)
-//                self.present(alertController, animated: true, completion: nil)
-//            }
-//        }
-//        return cust
-//        }()
     
     var ctMoreItemView : CustomerPopUpView!
     let contextDb = CustomerDBOp.defaultInstance()
@@ -76,14 +56,12 @@ class ContactTableViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.tableFooterView = UIView()
+        self.tableView.tableFooterView = UIView()
         self.tableView.delegate = self
         self.tableView.dataSource = self
         
-        //NSLog("ContactTableviewController init ! \(NSHomeDirectory())")
+        NSLog("ContactTableviewController init ! \(NSHomeDirectory())")
         self.tableView.register(UINib(nibName: String(describing: PersonContactCell.self ), bundle: nil), forCellReuseIdentifier: cellId)
-        
-        checkforContactPermission()
         
         //search bar information
         self.searchBarLocal.delegate = self
@@ -100,39 +78,58 @@ class ContactTableViewController: UIViewController {
             make.edges.equalTo(UIEdgeInsetsMake(64, 0, 0, 0))
         }
         self.chooseGroup.layer.cornerRadius = 10
-        self.contactsCells = self.contextDb.getContacts2Group( true ) // load customer data
+
         self.generateData()
-        
     }
     
-    func checkforContactPermission() {
-        switch CNContactStore.authorizationStatus(for: .contacts) {
-            
-        case .authorized:
-            self.contactDt = GetContactUtils.secondWay2GetContactData()
-            createData(data: self.contactDt)
-            
-        case .notDetermined:
-            contactStore.requestAccess(for: .contacts){succeeded, err in
-                guard err == nil && succeeded else{
-                    print("sorry , can not get permission! ")
-                    return
+    func generateData()  {
+        self.groupsInDb = self.contextDb.getGroup(userId: APP_USER_ID!)
+        // get group from local db , if this count is 0 , then ,get from server
+        if self.groupsInDb.count == 0 {
+            let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
+            hud.label.text = "加载中..."
+            // get data from server , and insert to local db
+            var request = NetworkUtils.postBackEnd("R_PAGED_QUERY_TXL_CUS_GROUP", body: ["userId" : APP_USER_ID! , "pageSize" : "1000" ] ){
+                json in
+                var gp : [MemGroup] = []
+                let rsp = json["body"]
+                for i in rsp["obj"].arrayValue {
+                    gp.append(MemGroup.init(json: i))
                 }
-                self.contactDt = GetContactUtils.secondWay2GetContactData()
+                self.contextDb.storeGroupArray(userId: APP_USER_ID! , gArray: gp)
             }
-        default:
-            print("Not handled")
+            
+            request = NetworkUtils.postBackEnd("R_PAGED_QUERY_TXL_CUS_INFO", body: ["userId": APP_USER_ID! ,  "pageSize": "50000"] , handler: { (json) in
+                
+                let obj = json["body"]["obj"].arrayValue
+                if obj.count > 0 {
+                    var cust : [Customer] = []
+                    for b in obj {
+                        cust.append(Customer.init(json: b))
+                    }
+                    self.contextDb.insertCustomerArray(ctms: cust)
+                }
+            })
+            
+            request.response(completionHandler: { _ in
+                self.contactsCells = self.contextDb.getContacts2Group(userId: APP_USER_ID! , true ) // load customer data
+                hud.hide(animated: true)
+                self.tableView.reloadData()
+            })
+        }else {
+            self.contactsCells = self.contextDb.getContacts2Group(userId: APP_USER_ID! , true ) // load customer data
         }
+        self.customer = self.contextDb.getCustomerInDb(userId: APP_USER_ID! )
     }
     
     func createData( data : [Customer]) {
-        self.customer = self.contextDb.getCustomerInDb(true)
+        self.customer = self.contextDb.getCustomerInDb(userId: APP_USER_ID! , true)
         // validate local costomer size , because the first time spcial
         if self.customer.count == 0 { // only first or delete all app customer's data
             for cd in data {
                 self.contextDb.insertCustomer(ctms: cd)
             }
-            self.customer = self.contextDb.getCustomerInDb(true)
+            self.customer = self.contextDb.getCustomerInDb(userId: APP_USER_ID!, true)
             self.tableView.reloadData()
         }
         if self.contactsCells.count == 0 {
@@ -141,19 +138,29 @@ class ContactTableViewController: UIViewController {
             
         }
         self.contactsCells = []
-        self.contactsCells = self.contextDb.getContacts2Group( true )
+        self.contactsCells = self.contextDb.getContacts2Group( userId: APP_USER_ID! , true )
     }
     
-    // default read data from db , but  first time get from  phone's contacts
-    func generateData() {
-        self.groupsInDb = self.contextDb.getGroupInDb(true)
-        self.customer = self.contextDb.getCustomerInDb(true)
+    func loadingData(){
         
-        if self.contactDt.count == 0 {
-//            self.contactDt = self.loadContactData()
-            print("lalllallallallal")
-        }
-//        createData(data: self.contactDt )
+        let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
+        hud.label.text = "正在加载中..."
+        let request = NetworkUtils.postBackEnd("R_PAGED_QUERY_TXL_CUS_GROUP" , body: ["userId": APP_USER_ID! , "pageSize" : ContactCommon.defaultRequestCount ] , handler: { [weak self] (json) in
+            
+            var gp : [MemGroup] = []
+            let rsp = json["body"]
+            for i in rsp["obj"].arrayValue {
+                gp.append(MemGroup.init(json: i))
+            }
+            self?.groupsInServer = gp
+            
+            // generate customerGroup
+            self?.contactsCells = ContactCommon.generateCustomerGroup(cust: (self?.customerInServer)!, grp: (self?.groupsInServer)!)
+        })
+        request.response(completionHandler: { _ in
+            hud.hide(animated: true)
+            self.tableView.reloadData()
+        })
     }
     
     override func didReceiveMemoryWarning() {
@@ -167,10 +174,6 @@ class ContactTableViewController: UIViewController {
         self.ctMoreItemView.hide(true)
         self.chooseGroup.isHidden = true
         
-    }
-    override func viewWillAppear(_ animated: Bool) {
-//        self.viewWillAppear(animated)
-        self.reloadTableViewData()
     }
     
     func pressCancel() {
@@ -218,7 +221,7 @@ extension ContactTableViewController : UITableViewDataSource, UITableViewDelegat
             return 1
         }
         let group = self.contactsCells[section - 1]
-        NSLog("numberOfRowsInSection \(String(describing: group.name))")
+//        NSLog("numberOfRowsInSection \(String(describing: group.name))")
         
         if group.isOpen! {
             return (group.friends?.count)!
@@ -235,7 +238,6 @@ extension ContactTableViewController : UITableViewDataSource, UITableViewDelegat
             let cell = UITableViewCell.init(style: UITableViewCellStyle.default , reuseIdentifier: self.newCellId)
             cell.textLabel?.text = "新的客户"
             cell.imageView?.image = UIImage(named: "pic_xkh")
-            //            cell.picButton.backgroundColor = UIColor.white
             cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
             return cell
         }else {
@@ -259,8 +261,17 @@ extension ContactTableViewController : UITableViewDataSource, UITableViewDelegat
         }
     }
     
+    func updateContactCell(cust : [Customer] , currentSectionLoadingData : Int) {
+        if currentSectionLoadingData < self.contactsCells.count{
+            for ct in cust{
+                self.contactsCells[currentSectionLoadingData].friends?.append(ct)
+            }
+        }
+    }
+    
     func clickedGroupTitle(headerView: CustomerHeaderView) {
         let section = NSIndexSet.init(index: headerView.tag + 1) as IndexSet
+        
         self.tableView.reloadSections(section, with: .automatic)
     }
     
@@ -268,12 +279,11 @@ extension ContactTableViewController : UITableViewDataSource, UITableViewDelegat
         
         if indexPath.section == 0 {
             let detailPage = storyboardLocal.instantiateViewController(withIdentifier: "newAddCustomer") as! CTChooseNewerController
-//            self.contactDt = self.loadContactData()
             tableView.deselectRow(at: indexPath, animated: false)
             detailPage.tableDelegate = self
             detailPage.contactDt = self.contactDt
-            detailPage.localDbContact = self.customer
             detailPage.groupsInDb = self.groupsInDb
+            
             self.navigationController?.pushViewController(detailPage, animated: true)
         }else {
             let cust = self.contactsCells[indexPath.section - 1].friends![indexPath.row]
@@ -286,6 +296,7 @@ extension ContactTableViewController : UITableViewDataSource, UITableViewDelegat
         
     }
     
+    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if section == 0 {
             return nil
@@ -296,7 +307,6 @@ extension ContactTableViewController : UITableViewDataSource, UITableViewDelegat
         headView.delegate = self as? LSHeaderViewDelegate
         
         headView.tag = section - 1
-        NSLog("-------section" + "\(section)" )
         
         headView.friendGroup = group
         return headView
@@ -306,25 +316,57 @@ extension ContactTableViewController : UITableViewDataSource, UITableViewDelegat
         NSLog("floatViewTapItemIndex:\(type)")
         switch type {
         case .addNewCustomer:
-            let sboard = UIStoryboard(name: "MineView" , bundle: nil)
-            let detailPage = sboard.instantiateViewController(withIdentifier: "addUserID") as! AddUserViewController
+            
+            let detailPage = self.storyboardLocal.instantiateViewController(withIdentifier: "AddNewUser") as! CTAddUserViewController
             self.navigationController?.pushViewController(detailPage, animated: true )
             break
+            
         case .synContacts: // read contact from iphon contacts , and add newers to default group
-            NSLog("press syn contact")
+            let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
+            hud.label.text = "同步通讯录中..."
+            
+            self.requestAccessToContacts { [unowned self](success) in
+                if success {
+                    GetContactUtils.simpleWay2GetContactData2({ (success, tmpContact) in
+                        if success {
+                            var info : String = "{"
+                            for key in 0..<tmpContact.count {
+                                let x = tmpContact[key]
+                                let pn = (x.phone_number?.count)! > 0 ? x.phone_number?[0] : " "
+                                let y = "\"" + x.name! + "\":"  + "\"" + pn! + "\","
+                                info += (y)
+                            }
+                            info.remove(at: info.index(before: info.endIndex ))
+                            let body : [String:String] = [ "busi_scene" : ContactCommon.addUserBatch ,"userId" : APP_USER_ID!, "pldrkh" : info + "}" ]
+                            // batch insert
+                            let request = NetworkUtils.postBackEnd("C_TXL_CUS_INFO", body: body, handler: nil )
+                            
+                            request.response(completionHandler: { _ in
+                                hud.hide(animated: true)
+                                self.tableView.reloadData()
+                            })
+                            
+                        }else {
+                            print("something wrong!!")
+                        }
+                    })
+                }
+            }
+            
             if self.customer.count == 0 {
-                self.customer = self.contextDb.getCustomerInDb()
+                self.customer = self.contextDb.getCustomerInDb(userId: APP_USER_ID!)
             }
             var newCustomer : [Customer] = []
             for ct in self.contactDt {
-                if !self.contextDb.queryByIdentifer(id: ct.id){
+                let result = self.contextDb.queryByIdentifer(id: (ct.phone_number?.count)!>0 ? (ct.phone_number?[0])! : "" )
+                if result.count == 0 {
                     newCustomer.append(ct)
                 }
             }
             if newCustomer.count > 0 {
                 self.contextDb.insertCustomerArray(ctms: newCustomer)
-                self.contactsCells = self.contextDb.getContacts2Group(true)
-                self.customer = self.contextDb.getCustomerInDb()
+                self.contactsCells = self.contextDb.getContacts2Group(userId : APP_USER_ID! ,  true)
+                self.customer = self.contextDb.getCustomerInDb(userId: APP_USER_ID!)
             }
             
             // information notice
@@ -332,7 +374,7 @@ extension ContactTableViewController : UITableViewDataSource, UITableViewDelegat
             //显示提示框
             self.present(alertController, animated: true, completion: nil)
             
-            self.contactsCells = self.contextDb.getContacts2Group(true)
+            self.contactsCells = self.contextDb.getContacts2Group(userId: APP_USER_ID! , true)
             self.tableView.reloadData()
             //两秒钟后自动消失
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
@@ -348,6 +390,32 @@ extension ContactTableViewController : UITableViewDataSource, UITableViewDelegat
             let detailPage = storyboardLocal.instantiateViewController(withIdentifier: "batchProcess") as! BatchProcessViewController
             self.navigationController?.pushViewController(detailPage, animated: true)
             break
+        }
+    }
+    
+    
+    func requestAccessToContacts(_ completion: @escaping (_ success: Bool) -> Void) {
+        let authorizationStatus = CNContactStore.authorizationStatus(for: CNEntityType.contacts)
+        
+        switch authorizationStatus {
+        case .authorized: completion(true) // authorized previously
+        case .denied, .notDetermined: // needs to ask for authorization
+            self.contactStore.requestAccess(for: CNEntityType.contacts, completionHandler: { (accessGranted, error) -> Void in
+                let alertController = UIAlertController(title: "『销小秘』想访问您的通讯录", message: "销小秘需要访问通讯录，才能为您提供更好的服务体验！", preferredStyle: .alert)
+                let cancelAction = UIAlertAction(title: "拒绝", style: .cancel, handler: nil)
+                let okAction = UIAlertAction(title: "设置", style: .default, handler: {
+                    action in
+                    let settingUrl = NSURL(string: UIApplicationOpenSettingsURLString)! as URL
+                    if UIApplication.shared.canOpenURL(settingUrl )
+                    {
+                        UIApplication.shared.open(settingUrl, options: [:], completionHandler: nil)                        }
+                })
+                alertController.addAction(cancelAction)
+                alertController.addAction(okAction)
+                self.present(alertController, animated: true, completion: nil)
+            })
+        default: // not authorized.
+            completion(false)
         }
     }
     
@@ -411,9 +479,9 @@ extension ContactTableViewController: UISearchBarDelegate {
 extension ContactTableViewController : ContactTableViewDelegate {
     
     func reloadTableViewData( ){
-        self.contactsCells = self.contextDb.getContacts2Group(true)
-        self.customer = self.contextDb.getCustomerInDb()
-        self.groupsInDb  = self.contextDb.getGroupInDb()
+        self.contactsCells = self.contextDb.getContacts2Group( userId: APP_USER_ID! , true)
+        self.customer = self.contextDb.getCustomerInDb(userId: APP_USER_ID!)
+        self.groupsInDb  = self.contextDb.getGroupInDb(userId: APP_USER_ID!)
         self.tableView.reloadData()
     }
     

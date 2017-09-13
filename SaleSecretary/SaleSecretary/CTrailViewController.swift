@@ -10,12 +10,18 @@ import UIKit
 
 class CTrailViewController: UIViewController {
 
+    @IBOutlet weak var trailTableView: UITableView!
+    
+    
+    let trailCell = "trailCell"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-//        self.tableView.delegate = self
-//        self.tableView.dataSource = self
-        NSLog("This is trailview")
-        // Do any additional setup after loading the view.
+        self.trailTableView.delegate = self
+        self.trailTableView.dataSource = self
+        
+        self.trailTableView.register( UINib(nibName: String(describing: PersonContactCell.self ), bundle: nil) , forCellReuseIdentifier: self.trailCell )
+        
     }
 
     override func didReceiveMemoryWarning() {

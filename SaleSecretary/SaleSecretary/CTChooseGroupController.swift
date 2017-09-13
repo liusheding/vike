@@ -21,7 +21,7 @@ class CTChooseGroupController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.group = self.contextDb.getGroupInDb()
+        self.group = self.contextDb.getGroupInDb(userId: APP_USER_ID!)
         self.navigationSetting()
         self.tableSetting()
     }

@@ -19,7 +19,7 @@ class BatchProcessViewController: UIViewController {
     
     let customerDB = CustomerDBOp.defaultInstance()
     
-    var contacts: [CustomerGroup] = CustomerDBOp.defaultInstance().getContacts2Group()
+    var contacts: [CustomerGroup] = CustomerDBOp.defaultInstance().getContacts2Group(userId: APP_USER_ID!)
     
     let cellId : String  = "CustomerSelectViewCellId"
     
@@ -291,7 +291,7 @@ extension BatchProcessViewController : CollapsibleImageHeaderViewDelegate {
 }
 extension BatchProcessViewController : ContactTableViewDelegate {
     func reloadTableViewData( ){
-        self.contacts = CustomerDBOp.defaultInstance().getContacts2Group(true)
+        self.contacts = CustomerDBOp.defaultInstance().getContacts2Group(userId: APP_USER_ID!, true)
         self.selctions = self.initSelections()
         self.tableView.reloadData()
     }

@@ -7,13 +7,14 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 private let reuseIdentifier = "Cell"
 
 class AddCustomerViewController: UIViewController {
 
     var groupArr : [MemGroup] = []
-    let addIconTag : MemGroup = MemGroup.init(id: 0, gn: "")
+    let addIconTag : MemGroup = MemGroup.init(id: "0", gn: "")
     let defaultFontSize : CGFloat  = 16
     let defaultBottomTopHeight : CGFloat = 25
     
@@ -34,7 +35,7 @@ class AddCustomerViewController: UIViewController {
     func initSetting() {
         
         // init data 
-        self.groupArr = MemGroup.toMemGroup(dbGroup: self.contextDb.getGroupInDb())
+        self.groupArr = MemGroup.toMemGroup(dbGroup: self.contextDb.getGroupInDb(userId: APP_USER_ID!))
         self.groupArr.append( self.addIconTag ) // the last for "Add button"
     }
     
@@ -52,14 +53,27 @@ class AddCustomerViewController: UIViewController {
         
         let view = self.parent as! CTChooseNewerController
         let c = view.newCustomer[view.tableViewSel]
-        c.group_id = g.group_name
-        self.contextDb.insertCustomer(ctms: c)
+        c.group_id = g.id
+        
+        let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
+        hud.label.text = "加载中..."
+        // 同步到服务器和本地数据库
+        let request = NetworkUtils.postBackEnd("C_TXL_CUS_INFO", body: ["busi_scene": ContactCommon.addUserSingle , "userId" : APP_USER_ID! , "cusGroupId" : c.group_id , "name" : c.name ?? "" , "cellphoneNumber" : c.phone_number?[0] ?? "" , "cw": c.nick_name ?? "" , "sex": "\(c.gender)" , "birthday": c.birthday , "company" : c.company ]  ){
+            json in
+            let dt = json["body"]["id"].stringValue
+            c.id = dt
+            self.contextDb.insertCustomer(ctms: c)
+        }
+        request.response(completionHandler: { _ in
+            hud.hide(animated: true)
+            if view.tableDelegate != nil {
+                view.tableDelegate?.reloadTableViewData()
+            }
+        })
+        
         view.pressCancel()
         view.changeButtonStatus()
         
-        if view.tableDelegate != nil {
-            view.tableDelegate?.reloadTableViewData()
-        }
     }
     
     override func viewDidLoad() {
@@ -167,7 +181,6 @@ extension AddCustomerViewController  : UICollectionViewDelegate, UICollectionVie
     func addNewGroup() {
         let alertController = UIAlertController(title: "添加分组", message: "请输入分组名（长度限制10个字）！",preferredStyle: .alert)
         
-        
         alertController.addTextField {
             (textField: UITextField!) -> Void in
         }
@@ -177,12 +190,6 @@ extension AddCustomerViewController  : UICollectionViewDelegate, UICollectionVie
             action in
             //也可以用下标的形式获取textField let login = alertController.textFields![0]
             let groupName = alertController.textFields!.first!
-            var maxId = 0
-            for ga in self.groupArr {
-                if Int(ga.id) > maxId {
-                    maxId = Int(ga.id)
-                }
-            }
             let msg = ContactCommon.validateGroupName(newName: groupName.text!, group: self.groupArr)
             if msg.characters.count > 0 {
                 let uc = UIAlertController(title: "警告", message: msg, preferredStyle: UIAlertControllerStyle.alert)
@@ -190,10 +197,22 @@ extension AddCustomerViewController  : UICollectionViewDelegate, UICollectionVie
                 self.present( uc , animated: true, completion: nil)
                 return
             }
-            self.contextDb.storeGroup(id: maxId + 1, group_name: groupName.text!)
-            self.groupArr = MemGroup.toMemGroup(dbGroup: self.contextDb.getGroupInDb(true))
-            self.groupArr.append( self.addIconTag )
-            self.collectionView.reloadData()
+            
+            let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
+            hud.label.text = "正在加载中..."
+            // 同步到服务器和本地数据库
+            let request = NetworkUtils.postBackEnd("C_TXL_CUS_GROUP", body: ["userId" : APP_USER_ID! , "name" : groupName.text! ] ){
+                json in
+                let dt = json["body"]["id"].stringValue
+                self.contextDb.storeGroup(id: dt , group_name: groupName.text!, userId: APP_USER_ID!)
+                self.groupArr = MemGroup.toMemGroup(dbGroup: self.contextDb.getGroupInDb(userId: APP_USER_ID!, true))
+                self.groupArr.append( self.addIconTag )
+            }
+            request.response(completionHandler: { _ in
+                hud.hide(animated: true)
+                self.collectionView.reloadData()
+            })
+            
         })
         alertController.addAction(cancelAction)
         alertController.addAction(okAction)

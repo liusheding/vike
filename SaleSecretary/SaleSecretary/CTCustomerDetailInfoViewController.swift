@@ -71,6 +71,13 @@ class CTCustomerDetailInfoViewController: UIViewController {
             self.present(messageVC!, animated: true, completion: nil)
         }
     }
+    
+    @IBAction func clickAddTrail(_ sender: Any) {
+        
+        let storyboardLocal = UIStoryboard(name: "ContactStoryboard" , bundle: nil)
+        let detail = storyboardLocal.instantiateViewController(withIdentifier: "addingMessageView") as! CTAddMessageController
+        self.navigationController?.pushViewController(detail, animated: true)
+    }
 
     func showSelectedView(_ idx : Int) {
         for (i, e) in segmentView.enumerated() {

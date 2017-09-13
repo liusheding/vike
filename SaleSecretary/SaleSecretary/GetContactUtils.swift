@@ -20,6 +20,8 @@ struct GetContactUtils {
                  CNContactDatesKey, CNContactInstantMessageAddressesKey ,
                  CNContactNicknameKey , CNContactOrganizationNameKey , CNContactBirthdayKey , CNContactIdentifierKey ]
     
+    static let keySimple = [CNContactFamilyNameKey , CNContactGivenNameKey , CNContactPhoneNumbersKey ]
+    
     static func loadContactData() -> [Customer] {
         let status = CNContactStore.authorizationStatus(for: .contacts)
         guard status == .authorized else {
@@ -60,7 +62,6 @@ struct GetContactUtils {
         return dt
     }
     
-    
     static func secondWay2GetContactData() -> [Customer] {
         var arrContacts = [CNContact]()
         var allContainers: [CNContainer] = []
@@ -83,6 +84,62 @@ struct GetContactUtils {
         }
         
         return toCustomer(contact: arrContacts)
+    }
+    
+    static func simpleWay2GetContactData(_ completion: (_ success: Bool, _ contacts: [Customer] ) -> Void) {
+        var arrContacts = [CNContact]()
+        var allContainers: [CNContainer] = []
+        var flag = true
+        do {
+            allContainers = try contactStore.containers(matching: nil)
+        } catch {
+            flag = false
+            print("Error fetching containers")
+        }
+        // Iterate all containers and append their contacts to our results array
+        for container in allContainers {
+            let fetchPredicate = CNContact.predicateForContactsInContainer(withIdentifier: container.identifier)
+            
+            do {
+                let containerResults = try contactStore.unifiedContacts(matching: fetchPredicate, keysToFetch: self.keySimple as [CNKeyDescriptor])
+                arrContacts.append(contentsOf: containerResults)
+                
+            } catch {
+                flag = false
+                print("Error fetching results for container")
+            }
+        }
+        completion( flag , simpleCustomer(contact: arrContacts))
+    }
+    
+    static func simpleWay2GetContactData2( _ completion: (_ success: Bool, _ contacts: [Customer] ) -> Void ){
+        var result : [Customer] = []
+        do {
+            let contactsFetchRequest = CNContactFetchRequest(keysToFetch: [CNContactGivenNameKey as CNKeyDescriptor, CNContactFamilyNameKey as CNKeyDescriptor, CNContactImageDataKey as CNKeyDescriptor, CNContactImageDataAvailableKey as CNKeyDescriptor, CNContactPhoneNumbersKey as CNKeyDescriptor, CNContactEmailAddressesKey as CNKeyDescriptor])
+            try contactStore.enumerateContacts(with: contactsFetchRequest, usingBlock: { (cnContact, error) in
+                if let contact = Customer(cnContact: cnContact) { result.append(contact) }
+            })
+            completion(true, result)
+        } catch {
+            completion(false, result)
+        }
+    }
+    
+    static func simpleCustomer(contact : [CNContact]) -> [Customer] {
+        var result = [Customer]()
+        if contact.count > 0 {
+            for c in contact {
+                var pNumber : [String] = []
+                for phone in c.phoneNumbers {
+                    if phone.label != nil {
+                        let value = phone.value.stringValue
+                        pNumber.append(value)
+                    }
+                }
+                result.append(Customer.init(name: c.familyName+c.givenName , phoneNum: pNumber ) )
+            }
+        }
+        return  result
     }
     
     static func toCustomer(contact : [CNContact]) -> [Customer] {

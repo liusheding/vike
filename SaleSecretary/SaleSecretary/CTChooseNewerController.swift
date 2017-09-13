@@ -11,13 +11,13 @@ import UIKit
 //import AddressBook  ios 9 below
 //import AddressBookUI
 import Contacts
+import MBProgressHUD
 
 class CTChooseNewerController: UIViewController {
     
     let store = CNContactStore()
     var tableViewSel : Int = -1
     var contactDt : [Customer] = [] // phone contacts data
-    var localDbContact : [Customers] = []
     var groupsInDb : [Group] = []
     var newCustomer : [Customer ] = []
     var alreadyAdded : [Customer] = []
@@ -48,18 +48,67 @@ class CTChooseNewerController: UIViewController {
         findNewCustomer()
     }
     
-    // throw query in db
+    func requestAccessToContacts(_ completion: @escaping (_ success: Bool) -> Void) {
+        let authorizationStatus = CNContactStore.authorizationStatus(for: CNEntityType.contacts)
+        
+        switch authorizationStatus {
+        case .authorized: completion(true) // authorized previously
+        case .denied, .notDetermined: // needs to ask for authorization
+            CNContactStore().requestAccess(for: CNEntityType.contacts, completionHandler: { (accessGranted, error) -> Void in
+                let alertController = UIAlertController(title: "『销小秘』想访问您的通讯录", message: "销小秘需要访问通讯录，才能为您提供更好的服务体验！", preferredStyle: .alert)
+                let cancelAction = UIAlertAction(title: "拒绝", style: .cancel, handler: {
+                    action in
+                    self.navigationController?.popViewController(animated: true)
+                })
+                let okAction = UIAlertAction(title: "设置", style: .default, handler: {
+                    action in
+                    let settingUrl = NSURL(string: UIApplicationOpenSettingsURLString)! as URL
+                    if UIApplication.shared.canOpenURL(settingUrl )
+                    {
+                        UIApplication.shared.open(settingUrl, options: [:], completionHandler: nil)
+                    }
+                })
+                alertController.addAction(cancelAction)
+                alertController.addAction(okAction)
+                self.present(alertController, animated: true, completion: nil)
+            })
+        default: // not authorized.
+            completion(false)
+        }
+    }
+    
+    //  query in db
     func findNewCustomer(){
-        print("++++++++++++++++\(Date.init())")
-        for cd in self.contactDt {
-            if !self.contextDb.queryByIdentifer(id: cd.id){
-               self.newCustomer.append(cd)
-            }else{
-                self.alreadyAdded.append(cd)
+        if self.contactDt.count == 0 {
+            let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
+            hud.label.text = "读取通讯录中..."
+            self.requestAccessToContacts { [unowned self](success) in
+                if success {
+                    GetContactUtils.simpleWay2GetContactData2({ (success, tmpContact) in
+                        if success {
+                            self.contactDt = tmpContact
+                            for cd in self.contactDt {
+//                                if !self.contextDb.queryByIdentifer(id: (cd.phone_number?.joined(separator: ContactCommon.separatorDefault))! ){
+                                var phone : String = ""
+                                if (cd.phone_number?.count)! > 0 {
+                                    phone = (cd.phone_number?[0])!
+                                }
+                                let result = self.contextDb.queryByIdentifer(id: phone)
+                                
+                                if result.count == 0 {
+                                    self.newCustomer.append(cd)
+                                }else{
+                                    self.alreadyAdded.append(cd)
+                                }
+                            }
+                            hud.hide(animated: true)
+                        }else {
+                            print("something wrong!!")
+                        }
+                    })
+                }
             }
         }
-        print("end --- ++++++++++++++++\(Date.init())")
-        NSLog("new customer's page , find \(self.newCustomer.count) new person")
     }
     
     override func didReceiveMemoryWarning() {
@@ -104,7 +153,7 @@ extension CTChooseNewerController : UITableViewDelegate , UITableViewDataSource 
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        NSLog(" log \(self.contactDt.count)")
+        
         return contactDt.count
     }
     
@@ -129,6 +178,7 @@ extension CTChooseNewerController : UITableViewDelegate , UITableViewDataSource 
         cell.picName.backgroundColor = ContactCommon.sampleColor[ indexPath.row % ContactCommon.count ]
         cell.name.text = userName
         if flag {
+            cell.acception.tag = indexPath.row
             cell.acception.setTitle( "添加" , for: .normal )
             cell.acception.setTitle("已添加", for: .disabled)
             cell.acception.setTitleColor(UIColor.white , for: .normal )

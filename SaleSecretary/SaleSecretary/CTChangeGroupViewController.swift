@@ -7,12 +7,14 @@
 //
 
 import UIKit
+import MBProgressHUD
+
 
 private let reuseIdentifier = "ChangeCell"
 class CTChangeGroupViewController: UIViewController {
 
     var groupArr : [MemGroup] = []
-    let addIconTag : MemGroup = MemGroup.init(id: 0, gn: "")
+    let addIconTag : MemGroup = MemGroup.init(id: "0", gn: "")
     let defaultFontSize : CGFloat  = 16
     let defaultBottomTopHeight : CGFloat = 25
     
@@ -35,7 +37,7 @@ class CTChangeGroupViewController: UIViewController {
     func initSetting() {
         
         // init data
-        self.groupArr = MemGroup.toMemGroup(dbGroup: self.contextDb.getGroupInDb())
+        self.groupArr = MemGroup.toMemGroup(dbGroup: self.contextDb.getGroupInDb(userId: APP_USER_ID!))
         self.groupArr.append( self.addIconTag ) // the last for "Add button"
     }
     
@@ -104,7 +106,7 @@ extension CTChangeGroupViewController  : UICollectionViewDelegate, UICollectionV
                 cell.addingButton.setTitle("", for: .normal)
                 cell.addingButton.setImage(UIImage(named: "icon_tj") , for: .normal )
                 cell.addingButton.tintColor = ContactCommon.THEME_COLOR
-                cell.addingButton.addTarget(self , action: #selector(self.addNewGroup) , for: .touchDown  )
+                cell.addingButton.addTarget(self , action: #selector(self.addNewGroup) , for: .touchUpInside  )
                 cell.addingButton.frame = CGRect.init(x: 5, y: 5, width: cell.addingButton.frame.width + self.defaultLeftRight , height: cell.addingButton.frame.height)
                 
             }else {
@@ -177,12 +179,7 @@ extension CTChangeGroupViewController  : UICollectionViewDelegate, UICollectionV
                 action in
                 //也可以用下标的形式获取textField let login = alertController.textFields![0]
                 let groupName = alertController.textFields!.first!
-                var maxId = 0
-                for ga in self.groupArr {
-                    if Int(ga.id) > maxId {
-                        maxId = Int(ga.id)
-                    }
-                }
+                
                 let msg = ContactCommon.validateGroupName(newName: groupName.text!, group: self.groupArr)
                 if msg.characters.count > 0 {
                     let uc = UIAlertController(title: "警告", message: msg, preferredStyle: UIAlertControllerStyle.alert)
@@ -190,10 +187,22 @@ extension CTChangeGroupViewController  : UICollectionViewDelegate, UICollectionV
                     self.present( uc , animated: true, completion: nil)
                     return
                 }
-                self.contextDb.storeGroup(id: maxId + 1, group_name: groupName.text!)
-                self.groupArr = MemGroup.toMemGroup(dbGroup: self.contextDb.getGroupInDb(true))
-                self.groupArr.append( self.addIconTag )
-                self.collectionView.reloadData()
+                
+                let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
+                hud.label.text = "加载中..."
+                // 同步到服务器和本地数据库
+                let request = NetworkUtils.postBackEnd("C_TXL_CUS_GROUP", body: ["userId" : APP_USER_ID! , "name" : groupName.text! ] ){
+                    json in
+                    print("++++===\(json)")
+                    let dt = json["body"]["id"].stringValue
+                    self.contextDb.storeGroup(id: dt , group_name: groupName.text!, userId: APP_USER_ID!)
+                    self.groupArr = MemGroup.toMemGroup(dbGroup: self.contextDb.getGroupInDb(userId: APP_USER_ID!, true))
+                    self.groupArr.append( self.addIconTag )
+                }
+                request.response(completionHandler: { _ in
+                    hud.hide(animated: true)
+                    self.collectionView.reloadData()
+                })
             })
             alertController.addAction(cancelAction)
             alertController.addAction(okAction)

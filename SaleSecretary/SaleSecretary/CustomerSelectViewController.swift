@@ -36,7 +36,7 @@ class CustomerSelectViewController : UIViewController {
     
     let customerDB = CustomerDBOp.defaultInstance()
     
-    var contacts: [CustomerGroup] = CustomerDBOp.defaultInstance().getContacts2Group()
+    var contacts: [CustomerGroup] = CustomerDBOp.defaultInstance().getContacts2Group(userId: APP_USER_ID!)
     
     let cellId : String  = "CustomerSelectViewCellId"
     

@@ -181,6 +181,14 @@
 		E7D2AC361F4A7A48000123A5 /* AddingCustomViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7D2AC311F4A7A48000123A5 /* AddingCustomViewCell.xib */; };
 		E7D2AC371F4A7A48000123A5 /* CustomAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D2AC321F4A7A48000123A5 /* CustomAlertView.swift */; };
 		E7DB1FE21F4EB9A6002DD96D /* CTManagerGroupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DB1FE11F4EB9A6002DD96D /* CTManagerGroupController.swift */; };
+		E7FC61DC1F68DE7F00B58483 /* CTAddMessageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FC61DA1F68DE7F00B58483 /* CTAddMessageController.swift */; };
+		E7FC61DD1F68DE7F00B58483 /* CTAddUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FC61DB1F68DE7F00B58483 /* CTAddUserViewController.swift */; };
+		E7FC61E41F68DEA200B58483 /* CTAddUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FC61DE1F68DEA200B58483 /* CTAddUserCell.swift */; };
+		E7FC61E51F68DEA200B58483 /* CTAddUserCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7FC61DF1F68DEA200B58483 /* CTAddUserCell.xib */; };
+		E7FC61E61F68DEA200B58483 /* MustAddCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FC61E01F68DEA200B58483 /* MustAddCell.swift */; };
+		E7FC61E71F68DEA200B58483 /* MustAddCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7FC61E11F68DEA200B58483 /* MustAddCell.xib */; };
+		E7FC61E81F68DEA200B58483 /* TrailMsgCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FC61E21F68DEA200B58483 /* TrailMsgCell.swift */; };
+		E7FC61E91F68DEA200B58483 /* TrailMsgCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7FC61E31F68DEA200B58483 /* TrailMsgCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -404,6 +412,14 @@
 		E7D2AC311F4A7A48000123A5 /* AddingCustomViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddingCustomViewCell.xib; sourceTree = "<group>"; };
 		E7D2AC321F4A7A48000123A5 /* CustomAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomAlertView.swift; sourceTree = "<group>"; };
 		E7DB1FE11F4EB9A6002DD96D /* CTManagerGroupController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CTManagerGroupController.swift; sourceTree = "<group>"; };
+		E7FC61DA1F68DE7F00B58483 /* CTAddMessageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CTAddMessageController.swift; sourceTree = "<group>"; };
+		E7FC61DB1F68DE7F00B58483 /* CTAddUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CTAddUserViewController.swift; sourceTree = "<group>"; };
+		E7FC61DE1F68DEA200B58483 /* CTAddUserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CTAddUserCell.swift; sourceTree = "<group>"; };
+		E7FC61DF1F68DEA200B58483 /* CTAddUserCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CTAddUserCell.xib; sourceTree = "<group>"; };
+		E7FC61E01F68DEA200B58483 /* MustAddCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MustAddCell.swift; sourceTree = "<group>"; };
+		E7FC61E11F68DEA200B58483 /* MustAddCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MustAddCell.xib; sourceTree = "<group>"; };
+		E7FC61E21F68DEA200B58483 /* TrailMsgCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrailMsgCell.swift; sourceTree = "<group>"; };
+		E7FC61E31F68DEA200B58483 /* TrailMsgCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TrailMsgCell.xib; sourceTree = "<group>"; };
 		E9B097EE912BE08E90307C3D5DBEAA47 /* SaleSecretaryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaleSecretaryTests.swift; sourceTree = "<group>"; };
 		F62447EA9409681F76292A514C7312A9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FB20A214877D05C6E7E1ECF3F9E4A391 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -580,6 +596,8 @@
 		6615BF551F3412EF0052879B /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				E7FC61DA1F68DE7F00B58483 /* CTAddMessageController.swift */,
+				E7FC61DB1F68DE7F00B58483 /* CTAddUserViewController.swift */,
 				E75CA6EB1F5D055900C92F14 /* CTChooseGroupController.swift */,
 				E75CA6E91F5D054C00C92F14 /* BatchProcessViewController.swift */,
 				E7412BC01F5659C500AF9F9E /* CTChangeGroupViewController.swift */,
@@ -621,6 +639,12 @@
 		662D6A461F317781001C1FB1 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				E7FC61DE1F68DEA200B58483 /* CTAddUserCell.swift */,
+				E7FC61DF1F68DEA200B58483 /* CTAddUserCell.xib */,
+				E7FC61E01F68DEA200B58483 /* MustAddCell.swift */,
+				E7FC61E11F68DEA200B58483 /* MustAddCell.xib */,
+				E7FC61E21F68DEA200B58483 /* TrailMsgCell.swift */,
+				E7FC61E31F68DEA200B58483 /* TrailMsgCell.xib */,
 				E7D2AC301F4A7A48000123A5 /* AddingCustomViewCell.swift */,
 				E7D2AC311F4A7A48000123A5 /* AddingCustomViewCell.xib */,
 				E7D2AC321F4A7A48000123A5 /* CustomAlertView.swift */,
@@ -1081,6 +1105,7 @@
 			files = (
 				66451F0E1F330DDD009B65DD /* AppellationCellView.xib in Resources */,
 				E7D2ABD81F457AC7000123A5 /* TableViewCell.xib in Resources */,
+				E7FC61E51F68DEA200B58483 /* CTAddUserCell.xib in Resources */,
 				664B999A1F3DBE5700968AA5 /* InfoPlist.strings in Resources */,
 				66B602F21F2F074A002A55E6 /* SMSListViewCell.xib in Resources */,
 				E7D2AC361F4A7A48000123A5 /* AddingCustomViewCell.xib in Resources */,
@@ -1094,12 +1119,14 @@
 				66C784D91F46DEAB0067B476 /* NLPLoadingView.xib in Resources */,
 				AF201728C3391AB87079CD9BA8E73001 /* Main.storyboard in Resources */,
 				6EE116DB1F555E98009601C7 /* AddUserCell.xib in Resources */,
+				E7FC61E91F68DEA200B58483 /* TrailMsgCell.xib in Resources */,
 				66451F121F331E81009B65DD /* InscribeViewCell.xib in Resources */,
 				6EF5B7031F4452E9001B0A77 /* Login.storyboard in Resources */,
 				66C784D11F457F290067B476 /* aip.license in Resources */,
 				6EBAA5511F3C2E520099DA89 /* MineInfoCell.xib in Resources */,
 				6EBAA56B1F3C5B330099DA89 /* WalletDetailCell.xib in Resources */,
 				6E20ECA01F341B8D00A0F29E /* MessageChat.storyboard in Resources */,
+				E7FC61E71F68DEA200B58483 /* MustAddCell.xib in Resources */,
 				D9D045E89EEF6E531B731C29AF71C6D8 /* MessageListCell.xib in Resources */,
 				6EBAA5651F3C4AA40099DA89 /* MineView.storyboard in Resources */,
 				29D06932D6D0A7D01DEBF31C0546DAAE /* SMSView.storyboard in Resources */,
@@ -1222,6 +1249,7 @@
 				66F265411F30243100E9ECAB /* SMSMessage.swift in Sources */,
 				63FFE17B8518E311F485E78D5AC99EDF /* MessageListCell.swift in Sources */,
 				6EBAA56F1F3D5C190099DA89 /* BusinessRecordController.swift in Sources */,
+				E7FC61E41F68DEA200B58483 /* CTAddUserCell.swift in Sources */,
 				66C784D31F457F440067B476 /* ScanResultViewController.swift in Sources */,
 				6E20ECB21F39B3DE00A0F29E /* MessageInfo.swift in Sources */,
 				E7412BC11F5659C500AF9F9E /* CTChangeGroupViewController.swift in Sources */,
@@ -1260,6 +1288,7 @@
 				66451F0C1F32C4C7009B65DD /* UIColor+Hex.swift in Sources */,
 				6E52D9851F458B560003305F /* ShareView.swift in Sources */,
 				E7B2A2721F39FE76001D8C61 /* CTrailViewController.swift in Sources */,
+				E7FC61DC1F68DE7F00B58483 /* CTAddMessageController.swift in Sources */,
 				6615BF6E1F3413EA0052879B /* TableViewCell.swift in Sources */,
 				6615BF6C1F34134C0052879B /* CustomerModel.swift in Sources */,
 				6EF2A1EE1F5017D60059DB59 /* AdviseViewController.swift in Sources */,
@@ -1279,6 +1308,7 @@
 				6E8739841F666772004BF380 /* TakeoutMoneyViewController.swift in Sources */,
 				E1E92A825F157EE0E15E88EC43FED169 /* SaleSecretary.xcdatamodeld in Sources */,
 				66EFA9CB1F4BD9DD0027011F /* CollapsibleImageHeaderView.swift in Sources */,
+				E7FC61E81F68DEA200B58483 /* TrailMsgCell.swift in Sources */,
 				E7DB1FE21F4EB9A6002DD96D /* CTManagerGroupController.swift in Sources */,
 				66451F161F331F8E009B65DD /* InscribeViewCell.swift in Sources */,
 				6EF5B72C1F4582D0001B0A77 /* HelpViewController.swift in Sources */,
@@ -1295,6 +1325,7 @@
 				E7D2AC351F4A7A48000123A5 /* AddingCustomViewCell.swift in Sources */,
 				6647E8C31F39C6160053AFF3 /* CommonSMSTableCell.swift in Sources */,
 				5F81108AF566E3AA21DC1DE8FE984ECE /* ViewController.swift in Sources */,
+				E7FC61E61F68DEA200B58483 /* MustAddCell.swift in Sources */,
 				66AB59101F3C6607005FB30F /* Month.swift in Sources */,
 				66F056C81F5803500069027F /* MessageSchedule.swift in Sources */,
 				66AB59171F3D54F2005FB30F /* CollapsibleTableViewHeader.swift in Sources */,
@@ -1310,6 +1341,7 @@
 				6EF2A1EA1F4EDD4F0059DB59 /* ChangePwdController.swift in Sources */,
 				6EF19C5D1F3BF9E000646BCF /* MineUIViewController.swift in Sources */,
 				6E20EC971F341B5500A0F29E /* UserInfo.swift in Sources */,
+				E7FC61DD1F68DE7F00B58483 /* CTAddUserViewController.swift in Sources */,
 				6E2110A01F6157430000F881 /* UserDetailCell.swift in Sources */,
 				E75CA6EC1F5D055900C92F14 /* CTChooseGroupController.swift in Sources */,
 				6EBAA5611F3C43B50099DA89 /* WalletViewController.swift in Sources */,
