@@ -57,7 +57,9 @@ class MessageItem {
         label.text = (body.length != 0 ? body as String : "")
         label.font = font
         label.backgroundColor = UIColor.clear
-        
+        if mtype == MINE_TYPE{
+            label.textColor = UIColor.white
+        }    
         let insets:UIEdgeInsets =  (mtype == MINE_TYPE ?
             MessageItem.getTextInsetsMine() : MessageItem.getTextInsetsSomeone())
         

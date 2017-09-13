@@ -44,7 +44,7 @@ class TableHeaderViewCell:UITableViewCell
         
         self.label.textColor = UIColor.darkGray
         
-        self.label.backgroundColor = UIColor.clear
+        self.backgroundColor = UIColor.groupTableViewBackground
         
         self.addSubview(self.label)
     }

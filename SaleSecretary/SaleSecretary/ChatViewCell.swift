@@ -19,6 +19,7 @@ class ChatViewCell:UITableViewCell {
         self.msgItem = data
         super.init(style: UITableViewCellStyle.default, reuseIdentifier:cellId)
         rebuildUserInterface()
+        self.backgroundColor = UIColor.groupTableViewBackground
     }
     
     func rebuildUserInterface() {

@@ -30,7 +30,7 @@ class TableView:UITableView,UITableViewDelegate, UITableViewDataSource
         
         super.init(frame:frame,  style:style)
         
-        self.backgroundColor = UIColor.white
+        self.backgroundColor = UIColor.groupTableViewBackground
         self.separatorStyle = UITableViewCellSeparatorStyle.none
         self.delegate = self
         self.dataSource = self
