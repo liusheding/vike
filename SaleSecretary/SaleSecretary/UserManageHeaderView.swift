@@ -33,6 +33,7 @@ class UserManageHeaderView: UITableViewHeaderFooterView {
         self.groupTitle.setImage(UIImage.init(named: "buddy_header_arrow"), for: UIControlState.normal)
         
         self.groupTitle.setTitleColor(UIColor.black, for: UIControlState.normal)
+        self.groupTitle.titleLabel?.font = UIFont.systemFont(ofSize: 17)
         
         self.groupTitle.contentHorizontalAlignment = UIControlContentHorizontalAlignment.left
         self.groupTitle.contentVerticalAlignment = UIControlContentVerticalAlignment.fill
