@@ -195,7 +195,6 @@ extension ToolsUIViewController: AipOcrDelegate {
     
     
     func ocr(onGeneralSuccessful resut: Any!) {
-        print("\(resut)")
         let json = JSON(resut)
         var strWords: [String] = []
         let words = json["words_result"].arrayValue

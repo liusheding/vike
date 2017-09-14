@@ -65,6 +65,39 @@ struct Utils {
         }
     }
     
+    static func matchsMobile(str: String) -> [String]? {
+        do {
+            let mobile = "^1((3[0-9]|4[57]|5[0-35-9]|7[0678]|8[0-9])\\d{8}$)"
+            let regex =  try NSRegularExpression(pattern: mobile, options: .caseInsensitive)
+            return Utils.matchesRegx(str: str, regx: regex)
+        } catch {
+            return nil
+        }
+
+    }
+    
+    static func matchesRegx(str: String, regx: NSRegularExpression) -> [String]? {
+        let matchs = regx.matches(in: str, options: .init(rawValue: 0), range: NSMakeRange(0, str.characters.count))
+        let nstr = NSString(string: str)
+        if matchs == nil || matchs.count == 0 {return nil}
+        var result: [String] = []
+        for m in matchs {
+            result.append(nstr.substring(with: m.range))
+        }
+        return result
+    }
+    
+    static func matchesJob(str: String) -> [String]? {
+        do {
+            let pat = "董事|经理|秘书|工人|CEO|CFO|CTO|总监|会计|主管|助理|出纳|文员|销售人员|工程师|科长|书记|主任|处长|局长|厂长|市长|县长|省长"
+            let regex = try NSRegularExpression(pattern: pat, options: .caseInsensitive)
+            return Utils.matchesRegx(str: str, regx: regex)
+        } catch {
+            return nil
+        }
+        
+    }
+    
     static func inputOnlyNumbers(str: String) -> Bool {
         let reg = "[0-9]*"
         let predicate = NSPredicate(format: "SELF MATCHES %@", reg)

@@ -24,9 +24,14 @@ class ScanResultViewController: UIViewController, ScanORCResultDelegate {
     
     fileprivate let cid = "ScanResultCellId"
     
-    fileprivate let labels = ["姓名", "称谓", "电话", "公司", "邮件" ,"地点"]
+    fileprivate let labels = ["姓名", "工作", "电话", "公司", "邮件" ,"地点"]
     
-    var nlpResults:[String] = ["", "", "", "", "", ""]
+    var nlpResults: [Set<String>] = [Set<String>(),
+                                 Set<String>(),
+                                 Set<String>(),
+                                 Set<String>(),
+                                 Set<String>(),
+                                 Set<String>()]
     
     var indicator: UIActivityIndicatorView?
     
@@ -40,8 +45,9 @@ class ScanResultViewController: UIViewController, ScanORCResultDelegate {
         tableView.sectionHeaderHeight = 10.0
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.backgroundColor = APP_BACKGROUND_COLOR
         // let v = UIActivityIndicatorView.init(frame: CGRect(x: 50, y: 200, width: 200, height: 200))
-        self.makeIndicator()
+        // self.makeIndicator()
         if words != nil {
             // self.navigationController?.view.makeToast("正在理解识别文字..", duration: 5.0, position: .center, title: nil, image: UIImage(named:""), completion: nil)
             // self.navigationController?.view.makeToast("正在理解识别文字", duration: 5.0, position: .center)
@@ -82,9 +88,8 @@ class ScanResultViewController: UIViewController, ScanORCResultDelegate {
             s += ","
             str += s
         }
-        print(str)
+        self.words = str.components(separatedBy: ",")
         NetworkUtils.requestNLPLexer(str, successHandler: { (val) in
-            print(val)
             let items = val["items"].arrayValue
             if items.count <= 0 {}
             else {
@@ -100,30 +105,55 @@ class ScanResultViewController: UIViewController, ScanORCResultDelegate {
     func parseNlpResults(items: [JSON]) {
         for item in items {
             let ne = item["ne"].string!  // 命名实体类型
-            let pos = item["pos"].string! // 词性
+            // let pos = item["pos"].string! // 词性
             let str:String = item["item"].string! //词汇的字符串
             if str == "" {continue}
             let nep = NLPWordNE(rawValue: ne)
             if let np = nep {
                 switch np {
                 case .PER: //人名
-                    self.nlpResults[0] = str
+                    self.nlpResults[0].insert(str)
                 case .ORG: //组织
-                    self.nlpResults[3] = str
+                    if let org = self.getFullWords(str: str) {
+                        self.nlpResults[3].insert(org)
+                    }
                 case .LOC: //地点
-                    self.nlpResults[5] = str
+                    if let loc = self.getFullWords(str: str) {
+                        self.nlpResults[5].insert(loc)
+                    }
                 default: break
                 }
                 continue
             }
-            if pos == "m" && str.lengthOfBytes(using: .utf8) >= 8 {
-                self.nlpResults[2] = str
+            //  手机
+            if let matchs = Utils.matchsMobile(str: str) {
+                for m in matchs {
+                    self.nlpResults[2].insert(m)
+                }
                 continue
             }
+            // 邮箱
             if str.contains("@") {
-                self.nlpResults[4] = str
+                if let w = getFullWords(str: str) {
+                    self.nlpResults[4].insert(str)
+                }
+                continue
+            }
+            // 工作
+            if let job = Utils.matchesJob(str: str) {
+                self.nlpResults[1].insert(str)
+                continue
             }
         }
+    }
+    
+    func getFullWords(str: String!) -> String? {
+        for word in self.words! {
+            if word.contains(str) {
+                return word
+            }
+        }
+        return nil
     }
     
 }
@@ -147,7 +177,8 @@ extension ScanResultViewController: UITableViewDataSource, UITableViewDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: cid) as! ScanResultCell
         let row = indexPath.row
         cell.label.text = labels[row]
-        cell.textField.text = self.nlpResults[row]
+        let set: Set<String> = self.nlpResults[row]
+        cell.textField.text = set.count == 0 ? "" : set.joined(separator: ",")
         return cell
     }
 }

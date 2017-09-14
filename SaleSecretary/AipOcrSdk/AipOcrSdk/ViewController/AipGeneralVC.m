@@ -45,6 +45,8 @@
 @property (assign, nonatomic) UIDeviceOrientation imageDeviceOrientation;
 @property (assign, nonatomic) UIImageOrientation imageOrientation;
 @property (assign, nonatomic) CGSize size;
+@property (strong, nonatomic) CAShapeLayer *shapeLayer;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *indicator;
 
 @end
 
@@ -69,7 +71,8 @@
     //delegate 用做传递手势事件
     self.maskImageView.delegate = self.cutImageView;
     self.cutImageView.imgDelegate = self;
-    
+    self.shapeLayer = [CAShapeLayer layer];
+    [self.view.layer addSublayer:self.shapeLayer];
     self.imageDeviceOrientation = UIDeviceOrientationPortrait;
     
     self.cmmotionManager = [[CMMotionManager alloc]init];
@@ -99,9 +102,30 @@
             
         }];
     }
+    // 绘制矩形
     
+    [self drawPreCutRect];
     [self.cameraController startRunningCamera];
 }
+
+- (void)drawPreCutRect  {
+    CGRect rect = [self TransformTheRect];
+    UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:rect cornerRadius: 6];
+    [[UIColor redColor] set];
+    path.lineWidth = 2;
+    self.shapeLayer.fillColor = nil;
+    UIColor *defaultColor = [UIColor colorWithWhite: 1 alpha: 0.8];
+    // self.shapeLayer.borderColor = [UIColor redColor].CGColor;
+    self.shapeLayer.strokeColor = defaultColor.CGColor;
+    self.shapeLayer.path = path.CGPath;
+    // [self shapeLayerChangeLight];
+    // self.shapeLayer.path = path.CGPath;
+}
+
+- (void)shapeLayerChangeLight{
+    self.shapeLayer.fillColor = [UIColor colorWithWhite:0 alpha:0.0].CGColor;
+}
+
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -242,16 +266,19 @@
     UIImage *image = [UIImage sapicamera_rotateImageEx:cutImage.CGImage byDeviceOrientation:self.imageDeviceOrientation];
     
     UIImage *finalImage = [UIImage sapicamera_rotateImageEx:image.CGImage orientation:self.imageOrientation];
-    
+    // [UIActivityIndicatorView]
+    [self.indicator startAnimating];
     NSDictionary *options = @{@"language_type": @"CHN_ENG", @"detect_direction": @"true"};
     [[AipOcrService shardService] detectTextFromImage:finalImage withOptions:options successHandler:^(id result) {
         if ([self.delegate respondsToSelector:@selector(ocrOnGeneralSuccessful:)]) {
             [self.delegate ocrOnGeneralSuccessful:result];
         }
+        [self.indicator stopAnimating];
     } failHandler:^(NSError *err) {
         if ([self.delegate respondsToSelector:@selector(ocrOnFail:)]) {
             [self.delegate ocrOnFail:err];
         }
+        [self.indicator stopAnimating];
     }];
 
 

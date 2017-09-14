@@ -225,6 +225,11 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
+                            <activityIndicatorView hidden="YES" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="1Xt-6T-kZD">
+                                <rect key="frame" x="169" y="315" width="37" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="color" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </activityIndicatorView>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ekk-cC-N2A" customClass="AipImageView">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -344,6 +349,7 @@
                         <outlet property="checkViewBoom" destination="mv5-Zr-QRy" id="FYE-q9-2Tk"/>
                         <outlet property="closeButton" destination="9eE-H5-UtU" id="zeb-FW-bur"/>
                         <outlet property="cutImageView" destination="mOa-jl-1X9" id="Z8Y-hT-83I"/>
+                        <outlet property="indicator" destination="1Xt-6T-kZD" id="cfe-4b-EWO"/>
                         <outlet property="lightButton" destination="FYu-ia-exw" id="ueV-Cq-qKr"/>
                         <outlet property="maskImageView" destination="Ekk-cC-N2A" id="Ijg-DP-j3Q"/>
                         <outlet property="previewView" destination="K13-8J-9JA" id="cGI-44-LTg"/>
