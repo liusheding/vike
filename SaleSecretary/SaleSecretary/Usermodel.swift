@@ -122,7 +122,6 @@ class UserGroup:NSObject {
         
         var models = [UserGroup]()
         for dict in list {
-            print(dict)
             models.append(UserGroup(dict: dict as! [String : AnyObject]))
         }
         return models
