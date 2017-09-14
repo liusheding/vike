@@ -29,6 +29,8 @@ class BusinessRecordController: UIViewController {
     var RecordData = [Dictionary<String, Any>]()
     let daySeconds = Int(60*60*24)
     
+    var emptyView: EmptyContentView?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -60,6 +62,7 @@ class BusinessRecordController: UIViewController {
     
     
     func loading(_ dateStart:String, _ dateEnd:String){
+        emptyView?.dismiss()
         let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
         hud.label.text = "正在加载中..."
         
@@ -76,6 +79,14 @@ class BusinessRecordController: UIViewController {
                 json in
                 let jsondata = json["body"]["obj"]
                 self.getRecordData(jsondata: jsondata)
+                if self.RecordData.count == 0{
+                    let frame = self.tableView.frame
+                    self.emptyView = EmptyContentView.init(frame: frame)
+                    self.emptyView?.textLabel.frame = CGRect(x: frame.origin.x + 20, y: frame.origin.y - 80, width: frame.width - 40, height:  40)
+                    self.emptyView?.textLabel.text = "您\(self.times[self.selTimesIndex])还没有发送过短信哦～"
+                    self.emptyView?.textLabel.numberOfLines = 2
+                    self.emptyView?.showInView(self.view)
+                }
                 self.tableView.reloadData()
             }
             request.response(completionHandler: { _ in

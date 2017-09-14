@@ -16,6 +16,7 @@ class ChooseCardController: UIViewController {
     var rootView:TakeoutMoneyViewController!
     var cardData = [Dictionary<String, Any>]()
     let cellId = "cardCell"
+    var emptyView: EmptyContentView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +36,7 @@ class ChooseCardController: UIViewController {
     }
     
     func loading(){
+        emptyView?.dismiss()
         let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
         hud.label.text = "正在加载中..."
         
@@ -44,7 +46,16 @@ class ChooseCardController: UIViewController {
                 json in
                 let jsondata = json["body"]["obj"]
                 self.getcardData(jsondata)
-                self.tableView.reloadData()
+                if self.cardData.count == 0{
+                    let frame = self.tableView.frame
+                    self.emptyView = EmptyContentView.init(frame: frame)
+                    self.emptyView?.textLabel.frame = CGRect(x: frame.origin.x + 20, y: frame.origin.y + 80, width: frame.width - 40, height:  40)
+                    self.emptyView?.textLabel.text = "您还没有添加任何银行卡哦～"
+                    self.emptyView?.textLabel.numberOfLines = 2
+                    self.emptyView?.showInView(self.view)
+                }else{
+                    self.tableView.reloadData()
+                }
             }
             request.response(completionHandler: { _ in
                 hud.hide(animated: true)

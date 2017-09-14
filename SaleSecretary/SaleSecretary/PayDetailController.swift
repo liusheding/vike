@@ -13,6 +13,7 @@ import SwiftyJSON
 class PayDetailController: UITableViewController {
     let cellId = "PayDetailID"
     var RecordData = [Dictionary<String, Any>]()
+    var emptyView: EmptyContentView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +27,7 @@ class PayDetailController: UITableViewController {
     }
     
     func loading(){
+        emptyView?.dismiss()
         let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
         hud.label.text = "正在加载中..."
         
@@ -35,7 +37,15 @@ class PayDetailController: UITableViewController {
                 json in
                 let jsondata = json["body"]["obj"]
                 self.getRecordData(jsondata: jsondata)
-                self.tableView.reloadData()
+                
+                if self.RecordData.count == 0{
+                    self.emptyView = EmptyContentView.init(frame: self.tableView.frame)
+                    self.emptyView?.textLabel.text = "您还没有短信充值记录哦～"
+                    self.emptyView?.textLabel.numberOfLines = 2
+                    self.emptyView?.showInView(self.view)
+                }else{
+                    self.tableView.reloadData()
+                }
             }
             request.response(completionHandler: { _ in
                 hud.hide(animated: true)

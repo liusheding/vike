@@ -13,6 +13,7 @@ import SwiftyJSON
 class WalletDetailController: UITableViewController {
     let cellId = "WalletDetailID"
     var RecordData = [Dictionary<String, Any>]()
+    var emptyView: EmptyContentView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +26,7 @@ class WalletDetailController: UITableViewController {
     }
     
     func loading(){
+        emptyView?.dismiss()
         let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
         hud.label.text = "正在加载中..."
         
@@ -34,7 +36,15 @@ class WalletDetailController: UITableViewController {
                 json in
                 let jsondata = json["body"]["obj"]
                 self.getRecordData(jsondata: jsondata)
-                self.tableView.reloadData()
+                
+                if self.RecordData.count == 0{
+                    self.emptyView = EmptyContentView.init(frame: self.tableView.frame)
+                    self.emptyView?.textLabel.text = "您还没有收支记录哦～"
+                    self.emptyView?.textLabel.numberOfLines = 2
+                    self.emptyView?.showInView(self.view)
+                }else{
+                    self.tableView.reloadData()
+                }
             }
             request.response(completionHandler: { _ in
                 hud.hide(animated: true)
