@@ -11,7 +11,7 @@ import CoreData
 
 class CustomerDBOp : NSObject {
     
-    let customerVar = ["birthday","company","gender","group_id","id","is_solar","nick_name","phone_number","user_name" , "app_userId"]
+    let customerVar = ["birthday","company","gender","group_id","id","is_solar","nick_name","phone_number","user_name" , "app_userId","desc"]
     
     private static let instance = CustomerDBOp()
     
@@ -63,15 +63,15 @@ class CustomerDBOp : NSObject {
     }
     
     // batch insert Customer 
-    func insertCustomerArray(ctms : [Customer]) {
+    func insertCustomerArray(ctms : [Customer] , groupId : String) {
         if ctms.count > 0 {
             for c in ctms {
-                insertCustomer(ctms: c)
+                insertCustomer(ctms: c , groupId: groupId )
             }
         }
     }
     
-    func insertCustomer(ctms : Customer){
+    func insertCustomer(ctms : Customer , groupId : String){
         let context = getContext()
         // 定义一个entity，这个entity一定要在xcdatamodeld中做好定义
         let entity = NSEntityDescription.entity(forEntityName: "Customers", in: context)
@@ -80,7 +80,14 @@ class CustomerDBOp : NSObject {
         cmt.setValue( ctms.birthday , forKey: self.customerVar[0] )
         cmt.setValue( ctms.company , forKey: self.customerVar[1] )
         cmt.setValue( ctms.gender , forKey: self.customerVar[2] )
-        cmt.setValue( ctms.group_id , forKey: self.customerVar[3] )
+        
+        // 第一次 ， 从手机通讯录加载数据
+        if ctms.group_id == ContactCommon.groupDefaultX {
+            cmt.setValue( groupId , forKey: self.customerVar[3] )
+        }else {
+            cmt.setValue( ctms.group_id , forKey: self.customerVar[3] )
+        }
+        
         cmt.setValue( ctms.id , forKey: self.customerVar[4] )
         cmt.setValue( ctms.is_solar , forKey: self.customerVar[5] )
         cmt.setValue( ctms.nick_name , forKey: self.customerVar[6] )
@@ -88,6 +95,7 @@ class CustomerDBOp : NSObject {
         cmt.setValue( (ctms.phone_number?.count)! > 0 ? ctms.phone_number?[0] : "", forKey: self.customerVar[7])
         cmt.setValue( ctms.name , forKey: self.customerVar[8] )
         cmt.setValue( APP_USER_ID! , forKey: self.customerVar[9] )
+        cmt.setValue( ctms.desc , forKey: self.customerVar[10] )
         do {
             try context.save()
         }catch{
@@ -111,6 +119,7 @@ class CustomerDBOp : NSObject {
         cmt.setValue( ctms.phone_number , forKey: self.customerVar[7] )
         cmt.setValue( ctms.user_name , forKey: self.customerVar[8] )
         cmt.setValue( ctms.app_userId , forKey: self.customerVar[9])
+        cmt.setValue( ctms.desc , forKey: self.customerVar[10])
         do {
             try context.save()
         }catch{
@@ -119,12 +128,17 @@ class CustomerDBOp : NSObject {
     }
     
     // delete one by one
-    func deleteCustomer(cust : Customer){
+    func deleteCustomer(cust : Customer  , tag : String = ""){
         let context = getContext()
         let fetchRequest = NSFetchRequest<Customers>(entityName: "Customers")
         fetchRequest.fetchOffset = 0 //查询的偏移量
         
-        fetchRequest.predicate = NSPredicate(format: "id = %s and app_userId = %s ", argumentArray: [ cust.id , cust.app_userId])
+        if tag.characters.count > 0 {
+            fetchRequest.predicate = NSPredicate(format: " phone_number = %s and app_userId = %s ", argumentArray: [ ( cust.phone_number?.count)! > 0 ? (cust.phone_number?[0])! : "" , cust.app_userId])
+        }else {
+            fetchRequest.predicate = NSPredicate(format: "id = %s and app_userId = %s ", argumentArray: [ cust.id , cust.app_userId])
+        }
+        
         do {
             let searchResults = try context.fetch(fetchRequest)
             NSLog("numbers of delete \(searchResults.count)")
@@ -138,17 +152,28 @@ class CustomerDBOp : NSObject {
         }
     }
     
-    func batchDeleteCustomer(cust : [Customer]) {
+    func batchDeleteCustomer(cust : [Customer] , tag : String = "") {
         if cust.count > 0 {
             var ids : [String] = []
-            for c in cust {
-                ids.append(c.id)
+            if tag.characters.count > 0 {
+                for c in cust {
+                    ids.append((c.phone_number?.count)! > 0 ? (c.phone_number?[0])! : "" )
+                }
+            }else {
+                for c in cust {
+                    ids.append(c.id)
+                }
             }
             let context = getContext()
             let fetchRequest = NSFetchRequest<Customers>(entityName: "Customers")
             fetchRequest.fetchOffset = 0 //查询的偏移量
             
-            fetchRequest.predicate = NSPredicate(format: "app_userId = %s and id in %s ", argumentArray: [ cust[0].app_userId, ids ])
+            if tag.characters.count > 0 {
+                fetchRequest.predicate = NSPredicate(format: "app_userId = %s and phone_number in %s ", argumentArray: [ cust[0].app_userId, ids ])
+            }else {
+                fetchRequest.predicate = NSPredicate(format: "app_userId = %s and id in %s ", argumentArray: [ cust[0].app_userId, ids ])
+            }
+            
             do {
                 let searchResults = try context.fetch(fetchRequest)
                 
@@ -244,12 +269,12 @@ class CustomerDBOp : NSObject {
         }
     }
     
-    func changeCustomerGroup(group : [MemGroup])  {
+    func changeCustomerGroup(group : [MemGroup] , defaultGroup : [MemGroup])  {
         if group.count > 0 {
             var strArray : [String]  = []
             
             for g in group {
-                strArray.append(g.group_name)
+                strArray.append(g.id)
             }
             let context = getContext()
             let fetchRequest = NSFetchRequest<Customers>(entityName: "Customers")
@@ -257,12 +282,21 @@ class CustomerDBOp : NSObject {
             fetchRequest.fetchOffset = 0 //查询的偏移量
             
             fetchRequest.predicate = NSPredicate(format: "group_id in %@ and app_userId = %s ", argumentArray: [ strArray , APP_USER_ID! ])
+            
+            var defaultId = ""
+            for d in defaultGroup {
+                if d.group_name == ContactCommon.groupDefault as String {
+                    defaultId = d.id
+                    break
+                }
+            }
+            
             do {
                 let searchResults = try context.fetch(fetchRequest)
                 NSLog("numbers of delete \(searchResults.count)")
                 
                 for p in searchResults  {
-                    p.group_id = ContactCommon.groupDefault as String
+                    p.group_id = defaultId
                 }
                 try context.save()
             } catch  {
@@ -299,10 +333,8 @@ class CustomerDBOp : NSObject {
     func deleteGroup(g:MemGroup)  {
         let context = getContext()
         let fetchRequest = NSFetchRequest<Group>(entityName: "Group")
-//        fetchRequest.fetchLimit = 10 //限定查询结果的数量
-//        fetchRequest.fetchOffset = 0 //查询的偏移量
         
-        fetchRequest.predicate = NSPredicate(format: "group_name=%s and app_userId = %s", argumentArray: [g.group_name , APP_USER_ID!])
+        fetchRequest.predicate = NSPredicate(format: " id = %s and app_userId = %s", argumentArray: [g.id , APP_USER_ID!])
         do {
             let searchResults = try context.fetch(fetchRequest)
             NSLog("numbers of delete \(searchResults.count)")
@@ -320,12 +352,12 @@ class CustomerDBOp : NSObject {
         if gArray.count > 0 {
             var strArray : [String] = []
             for g in gArray {
-                strArray.append(g.group_name)
+                strArray.append(g.id)
             }
             let context = getContext()
             let fetchRequest = NSFetchRequest<Group>(entityName: "Group")
             
-            fetchRequest.predicate = NSPredicate(format: "group_name  in %@ and app_userId = %s ", argumentArray: [strArray , APP_USER_ID!])
+            fetchRequest.predicate = NSPredicate(format: "id  in %@ and app_userId = %s ", argumentArray: [strArray , APP_USER_ID!])
             do {
                 let searchResults = try context.fetch(fetchRequest)
                 NSLog("numbers of delete \(searchResults.count)")

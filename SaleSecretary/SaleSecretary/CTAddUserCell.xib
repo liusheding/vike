@@ -16,26 +16,30 @@
             <rect key="frame" x="0.0" y="0.0" width="402" height="44"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="402" height="44"/>
+                <rect key="frame" x="0.0" y="0.0" width="402" height="43.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lBz-uf-2YS">
-                        <rect key="frame" x="65" y="6" width="337" height="30"/>
-                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lBz-uf-2YS">
+                        <rect key="frame" x="66" y="10.5" width="326" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <textInputTraits key="textInputTraits"/>
                     </textField>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JRo-gY-k5Y">
-                        <rect key="frame" x="13" y="12" width="42" height="21"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <nil key="textColor"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JRo-gY-k5Y">
+                        <rect key="frame" x="13" y="12" width="43" height="24"/>
+                        <attributedString key="attributedText">
+                            <fragment content="Label">
+                                <attributes>
+                                    <font key="NSFont" size="17" name="PingFangSC-Regular"/>
+                                </attributes>
+                            </fragment>
+                        </attributedString>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
                     <constraint firstItem="lBz-uf-2YS" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="4mr-nH-aaf"/>
                     <constraint firstItem="JRo-gY-k5Y" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="5" id="Egn-M7-05t"/>
-                    <constraint firstAttribute="trailing" secondItem="lBz-uf-2YS" secondAttribute="trailing" id="GYv-wR-w9g"/>
+                    <constraint firstAttribute="trailing" secondItem="lBz-uf-2YS" secondAttribute="trailing" constant="10" id="GYv-wR-w9g"/>
                     <constraint firstItem="lBz-uf-2YS" firstAttribute="leading" secondItem="JRo-gY-k5Y" secondAttribute="trailing" constant="10" id="fOI-4i-P2k"/>
                     <constraint firstItem="lBz-uf-2YS" firstAttribute="leading" secondItem="JRo-gY-k5Y" secondAttribute="trailing" constant="10" id="mKo-Fn-j6d"/>
                     <constraint firstItem="JRo-gY-k5Y" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="4" id="u5p-DG-Kpe"/>

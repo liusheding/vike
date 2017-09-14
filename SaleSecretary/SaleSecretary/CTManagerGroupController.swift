@@ -20,20 +20,15 @@ class CTManagerGroupController: UIViewController  {
     
     var group : [MemGroup] = []
     
-    var deleteGroup : [MemGroup] = []
-    var addedGroup : [MemGroup]  = []
-    
     var contactsTableviewDelegate : ContactTableViewDelegate?
-    
-    @IBOutlet weak var cancelButton: UIBarButtonItem!
-    
-    @IBOutlet weak var confirmButton: UIBarButtonItem!
     
     @IBOutlet weak var localTableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.navigationItem.title = "分组管理"
+        
         self.localTableView.dataSource = self
         self.localTableView.delegate = self
         self.localTableView.setEditing(true , animated: true)
@@ -44,54 +39,7 @@ class CTManagerGroupController: UIViewController  {
         self.localTableView.tableFooterView = UIView()
 
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-    @IBAction func cancelAction(_ sender: Any) {
-
-        if self.addedGroup.count == 0 && self.deleteGroup.count == 0 {
-            self.dismiss(animated: true, completion: nil)
-        }else {
-            let alertController = UIAlertController(title: "系统提示",
-                                                    message: "温馨提示：是否放弃修改？", preferredStyle: .alert)
-            let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
-            let okAction = UIAlertAction(title: "是的", style: .default, handler: {
-                action in
-                self.dismiss(animated: true, completion: nil)
-            })
-            alertController.addAction(cancelAction)
-            alertController.addAction(okAction)
-            self.present(alertController, animated: true, completion: nil)
-            
-        }
-        
-    }
     
-    @IBAction func confirmAction(_ sender: Any) {
-        
-//        if self.deleteGroup.count > 0 {
-//            var ids : [String] = []
-//            for id in self.deleteGroup {
-//                ids.append(id.id)
-//            }
-//            let request = NetworkUtils.postBackEnd( "D_TXL_CUS_GROUP", body: ["ids" : ids.joined(separator: ",")] , handler: { () in
-//                
-//            })
-//            self.contactDb.deleteGroupArray(gArray: self.deleteGroup)
-//            self.contactDb.changeCustomerGroup(group: self.deleteGroup)
-//        }
-//        if self.addedGroup.count > 0 {
-//            self.contactDb.storeGroupArray(userId: APP_USER_ID!, gArray: self.addedGroup)
-//        }
-        
-        if self.contactsTableviewDelegate != nil {
-           self.contactsTableviewDelegate?.reloadTableViewData()
-        }
-        self.dismiss(animated: true, completion: nil)
-    }
 }
 
 extension CTManagerGroupController : UITableViewDelegate , UITableViewDataSource{
@@ -149,13 +97,16 @@ extension CTManagerGroupController : UITableViewDelegate , UITableViewDataSource
                 return
             }
             
-            let request = NetworkUtils.postBackEnd("", body: ["name": groupName.text! , "userId": APP_USER_ID! ], handler: { (json) in
+            let request = NetworkUtils.postBackEnd("C_TXL_CUS_GROUP", body: ["name": groupName.text! , "userId": APP_USER_ID! ], handler: { (json) in
                 let id = json["body"]["id"].stringValue
                 self.contactDb.storeGroup(id: id , group_name: groupName.text! , userId: APP_USER_ID!)
                 self.group = MemGroup.toMemGroup(dbGroup: self.contactDb.getGroup(userId: APP_USER_ID!))
                 })
             request.response(completionHandler: {_ in
                 self.localTableView.reloadData()
+                if self.contactsTableviewDelegate != nil {
+                    self.contactsTableviewDelegate?.reloadTableViewData()
+                }
             })
         })
         alertController.addAction(cancelAction)
@@ -195,22 +146,19 @@ extension CTManagerGroupController : UITableViewDelegate , UITableViewDataSource
         
         if editingStyle == UITableViewCellEditingStyle.delete {
             let cell = self.group[indexPath.row - 1 ]
-            self.deleteGroup.append(cell)
-            self.group.remove(at: indexPath.row - 1)
-            self.localTableView.deleteRows(at: [indexPath], with: .fade)
-            var needRemove : Int = -1
-            if self.addedGroup.count > 0 {
-                for i in 0..<self.addedGroup.count {
-                    if self.addedGroup[i].group_name == self.group[indexPath.row - 1].group_name {
-                        needRemove = i
-                    }
+            
+            let request = NetworkUtils.postBackEnd("D_TXL_CUS_GROUP", body: ["ids": cell.id , "userId" : APP_USER_ID! ], handler: { (json) in
+                self.group.remove(at: indexPath.row - 1)
+                self.localTableView.deleteRows(at: [indexPath], with: .fade)
+                self.contactDb.deleteGroup(g: cell)
+                self.contactDb.changeCustomerGroup(group: [cell], defaultGroup: self.group)
+            })
+            request.response(completionHandler: { _ in
+                if self.contactsTableviewDelegate != nil {
+                    self.contactsTableviewDelegate?.reloadTableViewData()
                 }
-                if needRemove > 0 {
-                    self.addedGroup.remove(at: needRemove)
-                }
-            }
+            })
         }
-        
     }
     
 }

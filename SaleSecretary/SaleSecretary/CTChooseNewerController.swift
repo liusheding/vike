@@ -18,7 +18,6 @@ class CTChooseNewerController: UIViewController {
     let store = CNContactStore()
     var tableViewSel : Int = -1
     var contactDt : [Customer] = [] // phone contacts data
-    var groupsInDb : [Group] = []
     var newCustomer : [Customer ] = []
     var alreadyAdded : [Customer] = []
     
@@ -79,36 +78,35 @@ class CTChooseNewerController: UIViewController {
     
     //  query in db
     func findNewCustomer(){
-        if self.contactDt.count == 0 {
-            let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
-            hud.label.text = "读取通讯录中..."
-            self.requestAccessToContacts { [unowned self](success) in
-                if success {
-                    GetContactUtils.simpleWay2GetContactData2({ (success, tmpContact) in
-                        if success {
-                            self.contactDt = tmpContact
-                            for cd in self.contactDt {
+        let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
+        hud.label.text = "读取通讯录中..."
+        self.requestAccessToContacts { [unowned self](success) in
+            if success {
+                GetContactUtils.simpleWay2GetContactData2({ (success, tmpContact) in
+                    if success {
+                        self.contactDt = tmpContact
+                        for cd in self.contactDt {
 //                                if !self.contextDb.queryByIdentifer(id: (cd.phone_number?.joined(separator: ContactCommon.separatorDefault))! ){
-                                var phone : String = ""
-                                if (cd.phone_number?.count)! > 0 {
-                                    phone = (cd.phone_number?[0])!
-                                }
-                                let result = self.contextDb.queryByIdentifer(id: phone)
-                                
-                                if result.count == 0 {
-                                    self.newCustomer.append(cd)
-                                }else{
-                                    self.alreadyAdded.append(cd)
-                                }
+                            var phone : String = ""
+                            if (cd.phone_number?.count)! > 0 {
+                                phone = (cd.phone_number?[0])!
                             }
-                            hud.hide(animated: true)
-                        }else {
-                            print("something wrong!!")
+                            let result = self.contextDb.queryByIdentifer(id: phone)
+                            
+                            if result.count == 0 {
+                                self.newCustomer.append(cd)
+                            }else{
+                                self.alreadyAdded.append(cd)
+                            }
                         }
-                    })
-                }
+                        hud.hide(animated: true)
+                    }else {
+                        print("something wrong!!")
+                    }
+                })
             }
         }
+    
     }
     
     override func didReceiveMemoryWarning() {

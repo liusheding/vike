@@ -27,6 +27,7 @@ class Customer : NSObject{
     var company :     String
     var birthday :    String
     var app_userId :  String
+    var desc : String
     
     let properties = ["birthday","company","gender","group_id","id","is_solar","nick_name","phone_number","name"]
     
@@ -49,10 +50,11 @@ class Customer : NSObject{
         self.company = ""
         self.birthday = ""
         self.gender = 1
-        self.group_id = ContactCommon.groupDefault as String
+        self.group_id = ContactCommon.groupDefaultX
         self.id =  ""
         self.is_solar = true
         self.app_userId = ""
+        self.desc = ""
     }
     
     init( json : JSON ){
@@ -66,6 +68,7 @@ class Customer : NSObject{
         self.gender =  0 //Int(json["sex"].stringValue)!
         self.company = json["company"].stringValue
         self.app_userId = APP_USER_ID!
+        self.desc = ""
     }
     
     init( name : String , phoneNum : [String] ) {
@@ -75,10 +78,11 @@ class Customer : NSObject{
         self.company = ""
         self.birthday = ""
         self.gender = 1
-        self.group_id = ContactCommon.groupDefault as String
+        self.group_id = ContactCommon.groupDefaultX
         self.id =  ""
         self.is_solar = true
         self.app_userId = APP_USER_ID!
+        self.desc = ""
     }
     
     /*
@@ -92,9 +96,26 @@ class Customer : NSObject{
         self.birthday = birth
         self.is_solar = true
         self.id = id
-        self.group_id = ContactCommon.groupDefault as String
+        self.group_id = ContactCommon.groupDefaultX
         self.gender = 1
         self.app_userId = APP_USER_ID!
+        self.desc = ""
+    }
+    
+    init( birth : String , company:String , nick_name:String  , phone_number : [String] , name:String , id : String , is_solar : Bool , groupId : String , gender : Int , desc : String){
+        
+        self.name = name
+        self.phone_number = phone_number
+        self.nick_name = nick_name
+        self.company = company
+        self.birthday = birth
+        self.id = id
+        self.is_solar = is_solar
+        self.group_id = groupId
+        self.gender = gender
+        self.app_userId = APP_USER_ID!
+        self.desc = desc
+        
     }
     
     init(ctm : Customers) {
@@ -108,6 +129,7 @@ class Customer : NSObject{
         self.nick_name = ctm.nick_name
         self.phone_number = ctm.phone_number?.components(separatedBy: ",")
         self.app_userId = ctm.app_userId!
+        self.desc =  ctm.desc!
     }
     
     @available(iOS 9.0, *)
@@ -127,10 +149,11 @@ class Customer : NSObject{
         self.company = ""
         self.birthday = ""
         self.gender = 1
-        self.group_id = ContactCommon.groupDefault as String
+        self.group_id = ContactCommon.groupDefaultX
         self.id =  ""
         self.is_solar = true
         self.app_userId = APP_USER_ID!
+        self.desc = ""
         
     }
     
@@ -288,6 +311,7 @@ struct ContactCommon {
     
     static let separatorDefault = ","
     static let groupDefault : NSString = "默认分组"
+    static let groupDefaultX : String = "defaultId"
     
     static func limitedLength(str : String) -> Bool {
         var flag = false
@@ -327,6 +351,18 @@ struct ContactCommon {
         }
         
         return result
+    }
+    
+    static func getDefaultId(groups : [Group]) -> String {
+        
+        var defaultId = ""
+        for g in groups {
+            if g.group_name == self.groupDefault as String {
+                defaultId = g.id!
+                break
+            }
+        }
+        return defaultId
     }
     
 }

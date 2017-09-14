@@ -38,7 +38,7 @@ class CustomerHeaderView: UITableViewHeaderFooterView {
         self.groupTitle.contentEdgeInsets = UIEdgeInsets(top: 15, left: 30, bottom: 15, right: 0)
         self.groupTitle.imageEdgeInsets = UIEdgeInsets(top: 15, left: -15, bottom: 15, right: 20)
         self.groupTitle.backgroundColor = UIColor.white
-        self.groupTitle.setTitleColor(UIColor.gray , for: UIControlState.normal)
+        self.groupTitle.setTitleColor(UIColor.black , for: UIControlState.normal)
         
         self.groupTitle.contentHorizontalAlignment = UIControlContentHorizontalAlignment.left
         self.groupTitle.contentVerticalAlignment = UIControlContentVerticalAlignment.fill

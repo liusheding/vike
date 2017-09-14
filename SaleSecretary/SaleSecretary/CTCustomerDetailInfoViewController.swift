@@ -86,7 +86,6 @@ class CTCustomerDetailInfoViewController: UIViewController {
             } else {
                 e.isHidden = true
             }
-//            NSLog(" segment view hide \(i) --\(idx)-- \(e.isHidden)------")
         }
     }
     

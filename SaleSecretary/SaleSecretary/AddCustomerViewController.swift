@@ -62,7 +62,8 @@ class AddCustomerViewController: UIViewController {
             json in
             let dt = json["body"]["id"].stringValue
             c.id = dt
-            self.contextDb.insertCustomer(ctms: c)
+            
+            self.contextDb.insertCustomer(ctms: c, groupId: ContactCommon.getDefaultId(groups: self.contextDb.getGroupInDb(userId: APP_USER_ID! ) ))
         }
         request.response(completionHandler: { _ in
             hud.hide(animated: true)

@@ -57,11 +57,20 @@ class CTChangeGroupViewController: UIViewController {
         let cust = view.contactsCells[tmpIndexPath.section - 1].friends?[tmpIndexPath.row]
         
         if self.currentSel != tmpIndexPath.row  {
-            self.contextDb.updateById(id: (cust?.id)! , newGroup: g.group_name )
+            let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
+            hud.label.text = "加载中..."
+            
+            let request = NetworkUtils.postBackEnd("U_TXL_CUS_INFO", body: ["id": cust?.id ?? "" , "userId": APP_USER_ID! , "cusGroupId" : g.id ], handler: { (json) in
+                self.contextDb.updateById(id: (cust?.id)! , newGroup: g.id )
+            })
+            
+            request.response(completionHandler: { _ in
+                view.reloadTableViewData()
+                hud.hide(animated: true)
+            })
         }
         
         view.pressCancel()
-        view.reloadTableViewData()
     }
     
     override func viewDidLoad() {

@@ -117,7 +117,9 @@ struct GetContactUtils {
         do {
             let contactsFetchRequest = CNContactFetchRequest(keysToFetch: [CNContactGivenNameKey as CNKeyDescriptor, CNContactFamilyNameKey as CNKeyDescriptor, CNContactImageDataKey as CNKeyDescriptor, CNContactImageDataAvailableKey as CNKeyDescriptor, CNContactPhoneNumbersKey as CNKeyDescriptor, CNContactEmailAddressesKey as CNKeyDescriptor])
             try contactStore.enumerateContacts(with: contactsFetchRequest, usingBlock: { (cnContact, error) in
-                if let contact = Customer(cnContact: cnContact) { result.append(contact) }
+                if let contact = Customer(cnContact: cnContact) {
+                    result.append(contact)
+                }
             })
             completion(true, result)
         } catch {
