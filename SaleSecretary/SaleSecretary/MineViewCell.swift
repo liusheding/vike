@@ -10,10 +10,12 @@ import UIKit
 
 class MineViewCell: UITableViewCell {
     @IBOutlet weak var mineName: UILabel!
+    @IBOutlet weak var mineinfo: UILabel!
     @IBOutlet weak var mineImage: UIImageView!
 
     override func awakeFromNib() {
         super.awakeFromNib()
+        mineinfo.isHidden = true
         // Initialization code
     }
 

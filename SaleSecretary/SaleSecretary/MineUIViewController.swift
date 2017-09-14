@@ -135,6 +135,10 @@ class MineUIViewController: UITableViewController {
                 let jsondata = json["body"]
                 let cell = self.tableView.cellForRow(at: [0,0]) as! MineInfoCell
                 cell.name.text = jsondata["name"].stringValue
+                
+                let smscell = self.tableView.cellForRow(at: [1,0]) as! MineViewCell
+                smscell.mineinfo.isHidden = false
+                smscell.mineinfo.text = "剩余\(jsondata["messageSyts"].stringValue)条"
             }
             request.response(completionHandler: { _ in
                 hud.hide(animated: true)
