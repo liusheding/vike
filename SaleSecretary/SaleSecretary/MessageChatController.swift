@@ -11,7 +11,7 @@ import UIKit
 let SCREEN_WIDTH = UIScreen.main.bounds.size.width
 let SCREEN_HEIGHT = UIScreen.main.bounds.size.height
 
-class MessageChatController: UIViewController,ChatDataSource,UITextFieldDelegate {
+class MessageChatController: UIViewController,ChatDataSource,UITextViewDelegate {
     
     var Chats:NSMutableArray!
     var tableView:TableView!
@@ -37,8 +37,6 @@ class MessageChatController: UIViewController,ChatDataSource,UITextFieldDelegate
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(_:)), name: .UIKeyboardWillShow, object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide(_:)), name: .UIKeyboardWillHide, object: nil)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(self.textChanged(_:)), name: .UITextViewTextDidChange, object: nil)
         
         //注册点击事件
         self.view.addGestureRecognizer(UITapGestureRecognizer(target:self, action:#selector(self.handleTap(sender:))))
@@ -90,7 +88,7 @@ class MessageChatController: UIViewController,ChatDataSource,UITextFieldDelegate
         txtMsg.returnKeyType = UIReturnKeyType.send
         
         //Set the delegate so you can respond to user input
-        txtMsg.delegate=self as? UITextViewDelegate
+        txtMsg.delegate=self
         sendView.addSubview(txtMsg)
         self.view.addSubview(sendView)
         
@@ -168,9 +166,14 @@ class MessageChatController: UIViewController,ChatDataSource,UITextFieldDelegate
         self.isShowBoard=false
     }
     
-    func textFieldShouldReturn(_ textField:UITextField) -> Bool
-    {
-        sendMessage()
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if text == "\n"{ // 输入换行符时发送
+            sendMessage()
+            return false
+        }
+        
+        changeviewsize()
+        scrollToRow()
         return true
     }
     
