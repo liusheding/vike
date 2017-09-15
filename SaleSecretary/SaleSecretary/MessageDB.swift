@@ -27,6 +27,9 @@ class MessageDB: NSObject {
         // 定义一个entity，这个entity一定要在xcdatamodeld中做好定义
         let entity = NSEntityDescription.entity(forEntityName: "MsgList", in: context)
         let message = NSManagedObject(entity: entity!, insertInto: context)
+        if AppUser.currentUser == nil {
+            return 
+        }
         
         message.setValue(AppUser.currentUser?.cellphoneNumber, forKey: "msg_owner")
         message.setValue(msgdata.name, forKey: "msg_name")
@@ -108,6 +111,9 @@ class MessageDB: NSObject {
     }
     
     func getAllMsgList() -> [MsgList]{
+        if AppUser.currentUser == nil {
+            return []
+        }
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "MsgList")
         var result : [MsgList] = []
         fetchRequest.fetchLimit = 10 //限定查询结果的数量

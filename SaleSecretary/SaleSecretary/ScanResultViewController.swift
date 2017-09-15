@@ -24,7 +24,7 @@ class ScanResultViewController: UIViewController, ScanORCResultDelegate {
     
     fileprivate let cid = "ScanResultCellId"
     
-    fileprivate let labels = ["姓名", "工作", "电话", "公司", "邮件" ,"地点"]
+    fileprivate let labels = ["姓名*", "工作", "电话*", "公司", "邮件" ,"地点"]
     
     var nlpResults: [Set<String>] = [Set<String>(),
                                  Set<String>(),
@@ -35,10 +35,17 @@ class ScanResultViewController: UIViewController, ScanORCResultDelegate {
     
     var indicator: UIActivityIndicatorView?
     
+    let contactDb = CustomerDBOp.defaultInstance()
+    
+    var groups: [Group]!
+    
+    var group: Group?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.automaticallyAdjustsScrollViewInsets = false
         tableView.register(UINib(nibName: "ScanResultCell", bundle: nil), forCellReuseIdentifier: cid)
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "groupCell")
         tableView.tableHeaderView = UIView()
         tableView.tableFooterView = UIView()
         tableView.rowHeight = 44.0
@@ -55,6 +62,14 @@ class ScanResultViewController: UIViewController, ScanORCResultDelegate {
             self.indicator?.startAnimating()
             loadNlpResults()
         }
+        self.groups = self.contactDb.getGroupInDb(userId: APP_USER_ID!)
+        for g in self.groups {
+            if g.group_name! == "默认分组" {
+                self.group = g
+                break
+            }
+        }
+        
         // self.view.addSubview(tableView)
     }
     
@@ -166,19 +181,40 @@ extension ScanResultViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return 2
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return labels.count
+        if section == 0 {
+            return labels.count
+        } else {
+            return 1
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cid) as! ScanResultCell
         let row = indexPath.row
+        if indexPath.section == 1 {
+            let attr = NSMutableAttributedString(string: "分组*")
+            cell.textField.isHidden = true
+            attr.addAttribute(NSForegroundColorAttributeName, value: UIColor.red, range: NSRange(location: 2, length: 1))
+            cell.label?.attributedText = attr
+            cell.accessoryType = .disclosureIndicator
+            cell.detailTextLabel?.text = self.group?.group_name
+            cell.detailTextLabel?.font = UIFont.systemFont(ofSize: 17)
+            return cell
+        }
         cell.label.text = labels[row]
         let set: Set<String> = self.nlpResults[row]
         cell.textField.text = set.count == 0 ? "" : set.joined(separator: ",")
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        if indexPath.section == 1 {
+            
+        }
     }
 }

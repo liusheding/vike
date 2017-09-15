@@ -230,6 +230,7 @@ extension ContactTableViewController : UITableViewDataSource, UITableViewDelegat
         if indexPath.section == 0 {
             let cell = UITableViewCell.init(style: UITableViewCellStyle.default , reuseIdentifier: self.newCellId)
             cell.textLabel?.text = "新的客户"
+            cell.textLabel?.font = UIFont.systemFont(ofSize: 17)
             cell.imageView?.image = UIImage(named: "pic_xkh")
             cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
             return cell

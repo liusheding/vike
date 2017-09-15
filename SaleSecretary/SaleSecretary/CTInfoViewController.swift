@@ -137,7 +137,7 @@ extension CTInfoViewController : UITableViewDelegate , UITableViewDataSource {
                 body[arr[i]] = c?.textLabel?.text
             }
         }
-        let request = NetworkUtils.postBackEnd("", body: []) { (json) in
+        let request = NetworkUtils.postBackEnd("", body: [:]) { (json) in
             
         }
     }
