@@ -138,7 +138,10 @@ class MineUIViewController: UITableViewController {
                 
                 let smscell = self.tableView.cellForRow(at: [1,0]) as! MineViewCell
                 smscell.mineinfo.isHidden = false
-                smscell.mineinfo.text = "剩余\(jsondata["messageSyts"].stringValue)条"
+                let messageSyts = jsondata["messageSyts"].stringValue
+                let messageDjts = jsondata["messageDjts"].stringValue
+                let messageKyts = Int(messageSyts)! - Int(messageDjts)!
+                smscell.mineinfo.text = "剩余\(messageKyts)条"
             }
             request.response(completionHandler: { _ in
                 hud.hide(animated: true)

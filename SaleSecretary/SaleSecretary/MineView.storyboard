@@ -1155,10 +1155,10 @@
             </objects>
             <point key="canvasLocation" x="-703.20000000000005" y="894.60269865067471"/>
         </scene>
-        <!--在线充值-->
+        <!--短信充值-->
         <scene sceneID="U6v-67-qcg">
             <objects>
-                <viewController storyboardIdentifier="onlinepayID" title="在线充值" hidesBottomBarWhenPushed="YES" id="9IF-2l-FT2" customClass="PayViewController" customModule="SaleSecretary" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="onlinepayID" title="短信充值" hidesBottomBarWhenPushed="YES" id="9IF-2l-FT2" customClass="PayViewController" customModule="SaleSecretary" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ScG-QQ-EQc"/>
                         <viewControllerLayoutGuide type="bottom" id="Spg-hS-AvM"/>
@@ -1306,14 +1306,14 @@
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="50" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Y6k-ZB-yNx">
-                                <rect key="frame" x="0.0" y="282" width="375" height="100"/>
+                                <rect key="frame" x="0.0" y="275" width="375" height="100"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="qF7-uI-OI4"/>
                                 </constraints>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9en-ec-nHm">
-                                <rect key="frame" x="28" y="420" width="319" height="50"/>
+                                <rect key="frame" x="28" y="413" width="319" height="50"/>
                                 <color key="backgroundColor" red="0.0039215686269999999" green="0.70588235290000001" blue="0.078431372550000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="FJM-YJ-TwT"/>
@@ -1482,10 +1482,10 @@
                             <constraint firstItem="Y6k-ZB-yNx" firstAttribute="leading" secondItem="XGK-Xb-kck" secondAttribute="leading" id="wqm-24-Wuv"/>
                             <constraint firstItem="9en-ec-nHm" firstAttribute="leading" secondItem="XGK-Xb-kck" secondAttribute="leadingMargin" constant="12" id="xYY-rW-FYR"/>
                             <constraint firstItem="NCA-I7-ECx" firstAttribute="top" secondItem="ScG-QQ-EQc" secondAttribute="bottom" constant="40" id="yGs-Pt-EcL"/>
-                            <constraint firstItem="Y6k-ZB-yNx" firstAttribute="top" secondItem="XGK-Xb-kck" secondAttribute="top" constant="282" id="yur-Rz-Taj"/>
+                            <constraint firstItem="Y6k-ZB-yNx" firstAttribute="top" secondItem="XGK-Xb-kck" secondAttribute="top" constant="275" id="yur-Rz-Taj"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="在线充值" id="LpJ-cQ-UiN">
+                    <navigationItem key="navigationItem" title="短信充值" id="LpJ-cQ-UiN">
                         <barButtonItem key="rightBarButtonItem" title="充值明细" id="rru-pc-gCe">
                             <color key="tintColor" red="0.0039215686269999999" green="0.70588235290000001" blue="0.078431372550000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
