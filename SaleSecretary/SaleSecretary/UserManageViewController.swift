@@ -144,13 +144,6 @@ extension UserManageViewController: UITableViewDelegate, UITableViewDataSource, 
         
     }
     
-    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView?
-    {
-        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: Int(tableView.bounds.size.width), height: 1))
-        footerView.backgroundColor = UIColor.clear
-        return footerView
-    }
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! UserDetailCell
         let secNum = indexPath.section

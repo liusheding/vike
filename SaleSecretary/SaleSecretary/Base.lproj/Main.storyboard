@@ -29,15 +29,15 @@
                                     <outlet property="delegate" destination="sEa-Fs-Ett" id="R5g-t2-1El"/>
                                 </connections>
                             </searchBar>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hWh-3J-Vaa">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="50" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hWh-3J-Vaa">
                                 <rect key="frame" x="0.0" y="108" width="375" height="521"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="lWF-9m-jjf">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="28" width="375" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lWF-9m-jjf" id="G4R-le-GkX">
-                                            <rect key="frame" x="0.0" y="0.0" width="342" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="49.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
