@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreData
+import SwiftyJSON
 
 class CustomerDBOp : NSObject {
     
@@ -260,7 +261,7 @@ class CustomerDBOp : NSObject {
                 NSLog("numbers of delete \(searchResults.count)")
                 
                 for p in searchResults  {
-                    p.group_id = group.group_name
+                    p.group_id = group.id
                 }
                 try context.save()
             } catch  {

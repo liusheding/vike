@@ -309,7 +309,7 @@
                         <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <navigationItem key="navigationItem" id="Ylm-cM-nHb">
-                        <barButtonItem key="rightBarButtonItem" title="编辑" id="UZg-Cd-m9f"/>
+                        <barButtonItem key="rightBarButtonItem" id="UZg-Cd-m9f"/>
                     </navigationItem>
                     <connections>
                         <outlet property="customerInfo" destination="IM2-1c-e5F" id="Hlm-Dd-A6h"/>

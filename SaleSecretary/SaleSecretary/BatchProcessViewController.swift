@@ -139,8 +139,16 @@ class BatchProcessViewController: UIViewController {
         let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
         let okAction = UIAlertAction(title: "确定", style: .default, handler: {
             action in
-            self.customerDB.batchDeleteCustomer(cust: _recs)
-            self.reloadTableViewData()
+            var phoneArr : [String] = []
+            for r in _recs {
+                phoneArr.append( (r.phone_number?.count)!>0 ? (r.phone_number?[0])! : "" )
+            }
+            let request = NetworkUtils.postBackEnd("D_TXL_CUS_INFO", body: ["userId":APP_USER_ID! , "sjhms" : phoneArr.joined(separator: ContactCommon.separatorDefault) ], handler: { (json) in
+                self.customerDB.batchDeleteCustomer(cust: _recs)
+            })
+            request.response(completionHandler: { _ in
+                self.reloadTableViewData()
+            })
         })
         alertController.addAction(cancelAction)
         alertController.addAction(okAction)

@@ -9,6 +9,7 @@
 import UIKit
 import SwiftyJSON
 import Contacts
+import Alamofire
 
 class CustomerModel: NSObject {
     
@@ -16,6 +17,8 @@ class CustomerModel: NSObject {
 }
 
 class Customer : NSObject{
+    
+    let contactDb = CustomerDBOp.defaultInstance()
     
     var name:         String?
     var phone_number: [String]?
@@ -159,6 +162,32 @@ class Customer : NSObject{
     
     override func  setValue(_ value: Any?, forUndefinedKey key: String) { }
     
+    public func save(_ callback: @escaping ((JSON) -> Void)) -> DataRequest? {
+        var body : [String : String] = [:]
+        body["busi_scene"] = ContactCommon.addUserSingle
+        body["userId"]     = APP_USER_ID
+        body["name"]       = self.name
+        body["cusGroupId"] = self.group_id
+        body["cellphoneNumber"] = (self.phone_number?.count)!>0 ? self.phone_number?[0] : ""
+        body["sex"]        = "\(self.gender)"
+        body["birthday"]   = self.birthday
+        body["birthdayType"] = self.is_solar ? "0" : "1"
+        body["company"]    = self.company
+        body["cw"]         = self.nick_name
+        body["desc"]       = self.desc
+        
+        let request = NetworkUtils.postBackEnd("C_TXL_CUS_INFO"  , body: body) { (json) in
+            let id = json["body"]["id"].stringValue
+            self.id = id
+            self.contactDb.insertCustomer(ctms: self , groupId: self.group_id)
+            callback(json["body"])
+        }
+        return request
+    }
+    
+//    public func update() -> DataRequest {
+//        
+//    }
 }
 
 class MemGroup{

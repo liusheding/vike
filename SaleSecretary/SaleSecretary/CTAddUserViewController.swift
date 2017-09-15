@@ -27,6 +27,7 @@ class CTAddUserViewController: UITableViewController {
         tableView.tableFooterView = UIView()
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.backgroundColor = UIColor.groupTableViewBackground
         
         tableView.register(UINib(nibName: String(describing: MustAddCell.self), bundle: nil), forCellReuseIdentifier: mustcellId)
         tableView.register(UINib(nibName: String(describing: CTAddUserCell.self), bundle: nil), forCellReuseIdentifier: cellId)
@@ -173,18 +174,11 @@ class CTAddUserViewController: UITableViewController {
                 break
             }
         }
-        let body : [String : Any] = ["busi_scene" : ContactCommon.addUserSingle , "userId": APP_USER_ID ?? "" ,"name" :self.inputtext[0].text ?? "" , "cusGroupId" : gdId , "cellphoneNumber" : self.inputtext[1].text ?? "" ,
-                                     "sex" : self.genderChoose == "男" ? "0" : "1" , "birthday" : self.birthDay , "birthdayType": "1" ,"company" : self.inputtext[3].text ?? "","cw" : self.inputtext[2].text ?? "", "desc" : self.inputtext[4].text ?? "" ]
         
-        let request = NetworkUtils.postBackEnd("C_TXL_CUS_INFO"  , body: body) { (json) in
-            let id = json["body"]["id"].stringValue
-            
-            let cust = Customer.init(birth: self.birthDay , company: self.inputtext[3].text ?? "", nick_name: self.inputtext[2].text ?? "" , phone_number: [self.inputtext[1].text ?? ""], name: self.inputtext[0].text ?? "" , id:  id ,is_solar: true , groupId: gdId , gender: self.genderChoose == "男" ? 1 : 0 , desc: self.inputtext[4].text ?? "" )
-            
-            self.contactDb.insertCustomer(ctms: cust, groupId: cust.group_id)
-        }
+        let cust = Customer.init(birth: self.birthDay , company: self.inputtext[3].text ?? "", nick_name: self.inputtext[2].text ?? "" , phone_number: [self.inputtext[1].text ?? ""], name: self.inputtext[0].text ?? "" , id: ""  ,is_solar: true , groupId: gdId , gender: self.genderChoose == "男" ? 1 : 0 , desc: self.inputtext[4].text ?? "" )
+        let request = cust.save { (_) in  }
         
-        request.response(completionHandler: { _ in
+        request?.response(completionHandler: { _ in
             self.navigationController?.popViewController(animated: true)
             if self.tableDelegate != nil {
                 self.tableDelegate?.reloadTableViewData()

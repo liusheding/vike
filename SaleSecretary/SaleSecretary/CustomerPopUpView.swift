@@ -11,7 +11,7 @@ import SnapKit
 import RxSwift
 import RxCocoa
 
-private let kActionViewWidth: CGFloat = 140   //container view width
+private let kActionViewWidth: CGFloat = 138   //container view width
 private let kActionViewHeight: CGFloat = 34   //container view height
 private let kActionButtonHeight: CGFloat = 34   //button height
 private let kFirstButtonY: CGFloat = 12 //the first button Y value

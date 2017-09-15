@@ -62,6 +62,8 @@ class ContactTableViewController: UIViewController {
         self.tableView.delegate = self
         self.tableView.dataSource = self
         
+        self.view.backgroundColor = UIColor.groupTableViewBackground
+        self.tableView.backgroundColor = UIColor.groupTableViewBackground
         NSLog("ContactTableviewController init ! \(NSHomeDirectory())")
         self.tableView.register(UINib(nibName: String(describing: PersonContactCell.self ), bundle: nil), forCellReuseIdentifier: cellId)
         
@@ -97,7 +99,7 @@ class ContactTableViewController: UIViewController {
             let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
             hud.label.text = "加载中..."
             // get data from server , and insert to local db
-            var request = NetworkUtils.postBackEnd("R_PAGED_QUERY_TXL_CUS_GROUP", body: ["userId" : APP_USER_ID! , "pageSize" : "1000" ] ){
+            let request = NetworkUtils.postBackEnd("R_PAGED_QUERY_TXL_CUS_GROUP", body: ["userId" : APP_USER_ID! , "pageSize" : "1000" ] ){
                 json in
                 var gp : [MemGroup] = []
                 let rsp = json["body"]
@@ -278,7 +280,7 @@ extension ContactTableViewController : UITableViewDataSource, UITableViewDelegat
             let cust = self.contactsCells[indexPath.section - 1].friends![indexPath.row]
             let detail = storyboardLocal.instantiateViewController(withIdentifier: "customerDetail") as! CTCustomerDetailInfoViewController
             detail.userInfo = cust
-            
+            detail.contactViewController = self
             self.navigationController?.pushViewController( detail , animated: true)
         }
         tableView.deselectRow(at: indexPath, animated: false)  // 取消 返回后选中的状态

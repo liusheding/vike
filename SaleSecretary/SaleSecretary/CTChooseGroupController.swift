@@ -48,9 +48,18 @@ class CTChooseGroupController: UITableViewController {
             return
         }
         
-        self.contextDb.batchChangeCustomerGroup(cust: self.selectedCustomer , group: group[self.selectedGroup ] )
-        if self.reloadViewDelegate != nil{
-            self.reloadViewDelegate?.reloadTableViewData()
+        var phoneArr : [String] = []
+        for  sc in self.selectedCustomer {
+            phoneArr.append( (sc.phone_number?.count)! > 0 ? (sc.phone_number?[0])! : "" )
+        }
+        
+        let request = NetworkUtils.postBackEnd("U_TXL_CUS_GROUP", body: ["id" : self.group[self.selectedGroup].id ?? "" , "xzkh": phoneArr.joined(separator: ContactCommon.separatorDefault) ]) { (json) in
+            self.contextDb.batchChangeCustomerGroup(cust: self.selectedCustomer , group: self.group[self.selectedGroup ] )
+        }
+        request.response { (_) in
+            if self.reloadViewDelegate != nil{
+                self.reloadViewDelegate?.reloadTableViewData()
+            }
         }
         self.navigationController?.popViewController(animated: true)
         

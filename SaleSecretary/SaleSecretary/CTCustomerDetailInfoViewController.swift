@@ -13,6 +13,8 @@ class CTCustomerDetailInfoViewController: UIViewController {
 
     var userInfo = Customer.init()
     
+    var contactViewController : ContactTableViewController?
+    
     @IBOutlet weak var name: UILabel!
     
     @IBOutlet weak var segments: UISegmentedControl!
@@ -27,7 +29,6 @@ class CTCustomerDetailInfoViewController: UIViewController {
     @IBAction func changeSegment(_ sender: Any) {
         
         let idx = (sender as AnyObject).selectedSegmentIndex
-//        NSLog("select \(String(describing: idx)) segment")
         if idx! >= segmentView.count {
             NSLog("unexcepted idx, please check code or storyboard")
             return
@@ -42,11 +43,12 @@ class CTCustomerDetailInfoViewController: UIViewController {
         self.name.text = userInfo.name
         self.hidesBottomBarWhenPushed=true
         
+//        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(title: "保存", style: .plain , target: self, action: #selector(saveCustomer) )
         // choose segment uiview
         showSelectedView(0)
 
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -86,6 +88,13 @@ class CTCustomerDetailInfoViewController: UIViewController {
             } else {
                 e.isHidden = true
             }
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "embedCustomerInfo" {
+            let vc = segue.destination as! CTInfoViewController
+            vc.reloadDelegate = contactViewController
         }
     }
     
