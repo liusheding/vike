@@ -103,9 +103,8 @@ class UserManageViewController: UIViewController {
 extension UserManageViewController: UITableViewDelegate, UITableViewDataSource, UMHeaderViewDelegate {
     
     func clickedGroupTitle(headerView: UserManageHeaderView){
-//        let section = NSIndexSet.init(index: headerView.tag) as IndexSet
-//        self.tableView.reloadSections(section, with: .automatic)
-        self.tableView.reloadData()
+        let section = NSIndexSet.init(index: headerView.tag) as IndexSet
+        self.tableView.reloadSections(section, with: .automatic)
     }
     
     // 每次点击headerView时，改变group的isOpen参数，然后刷新tableview，显示或者隐藏好友信息
@@ -143,6 +142,13 @@ extension UserManageViewController: UITableViewDelegate, UITableViewDataSource, 
         headView.friendGroup = group
         return headView
         
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView?
+    {
+        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: Int(tableView.bounds.size.width), height: 1))
+        footerView.backgroundColor = UIColor.clear
+        return footerView
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
