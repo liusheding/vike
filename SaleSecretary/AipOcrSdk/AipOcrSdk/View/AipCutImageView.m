@@ -48,7 +48,7 @@ static CGFloat const pinchMinscale = 0.5;
     self = [super init];
     if (self) {
         //截图的分辨率系数 开发者可自行配置.卡片识别可以比通用识别图片质量适当降低
-        self.scale = 1.8;
+        self.scale = 1.2;
     }
     return self;
 }
@@ -57,7 +57,7 @@ static CGFloat const pinchMinscale = 0.5;
     
     [super awakeFromNib];
     //截图的分辨率系数 开发者可自行配置.卡片识别可以比通用识别图片质量适当降低
-    self.scale = 1.8;
+    self.scale = 1.2;
 }
 
 #pragma mark - AipImageViewDelegate

@@ -74,7 +74,7 @@
                     <navigationItem key="navigationItem" title="新增客户" id="Cdg-Aa-nvr">
                         <barButtonItem key="rightBarButtonItem" title="确认" id="IMm-8e-Iab">
                             <connections>
-                                <action selector="confirmAction:" destination="LxF-Kk-8te" id="mib-E9-iXN"/>
+                                <action selector="confirmAction:" destination="LxF-Kk-8te" id="Q2s-NR-cto"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

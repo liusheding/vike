@@ -45,6 +45,8 @@ class ContactTableViewController: UIViewController {
     
     @IBOutlet weak var chooseGroup: UIView!
     
+    static var instance: ContactTableViewController!
+    
     var tableViewSel : Int = -1
     // MARK : about ... more bar item (float)
     @IBOutlet weak var ctMoreBar: UIBarButtonItem!
@@ -89,6 +91,7 @@ class ContactTableViewController: UIViewController {
         self.searchDisplayController?.searchResultsDelegate = self.searchDelegator
         self.searchDisplayController?.searchResultsDataSource = self.searchDelegator
         self.searchDisplayController?.delegate = self.searchDelegator
+        ContactTableViewController.instance = self
         
     }
     

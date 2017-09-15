@@ -41,6 +41,8 @@ class ScanResultViewController: UIViewController, ScanORCResultDelegate {
     
     var group: Group?
     
+    var delegate: ContactTableViewDelegate?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.automaticallyAdjustsScrollViewInsets = false
@@ -69,16 +71,12 @@ class ScanResultViewController: UIViewController, ScanORCResultDelegate {
                 break
             }
         }
-        
+        self.delegate = ContactTableViewController.instance
         // self.view.addSubview(tableView)
     }
     
     func processReuslt(result: [String]) -> Customer? {
         return nil
-    }
-    
-    @IBAction func confirmAction(_ sender: UIBarButtonItem) {
-        
     }
     
     func makeIndicator() {
@@ -97,7 +95,7 @@ class ScanResultViewController: UIViewController, ScanORCResultDelegate {
  
     func loadNlpResults() {
         var str = ""
-        for w in words! { //识别的前文本处理
+        for w in words! { //识别前的文本处理
             var s = w.replacingOccurrences(of: " ", with: "")
             if s.lengthOfBytes(using: .utf8) < 2 { continue }
             s += ","
@@ -171,6 +169,73 @@ class ScanResultViewController: UIViewController, ScanORCResultDelegate {
         return nil
     }
     
+    func chooseRole(title : String , index : IndexPath) {
+        
+        let alertController = UIAlertController(title: "", message: title ,preferredStyle: .actionSheet)
+        let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
+        alertController.addAction(cancelAction)
+        
+        for group in self.groups {
+            let roleAction = UIAlertAction(title: group.group_name, style: .destructive, handler: {_ in self.showRole(group , index: index)})
+            alertController.addAction(roleAction)
+        }
+        
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    func showRole(_ g: Group , index : IndexPath){
+        let cell = self.tableView.cellForRow(at: index)
+        cell?.detailTextLabel?.text = g.group_name
+        self.group = g
+    }
+    @IBAction func confirmAction(_ sender: UIBarButtonItem) {
+        let customer: Customer = Customer()
+        let vals: [String?] = self.labels.enumerated().flatMap({
+            e -> String? in
+            return getText(at: [0, e.offset])
+        })
+        let name = vals[0]
+        let phone = vals[2]
+        if name == nil || phone == nil {
+            Utils.alert("请务必填写客户姓名和电话哦")
+            return
+        }
+         // ["姓名*", "工作", "电话*", "公司", "邮件" ,"地点"]
+        customer.name = name!
+        customer.phone_number?.append(phone!)
+        customer.nick_name = "\(name!)\(vals[1] ?? "")"
+        customer.company = vals[3] ?? ""
+        customer.desc = vals[5] ?? ""
+        customer.group_id = (self.group?.id)!
+        
+        Utils.showLoadingHUB(view: self.view, msg: "保存中..", completion: {
+            hub in
+            let req = customer.save({
+                json in
+                self.delegate?.reloadTableViewData()
+                self.navigationController?.popViewController(animated: true)
+            })
+            req?.response(completionHandler: {
+                _ in
+                hub.hide(animated: true)
+            })
+        })
+    }
+    
+    
+    func getText(at: IndexPath) -> String? {
+        let cell = self.tableView.cellForRow(at: at) as! ScanResultCell
+        let text = cell.textField.text
+        if text == nil  {
+            return nil
+        }
+        let str = text!
+        if str.isEmpty || str.trimmingCharacters(in: .whitespaces).isEmpty {
+            return nil
+        }
+        return str
+    }
+    
 }
 
 
@@ -192,20 +257,40 @@ extension ScanResultViewController: UITableViewDataSource, UITableViewDelegate {
         }
     }
     
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cid) as! ScanResultCell
+        
         let row = indexPath.row
         if indexPath.section == 1 {
+            let cell = UITableViewCell(style:.value1, reuseIdentifier: "")
             let attr = NSMutableAttributedString(string: "分组*")
-            cell.textField.isHidden = true
             attr.addAttribute(NSForegroundColorAttributeName, value: UIColor.red, range: NSRange(location: 2, length: 1))
-            cell.label?.attributedText = attr
+            attr.addAttribute(NSForegroundColorAttributeName, value: APP_THEME_COLOR, range: NSRange(location: 0, length: 2))
+            cell.textLabel?.attributedText = attr
+            cell.textLabel?.font = UIFont.systemFont(ofSize: 17)
+            cell.textLabel?.textAlignment = .left
+            cell.textLabel?.snp.makeConstraints({
+                make in
+                make.left.equalToSuperview().offset(5)
+                make.centerY.equalToSuperview()
+            })
             cell.accessoryType = .disclosureIndicator
             cell.detailTextLabel?.text = self.group?.group_name
             cell.detailTextLabel?.font = UIFont.systemFont(ofSize: 17)
+            cell.detailTextLabel?.textAlignment = .right
+            cell.detailTextLabel?.textColor = UIColor.black
+            cell.backgroundColor = APP_BACKGROUND_COLOR
             return cell
         }
-        cell.label.text = labels[row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: cid) as! ScanResultCell
+        let text = labels[row]
+        if text.contains("*") {
+            let attr = NSMutableAttributedString(string: text)
+            attr.addAttribute(NSForegroundColorAttributeName, value: UIColor.red, range: NSString(string: text).range(of: "*"))
+            cell.label.attributedText = attr
+        } else {
+            cell.label.text = text
+        }
         let set: Set<String> = self.nlpResults[row]
         cell.textField.text = set.count == 0 ? "" : set.joined(separator: ",")
         return cell
@@ -214,7 +299,9 @@ extension ScanResultViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         if indexPath.section == 1 {
-            
+            self.chooseRole(title: "选择分组", index: indexPath)
         }
     }
+    
+    
 }
