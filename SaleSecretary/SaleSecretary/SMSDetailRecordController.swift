@@ -38,7 +38,7 @@ class SMSDetailRecordController: UIViewController {
         
         menu.indicatorColor = UIColor(colorLiteralRed: 175.0/255.0, green: 175.0/255.0, blue: 175.0/255.0, alpha: 1)
         menu.separatorColor = UIColor(colorLiteralRed: 210.0/255.0, green: 210.0/255.0, blue: 210.0/255.0, alpha: 1)
-        menu.textColor = UIColor(colorLiteralRed: 83.0/255.0, green: 83.0/255.0, blue: 83.0/255.0, alpha: 1)
+        menu.textColor = APP_THEME_COLOR
         menu.dataSource = self as JSDropDownMenuDataSource
         menu.delegate = self as JSDropDownMenuDelegate
         
