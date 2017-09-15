@@ -11,8 +11,8 @@ import UIKit
 class PayDetailCell: UITableViewCell {
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var time: UILabel!
-    @IBOutlet weak var money: UILabel!
-
+    @IBOutlet weak var state: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

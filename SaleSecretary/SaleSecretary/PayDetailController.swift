@@ -55,7 +55,7 @@ class PayDetailController: UITableViewController {
     
     func getRecordData(jsondata:JSON){
         RecordData = [Dictionary<String, Any>]()
-        for data in jsondata.array!{self.RecordData.append(["title":data["dxts"].stringValue,"time":data["orderDate"].stringValue,"record":data["paymentAmount"].stringValue])
+        for data in jsondata.array!{self.RecordData.append(["title":data["dxts"].stringValue,"time":data["orderDate"].stringValue,"record":data["paymentAmount"].stringValue,"state":data["status"].stringValue, "paystate":data["payStatus"].stringValue])
         }
         RecordData.sort { (s1, s2) -> Bool in
             s1["time"] as! String > s2["time"] as! String
@@ -79,11 +79,16 @@ class PayDetailController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! PayDetailCell
         
         let title = self.RecordData[indexPath.row]["title"] as? String
-        cell.title.text = "充值短信\(title!)条"
+        let money = self.RecordData[indexPath.row]["record"] as? String
+        cell.title.text = "\(title!)条/\(money!)元"
         
         cell.time.text = self.RecordData[indexPath.row]["time"] as? String
-        let money = self.RecordData[indexPath.row]["record"] as? String
-        cell.money.text = money
+        
+        let state = self.RecordData[indexPath.row]["state"] as? String
+        let states = ["0":"短信未到账", "1":"短信已到账", "2":"待处理"]
+        let paystate = self.RecordData[indexPath.row]["paystate"] as? String
+        let paystates = ["1":"未支付", "2":"支付成功", "3":"支付失败"]
+        cell.state.text = paystates[paystate!]! + "/" + states[state!]!
         cell.selectionStyle = .none
         return cell
     }
