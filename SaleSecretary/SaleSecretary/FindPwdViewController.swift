@@ -14,7 +14,6 @@ class FindPwdViewController: UIViewController,UITextFieldDelegate {
     @IBOutlet weak var password: UITextField!
     @IBOutlet weak var confirmPwd: UITextField!
     @IBOutlet weak var smsCheck: UITextField!
-    @IBOutlet weak var imageCheck: UITextField!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,12 +29,9 @@ class FindPwdViewController: UIViewController,UITextFieldDelegate {
         confirmPwd.isSecureTextEntry=true
         smsCheck.borderStyle = .none
         smsCheck.placeholder = "短信验证码"
-        imageCheck.borderStyle = .none
-        imageCheck.placeholder = "图形验证码"
         
         phone.delegate = self
         smsCheck.delegate = self
-        imageCheck.delegate = self
         
         // 创建一个导航栏
         let navBar = UINavigationBar(frame: CGRect(x:0, y:0, width:self.view.frame.size.width, height:60))
@@ -74,7 +70,6 @@ class FindPwdViewController: UIViewController,UITextFieldDelegate {
             password.resignFirstResponder()
             confirmPwd.resignFirstResponder()
             smsCheck.resignFirstResponder()
-            imageCheck.resignFirstResponder()
         }
         sender.cancelsTouchesInView = false
     }
@@ -103,20 +98,6 @@ class FindPwdViewController: UIViewController,UITextFieldDelegate {
             //限制长度6
             let proposeLength = (textField.text?.lengthOfBytes(using: String.Encoding.utf8))! - range.length + string.lengthOfBytes(using: String.Encoding.utf8)
             if proposeLength > 6 { return false }
-            return true
-        }
-        else if imageCheck == textField{
-            //限制只能输入数字或字母，不能输入特殊字符
-            for loopIndex in 0..<length {
-                let char = (string as NSString).character(at: loopIndex)
-                if char < 48 { return false }
-                if char > 57 && char < 65 { return false }
-                if char >= 91 && char <= 112 {return false }
-                if char >= 123 {return false }
-            }
-            //限制长度4
-            let proposeLength = (textField.text?.lengthOfBytes(using: String.Encoding.utf8))! - range.length + string.lengthOfBytes(using: String.Encoding.utf8)
-            if proposeLength > 4 { return false }
             return true
         }
         return true

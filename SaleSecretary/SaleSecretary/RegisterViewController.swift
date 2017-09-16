@@ -14,7 +14,6 @@ class RegisterViewController: UIViewController,UITextFieldDelegate {
     @IBOutlet weak var name: UITextField!
     @IBOutlet weak var password: UITextField!
     @IBOutlet weak var smsCheck: UITextField!
-    @IBOutlet weak var imageCheck: UITextField!
     @IBOutlet weak var recommendCode: UITextField!
     @IBOutlet weak var registerBtn: UIButton!
     @IBOutlet weak var smsBtn: UIButton!
@@ -64,14 +63,11 @@ class RegisterViewController: UIViewController,UITextFieldDelegate {
         password.isSecureTextEntry=true
         smsCheck.borderStyle = .none
         smsCheck.placeholder = "短信验证码"
-        imageCheck.borderStyle = .none
-        imageCheck.placeholder = "图形验证码"
         recommendCode.borderStyle = .none
         recommendCode.placeholder = "推荐码"
         
         phone.delegate = self
         smsCheck.delegate = self
-        imageCheck.delegate = self
         
         // 创建一个导航栏
         let navBar = UINavigationBar(frame: CGRect(x:0, y:0, width:self.view.frame.size.width, height:60))
@@ -109,7 +105,6 @@ class RegisterViewController: UIViewController,UITextFieldDelegate {
             name.resignFirstResponder()
             password.resignFirstResponder()
             smsCheck.resignFirstResponder()
-            imageCheck.resignFirstResponder()
             recommendCode.resignFirstResponder()
         }
         sender.cancelsTouchesInView = false
@@ -139,20 +134,6 @@ class RegisterViewController: UIViewController,UITextFieldDelegate {
             //限制长度6
             let proposeLength = (textField.text?.lengthOfBytes(using: String.Encoding.utf8))! - range.length + string.lengthOfBytes(using: String.Encoding.utf8)
             if proposeLength > 6 { return false }
-            return true
-        }
-        else if imageCheck == textField{
-            //限制只能输入数字或字母，不能输入特殊字符
-            for loopIndex in 0..<length {
-                let char = (string as NSString).character(at: loopIndex)
-                if char < 48 { return false }
-                if char > 57 && char < 65 { return false }
-                if char >= 91 && char <= 112 {return false }
-                if char >= 123 {return false }
-            }
-            //限制长度4
-            let proposeLength = (textField.text?.lengthOfBytes(using: String.Encoding.utf8))! - range.length + string.lengthOfBytes(using: String.Encoding.utf8)
-            if proposeLength > 4 { return false }
             return true
         }
         return true
