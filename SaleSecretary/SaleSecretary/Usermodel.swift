@@ -14,7 +14,8 @@ class User : NSObject{
     var phone: String?
     var userid: String?
     var status: String?
-    let properties = ["name", "phone", "userid", "status"]
+    var role: String?
+    let properties = ["name", "phone", "userid", "status", "role"]
     
     override var description: String {
         let dict = dictionaryWithValues(forKeys: properties)
@@ -30,6 +31,7 @@ class User : NSObject{
         self.phone = ""
         self.userid = ""
         self.status = ""
+        self.role = ""
     }
     override func  setValue(_ value: Any?, forUndefinedKey key: String) { }
     
@@ -70,53 +72,88 @@ class UserGroup:NSObject {
             ["name":"一级代理商", "isOpen":0, "friends":[]],
             ["name":"二级代理商", "isOpen":0, "friends":[]],
             ["name":"客户", "isOpen":0, "friends":[]],
+            ["name":"冻结账号", "isOpen":0, "friends":[]],
         ]
         
         if AppUser.currentUser?.role == .YJDLS{
             list = [
                 ["name":"二级代理商", "isOpen":0, "friends":[]],
                 ["name":"客户", "isOpen":0, "friends":[]],
+                ["name":"冻结账号", "isOpen":0, "friends":[]],
             ]
         } else if AppUser.currentUser?.role == .EJDLS{
             list = [
                 ["name":"客户", "isOpen":0, "friends":[]],
+                ["name":"冻结账号", "isOpen":0, "friends":[]],
             ]
         }
         
         for data in jsondata.array!{
             if AppUser.currentUser?.role == .PTYWY{
+                var freeze = list[3]["friends"] as! Array<[String:String]>
                 if data["roleCode"].stringValue == "YJDLS"{
-                    var fir = list[0]["friends"] as! Array<[String:String]>
-                    fir.append(["name":data["name"].stringValue, "phone":data["cellphoneNumber"].stringValue, "userid":data["id"].stringValue, "status":data["status"].stringValue])
-                    list[0]["friends"] = fir
+                    if data["status"].stringValue == "1"{
+                        freeze.append(["name":data["name"].stringValue, "phone":data["cellphoneNumber"].stringValue, "userid":data["id"].stringValue, "status":data["status"].stringValue, "role":data["roleCode"].stringValue])
+                    }else{
+                        var fir = list[0]["friends"] as! Array<[String:String]>
+                        fir.append(["name":data["name"].stringValue, "phone":data["cellphoneNumber"].stringValue, "userid":data["id"].stringValue, "status":data["status"].stringValue, "role":data["roleCode"].stringValue])
+                        list[0]["friends"] = fir
+                    }
+                    
                 }
                 else if data["roleCode"].stringValue == "EJDLS"{
-                    var fir = list[1]["friends"] as! Array<[String:String]>
-                    fir.append(["name":data["name"].stringValue, "phone":data["cellphoneNumber"].stringValue, "userid":data["id"].stringValue, "status":data["status"].stringValue])
-                    list[1]["friends"] = fir
+                    if data["status"].stringValue == "1"{
+                        freeze.append(["name":data["name"].stringValue, "phone":data["cellphoneNumber"].stringValue, "userid":data["id"].stringValue, "status":data["status"].stringValue, "role":data["roleCode"].stringValue])
+                    }else{
+                        var fir = list[1]["friends"] as! Array<[String:String]>
+                        fir.append(["name":data["name"].stringValue, "phone":data["cellphoneNumber"].stringValue, "userid":data["id"].stringValue, "status":data["status"].stringValue, "role":data["roleCode"].stringValue])
+                        list[1]["friends"] = fir
+                    }
+                    
                 }
                 else if data["roleCode"].stringValue == "KH"{
-                    var fir = list[2]["friends"] as! Array<[String:String]>
-                    fir.append(["name":data["name"].stringValue, "phone":data["cellphoneNumber"].stringValue, "userid":data["id"].stringValue, "status":data["status"].stringValue])
-                    list[2]["friends"] = fir
+                    if data["status"].stringValue == "1"{
+                        freeze.append(["name":data["name"].stringValue, "phone":data["cellphoneNumber"].stringValue, "userid":data["id"].stringValue, "status":data["status"].stringValue, "role":data["roleCode"].stringValue])
+                    }else{
+                        var fir = list[2]["friends"] as! Array<[String:String]>
+                        fir.append(["name":data["name"].stringValue, "phone":data["cellphoneNumber"].stringValue, "userid":data["id"].stringValue, "status":data["status"].stringValue, "role":data["roleCode"].stringValue])
+                        list[2]["friends"] = fir
+                    }
                 }
+                list[3]["friends"] = freeze
             }
             else if AppUser.currentUser?.role == .YJDLS{
+                var freeze = list[2]["friends"] as! Array<[String:String]>
                 if data["roleCode"].stringValue == "EJDLS"{
-                    var fir = list[0]["friends"] as! Array<[String:String]>
-                    fir.append(["name":data["name"].stringValue, "phone":data["cellphoneNumber"].stringValue, "userid":data["id"].stringValue, "status":data["status"].stringValue])
-                    list[0]["friends"] = fir
+                    if data["status"].stringValue == "1"{
+                        freeze.append(["name":data["name"].stringValue, "phone":data["cellphoneNumber"].stringValue, "userid":data["id"].stringValue, "status":data["status"].stringValue, "role":data["roleCode"].stringValue])
+                    }else{
+                        var fir = list[0]["friends"] as! Array<[String:String]>
+                        fir.append(["name":data["name"].stringValue, "phone":data["cellphoneNumber"].stringValue, "userid":data["id"].stringValue, "status":data["status"].stringValue, "role":data["roleCode"].stringValue])
+                        list[0]["friends"] = fir
+                    }
                 }
                 else if data["roleCode"].stringValue == "KH"{
-                    var fir = list[1]["friends"] as! Array<[String:String]>
-                    fir.append(["name":data["name"].stringValue, "phone":data["cellphoneNumber"].stringValue, "userid":data["id"].stringValue, "status":data["status"].stringValue])
-                    list[1]["friends"] = fir
+                    if data["status"].stringValue == "1"{
+                        freeze.append(["name":data["name"].stringValue, "phone":data["cellphoneNumber"].stringValue, "userid":data["id"].stringValue, "status":data["status"].stringValue, "role":data["roleCode"].stringValue])
+                    }else{
+                        var fir = list[1]["friends"] as! Array<[String:String]>
+                        fir.append(["name":data["name"].stringValue, "phone":data["cellphoneNumber"].stringValue, "userid":data["id"].stringValue, "status":data["status"].stringValue, "role":data["roleCode"].stringValue])
+                        list[1]["friends"] = fir
+                    }
                 }
+                list[2]["friends"] = freeze
             }
             else if AppUser.currentUser?.role == .EJDLS{
-                var fir = list[0]["friends"] as! Array<[String:String]>
-                fir.append(["name":data["name"].stringValue, "phone":data["cellphoneNumber"].stringValue, "userid":data["id"].stringValue, "status":data["status"].stringValue])
-                list[0]["friends"] = fir
+                var freeze = list[1]["friends"] as! Array<[String:String]>
+                if data["status"].stringValue == "1"{
+                    freeze.append(["name":data["name"].stringValue, "phone":data["cellphoneNumber"].stringValue, "userid":data["id"].stringValue, "status":data["status"].stringValue, "role":data["roleCode"].stringValue])
+                }else{
+                    var fir = list[0]["friends"] as! Array<[String:String]>
+                    fir.append(["name":data["name"].stringValue, "phone":data["cellphoneNumber"].stringValue, "userid":data["id"].stringValue, "status":data["status"].stringValue, "role":data["roleCode"].stringValue])
+                    list[0]["friends"] = fir
+                }
+                list[1]["friends"] = freeze
             }
         }
         

@@ -115,6 +115,7 @@ class AddUserViewController: UITableViewController,UITextFieldDelegate {
     func showRole(_ message: String){
         let cell = self.tableView.cellForRow(at: [0,2])
         cell?.textLabel?.text = message
+        cell?.textLabel?.textColor = UIColor.black
     }
     
     func clickSaveBtn(){
