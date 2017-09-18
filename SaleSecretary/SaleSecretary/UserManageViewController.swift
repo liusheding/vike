@@ -159,16 +159,6 @@ extension UserManageViewController: UITableViewDelegate, UITableViewDataSource, 
         
         cell.name?.text = userName
         cell.phone?.text = customer?.phone
-        
-        if customer?.status == "1"{ //锁定
-            cell.name.textColor = UIColor.red
-            cell.phone.textColor = UIColor.red
-        }else{
-            cell.name.textColor = UIColor.black
-            cell.phone.textColor = UIColor.lightGray
-        }
-
-        
         cell.picName.backgroundColor = ContactCommon.sampleColor[ indexPath.row % ContactCommon.count ]
         cell.picName.setTitle(cString , for: .normal )
         return cell
@@ -217,7 +207,52 @@ extension UserManageViewController: UITableViewDelegate, UITableViewDataSource, 
                 hub.mode = MBProgressHUDMode.text
                 hub.label.text = tips
                 customer?.status = status
-                self?.tableView.reloadRows(at: [indexPath], with: .automatic)
+                group.friends?.remove(at: indexPath.row)
+                if status == "1"{
+                    self?.contactsCells[(self?.contactsCells.count)!-1].friends?.append(customer!)
+                    self?.contactsCells[(self?.contactsCells.count)!-1].friends?.sort { (s1, s2) -> Bool in
+                        s1.name < s2.name
+                    }
+                }else{
+                    if AppUser.currentUser?.role == .PTYWY{
+                        if customer?.role == "YJDLS"{
+                            self?.contactsCells[0].friends?.append(customer!)
+                            self?.contactsCells[0].friends?.sort { (s1, s2) -> Bool in
+                                s1.name < s2.name
+                            }
+                        }else if customer?.role == "EJDLS"{
+                            self?.contactsCells[1].friends?.append(customer!)
+                            self?.contactsCells[1].friends?.sort { (s1, s2) -> Bool in
+                                s1.name < s2.name
+                            }
+                        }else if customer?.role == "KH"{
+                            self?.contactsCells[2].friends?.append(customer!)
+                            self?.contactsCells[2].friends?.sort { (s1, s2) -> Bool in
+                                s1.name < s2.name
+                            }
+                        }
+                    }else if AppUser.currentUser?.role == .YJDLS{
+                        if customer?.role == "EJDLS"{
+                            self?.contactsCells[0].friends?.append(customer!)
+                            self?.contactsCells[0].friends?.sort { (s1, s2) -> Bool in
+                                s1.name < s2.name
+                            }
+                        }else if customer?.role == "KH"{
+                            self?.contactsCells[1].friends?.append(customer!)
+                            self?.contactsCells[1].friends?.sort { (s1, s2) -> Bool in
+                                s1.name < s2.name
+                            }
+                        }
+                    }else if AppUser.currentUser?.role == .EJDLS{
+                        if customer?.role == "KH"{
+                            self?.contactsCells[0].friends?.append(customer!)
+                            self?.contactsCells[0].friends?.sort { (s1, s2) -> Bool in
+                                s1.name < s2.name
+                            }
+                        }
+                    }
+                }
+                self?.tableView.reloadData()
                 hub.hide(animated: true, afterDelay: 1)
             })
             request.response(completionHandler: {_ in
