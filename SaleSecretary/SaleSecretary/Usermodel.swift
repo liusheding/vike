@@ -123,7 +123,7 @@ class UserGroup:NSObject {
                 list[3]["friends"] = freeze
             }
             else if AppUser.currentUser?.role == .YJDLS{
-                var freeze = list[3]["friends"] as! Array<[String:String]>
+                var freeze = list[2]["friends"] as! Array<[String:String]>
                 if data["roleCode"].stringValue == "EJDLS"{
                     if data["status"].stringValue == "1"{
                         freeze.append(["name":data["name"].stringValue, "phone":data["cellphoneNumber"].stringValue, "userid":data["id"].stringValue, "status":data["status"].stringValue, "role":data["roleCode"].stringValue])
@@ -142,10 +142,10 @@ class UserGroup:NSObject {
                         list[1]["friends"] = fir
                     }
                 }
-                list[3]["friends"] = freeze
+                list[2]["friends"] = freeze
             }
             else if AppUser.currentUser?.role == .EJDLS{
-                var freeze = list[3]["friends"] as! Array<[String:String]>
+                var freeze = list[1]["friends"] as! Array<[String:String]>
                 if data["status"].stringValue == "1"{
                     freeze.append(["name":data["name"].stringValue, "phone":data["cellphoneNumber"].stringValue, "userid":data["id"].stringValue, "status":data["status"].stringValue, "role":data["roleCode"].stringValue])
                 }else{
@@ -153,7 +153,7 @@ class UserGroup:NSObject {
                     fir.append(["name":data["name"].stringValue, "phone":data["cellphoneNumber"].stringValue, "userid":data["id"].stringValue, "status":data["status"].stringValue, "role":data["roleCode"].stringValue])
                     list[0]["friends"] = fir
                 }
-                list[3]["friends"] = freeze
+                list[1]["friends"] = freeze
             }
         }
         
