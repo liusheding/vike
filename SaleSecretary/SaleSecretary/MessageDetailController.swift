@@ -28,6 +28,13 @@ class MessageDetailController: UITableViewController {
         tableView.backgroundColor = UIColor.groupTableViewBackground
         tableView.separatorStyle = .none
         
+        //滑倒最底部
+        DispatchQueue.main.async(execute: {
+            let offset = CGPoint(x:0, y:self.tableView.contentSize.height
+            - self.tableView.frame.size.height)
+            self.tableView.setContentOffset(offset, animated: false)
+        })
+        
     }
 
     override func didReceiveMemoryWarning() {
