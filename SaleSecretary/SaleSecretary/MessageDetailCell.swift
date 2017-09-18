@@ -10,9 +10,9 @@ import UIKit
 
 class MessageDetailCell: UITableViewCell {
     
+    @IBOutlet weak var cellcontent: UITextView!
     @IBOutlet weak var celltime: UILabel!
     @IBOutlet weak var celltitle: UILabel!
-    @IBOutlet weak var cellcontent: UILabel!
     @IBOutlet weak var imageview: UIImageView!
     var mtype:Int!
     
