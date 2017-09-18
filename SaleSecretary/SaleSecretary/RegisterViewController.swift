@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 class RegisterViewController: UIViewController,UITextFieldDelegate {
     @IBOutlet weak var backgroundView: UIView!
@@ -42,7 +43,7 @@ class RegisterViewController: UIViewController,UITextFieldDelegate {
             if newValue {
                 // 计时器
                 self.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: Selector(("countingDown")), userInfo: nil, repeats: true)
-                remaining = 30
+                remaining = 60
             } else {
                 self.timer?.invalidate()
                 self.timer = nil
@@ -148,16 +149,54 @@ class RegisterViewController: UIViewController,UITextFieldDelegate {
         let phoneValue = phone.text!
         let pwdValue = password.text!
         let nameValue = name.text!
+        let sms = smsCheck.text!
         if !Utils.isTelNumber(num: phoneValue) || pwdValue == "" || nameValue == "" {
             alert("请填写正确的手机号、姓名及密码")
             sender.isEnabled = true
             return
         }
-        let body = ["busi_scene": "REGISTER", "cellphoneNumber": phoneValue, "loginPwd": pwdValue, "name": nameValue]
-        let request = NetworkUtils.postBackEnd("C_USER", body: body , handler: {[weak self] (val ) in
-            self?.alert("注册成功")
+        // 校验短信
+        if sms.characters.count != 6 {
+            alert("请输入6位短信校验码长")
+            sender.isEnabled = true
+            return
+        }
+        
+        let checkBody = ["busi_code": "REGISTER", "cellphone_number": phoneValue, "sms_code": sms]
+        let checkReq = NetworkUtils.postBackEnd("R_SMSCODE_CHECK", body: checkBody, handler: {
+            json in
+            print(json)
         })
-        request.response(completionHandler: {_ in sender.isEnabled = true})
+        let body = ["busi_scene": "REGISTER", "cellphoneNumber": phoneValue, "loginPwd": pwdValue, "name": nameValue]
+        
+        let request = NetworkUtils.postBackEnd("C_USER", body: body , handler: {[weak self] (val ) in
+            let hub = MBProgressHUD.showAdded(to: (self?.view)!, animated: true)
+            hub.mode = MBProgressHUDMode.text
+            hub.label.text = "注册成功，正在登录中"
+            let id = val["body"]["id"].stringValue
+            APP_USER_ID = id
+            UserDefaults.standard.setValue(id, forKey: "APP_USER_ID")
+            UserDefaults.standard.synchronize()
+            
+            let r = AppUser.loadFromServer() { (user) in
+                AppUser.currentUser = user
+                let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+                let mainVC = storyBoard.instantiateViewController(withIdentifier: "mainID")
+                sleep(1)
+                do {
+                    UIApplication.shared.delegate?.window??.rootViewController = mainVC
+                } catch {
+                    print(error)
+                }
+            }
+            r?.response(completionHandler: {_ in
+                hub.hide(animated: true)
+            })
+        })
+        request.response(completionHandler: {_ in
+            sender.isEnabled = true
+            
+        })
     }
     
     @IBAction func smsCode(_ sender: UIButton) {
@@ -166,7 +205,12 @@ class RegisterViewController: UIViewController,UITextFieldDelegate {
             self.alert("请填写正确的手机号")
             return
         }
-        self.isCounting = true
+        // 短信发送
+        let req = NetworkUtils.postBackEnd("C_SMSCODE_SEND", body: ["busi_code": "REGISTER", "cellphone_number": phoneValue], handler: {
+            json in
+            self.isCounting = true
+        })
+        
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

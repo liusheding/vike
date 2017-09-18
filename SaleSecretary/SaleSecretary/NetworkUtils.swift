@@ -105,7 +105,6 @@ struct NetworkUtils {
     static func postBackEnd(_ method: String, body: [String: Any], successHandler: ((_ json : JSON) -> Void)?,
                             failedHandler: ((_ result: Error) -> Void)? ) {
         let bodyStr = createBody(method, body: body)
-        print(bodyStr)
         var req = URLRequest(url: URL(string: ZJKJ_API_URL)!)
         req.httpMethod = HTTPMethod.post.rawValue
         req.setValue("application/json", forHTTPHeaderField: "Content-Type")
