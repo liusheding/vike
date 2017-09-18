@@ -325,14 +325,6 @@ class UserSearchDelegator: NSObject, UITableViewDataSource, UITableViewDelegate,
         
         cell.name?.text = userName
         cell.phone?.text = customer.phone
-        
-        if customer.status == "1"{ //锁定
-            cell.name.textColor = UIColor.red
-            cell.phone.textColor = UIColor.red
-        }else{
-            cell.name.textColor = UIColor.black
-            cell.phone.textColor = UIColor.lightGray
-        }
         cell.picName.backgroundColor = ContactCommon.sampleColor[ indexPath.row % ContactCommon.count ]
         cell.picName.setTitle(cString , for: .normal )
         return cell
