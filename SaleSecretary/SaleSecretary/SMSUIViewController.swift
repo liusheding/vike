@@ -67,18 +67,17 @@ class SMSUIViewController : UITableViewController {
             let request = MessageSchedule.loadMySchedules({
                 msgs in
                 self.schedules = msgs
+                self.tableView.reloadData()
                 if self.schedules.count == 0 {
                     self.emptyView = EmptyContentView.init(frame: self.tableView.frame)
                     self.emptyView?.textLabel.text = "您还没有执行计划，点击右上角去新建一个吧～"
                     self.emptyView?.textLabel.numberOfLines = 2
                     self.emptyView?.showInView(self.view)
-                } else {
-                    self.tableView.reloadData()
                 }
             })
             request?.response(completionHandler: {
                 _ in
-                hub.hide(animated: true, afterDelay: 0.3)
+                hub.hide(animated: true, afterDelay: 0.1)
             })
         })
     }

@@ -190,22 +190,22 @@ class ScanResultViewController: UIViewController, ScanORCResultDelegate {
     }
     @IBAction func confirmAction(_ sender: UIBarButtonItem) {
         let customer: Customer = Customer()
-        let vals: [String?] = self.labels.enumerated().flatMap({
-            e -> String? in
-            return getText(at: [0, e.offset])
+        let vals: [String] = self.labels.enumerated().flatMap({
+            e -> String in
+            return getText(at: [0, e.offset]) ?? ""
         })
         let name = vals[0]
         let phone = vals[2]
-        if name == nil || phone == nil {
+        if name.trimmingCharacters(in: .whitespaces) == "" || phone.trimmingCharacters(in: .whitespaces) == "" {
             Utils.alert("请务必填写客户姓名和电话哦")
             return
         }
          // ["姓名*", "工作", "电话*", "公司", "邮件" ,"地点"]
-        customer.name = name!
-        customer.phone_number?.append(phone!)
-        customer.nick_name = "\(name!)\(vals[1] ?? "")"
-        customer.company = vals[3] ?? ""
-        customer.desc = vals[5] ?? ""
+        customer.name = name
+        customer.phone_number?.append(phone)
+        customer.nick_name = "\(name)\(vals[1])"
+        customer.company = vals[3]
+        customer.desc = vals[5]
         customer.group_id = (self.group?.id)!
         
         Utils.showLoadingHUB(view: self.view, msg: "保存中..", completion: {

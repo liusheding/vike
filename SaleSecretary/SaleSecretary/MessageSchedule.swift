@@ -61,6 +61,8 @@ class MessageSchedule: NSObject {
     
     var dxtd: String?
     
+    var containsCW: Bool?
+    
     override init() {
         super.init()
     }

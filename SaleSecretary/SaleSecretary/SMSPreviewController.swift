@@ -101,12 +101,14 @@ extension SMSPreviewController : UITableViewDataSource, UITableViewDelegate {
         let text = content?.replacingOccurrences(of: MSG_CW, with: cw!).replacingOccurrences(of: MSG_QM, with: kh.qm!)
         let nsText = NSString.init(string: text!)
         // 如果使用的统一称谓
-        let cwRange = nsText.range(of: cw!)
         let qmRange = nsText.range(of: kh.qm!)
         cell.textLabel?.text = nsText as String
         let attr = NSMutableAttributedString(string: text!)
-        if self.schedule.cw == nil {
-            attr.addAttribute(NSForegroundColorAttributeName, value: APP_THEME_COLOR, range: cwRange)
+        if schedule.containsCW! {
+            let cwRange = nsText.range(of: cw!)
+            if self.schedule.cw == nil {
+                attr.addAttribute(NSForegroundColorAttributeName, value: APP_THEME_COLOR, range: cwRange)
+            }
         }
         attr.addAttribute(NSForegroundColorAttributeName, value: APP_THEME_COLOR, range: qmRange)
         cell.textLabel?.attributedText = attr
@@ -118,7 +120,7 @@ extension SMSPreviewController : UITableViewDataSource, UITableViewDelegate {
             self.present(alert, animated: true, completion: nil)
         }
         // cell.textLabel?.enabledTapEffect = false
-        if self.schedule.cw == nil {
+        if self.schedule.cw == nil && self.schedule.containsCW! {
             cell.textLabel?.yb_addAttributeTapAction(with: [cw!, kh.qm!], tapClicked: cick)
         } else {
             cell.textLabel?.yb_addAttributeTapAction(with: [kh.qm!], tapClicked: cick)

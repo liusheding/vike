@@ -182,7 +182,6 @@ class RegisterViewController: UIViewController,UITextFieldDelegate {
                 AppUser.currentUser = user
                 let storyBoard = UIStoryboard(name: "Main", bundle: nil)
                 let mainVC = storyBoard.instantiateViewController(withIdentifier: "mainID")
-                sleep(1)
                 do {
                     UIApplication.shared.delegate?.window??.rootViewController = mainVC
                 } catch {
@@ -206,7 +205,7 @@ class RegisterViewController: UIViewController,UITextFieldDelegate {
             return
         }
         // 短信发送
-        let req = NetworkUtils.postBackEnd("C_SMSCODE_SEND", body: ["busi_code": "REGISTER", "cellphone_number": phoneValue], handler: {
+        let _ = NetworkUtils.postBackEnd("C_SMSCODE_SEND", body: ["busi_code": "REGISTER", "cellphone_number": phoneValue], handler: {
             json in
             self.isCounting = true
         })

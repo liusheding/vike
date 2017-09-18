@@ -19,7 +19,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="如：尊敬的客户" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hE5-SA-93i">
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="客户称谓，如：尊敬的客户" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hE5-SA-93i">
                         <rect key="frame" x="15" y="0.0" width="253" height="44"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="253" id="fOS-A1-6D0"/>
@@ -37,6 +37,12 @@
                         <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="短信模板没有客户称谓字段" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gxz-o2-5qQ">
+                        <rect key="frame" x="13" y="10" width="208" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstItem="QdP-7l-9J5" firstAttribute="leading" secondItem="x83-kg-LDa" secondAttribute="trailing" constant="7" id="2wb-um-DTs"/>
@@ -44,15 +50,19 @@
                     <constraint firstItem="x83-kg-LDa" firstAttribute="leading" secondItem="hE5-SA-93i" secondAttribute="trailing" constant="14" id="Sqh-yC-187"/>
                     <constraint firstItem="hE5-SA-93i" firstAttribute="top" secondItem="IPk-g6-UTT" secondAttribute="top" id="TGm-7q-U44"/>
                     <constraint firstItem="x83-kg-LDa" firstAttribute="centerY" secondItem="QdP-7l-9J5" secondAttribute="centerY" id="TgL-Ee-hYG"/>
+                    <constraint firstItem="Gxz-o2-5qQ" firstAttribute="baseline" secondItem="hE5-SA-93i" secondAttribute="baseline" id="Z1Q-wN-447"/>
                     <constraint firstItem="hE5-SA-93i" firstAttribute="leading" secondItem="IPk-g6-UTT" secondAttribute="leadingMargin" constant="7" id="ZMZ-F7-m59"/>
+                    <constraint firstItem="Gxz-o2-5qQ" firstAttribute="leading" secondItem="IPk-g6-UTT" secondAttribute="leadingMargin" constant="5" id="e04-6C-ebf"/>
                     <constraint firstItem="QdP-7l-9J5" firstAttribute="centerY" secondItem="IPk-g6-UTT" secondAttribute="centerY" id="flI-t2-lqy"/>
                     <constraint firstAttribute="trailing" secondItem="QdP-7l-9J5" secondAttribute="trailing" constant="8" id="g6m-Ju-qum"/>
                     <constraint firstItem="hE5-SA-93i" firstAttribute="centerY" secondItem="QdP-7l-9J5" secondAttribute="centerY" id="gdV-jq-aFP"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="noAppellationLabel" destination="Gxz-o2-5qQ" id="GqG-7S-3hJ"/>
                 <outlet property="switchControl" destination="QdP-7l-9J5" id="MG6-Qx-as5"/>
                 <outlet property="textField" destination="hE5-SA-93i" id="uan-RI-35n"/>
+                <outlet property="tipsLabel" destination="x83-kg-LDa" id="G8r-YT-hNP"/>
             </connections>
             <point key="canvasLocation" x="53.5" y="62"/>
         </tableViewCell>

@@ -95,6 +95,20 @@ class SMSTemplateViewController : UIViewController {
     var executeDate: String?
     //短信通道
     var dxtd: String?
+    //
+    var isAppellationShow = true {
+        
+        didSet {
+            self.appellationCell.switchControl.isHidden = !self.isAppellationShow
+            self.appellationCell.tipsLabel.isHidden = !self.isAppellationShow
+            self.appellationCell.noAppellationLabel.isHidden = self.isAppellationShow
+            if self.isAppellationShow && self.appellationCell.switchControl.isOn {
+                self.appellationCell.textField.isHidden = false
+            } else {
+                self.appellationCell.textField.isHidden = true
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -188,10 +202,11 @@ class SMSTemplateViewController : UIViewController {
         sched.userSign = sign.isEmpty ? (AppUser.currentUser?.name)! : sign
         for c in self.customers! {
             let kh = MsgKH(customer: c)
-            kh.sjhm = kh.sjhm.replacingOccurrences(of: "+86", with: "").trimmingCharacters(in: .whitespaces)
+            kh.sjhm = kh.sjhm.replacingOccurrences(of: "+86", with: "").trimmingCharacters(in: .whitespaces).replacingOccurrences(of: "-", with: "")
             kh.qm = sched.userSign
             sched.addCustomer(kh: kh)
         }
+        sched.containsCW = self.isAppellationShow
         return sched
     }
     
@@ -230,7 +245,7 @@ extension SMSTemplateViewController : UITableViewDataSource, UITableViewDelegate
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         if section == 0 {
             self.alreadyChose = UILabel(frame: CGRect(x: 10, y: 0, width: tableView.frame.width, height: 15))
-            self.alreadyChose.text = "已选择0/200人"
+            self.alreadyChose.text = "已选择0/2000人"
             self.alreadyChose.textAlignment = .right
             self.alreadyChose.backgroundColor = APP_BACKGROUND_COLOR
             self.alreadyChose.font = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
@@ -277,6 +292,10 @@ extension SMSTemplateViewController : UITableViewDataSource, UITableViewDelegate
             self.appellationCell = createAppellationCell() as! AppellationCellView
             let switchControl = self.appellationCell.switchControl
             switchControl?.addTarget(self, action: #selector(switchChanged), for: .valueChanged)
+            switchControl?.isOn = false
+            self.appellationCell.textField.isHidden = true
+            self.appellationCell.noAppellationLabel.text = "短信模板没有称谓字段，动态客户称谓功能无法使用"
+            self.appellationCell.noAppellationLabel.font = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
             return self.appellationCell
         case 3:
             self.inscribeView = createInscribeCell() as! InscribeViewCell
@@ -390,6 +409,8 @@ extension SMSTemplateViewController : TemplateSelectorDelegate, ChooseDateDelega
         cell?.textLabel?.textColor = UIColor.darkText
         self.dxtd = template.id
         self.content = template.content
+        self.isAppellationShow = (self.content?.contains("【称谓】"))!
+        // self.isAppellationShow = !self.isAppellationShow
     }
     
     func didchose(date: String) {

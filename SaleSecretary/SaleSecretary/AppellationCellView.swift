@@ -17,6 +17,9 @@ class AppellationCellView : UITableViewCell {
     
     @IBOutlet weak var switchControl: UISwitch!
     
+    @IBOutlet weak var noAppellationLabel: UILabel!
+    
+    @IBOutlet weak var tipsLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
