@@ -65,8 +65,12 @@ class CTCustomerDetailInfoViewController: UIViewController {
 //        callWebView.loadRequest(URLRequest(url:URL(string: "tel:\(10086)")!))
 //        self.view.addSubview(callWebView)
         //2.有提示
-        UIApplication.shared.open(URL(string: "telprompt://"+(self.userInfo.phone_number?[0])!)! , options: [:], completionHandler: nil)
-        
+        let phones = self.userInfo.phone_number!
+        if phones.count > 0 {
+            if let phone = Utils.replacePhoneRegx(phones[0]) {
+                UIApplication.shared.open(URL(string: "telprompt://\(phone)")! , options: [:], completionHandler: nil)
+            }
+        }
     }
     
     @IBAction func clickMessageButton(_ sender: Any) {
