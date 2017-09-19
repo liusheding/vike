@@ -43,10 +43,14 @@ class CTCustomerDetailInfoViewController: UIViewController {
         self.name.text = userInfo.name
         self.hidesBottomBarWhenPushed=true
         
-//        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(title: "保存", style: .plain , target: self, action: #selector(saveCustomer) )
+         self.view.addGestureRecognizer(UITapGestureRecognizer(target:self, action:#selector(self.handleTap(sender:))))
         // choose segment uiview
         showSelectedView(0)
 
+    }
+    
+    func handleTap( sender: UITapGestureRecognizer) {
+        sender.cancelsTouchesInView = false
     }
     
     override func didReceiveMemoryWarning() {
@@ -78,6 +82,8 @@ class CTCustomerDetailInfoViewController: UIViewController {
         
         let storyboardLocal = UIStoryboard(name: "ContactStoryboard" , bundle: nil)
         let detail = storyboardLocal.instantiateViewController(withIdentifier: "addingMessageView") as! CTAddMessageController
+        detail.userInfo = self.userInfo
+        
         self.navigationController?.pushViewController(detail, animated: true)
     }
 
@@ -95,12 +101,17 @@ class CTCustomerDetailInfoViewController: UIViewController {
         if segue.identifier == "embedCustomerInfo" {
             let vc = segue.destination as! CTInfoViewController
             vc.reloadDelegate = contactViewController
+            vc.currentInfo = self.userInfo
+        }else if segue.identifier == "embedTrail" {
+            let vc = segue.destination as! CTrailViewController
+            vc.custInfo = self.userInfo
         }
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        print(self.segments.frame)
+//        print(self.segments.frame)
+        
     }
 
 }

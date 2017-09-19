@@ -42,9 +42,6 @@ class Customer : NSObject{
     static public func == (lhs: Customer, rhs: Customer) -> Bool {
         return true
     }
-    //    static func == (l: Customer, r: Customer) -> Bool {
-    //        return l.phone_number![0] == r.phone_number![0]
-    //    }
     
     override init() {
         self.name = ""
@@ -275,6 +272,7 @@ class CustomerGroup:NSObject {
 
 class TrailMessage {
     var id : String?
+    var cusInfoId : String?
     var title : String?
     var content : String?
     var date : String?
@@ -282,6 +280,7 @@ class TrailMessage {
     init() {
         self.id = ""
         self.title = ""
+        self.cusInfoId = ""
         self.content = ""
         self.date = ""
     }
@@ -291,13 +290,28 @@ class TrailMessage {
         self.title = json["title"].stringValue
         self.content = json["content"].stringValue
         self.date = json["date"].stringValue
+        self.cusInfoId = ""
     }
     
-    init(title : String , content : String) {
+    init(title : String , content : String , cusInfoId : String) {
         self.title = title
         self.content  = content
-        self.date = DateFormatterUtils.getStringFromDate( Date.init() , dateFormat:"yyyy-MM-dd HH-mm-ss")
+        self.date = DateFormatterUtils.getStringFromDate( Date.init() , dateFormat:"yyyy/MM/dd HH:mm:ss")
         self.id = "1"
+        self.cusInfoId = cusInfoId
+    }
+    
+    func save(_ callback: @escaping ((JSON) -> Void) ) -> DataRequest? {
+        var body :[String : String] = [:]
+        body["cusInfoId"] = self.cusInfoId
+        body["title"]     = self.title
+        body["content"]   = self.content
+        let request = NetworkUtils.postBackEnd("C_TXL_CUS_GTGJ", body: body) { (json) in
+            let id = json["body"]["id"].stringValue
+            self.id = id
+            callback(json["body"])
+        }
+        return request
     }
 }
 

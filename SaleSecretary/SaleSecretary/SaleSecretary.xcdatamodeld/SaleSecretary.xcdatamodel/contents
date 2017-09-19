@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="12141" systemVersion="16G29" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="12141" systemVersion="16C67" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Customers" representedClassName="Customers" syncable="YES" codeGenerationType="class">
         <attribute name="app_userId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="birthday" optional="YES" attributeType="String" syncable="YES"/>
@@ -32,10 +32,18 @@
         <attribute name="msg_type" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="msg_unread" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
     </entity>
+    <entity name="TrailMsg" representedClassName="TrailMsg" syncable="YES" codeGenerationType="class">
+        <attribute name="content" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="cusInfoId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="date" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <elements>
-        <element name="Customers" positionX="-63" positionY="-18" width="128" height="210"/>
+        <element name="Customers" positionX="-63" positionY="-18" width="128" height="30"/>
         <element name="Group" positionX="160" positionY="123" width="128" height="90"/>
         <element name="MsgItem" positionX="279" positionY="2" width="128" height="105"/>
         <element name="MsgList" positionX="108" positionY="-9" width="128" height="133"/>
+        <element name="TrailMsg" positionX="108" positionY="81" width="128" height="30"/>
     </elements>
 </model>

@@ -22,6 +22,8 @@ class CTManagerGroupController: UIViewController  {
     
     var contactsTableviewDelegate : ContactTableViewDelegate?
     
+    var groupDelegate : GroupDataDelegate?
+    
     @IBOutlet weak var localTableView: UITableView!
     
     override func viewDidLoad() {
@@ -34,10 +36,9 @@ class CTManagerGroupController: UIViewController  {
         self.localTableView.setEditing(true , animated: true)
         // init data
         self.group = MemGroup.toMemGroup(dbGroup: self.contactDb.getGroupInDb(userId: APP_USER_ID!, true))
-        
         self.localTableView.register( UITableViewCell.self, forCellReuseIdentifier: self.managerGroup )
         self.localTableView.tableFooterView = UIView()
-
+        self.groupDelegate = CTChangeGroupViewController.instance
     }
     
 }
@@ -107,6 +108,9 @@ extension CTManagerGroupController : UITableViewDelegate , UITableViewDataSource
                 if self.contactsTableviewDelegate != nil {
                     self.contactsTableviewDelegate?.reloadTableViewData()
                 }
+                if self.groupDelegate != nil {
+                    self.groupDelegate?.reloadGroupData()
+                }
             })
         })
         alertController.addAction(cancelAction)
@@ -156,6 +160,9 @@ extension CTManagerGroupController : UITableViewDelegate , UITableViewDataSource
             request.response(completionHandler: { _ in
                 if self.contactsTableviewDelegate != nil {
                     self.contactsTableviewDelegate?.reloadTableViewData()
+                }
+                if self.groupDelegate != nil {
+                    self.groupDelegate?.reloadGroupData()
                 }
             })
         }

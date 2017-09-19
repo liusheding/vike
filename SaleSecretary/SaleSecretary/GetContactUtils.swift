@@ -166,6 +166,38 @@ struct GetContactUtils {
         return  result
     }
     
+    static func writeData(cust : [Customer]) {
+        if cust.count > 0 {
+            var i = 0
+            for ct in cust {
+                i += 1
+                if i%3000 == 0 {
+                    print( "+++-------\(i)" )
+                }
+                //创建CNMutableContact类型的实例
+                let contactToAdd = CNMutableContact()
+                contactToAdd.familyName = ct.name!
+//                contactToAdd.givenName = "飞"
+                //设置电话
+                contactToAdd.phoneNumbers = [ CNLabeledValue(label: CNLabelPhoneNumberMobile,
+                                                                 value: CNPhoneNumber(stringValue: ct.phone_number![0] )) ]
+                //设置email
+                //let email = CNLabeledValue(label: CNLabelHome, value: "feifei@163.com" as NSString)
+                //contactToAdd.emailAddresses = [email]
+                
+                //添加联系人请求
+                let saveRequest = CNSaveRequest()
+                saveRequest.add(contactToAdd, toContainerWithIdentifier: nil)
+                do {
+                    //写入联系人
+                    try self.contactStore.execute(saveRequest)
+                } catch {
+                    print(error)
+                }
+            }
+        }
+    }
+    
     func loadContactsData() {
         //获取授权状态
         let status = CNContactStore.authorizationStatus(for: .contacts)

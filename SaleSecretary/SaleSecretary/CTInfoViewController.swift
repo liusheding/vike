@@ -23,7 +23,6 @@ class CTInfoViewController: UIViewController {
     var reloadDelegate : ContactTableViewDelegate?
     
     var currentInfo : Customer?
-    var changedInfo : Customer?
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -35,6 +34,17 @@ class CTInfoViewController: UIViewController {
         
         self.groups = self.contactDb.getGroupInDb(userId: APP_USER_ID!)
         // Do any additional setup after loading the view.
+        //点击空白收起键盘
+        self.view.addGestureRecognizer(UITapGestureRecognizer(target:self, action:#selector(self.handleTap(sender:))))
+    }
+
+    func handleTap(sender: UITapGestureRecognizer) {
+        if sender.state == .ended {
+            for str in self.inputtext{
+                str.resignFirstResponder()
+            }
+        }
+        sender.cancelsTouchesInView = false
     }
 
     override func didReceiveMemoryWarning() {
@@ -48,8 +58,7 @@ extension CTInfoViewController : UITableViewDelegate , UITableViewDataSource {
     
     // required
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
-        let parentView = self.parent as! CTCustomerDetailInfoViewController
-        self.currentInfo = parentView.userInfo
+        
         return createCTInfoCell(indexPath: indexPath )
     }
     
@@ -64,11 +73,19 @@ extension CTInfoViewController : UITableViewDelegate , UITableViewDataSource {
                 cell.textLabel?.text = self.infoPate[i]
                 cell.detailTextLabel?.text = dataCell[i] as? String
                 cell.accessoryType = .disclosureIndicator
+//                cell.leftAnchor.constraint(equalTo:  , constant: 5)
                 return cell
             }else {
                 let cell = tableView.dequeueReusableCell(withIdentifier: self.cellId , for: indexPath) as! CTAddUserCell
                 cell.title.text = self.infoPate[i]
                 cell.inputtext.text = dataCell[i] as? String
+                cell.inputtext.borderStyle = .none
+                if indexPath.row == 1{
+                    cell.inputtext.keyboardType = .phonePad
+                    cell.inputtext.delegate = self as? UITextFieldDelegate
+                }else if indexPath.row ==  3{
+                    cell.inputtext.isSecureTextEntry = true
+                }
                 return cell
             }
             
@@ -76,6 +93,7 @@ extension CTInfoViewController : UITableViewDelegate , UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: self.cellId , for: indexPath) as! CTAddUserCell
             cell.title.text = "称谓"
             cell.inputtext.text = self.currentInfo?.nick_name
+            cell.inputtext.borderStyle = .none
             return cell
         case 2:
             let cell = UITableViewCell(style: UITableViewCellStyle.value1, reuseIdentifier: "cell")
@@ -115,7 +133,6 @@ extension CTInfoViewController : UITableViewDelegate , UITableViewDataSource {
     }
     
     func saveCustomer() {
-        print("--------")
         let arr : [String] = ["name","phone" , "company" , "birthday" , "desc" ,"nickName" , "group"]
         var body : [String : String] = [:]
         
@@ -137,11 +154,16 @@ extension CTInfoViewController : UITableViewDelegate , UITableViewDataSource {
                 body[arr[i]] = c?.textLabel?.text
             }
         }
-        let request = NetworkUtils.postBackEnd("", body: [:]) { (json) in
+        let request = NetworkUtils.postBackEnd("", body: body) { (json) in
             
         }
+        request.response { (_) in
+            if self.reloadDelegate != nil {
+                self.reloadDelegate?.reloadTableViewData()
+            }
+            self.navigationController?.popViewController(animated: true)
+        }
     }
-
     
     func showRole(_ message: String , index : IndexPath){
         let cell = self.tableView.cellForRow(at: index)
@@ -154,11 +176,13 @@ extension CTInfoViewController : UITableViewDelegate , UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.tableView.deselectRow(at: indexPath, animated: false)
         if indexPath.section == 0 {
             if indexPath.row == 3 {
                 let shooseView = ChooseDataView.init(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT))
                 shooseView.delegate = self
                 shooseView.showInViewController(self)
+                self.tableView.deselectRow(at: indexPath, animated: false)
             }
         }else if indexPath.section == 2 {
             var titles : [String] = []
@@ -217,14 +241,18 @@ extension CTInfoViewController : UITableViewDelegate , UITableViewDataSource {
     // end of required 
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 10
+        return 5
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 1
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 40
+        if indexPath.section == 4 {
+            return 50
+        }else {
+            return 40
+        }
     }
     func numberOfSections(in tableView: UITableView) -> Int{
         return 5

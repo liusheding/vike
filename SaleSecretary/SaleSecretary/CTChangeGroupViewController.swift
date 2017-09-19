@@ -9,6 +9,9 @@
 import UIKit
 import MBProgressHUD
 
+protocol GroupDataDelegate {
+    func reloadGroupData()
+}
 
 private let reuseIdentifier = "ChangeCell"
 class CTChangeGroupViewController: UIViewController {
@@ -33,11 +36,11 @@ class CTChangeGroupViewController: UIViewController {
     
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var confirmButton: UIButton!
-    
+    static var instance : CTChangeGroupViewController!
     func initSetting() {
         
         // init data
-        self.groupArr = MemGroup.toMemGroup(dbGroup: self.contextDb.getGroupInDb(userId: APP_USER_ID!))
+        self.groupArr = MemGroup.toMemGroup(dbGroup: self.contextDb.getGroupInDb(userId: APP_USER_ID! , true))
         self.groupArr.append( self.addIconTag ) // the last for "Add button"
     }
     
@@ -88,6 +91,7 @@ class CTChangeGroupViewController: UIViewController {
         self.view.layer.cornerRadius = 10
         // Register cell classes
         self.collectionView.register( UINib.init(nibName: String.init(describing: AddingCustomViewCell.self ) , bundle: nil) , forCellWithReuseIdentifier: reuseIdentifier)
+        CTChangeGroupViewController.instance = self
     }
     
     override func didReceiveMemoryWarning() {
@@ -112,6 +116,9 @@ extension CTChangeGroupViewController  : UICollectionViewDelegate, UICollectionV
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! AddingCustomViewCell
             
             if indexPath.row == (self.groupArr.count-1) {
+                // remove setting
+//                cell.addingButton.removeTarget(self , action: #selector(self.choosedButton(_:)) , for: .touchDown )
+//                cell.addingButton.layer.borderWidth = 0
                 cell.addingButton.setTitle("", for: .normal)
                 cell.addingButton.setImage(UIImage(named: "icon_tj") , for: .normal )
                 cell.addingButton.tintColor = ContactCommon.THEME_COLOR
@@ -241,4 +248,11 @@ extension CTChangeGroupViewController  : UICollectionViewDelegate, UICollectionV
         }
         
     }
+
+extension CTChangeGroupViewController : GroupDataDelegate {
+    func reloadGroupData() {
+        self.initSetting()
+        self.collectionView.reloadData()
+    }
+}
 

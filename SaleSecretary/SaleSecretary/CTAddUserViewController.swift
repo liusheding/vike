@@ -82,22 +82,26 @@ class CTAddUserViewController: UITableViewController {
         if indexPath.section == 0{
             if indexPath.row == 5{
                 let cell = UITableViewCell(style: .value1, reuseIdentifier: "addUserCell")
+                cell.textLabel?.font = UIFont.systemFont(ofSize: 17)
                 cell.textLabel?.text = self.titles[0]?[5]
                 cell.accessoryType = .disclosureIndicator
                 return cell
             }else if indexPath.row == 0 || indexPath.row == 1{
                 let cell = tableView.dequeueReusableCell(withIdentifier: mustcellId, for: indexPath) as! MustAddCell
+                cell.inputtext.borderStyle = .none
                 cell.title.text = self.titles[0]?[indexPath.row]
                 cell.selectionStyle = .none
                 self.inputtext.append(cell.inputtext)
                 return cell
             }else if  indexPath.row == 0 || indexPath.row == 2{
                 let cell = UITableViewCell(style: .value1, reuseIdentifier: "addUserCell")
+                cell.textLabel?.font = UIFont.systemFont(ofSize: 17)
                 cell.textLabel?.text = self.titles[0]?[indexPath.row]
                 cell.accessoryType = .disclosureIndicator
                 return cell
             }else {
                 let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! CTAddUserCell
+                cell.inputtext.borderStyle = .none
                 cell.title.text = self.titles[0]?[indexPath.row]
                 cell.selectionStyle = .none
                 self.inputtext.append(cell.inputtext)
@@ -142,13 +146,16 @@ class CTAddUserViewController: UITableViewController {
             let shooseView = ChooseDateView.init(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT))
             shooseView.delegate = self
             shooseView.showInViewController(self)
+            tableView.deselectRow(at: indexPath, animated: false)
         }else if indexPath.section == 0 && indexPath.row == 2 {
             self.chooseRole(title: "请选择性别", data: ["男", "女"] , index:  indexPath)
+            tableView.deselectRow(at: indexPath, animated: false)
         }else if indexPath.section == 1 {
             var titles : [String] = []
             for t in self.groups {
                 titles.append( t.group_name! )
             }
+            tableView.deselectRow(at: indexPath, animated: false)
             self.chooseRole(title: "请选择分组", data: titles , index:  indexPath )
         }
     }

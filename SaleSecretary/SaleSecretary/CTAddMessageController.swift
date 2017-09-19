@@ -15,28 +15,28 @@ class CTAddMessageController: UIViewController {
     @IBOutlet weak var content: UITextView!
     
     @IBOutlet weak var backView: UIView!
-    
-    
-    
+    var userInfo : Customer?
     let db = CustomerDBOp.defaultInstance()
+    var trailDelegate : TrailMsgReloadDelegate?
     
     let placeholderLabel = UILabel.init()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.titleText.borderStyle = .none
         self.backView.backgroundColor = UIColor.groupTableViewBackground
         self.content.delegate = self
         self.titleText.delegate = self
         
         self.navigationSetting()
-        
+        self.titleText.placeholder = "请输入轨迹主题"
         self.automaticallyAdjustsScrollViewInsets = false
         self.placeholderLabel.frame = CGRect(x : 5 , y: 5, width: UIScreen.main.bounds.size.width, height: 20)
         self.placeholderLabel.font = UIFont.init(name: "PingFangSC-Regular", size: 16)
         self.placeholderLabel.text = "记录下轨迹的详细内容（限长1000）"
         self.placeholderLabel.textColor = UIColor.lightGray
         self.content.addSubview(self.placeholderLabel)
-        
+        self.trailDelegate = CTrailViewController.instance
         //点击空白收起键盘
         self.view.addGestureRecognizer(UITapGestureRecognizer(target:self, action:#selector(self.handleTap(sender:))))
     }
@@ -64,11 +64,16 @@ class CTAddMessageController: UIViewController {
             return
         }
         
-        let body : [String : Any] = ["cusInfoId": APP_USER_ID ?? "" , "title" : title ?? "" , "content" : content ?? "" ]
-        NetworkUtils.postBackEnd("C_TXL_CUS_GTGJ", body: body, handler: { (val) in
-            print(val)
-        })
+        let trail = TrailMessage.init(title: title! , content: content!, cusInfoId: (self.userInfo?.id)!)
+        let request =  trail.save { (_) in
+            self.db.storeTrailInfo(trail: trail)
+        }
         
+        request?.response { (_) in
+            if self.trailDelegate != nil {
+                self.trailDelegate?.reloadTrailMsg()
+            }
+        }
 //        self.db.storeTrailInfo(trail: TrailMessage.init(title: title!, content: content!))
         
         self.navigationController?.popViewController(animated: true)

@@ -398,15 +398,29 @@ class CustomerDBOp : NSObject {
         
         person.setValue( trail.id , forKey: "id")
         person.setValue( trail.title , forKey: "title")
-        person.setValue( trail.content, forKey: "message")
+        person.setValue( trail.content, forKey: "content")
         person.setValue( trail.date , forKey: "date")
-        
+        person.setValue( trail.cusInfoId , forKey: "cusInfoId")
         do {
             try context.save()
             NSLog("op group saved")
         }catch{
             print(error)
         }
+    }
+    
+    func queryTrailInfo(cusInfoId : String) -> [TrailMsg] {
+        var result : [TrailMsg] = []
+        let fetchRequest = NSFetchRequest<TrailMsg>(entityName: "TrailMsg")
+        
+        fetchRequest.predicate = NSPredicate(format: "cusInfoId = %@", argumentArray: [cusInfoId])
+        do {
+            let searchResults = try getContext().fetch(fetchRequest)
+            result = searchResults
+        } catch  {
+            NSLog(error as! String)
+        }
+        return result
     }
     
     

@@ -23,6 +23,7 @@ class CTChooseNewerController: UIViewController {
     
     let contextDb  = CustomerDBOp.defaultInstance()
     
+    
     var tableDelegate : ContactTableViewDelegate?
     let cellId = "contactsCell"
     
@@ -31,20 +32,23 @@ class CTChooseNewerController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
+        hud.label.text = "读取通讯录中..."
         self.chooseAlertView.isHidden = true
+        // init contacts data
+        findNewCustomer()
+        hud.hide(animated: true)
+        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.navigationItem.title = "新的客户"
         self.tableView.tableFooterView = UIView()
         self.tableView.dataSource = self
         self.tableView.delegate  = self
         self.tableView.register(UINib(nibName: String(describing: PersonContactCell.self), bundle: nil), forCellReuseIdentifier: cellId)
         
-        // init contacts data
-        findNewCustomer()
     }
     
     func requestAccessToContacts(_ completion: @escaping (_ success: Bool) -> Void) {
@@ -78,8 +82,7 @@ class CTChooseNewerController: UIViewController {
     
     //  query in db
     func findNewCustomer(){
-        let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
-        hud.label.text = "读取通讯录中..."
+        
         self.requestAccessToContacts { [unowned self](success) in
             if success {
                 GetContactUtils.simpleWay2GetContactData2({ (success, tmpContact) in
@@ -99,7 +102,7 @@ class CTChooseNewerController: UIViewController {
                                 self.alreadyAdded.append(cd)
                             }
                         }
-                        hud.hide(animated: true)
+//                        hud.hide(animated: true)
                     }else {
                         print("something wrong!!")
                     }
@@ -130,16 +133,6 @@ class CTChooseNewerController: UIViewController {
         self.tableView.alpha = 1.0
         self.tableView.isUserInteractionEnabled = true
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 }
 
 extension CTChooseNewerController : UITableViewDelegate , UITableViewDataSource  {

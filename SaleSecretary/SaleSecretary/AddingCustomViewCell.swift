@@ -12,7 +12,7 @@ class AddingCustomViewCell: UICollectionViewCell {
 
     
     @IBOutlet weak var addingButton: UIButton!
-    
+
 //    override init(frame: CGRect) {
 //        super.init(frame: frame)
 //        self.addingButton.layer.borderWidth = 1

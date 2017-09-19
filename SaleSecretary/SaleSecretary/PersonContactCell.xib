@@ -15,12 +15,11 @@
             <rect key="frame" x="0.0" y="0.0" width="381" height="44"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="381" height="43.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="381" height="44"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lnk-tX-bWm">
-                        <rect key="frame" x="62" y="5" width="176" height="20"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lnk-tX-bWm">
+                        <rect key="frame" x="62" y="5" width="239" height="23"/>
                         <attributedString key="attributedText">
                             <fragment content="Label">
                                 <attributes>
@@ -31,9 +30,8 @@
                         </attributedString>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fi7-UI-ZDd">
-                        <rect key="frame" x="62" y="25" width="196" height="16"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fi7-UI-ZDd">
+                        <rect key="frame" x="62" y="28" width="219" height="19"/>
                         <attributedString key="attributedText">
                             <fragment content="Label">
                                 <attributes>
@@ -46,8 +44,11 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VNR-ie-vFP">
-                        <rect key="frame" x="324" y="9" width="52" height="25"/>
+                        <rect key="frame" x="331" y="9" width="45" height="25"/>
                         <color key="backgroundColor" red="0.0039215686274509803" green="0.70588235294117641" blue="0.078431372549019607" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="45" id="jUG-DI-QOA"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <state key="normal">
                             <color key="titleColor" red="0.98229456719999997" green="0.98235905170000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -74,6 +75,7 @@
                     </button>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="fi7-UI-ZDd" firstAttribute="leading" secondItem="lnk-tX-bWm" secondAttribute="leading" id="2qY-ax-pNc"/>
                     <constraint firstItem="J03-BF-tkn" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" symbolic="YES" id="93Q-XY-3O7"/>
                     <constraint firstAttribute="trailing" secondItem="VNR-ie-vFP" secondAttribute="trailing" constant="5" id="Gk4-jW-czh"/>
                     <constraint firstItem="J03-BF-tkn" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="4" id="H85-MX-J7b"/>
@@ -81,9 +83,15 @@
                     <constraint firstAttribute="bottom" secondItem="VNR-ie-vFP" secondAttribute="bottom" constant="10" id="I28-RK-wQS"/>
                     <constraint firstItem="J03-BF-tkn" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="LDy-YT-qpm"/>
                     <constraint firstItem="VNR-ie-vFP" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="9" id="NGX-Qh-YhO"/>
+                    <constraint firstItem="VNR-ie-vFP" firstAttribute="leading" secondItem="fi7-UI-ZDd" secondAttribute="trailing" constant="66" id="OlW-tv-2eh"/>
+                    <constraint firstItem="lnk-tX-bWm" firstAttribute="leading" secondItem="J03-BF-tkn" secondAttribute="trailing" constant="16" id="QZ2-UR-vxc"/>
                     <constraint firstItem="J03-BF-tkn" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="3.5" id="R3T-DC-ziP"/>
+                    <constraint firstItem="VNR-ie-vFP" firstAttribute="leading" secondItem="fi7-UI-ZDd" secondAttribute="trailing" constant="50" id="Xjj-aq-ws1"/>
+                    <constraint firstItem="VNR-ie-vFP" firstAttribute="leading" secondItem="lnk-tX-bWm" secondAttribute="trailing" constant="30" id="Zsh-8B-gRW"/>
                     <constraint firstItem="VNR-ie-vFP" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="324" id="ans-Ug-jCa"/>
                     <constraint firstAttribute="bottom" secondItem="J03-BF-tkn" secondAttribute="bottom" constant="4" id="fbN-Uq-8aB"/>
+                    <constraint firstItem="fi7-UI-ZDd" firstAttribute="top" secondItem="lnk-tX-bWm" secondAttribute="bottom" id="sTr-Y4-yTD"/>
+                    <constraint firstItem="lnk-tX-bWm" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="xf1-Hf-q8b"/>
                 </constraints>
                 <variation key="default">
                     <mask key="constraints">
@@ -91,6 +99,8 @@
                         <exclude reference="LDy-YT-qpm"/>
                         <exclude reference="R3T-DC-ziP"/>
                         <exclude reference="fbN-Uq-8aB"/>
+                        <exclude reference="OlW-tv-2eh"/>
+                        <exclude reference="ans-Ug-jCa"/>
                     </mask>
                 </variation>
             </tableViewCellContentView>
