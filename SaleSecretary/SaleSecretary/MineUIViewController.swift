@@ -125,9 +125,6 @@ class MineUIViewController: UITableViewController {
     }
     
     func loading(){
-        let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
-        hud.label.text = "正在加载中..."
-        
         DispatchQueue.global(qos: .userInitiated).async {
             let body = ["busi_scene":"USER_INFO", "id": APP_USER_ID]
             let request = NetworkUtils.postBackEnd("R_BASE_USER", body: body) {
@@ -144,7 +141,6 @@ class MineUIViewController: UITableViewController {
                 smscell.mineinfo.text = "剩余\(messageKyts)条"
             }
             request.response(completionHandler: { _ in
-                hud.hide(animated: true)
             })
         }
     }

@@ -20,7 +20,7 @@ class UserProtocolController: UIViewController {
         navBar.backgroundColor = UIColor.groupTableViewBackground
         // 自定义导航栏的title，用UILabel实现
         let titleLabel = UILabel(frame: CGRect(x:0,y:0,width:50,height:60))
-        titleLabel.text = "用户协议"
+        titleLabel.text = "用户服务协议"
         
         // 创建导航栏组件
         let navItem = UINavigationItem()
