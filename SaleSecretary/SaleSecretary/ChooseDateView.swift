@@ -47,15 +47,15 @@ class ChooseDateView: UIView {
         self.contentView.backgroundColor = UIColor.white
         
         let cancelBtn = UIButton(type:.custom)
-        cancelBtn.frame = CGRect(x:20, y:10, width:16, height:16)
+        cancelBtn.frame = CGRect(x:0, y:0, width:43, height:43)
         cancelBtn.addTarget(self, action: #selector(self.cancelBtnClicked), for: .touchUpInside)
-        cancelBtn.setBackgroundImage(UIImage(named: "icon_gb"), for: UIControlState())
+        cancelBtn.setImage(UIImage(named: "icon_gb"), for: UIControlState())
         contentView.addSubview(cancelBtn)
         
         let commitBtn = UIButton(type:.custom)
-        commitBtn.frame = CGRect(x:frame.width - 41, y:10, width:21, height:14)
+        commitBtn.frame = CGRect(x:frame.width - 43, y:0, width:43, height:43)
         commitBtn.addTarget(self, action: #selector(self.commitBtnClicked), for: .touchUpInside)
-        commitBtn.setBackgroundImage(UIImage(named: "icon_dg"), for: UIControlState())
+        commitBtn.setImage(UIImage(named: "icon_dg"), for: UIControlState())
         contentView.addSubview(commitBtn)
         
         tableView = createTableView()
