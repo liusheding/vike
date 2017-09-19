@@ -189,6 +189,29 @@ class Customer : NSObject{
         return request
     }
     
+    public func update(cust:Customer,  _ callback: @escaping ((JSON) -> Void)) -> DataRequest? {
+        var body : [String : String] = [:]
+        body["id"]  = cust.id
+        body["userId"] = APP_USER_ID!
+        body["name"]       = self.name
+        body["cusGroupId"] = self.group_id
+        body["cellphoneNumber"] = (self.phone_number?.count)!>0 ? self.phone_number?[0] : ""
+        body["sex"]        = "\(self.gender)"
+        body["birthday"]   = self.birthday
+        body["birthdayType"] = self.is_solar ? "0" : "1"
+        body["company"]    = self.company
+        body["cw"]         = self.nick_name
+        body["desc"]       = self.desc
+        
+        let request = NetworkUtils.postBackEnd("U_TXL_CUS_INFO", body: body) { (json) in
+            self.contactDb.updateCustomer(cust: self)
+            callback(json)
+        }
+        
+        return request
+    }
+    
+    
 //    public func update() -> DataRequest {
 //        
 //    }

@@ -153,6 +153,33 @@ class CustomerDBOp : NSObject {
         }
     }
     
+    func updateCustomer(cust : Customer) {
+        let context = getContext()
+        let fetchRequest = NSFetchRequest<Customers>(entityName: "Customers")
+        fetchRequest.fetchOffset = 0 //查询的偏移量
+        let phone = (cust.phone_number?.count)! > 0 ? cust.phone_number?[0] : ""
+        
+        fetchRequest.predicate = NSPredicate(format: "phone_number = %@  and app_userId = %s ", argumentArray: [ phone , APP_USER_ID!])
+        do {
+            let searchResults = try context.fetch(fetchRequest)
+            NSLog("numbers of update \(searchResults.count)")
+            if searchResults.count > 0 {
+                for sr in searchResults {
+                    sr.birthday = cust.birthday
+                    sr.user_name = cust.name
+                    sr.nick_name = cust.nick_name
+                    sr.gender = Int16(cust.gender)
+                    sr.company = cust.company
+                    sr.phone_number = (cust.phone_number?.count)! > 0 ? cust.phone_number?[0] : ""
+                    sr.id = cust.id
+                }
+            }
+            try context.save()
+        } catch  {
+            NSLog(error as! String)
+        }
+    }
+    
     func batchDeleteCustomer(cust : [Customer] , tag : String = "") {
         if cust.count > 0 {
             var ids : [String] = []

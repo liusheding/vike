@@ -32,10 +32,26 @@ class CTInfoViewController: UIViewController {
         self.tableView.dataSource = self
         tableView.register(UINib(nibName: String(describing: CTAddUserCell.self), bundle: nil), forCellReuseIdentifier: cellId)
         
+        self.birthDay = (self.currentInfo?.birthday)!
+        
         self.groups = self.contactDb.getGroupInDb(userId: APP_USER_ID!)
+        
         // Do any additional setup after loading the view.
         //点击空白收起键盘
         self.view.addGestureRecognizer(UITapGestureRecognizer(target:self, action:#selector(self.handleTap(sender:))))
+        if self.currentInfo?.id == nil || (self.currentInfo?.id.characters.count)! > 0 {
+            self.getDataFromServer()
+        }
+    }
+    
+    func getDataFromServer() {
+        let request = NetworkUtils.postBackEnd("R_BASE_TXL_CUS_INFO" , body: ["userId" : APP_USER_ID! , "cellphoneNumber": (self.currentInfo?.phone_number?.count)!>0 ? self.currentInfo?.phone_number?[0] ?? "" : "" ]) { [weak self](json) in
+            let id = json["body"]["id"].stringValue
+            self?.currentInfo?.id  = id
+        }
+        request.response { (_) in
+            
+        }
     }
 
     func handleTap(sender: UITapGestureRecognizer) {
@@ -73,7 +89,6 @@ extension CTInfoViewController : UITableViewDelegate , UITableViewDataSource {
                 cell.textLabel?.text = self.infoPate[i]
                 cell.detailTextLabel?.text = dataCell[i] as? String
                 cell.accessoryType = .disclosureIndicator
-//                cell.leftAnchor.constraint(equalTo:  , constant: 5)
                 return cell
             }else {
                 let cell = tableView.dequeueReusableCell(withIdentifier: self.cellId , for: indexPath) as! CTAddUserCell
@@ -136,37 +151,28 @@ extension CTInfoViewController : UITableViewDelegate , UITableViewDataSource {
     }
     
     func saveCustomer() {
-        let arr : [String] = ["name","phone" , "company" , "birthday" , "desc" ,"nickName" , "group"]
-        var body : [String : String] = [:]
+        var gdId = ""
+        for gd in self.groups {
+            if self.groupName == gd.group_name {
+                gdId = gd.id!
+                break
+            }
+        }
         
-        for i in 0...6 {
-            
-            if i < 5 {
-                if i == 3 {
-                    let c = self.tableView.cellForRow(at: [0,3])
-                    body[arr[i]] = c?.textLabel?.text
-                }else {
-                    let c = self.tableView.cellForRow(at: [0 , i])  as! CTAddUserCell
-                    body[arr[i]] = c.title.text
+        let changedCust : Customer = Customer.init(birth: self.birthDay , company: self.inputtext[2].text! , nick_name: self.inputtext[4].text! , phone_number: [self.inputtext[1].text! ] , name: self.inputtext[0].text! , id: (self.currentInfo?.id)! , is_solar: false , groupId: gdId , gender: (self.currentInfo?.gender)! , desc: self.inputtext[3].text! )
+        
+        Utils.showLoadingHUB(view: self.view , msg: "正在保存...") { (_) in
+            let request = changedCust.update(cust: changedCust) { (_) in
+                
+            }
+            request?.response { (_) in
+                if self.reloadDelegate != nil {
+                    self.reloadDelegate?.reloadTableViewData()
                 }
-            }else if i == 5 {
-                let c = self.tableView.cellForRow(at: [1,0]) as! CTAddUserCell
-                body[arr[i]] = c.title.text
-            }else if i == 6 {
-                let c = self.tableView.cellForRow(at: [2,0])
-                body[arr[i]] = c?.textLabel?.text
+                self.navigationController?.popViewController(animated: true)
             }
         }
-        body["id"] = self.currentInfo?.id
-        let request = NetworkUtils.postBackEnd("U_TXL_CUS_INFO", body: body) { (json) in
-            
-        }
-        request.response { (_) in
-            if self.reloadDelegate != nil {
-                self.reloadDelegate?.reloadTableViewData()
-            }
-            self.navigationController?.popViewController(animated: true)
-        }
+        
     }
     
     func showRole(_ message: String , index : IndexPath){
