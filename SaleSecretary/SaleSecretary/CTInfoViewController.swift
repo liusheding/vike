@@ -86,6 +86,7 @@ extension CTInfoViewController : UITableViewDelegate , UITableViewDataSource {
                 }else if indexPath.row ==  3{
                     cell.inputtext.isSecureTextEntry = true
                 }
+                self.inputtext.append(cell.inputtext)
                 return cell
             }
             
@@ -94,6 +95,7 @@ extension CTInfoViewController : UITableViewDelegate , UITableViewDataSource {
             cell.title.text = "称谓"
             cell.inputtext.text = self.currentInfo?.nick_name
             cell.inputtext.borderStyle = .none
+            self.inputtext.append(cell.inputtext)
             return cell
         case 2:
             let cell = UITableViewCell(style: UITableViewCellStyle.value1, reuseIdentifier: "cell")
@@ -114,11 +116,12 @@ extension CTInfoViewController : UITableViewDelegate , UITableViewDataSource {
             return cell
         case 4:
             let cell = UITableViewCell(style: UITableViewCellStyle.value1, reuseIdentifier: "cell")
-            
-            let btn = UIButton.init(frame: CGRect(x: 25 , y: 7  , width: SCREEN_WIDTH - 50 , height: 30 ))
-            btn.titleLabel?.text = "保存"
+            let btn = UIButton.init(frame: CGRect(x: 25 , y: 0  , width: SCREEN_WIDTH - 50 , height: 50 ))
+            btn.setTitle("保存", for: .normal)
             btn.titleLabel?.textColor = UIColor.white
             btn.backgroundColor = ContactCommon.THEME_COLOR
+            btn.layer.cornerRadius = 10
+            cell.selectionStyle = .none
             
             btn.addTarget(self, action: #selector(self.saveCustomer), for: .touchUpInside)
             cell.addSubview(btn)
@@ -154,7 +157,8 @@ extension CTInfoViewController : UITableViewDelegate , UITableViewDataSource {
                 body[arr[i]] = c?.textLabel?.text
             }
         }
-        let request = NetworkUtils.postBackEnd("", body: body) { (json) in
+        body["id"] = self.currentInfo?.id
+        let request = NetworkUtils.postBackEnd("U_TXL_CUS_INFO", body: body) { (json) in
             
         }
         request.response { (_) in
