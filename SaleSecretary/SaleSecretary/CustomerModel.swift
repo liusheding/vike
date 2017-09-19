@@ -141,8 +141,15 @@ class Customer : NSObject{
         self.phone_number = []
         if cnContact.isKeyAvailable(CNContactPhoneNumbersKey) {
             if cnContact.phoneNumbers.count > 0 {
-                let phone = cnContact.phoneNumbers.first?.value
-                self.phone_number?.append((phone?.stringValue)!)
+                if let phone = cnContact.phoneNumbers.first?.value {
+                  
+                    let pValue = phone.stringValue
+                    
+                    let r = Utils.replacePhoneRegx(pValue)
+                    if r != nil {
+                        self.phone_number?.append(r!)
+                    }
+                }
             }
         }
         self.nick_name = ""

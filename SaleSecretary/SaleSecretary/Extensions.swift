@@ -127,5 +127,16 @@ struct Utils {
         return
     }
     
+    static func replacePhoneRegx(_ phone: String) -> String? {
+        do {
+            let regex = try NSRegularExpression(pattern: "\\+86|\\p{Z}|-|\\?", options: .init(rawValue: 0))
+            let r = regex.stringByReplacingMatches(in: phone, options: .init(rawValue: 0), range:NSMakeRange(0, phone.characters.count), withTemplate: "")
+            return r
+        } catch {
+            return nil
+        }
+    }
+        
+    
 }
 
