@@ -26,6 +26,7 @@ class SMSContentTextCell: UITableViewCell {
         self.textView.delegate = self
     }
     
+    
 }
 
 extension SMSContentTextCell: UITextViewDelegate {
@@ -37,6 +38,14 @@ extension SMSContentTextCell: UITextViewDelegate {
             self.placeHolder.isHidden = true
         }
         self.delegte?.textChanged(textView.text)
+    }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if text == "\n" {
+            self.textView.resignFirstResponder()
+            return false
+        }
+        return true
     }
     
 }

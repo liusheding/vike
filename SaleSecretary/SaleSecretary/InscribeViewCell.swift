@@ -19,4 +19,7 @@ class InscribeViewCell: UITableViewCell {
     }
     
     
+    @IBAction func endTextEditing(_ sender: UITextField) {
+        self.inscribeText.resignFirstResponder()
+    }
 }

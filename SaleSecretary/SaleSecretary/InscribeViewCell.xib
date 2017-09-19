@@ -23,7 +23,10 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <nil key="textColor"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <textInputTraits key="textInputTraits"/>
+                        <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                        <connections>
+                            <action selector="endTextEditing:" destination="9GT-0U-SsU" eventType="editingDidEndOnExit" id="c2U-P1-gZA"/>
+                        </connections>
                     </textField>
                 </subviews>
             </tableViewCellContentView>

@@ -25,4 +25,7 @@ class AppellationCellView : UITableViewCell {
         super.awakeFromNib()
     }
     
+    @IBAction func doneEditing(_ sender: UITextField) {
+        self.textField.resignFirstResponder()
+    }
 }
