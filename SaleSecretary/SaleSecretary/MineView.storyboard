@@ -897,7 +897,7 @@
         <!--新手指南-->
         <scene sceneID="jUV-1V-0CM">
             <objects>
-                <viewController storyboardIdentifier="guideID" title="新手指南" id="0Xx-60-znj" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="guideID" title="新手指南" id="0Xx-60-znj" customClass="NewUserHelpController" customModule="SaleSecretary" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="mdf-rl-dna"/>
                         <viewControllerLayoutGuide type="bottom" id="st4-XN-FqE"/>
@@ -905,12 +905,27 @@
                     <view key="view" contentMode="scaleToFill" id="oSQ-dz-S8e">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DQp-LR-tZh">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                            </webView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="DQp-LR-tZh" firstAttribute="top" secondItem="oSQ-dz-S8e" secondAttribute="top" id="e1F-Y1-zeB"/>
+                            <constraint firstAttribute="trailing" secondItem="DQp-LR-tZh" secondAttribute="trailing" id="gH8-7l-yuF"/>
+                            <constraint firstItem="DQp-LR-tZh" firstAttribute="leading" secondItem="oSQ-dz-S8e" secondAttribute="leading" id="gsh-lj-0x0"/>
+                            <constraint firstAttribute="bottom" secondItem="DQp-LR-tZh" secondAttribute="bottom" id="wnY-2k-hjh"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="webView" destination="DQp-LR-tZh" id="CRN-E6-9Vj"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uO1-aj-60f" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2348" y="895"/>
+            <point key="canvasLocation" x="2348" y="894.60269865067471"/>
         </scene>
         <!--银行卡-->
         <scene sceneID="5M4-fw-9W2">
