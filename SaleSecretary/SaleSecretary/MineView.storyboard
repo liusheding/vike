@@ -110,6 +110,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="6QM-Jw-wCV"/>
                                 </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" title="提现">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
@@ -288,6 +289,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="eax-Lf-dFs"/>
                                 </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" title="提现">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -549,6 +551,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="Jy2-s2-8Td"/>
                                 </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" title="提交">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -1333,6 +1336,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="FJM-YJ-TwT"/>
                                 </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" title="确认充值">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
