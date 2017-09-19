@@ -21,6 +21,10 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         if let phoneValue = phone.text, let pwd = password.text {
             let request = AppUser.login(phone: phoneValue, password: pwd) {
                 user in
+                if user.status != "0" {
+                    Utils.alert("对不起，您的账户已被冻结或处于异常状态，暂时无法登陆，请联系您的代理商。");
+                    return
+                }
                 AppUser.currentUser = user
                 UserDefaults.standard.setValue(user.id!, forKey: "APP_USER_ID")
                 UserDefaults.standard.synchronize()

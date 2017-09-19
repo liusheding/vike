@@ -29,20 +29,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate,WXApiDelegate {
         
         //读取用户信息
         APP_USER_ID = UserDefaults.standard.string(forKey: "APP_USER_ID")
+        let storyBoard = UIStoryboard(name: "Login", bundle: nil)
+        let loginVC = storyBoard.instantiateViewController(withIdentifier: "LoginID")
         if APP_USER_ID == nil {
-            let storyBoard = UIStoryboard(name: "Login", bundle: nil)
-            let loginVC = storyBoard.instantiateViewController(withIdentifier: "LoginID")
             self.window?.rootViewController = loginVC
         } else {
-            let request = AppUser.loadFromServer() { (user) in
-                AppUser.currentUser = user
-                do {
-                    let msgcontroller = try self.window?.rootViewController?.childViewControllers[2].childViewControllers[0] as! MessageViewController
-                        msgcontroller.showDotOnItem()
-                }catch{
-                    print(error)
-                }
-            }
+            let msgcontroller = self.window?.rootViewController?.childViewControllers[2].childViewControllers[0]    as! MessageViewController
+            msgcontroller.showDotOnItem()
         }
         // 微信注册
         WXApi.registerApp("wx3cd741c2be80a27d")
@@ -64,6 +57,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,WXApiDelegate {
         JPUSHService.setup(withOption: nil, appKey: "c06a7098971e360662a2d990",channel: "AppStore", apsForProduction: false)
         
         JPUSHService.setBadge(0)
+        // JPUSHService.addTags(<#T##tags: Set<String>!##Set<String>!#>, completion: <#T##JPUSHTagsOperationCompletion!##JPUSHTagsOperationCompletion!##(Int, Set<AnyHashable>?, Int) -> Void#>, seq: <#T##Int#>)
         application.applicationIconBadgeNumber = 0
         // 请求通讯录
         DispatchQueue.global(qos: .userInteractive).async {
@@ -99,6 +93,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,WXApiDelegate {
     func onReq(_ req: BaseReq!) {
         
     }
+    
     
     //如果第三方程序向微信发送了sendReq的请求，那么onResp会被回调。sendReq请求调用后，会切到微信终端程序界面。
     func onResp(_ resp: BaseResp!) {
@@ -147,6 +142,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate,WXApiDelegate {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
         JPUSHService.setBadge(0)
         application.applicationIconBadgeNumber = 0
+        
+        let _ = AppUser.loadFromServer() { (user) in
+            if user.status != "0" {
+                Utils.alert("对不起，您的账户已被冻结或处于异常状态，暂时无法登陆，请联系您的代理商。")
+                AppUser.logout()
+            } else {
+                AppUser.currentUser = user
+            }
+        }
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
@@ -165,6 +169,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,WXApiDelegate {
          error conditions that could cause the creation of the store to fail.
         */
         let container = NSPersistentContainer(name: "SaleSecretary")
+        
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
                 // Replace this implementation with code to handle the error appropriately.

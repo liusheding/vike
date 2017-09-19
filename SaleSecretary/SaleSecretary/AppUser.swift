@@ -45,6 +45,8 @@ class AppUser: NSObject {
     // 客户：KH
     var role: UserRole?
     
+    var status: String!
+    
     override init() {
         
     }
@@ -55,6 +57,7 @@ class AppUser: NSObject {
         self.cellphoneNumber = response["cellphoneNumber"].string
         self.role = UserRole.fromString(str: response["roleCode"].string)
         self.referralCode = response["referralCode"].string
+        self.status = response["status"].stringValue
         self.body = response
     }
     
