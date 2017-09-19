@@ -11,7 +11,7 @@ import SnapKit
 
 class ChooseDataView: UIView {
 
-        fileprivate var contentHeight:CGFloat = 180
+        fileprivate var contentHeight:CGFloat = 320
         fileprivate var topbarHeight:CGFloat = 65
         fileprivate var tabViewHeight:CGFloat = 120
         var delegate: ChooseDateDelegate?
