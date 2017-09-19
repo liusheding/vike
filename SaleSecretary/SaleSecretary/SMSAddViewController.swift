@@ -110,6 +110,8 @@ class SMSTemplateViewController : UIViewController {
         }
     }
     
+    var totalWords: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // setUpTextFields()
@@ -251,6 +253,14 @@ extension SMSTemplateViewController : UITableViewDataSource, UITableViewDelegate
             self.alreadyChose.font = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
             self.alreadyChose.textColor = UIColor.lightGray
             return self.alreadyChose
+        } else if section == 1 {
+            self.totalWords = UILabel(frame: CGRect(x: 10, y: 0, width: tableView.frame.width, height: 15))
+            self.totalWords.text = "0字"
+            self.totalWords.textAlignment = .right
+            self.totalWords.backgroundColor = APP_BACKGROUND_COLOR
+            self.totalWords.font = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
+            self.totalWords.textColor = UIColor.lightGray
+            return self.totalWords
         } else {
             return UIView()
         }
@@ -271,6 +281,9 @@ extension SMSTemplateViewController : UITableViewDataSource, UITableViewDelegate
             return 5
         }
         if section == 1 {
+            return 1
+        }
+        if section == 2 {
             return 1
         }
         return CGFloat(10)
@@ -310,7 +323,7 @@ extension SMSTemplateViewController : UITableViewDataSource, UITableViewDelegate
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        if section == 0 {
+        if section == 0 || section == 1{
             return 18
         }
         return 2
@@ -325,7 +338,7 @@ extension SMSTemplateViewController : UITableViewDataSource, UITableViewDelegate
     private func createTemplateCell() -> UITableViewCell {
         let cell = UITableViewCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: cellId)
         cell.imageView?.image = UIImage(named: "icon_nr")
-        cell.textLabel?.text = "短信模版内容"
+        cell.textLabel?.text = "短信模版内容，每70字按一条短信计算"
         cell.textLabel?.textColor = UIColor.lightGray
         cell.textLabel?.adjustsFontSizeToFitWidth = true
         // cell.textLabel?.font = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
@@ -409,6 +422,7 @@ extension SMSTemplateViewController : TemplateSelectorDelegate, ChooseDateDelega
         cell?.textLabel?.textColor = UIColor.darkText
         self.dxtd = template.id
         self.content = template.content
+        self.totalWords.text = "模板\(self.content!.characters.count)字"
         self.isAppellationShow = (self.content?.contains("【称谓】"))!
         // self.isAppellationShow = !self.isAppellationShow
     }

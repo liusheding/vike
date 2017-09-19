@@ -103,6 +103,7 @@ extension PhoneSMSViewController : UITableViewDelegate, UITableViewDataSource {
             return CommonTableCell.createCustomerCell(cellId)
         } else {
             self.contentCell = CommonTableCell.createSMSContentCell(tableView) as! SMSContentTextCell
+            self.contentCell.placeHolder.text = "短信内容"
             return self.contentCell
         }
         

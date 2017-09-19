@@ -56,12 +56,12 @@ class SMSPreviewController : UIViewController {
         
         Utils.showLoadingHUB(view: self.view, msg: "保存中..." ,completion: {
             hub in
-            let _ = self.schedule.save() {
+            let r = self.schedule.save() {
                 json in
-                hub.hide(animated: true)
                 let vc = self.navigationController?.viewControllers
                 self.navigationController?.popToViewController((vc?[(vc?.count)! - 3])!, animated: true)
             }
+            r?.response(completionHandler: {_ in hub.hide(animated: true) })
         })
         
         

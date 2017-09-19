@@ -20,9 +20,6 @@ class CustomSMSViewController : UIViewController {
     
     fileprivate let planDatePickerId = "planDatePicker"
     
-    
-    
-    
     // 客户数组
     fileprivate var customers: [Customer]?
     
@@ -37,6 +34,7 @@ class CustomSMSViewController : UIViewController {
     
     var executeDate: String!
     
+    var totalWords: UILabel!
     
     lazy var datePicker : PlanExecTimeCellView = {
         let cell = self.tableView.dequeueReusableCell(withIdentifier: self.planDatePickerId) as! PlanExecTimeCellView
@@ -145,7 +143,7 @@ extension CustomSMSViewController : UITableViewDelegate, UITableViewDataSource {
         if section == 0 {
             return 5
         }
-        if section == 1 {
+        if section == 1 || section == 2{
             return 1
         }
         return CGFloat(10)
@@ -161,6 +159,14 @@ extension CustomSMSViewController : UITableViewDelegate, UITableViewDataSource {
             self.alreadyChose.font = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
             self.alreadyChose.textColor = UIColor.lightGray
             return self.alreadyChose
+        } else if section == 1 {
+            self.totalWords = UILabel(frame: CGRect(x: 10, y: 0, width: tableView.frame.width, height: 15))
+            self.totalWords.text = "0字"
+            self.totalWords.textAlignment = .right
+            self.totalWords.backgroundColor = APP_BACKGROUND_COLOR
+            self.totalWords.font = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
+            self.totalWords.textColor = UIColor.lightGray
+            return self.totalWords
         } else {
             return UIView()
         }
@@ -189,6 +195,7 @@ extension CustomSMSViewController : UITableViewDelegate, UITableViewDataSource {
             return self.customerCell
         case 1:
             self.contentCell =  CommonTableCell.createSMSContentCell(tableView) as! SMSContentTextCell
+            self.contentCell.delegte = self
             return self.contentCell
         case 2:
             self.dateCell = CommonTableCell.createPlanDateCell(cellId)
@@ -200,7 +207,7 @@ extension CustomSMSViewController : UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        if section == 0 {
+        if section == 0 || section == 1 {
             return 18
         }
         return 2
@@ -236,7 +243,7 @@ extension CustomSMSViewController : UITableViewDelegate, UITableViewDataSource {
     
 }
 
-extension CustomSMSViewController: CustomerSelectDelegate, ChooseDateDelegate  {
+extension CustomSMSViewController: CustomerSelectDelegate, ChooseDateDelegate, SMSContentChangeDelegate {
     
     func selectedRecipients(rec: [Customer]) {
         self.customers = rec
@@ -251,6 +258,10 @@ extension CustomSMSViewController: CustomerSelectDelegate, ChooseDateDelegate  {
         let cell = self.tableView.cellForRow(at: [2, 0])
         cell?.detailTextLabel?.text = date
         self.executeDate = date
+    }
+    
+    func textChanged(_ text: String!) {
+        self.totalWords.text = "\(text.characters.count)字"
     }
     
 }
