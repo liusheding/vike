@@ -211,6 +211,23 @@
                                     <action selector="registerUser:" destination="Iph-4C-eli" eventType="touchUpInside" id="254-Pn-fWN"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hG4-tz-fxb">
+                                <rect key="frame" x="114" y="631" width="146" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="XhS-D7-EC5"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <state key="normal" title="《销小秘用户服务协议》"/>
+                                <connections>
+                                    <segue destination="PRl-87-5wj" kind="show" id="gfR-r0-NiL"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="轻触上面的&quot;注册&quot;按钮，即表示你同意" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sXP-YX-YrB">
+                                <rect key="frame" x="75.5" y="613" width="223.5" height="16"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -219,7 +236,11 @@
                             <constraint firstItem="ERi-lm-K1F" firstAttribute="leading" secondItem="xYY-gH-vja" secondAttribute="leadingMargin" constant="13" id="5lL-OW-slL"/>
                             <constraint firstAttribute="trailingMargin" secondItem="nhZ-up-yCF" secondAttribute="trailing" constant="28" id="RHa-Cq-Tty"/>
                             <constraint firstItem="ERi-lm-K1F" firstAttribute="top" secondItem="xYY-gH-vja" secondAttribute="topMargin" constant="100" id="Yju-hq-ibr"/>
+                            <constraint firstItem="sXP-YX-YrB" firstAttribute="centerX" secondItem="xYY-gH-vja" secondAttribute="centerX" id="a9b-EG-PEf"/>
+                            <constraint firstItem="hG4-tz-fxb" firstAttribute="centerX" secondItem="xYY-gH-vja" secondAttribute="centerX" id="cCZ-Lu-AuR"/>
+                            <constraint firstItem="DqA-4e-444" firstAttribute="top" secondItem="hG4-tz-fxb" secondAttribute="bottom" constant="15" id="dh6-xf-Whg"/>
                             <constraint firstAttribute="trailingMargin" secondItem="ERi-lm-K1F" secondAttribute="trailing" constant="13" id="lAT-H0-9nr"/>
+                            <constraint firstItem="hG4-tz-fxb" firstAttribute="top" secondItem="sXP-YX-YrB" secondAttribute="bottom" constant="2" id="vn4-j3-bc9"/>
                         </constraints>
                     </view>
                     <connections>
@@ -235,7 +256,40 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KjY-09-aRA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1814" y="621"/>
+            <point key="canvasLocation" x="-1815.2" y="620.23988005997012"/>
+        </scene>
+        <!--用户协议-->
+        <scene sceneID="X7g-p3-qDB">
+            <objects>
+                <viewController title="用户协议" id="PRl-87-5wj" customClass="UserProtocolController" customModule="SaleSecretary" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ovI-db-3Fm"/>
+                        <viewControllerLayoutGuide type="bottom" id="vXL-ra-7Rn"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ZgF-c9-JpG">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1eS-it-pcR">
+                                <rect key="frame" x="0.0" y="80" width="375" height="587"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="1eS-it-pcR" firstAttribute="leading" secondItem="ZgF-c9-JpG" secondAttribute="leading" id="4u7-uw-qzT"/>
+                            <constraint firstAttribute="trailing" secondItem="1eS-it-pcR" secondAttribute="trailing" id="jXv-ug-Znl"/>
+                            <constraint firstItem="1eS-it-pcR" firstAttribute="top" secondItem="ovI-db-3Fm" secondAttribute="bottom" constant="60" id="oYI-ae-jcT"/>
+                            <constraint firstItem="vXL-ra-7Rn" firstAttribute="top" secondItem="1eS-it-pcR" secondAttribute="bottom" id="wZP-uw-tGn"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="webView" destination="1eS-it-pcR" id="hta-gr-wY1"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jaI-Xb-iP1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-937" y="623"/>
         </scene>
         <!--找回密码-->
         <scene sceneID="kQV-BW-yIZ">

@@ -120,6 +120,7 @@
 		6E8739A61F68E845004BF380 /* SmsStateCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E8739A21F68E845004BF380 /* SmsStateCell.xib */; };
 		6E8739A81F68E85E004BF380 /* SMSDetailRecordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8739A71F68E85E004BF380 /* SMSDetailRecordController.swift */; };
 		6EA47FD11F70B927008E88C4 /* NewUserHelpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA47FD01F70B927008E88C4 /* NewUserHelpController.swift */; };
+		6EA47FD31F710329008E88C4 /* UserProtocolController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA47FD21F710329008E88C4 /* UserProtocolController.swift */; };
 		6EBAA5441F3C03240099DA89 /* MineViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBAA5421F3C03240099DA89 /* MineViewCell.swift */; };
 		6EBAA5451F3C03240099DA89 /* MineViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EBAA5431F3C03240099DA89 /* MineViewCell.xib */; };
 		6EBAA54F1F3C2E480099DA89 /* MineInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBAA54E1F3C2E480099DA89 /* MineInfoCell.swift */; };
@@ -354,6 +355,7 @@
 		6E8739A21F68E845004BF380 /* SmsStateCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SmsStateCell.xib; sourceTree = "<group>"; };
 		6E8739A71F68E85E004BF380 /* SMSDetailRecordController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SMSDetailRecordController.swift; sourceTree = "<group>"; };
 		6EA47FD01F70B927008E88C4 /* NewUserHelpController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewUserHelpController.swift; sourceTree = "<group>"; };
+		6EA47FD21F710329008E88C4 /* UserProtocolController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProtocolController.swift; sourceTree = "<group>"; };
 		6EBAA5421F3C03240099DA89 /* MineViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MineViewCell.swift; sourceTree = "<group>"; };
 		6EBAA5431F3C03240099DA89 /* MineViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MineViewCell.xib; sourceTree = "<group>"; };
 		6EBAA54E1F3C2E480099DA89 /* MineInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MineInfoCell.swift; sourceTree = "<group>"; };
@@ -843,6 +845,7 @@
 		6EF5B6FD1F4452BC001B0A77 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				6EA47FD21F710329008E88C4 /* UserProtocolController.swift */,
 				6EF5B7001F4452E9001B0A77 /* Login.storyboard */,
 				6EF5B7011F4452E9001B0A77 /* LoginViewController.swift */,
 				6EF5B7021F4452E9001B0A77 /* RegisterViewController.swift */,
@@ -1376,6 +1379,7 @@
 				E7D2ABDB1F457B00000123A5 /* CustomerDBOp.swift in Sources */,
 				E754DC991F3D4E5A0025DBBE /* GetContactUtils.swift in Sources */,
 				6647E8CC1F3AFEE90053AFF3 /* CryptoHeader.m in Sources */,
+				6EA47FD31F710329008E88C4 /* UserProtocolController.swift in Sources */,
 				6EE116CF1F5553D7009601C7 /* AddUserViewController.swift in Sources */,
 				6EF2B7851F3EC7B400C808EE /* PayDetailController.swift in Sources */,
 				6E20EC931F341B2B00A0F29E /* ChatDataSource.swift in Sources */,

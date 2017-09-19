@@ -65,7 +65,7 @@ class RegisterViewController: UIViewController,UITextFieldDelegate {
         smsCheck.borderStyle = .none
         smsCheck.placeholder = "短信验证码"
         recommendCode.borderStyle = .none
-        recommendCode.placeholder = "推荐码"
+        recommendCode.placeholder = "推荐码(可选)"
         
         phone.delegate = self
         smsCheck.delegate = self
@@ -85,7 +85,7 @@ class RegisterViewController: UIViewController,UITextFieldDelegate {
        
         // 创建左侧按钮
         let leftButton = UIBarButtonItem(title: "取消", style: .plain, target: self, action: #selector(clickCancelBtn))
-        leftButton.setTitleTextAttributes([NSFontAttributeName: UIFont.systemFont(ofSize: 15),NSForegroundColorAttributeName: UIColor.darkGray],for: .normal)
+        leftButton.setTitleTextAttributes([NSFontAttributeName: UIFont.systemFont(ofSize: 17),NSForegroundColorAttributeName: APP_THEME_COLOR],for: .normal)
         
         // 添加左侧按钮
         navItem.setLeftBarButton(leftButton, animated: false)

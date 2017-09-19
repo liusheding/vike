@@ -1014,20 +1014,20 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="指尖科技" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PyK-pf-OZu">
-                                <rect key="frame" x="157" y="616" width="61.5" height="21"/>
+                                <rect key="frame" x="161" y="621" width="53.5" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="Hp1-cp-IeB"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Copyright © 2017 All Right Reserved" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j0s-do-Wbd">
-                                <rect key="frame" x="77.5" y="636" width="221.5" height="21"/>
+                                <rect key="frame" x="84" y="636" width="207" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="Wee-cl-91Y"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -1038,7 +1038,7 @@
                             <constraint firstItem="4E3-pH-9zO" firstAttribute="top" secondItem="6BM-5g-Rut" secondAttribute="bottom" constant="55" id="FAK-9U-crw"/>
                             <constraint firstItem="PyK-pf-OZu" firstAttribute="centerX" secondItem="12t-eh-Fmd" secondAttribute="centerX" id="MFM-md-HE3"/>
                             <constraint firstItem="4E3-pH-9zO" firstAttribute="leading" secondItem="12t-eh-Fmd" secondAttribute="leading" id="TpM-4S-JRB"/>
-                            <constraint firstAttribute="bottomMargin" secondItem="PyK-pf-OZu" secondAttribute="bottom" constant="30" id="Zcb-6q-vIv"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="PyK-pf-OZu" secondAttribute="bottom" constant="25" id="Zcb-6q-vIv"/>
                             <constraint firstItem="O7q-tN-rzK" firstAttribute="top" secondItem="12t-eh-Fmd" secondAttribute="topMargin" constant="100" id="Zwl-Yu-GCM"/>
                             <constraint firstItem="6BM-5g-Rut" firstAttribute="top" secondItem="O7q-tN-rzK" secondAttribute="bottom" constant="10" id="b3U-JD-VYE"/>
                             <constraint firstAttribute="bottomMargin" secondItem="j0s-do-Wbd" secondAttribute="bottom" constant="10" id="dgs-PL-kaK"/>

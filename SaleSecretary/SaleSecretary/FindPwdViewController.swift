@@ -48,7 +48,7 @@ class FindPwdViewController: UIViewController,UITextFieldDelegate {
         
         // 创建左侧按钮
         let leftButton = UIBarButtonItem(title: "取消", style: .plain, target: self, action: #selector(clickCancelBtn))
-        leftButton.setTitleTextAttributes([NSFontAttributeName: UIFont.systemFont(ofSize: 15),NSForegroundColorAttributeName: UIColor.darkGray],for: .normal)
+        leftButton.setTitleTextAttributes([NSFontAttributeName: UIFont.systemFont(ofSize: 17),NSForegroundColorAttributeName: APP_THEME_COLOR],for: .normal)
         
         // 添加左侧按钮
         navItem.setLeftBarButton(leftButton, animated: false)
