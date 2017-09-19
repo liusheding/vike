@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="83" id="OmM-J6-BqG" customClass="SMSStatusCell" customModule="SaleSecretary" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="83"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="OmM-J6-BqG" id="NJx-0a-ywT">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="83"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="92k-Cv-44R">
+                        <rect key="frame" x="8" y="18" width="45" height="46"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="45" id="l5z-wm-1nY"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="状态" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dwj-oe-RhU">
+                        <rect key="frame" x="311" y="18" width="56" height="14"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="14" id="78R-jk-E11"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="短信内容摘要" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EdI-pA-lyd">
+                        <rect key="frame" x="61" y="7" width="242" height="57"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="242" id="csO-kk-Ozm"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="50条短信" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X9a-6g-Qdh">
+                        <rect key="frame" x="314" y="40" width="56" height="13.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="待执行时间" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ELf-NF-tYu">
+                        <rect key="frame" x="61" y="66" width="122" height="12"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="122" id="TZr-pr-Zsl"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="创建时间" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iaJ-gM-nwZ">
+                        <rect key="frame" x="222" y="67" width="148" height="12"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="12" id="yoU-5n-VsH"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="ELf-NF-tYu" firstAttribute="leading" secondItem="EdI-pA-lyd" secondAttribute="leading" id="28n-OA-UER"/>
+                    <constraint firstItem="Dwj-oe-RhU" firstAttribute="top" secondItem="92k-Cv-44R" secondAttribute="top" id="2l3-My-Sn9"/>
+                    <constraint firstItem="92k-Cv-44R" firstAttribute="leading" secondItem="NJx-0a-ywT" secondAttribute="leadingMargin" id="9Ua-jK-COz"/>
+                    <constraint firstItem="X9a-6g-Qdh" firstAttribute="top" secondItem="Dwj-oe-RhU" secondAttribute="bottom" constant="8" symbolic="YES" id="Ekt-7t-KoV"/>
+                    <constraint firstItem="EdI-pA-lyd" firstAttribute="leading" secondItem="92k-Cv-44R" secondAttribute="trailing" constant="8" symbolic="YES" id="FFW-ln-3mH"/>
+                    <constraint firstItem="EdI-pA-lyd" firstAttribute="bottom" secondItem="92k-Cv-44R" secondAttribute="bottom" id="JQv-4z-aQF"/>
+                    <constraint firstItem="Dwj-oe-RhU" firstAttribute="trailing" secondItem="NJx-0a-ywT" secondAttribute="trailingMargin" id="RwY-EO-Po0"/>
+                    <constraint firstItem="Dwj-oe-RhU" firstAttribute="leading" secondItem="EdI-pA-lyd" secondAttribute="trailing" constant="8" symbolic="YES" id="TAw-pY-XM4"/>
+                    <constraint firstItem="iaJ-gM-nwZ" firstAttribute="top" secondItem="EdI-pA-lyd" secondAttribute="bottom" constant="3" id="V5m-Yu-Xqc"/>
+                    <constraint firstItem="ELf-NF-tYu" firstAttribute="top" secondItem="EdI-pA-lyd" secondAttribute="bottom" constant="2" id="VlI-Xz-UMw"/>
+                    <constraint firstItem="iaJ-gM-nwZ" firstAttribute="trailing" secondItem="X9a-6g-Qdh" secondAttribute="trailing" id="XQ2-gO-WAW"/>
+                    <constraint firstItem="92k-Cv-44R" firstAttribute="centerY" secondItem="NJx-0a-ywT" secondAttribute="centerY" id="Yre-gM-p5c"/>
+                    <constraint firstItem="EdI-pA-lyd" firstAttribute="top" secondItem="NJx-0a-ywT" secondAttribute="topMargin" constant="-1" id="ZRs-SM-v4T"/>
+                    <constraint firstItem="iaJ-gM-nwZ" firstAttribute="leading" secondItem="ELf-NF-tYu" secondAttribute="trailing" constant="39" id="ci0-E2-CS9"/>
+                    <constraint firstItem="X9a-6g-Qdh" firstAttribute="leading" secondItem="EdI-pA-lyd" secondAttribute="trailing" constant="11" id="hD9-Xn-ekx"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="iaJ-gM-nwZ" secondAttribute="trailing" constant="-3" id="iC0-Rq-Q8k"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="iaJ-gM-nwZ" secondAttribute="bottom" constant="-4.5" id="kMC-kR-siL"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="createTime" destination="iaJ-gM-nwZ" id="7D6-Eg-5uE"/>
+                <outlet property="executeDate" destination="ELf-NF-tYu" id="nyt-Pm-yVH"/>
+                <outlet property="smsImage" destination="92k-Cv-44R" id="pIX-zn-sAL"/>
+                <outlet property="smsStatus" destination="Dwj-oe-RhU" id="08O-Nv-2xc"/>
+                <outlet property="textContent" destination="EdI-pA-lyd" id="Ycs-EU-cQt"/>
+                <outlet property="totalSMS" destination="X9a-6g-Qdh" id="PeH-tp-wlf"/>
+            </connections>
+            <point key="canvasLocation" x="-278.5" y="-463.5"/>
+        </tableViewCell>
+    </objects>
+</document>

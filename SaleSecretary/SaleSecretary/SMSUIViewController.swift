@@ -77,7 +77,7 @@ class SMSUIViewController : UITableViewController {
             })
             request?.response(completionHandler: {
                 _ in
-                hub.hide(animated: true, afterDelay: 0.1)
+                hub.hide(animated: true, afterDelay: 0.3)
             })
         })
     }
@@ -110,7 +110,9 @@ extension SMSUIViewController  {
         self.tableView.dataSource = self
         self.tableView.backgroundColor = APP_BACKGROUND_COLOR
         self.view.backgroundColor = APP_BACKGROUND_COLOR
+        self.tableView.separatorStyle = .none
         self.tableView.register(UINib(nibName: "SMSListViewCell", bundle: nil), forCellReuseIdentifier: cellId)
+        self.tableView.register(UINib(nibName: "SMSStatusCell", bundle: nil), forCellReuseIdentifier: "statusCell")
         // moreDrop.anchorView = self.moreBarItem
         let appearance = DropDown.appearance()
         self.moreDrop =  CustomerPopUpView(titles: ["新的执行计划", "短信模板", "我的模板"], images: ["icon_xjzxjh", "icon_mlmb", "icon_mlmb"])
@@ -151,29 +153,43 @@ extension SMSUIViewController {
     
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return CGFloat(60)
+        return 83
     }
     
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // print("only one row ")
-        return self.schedules.count
+        return 1
     }
     
+//    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        
+//        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! SMSListViewCell
+//        let section = indexPath.section
+//        let schedule = self.schedules[section]
+//        cell.imageLabel.image = UIImage(named: images[schedule.type]!)
+//        cell.contentLabel.text = schedule.content
+//        cell.timeLabel.text = "执行时间：\(schedule.executeTime!)/共\(schedule.count!)条短信"
+//        cell.createLabel.text = schedule.createTime
+//        return cell
+//    }
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! SMSListViewCell
-        let row = indexPath.row
-        let schedule = self.schedules[row]
-        cell.imageLabel.image = UIImage(named: images[schedule.type]!)
-        cell.contentLabel.text = schedule.content
-        cell.timeLabel.text = "执行时间：\(schedule.executeTime!)/共\(schedule.count!)条短信"
-        cell.createLabel.text = schedule.createTime
+        let cell = tableView.dequeueReusableCell(withIdentifier: "statusCell", for: indexPath) as! SMSStatusCell
+        let section = indexPath.section
+        let schedule = self.schedules[section]
+        cell.smsImage.image = UIImage(named: images[schedule.type]!)
+        cell.textContent.text = schedule.content
+        cell.smsStatus.text = "待执行"
+        cell.createTime.text = "创建于:\(schedule.createTime!)"
+        cell.executeDate.text = "执行时间:\(schedule.executeTime!)"
+        cell.totalSMS.text = "共\(schedule.count!)条短信"
         return cell
+        
     }
     
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 1
+        return 0
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -182,11 +198,20 @@ extension SMSUIViewController {
         // self.performSegue(withIdentifier: <#T##String#>, sender: <#T##Any?#>)
     }
     
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // print("display table view sections, 1/1")
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 1
     }
     
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        // print("display table view sections, 1/1")
+        return self.schedules.count
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let view = UIView()
+        view.backgroundColor = APP_BACKGROUND_COLOR
+        return view
+    }
     
 }
 

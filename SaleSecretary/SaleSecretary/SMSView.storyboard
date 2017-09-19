@@ -470,15 +470,14 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rgX-cD-2Dg" id="Yf2-Zk-E9O">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" restorationIdentifier="previewBtn" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fw3-v7-pxs">
-                                <rect key="frame" x="16" y="505" width="343" height="45"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="previewBtn" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fw3-v7-pxs">
+                                <rect key="frame" x="21" y="505" width="343" height="45"/>
                                 <color key="backgroundColor" red="0.31372549019607843" green="0.68627450980392157" blue="0.21568627450980393" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal">
@@ -499,9 +498,13 @@
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="iQa-Xh-c6E" firstAttribute="top" secondItem="Epu-5A-2cc" secondAttribute="bottom" constant="97" id="3Rx-N0-ac8"/>
+                            <constraint firstItem="fw3-v7-pxs" firstAttribute="top" secondItem="Epu-5A-2cc" secondAttribute="bottom" constant="32" id="55N-Hm-MA7"/>
+                            <constraint firstItem="fw3-v7-pxs" firstAttribute="trailing" secondItem="iJz-sj-6Dl" secondAttribute="trailingMargin" constant="5" id="HXH-Hn-Mo5"/>
+                            <constraint firstItem="fw3-v7-pxs" firstAttribute="leading" secondItem="iJz-sj-6Dl" secondAttribute="leadingMargin" constant="5" id="Xgk-gP-l6B"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Epu-5A-2cc" secondAttribute="trailing" constant="-16" id="Yqc-t0-prJ"/>
                             <constraint firstItem="Epu-5A-2cc" firstAttribute="top" secondItem="Za6-9x-4Dl" secondAttribute="bottom" id="iiI-4F-8MP"/>
                             <constraint firstItem="Epu-5A-2cc" firstAttribute="leading" secondItem="iJz-sj-6Dl" secondAttribute="leading" id="qqr-ks-S59"/>
+                            <constraint firstAttribute="bottom" secondItem="fw3-v7-pxs" secondAttribute="bottom" constant="20" symbolic="YES" id="wQ4-0j-TjT"/>
                         </constraints>
                     </view>
                     <connections>
