@@ -13,8 +13,8 @@ class MessageViewController: UITableViewController {
     var DataSource:NSMutableArray!
     let cellId = "MessageListID"
     let msgdb = MessageDB.defaultInstance()
-    let planPhone = "10001" //待执行计划预设的电话号码
-    let notifyPhone = "10002" //消息通知预设的电话号码
+    let notifyPhone = "100001" //消息通知预设的电话号码
+    var emptyView: EmptyContentView?
     
     func initData(){
         let msglist = msgdb.getAllMsgList()
@@ -27,27 +27,21 @@ class MessageViewController: UITableViewController {
         DataSource=NSMutableArray()
         DataSource.addObjects(from: msgdata)
         DataSource.sort(comparator: sortDate)
+        
+        emptyView?.dismiss()
+        if DataSource.count == 0{
+            let frame = self.tableView.frame
+            emptyView = EmptyContentView.init(frame: frame)
+            emptyView?.textLabel.text = "暂无任何消息通知～"
+            emptyView?.textLabel.numberOfLines = 2
+            emptyView?.showInView(self.view)
+        }
     }
     
     func getPhoneNumber(_ phone:String) -> String{
         let endindex = phone.index(phone.endIndex, offsetBy: -11)
         let phonenumber = phone.substring(to: endindex)
         return phonenumber
-    }
-    
-    //根据新消息的手机号得到对应的cell
-    func getmessagedata(_ message:String) -> MessageData?{
-        let json = string2json(message)
-        if json != nil{
-            for data in self.DataSource as NSMutableArray{
-                let msg = data as! MessageData
-                let str = String(describing: json!["phone"])
-                if msg.phone == str{
-                    return msg
-                }
-            }
-        }
-        return nil
     }
     
     //消息列表按日期排序方法
@@ -97,14 +91,6 @@ class MessageViewController: UITableViewController {
         }
     }
     
-    func string2json(_ str:String) -> JSON? {
-        if let jsonData = str.data(using: String.Encoding.utf8, allowLossyConversion: false) {
-            let json = JSON(data: jsonData)
-            return json
-        }
-        return nil
-    }
-    
     override func viewDidLoad() {
         insertMsgList()
         insertMsgItem()
@@ -140,16 +126,22 @@ class MessageViewController: UITableViewController {
         if msglist != []{
             return
         }
-        
-        msgdb.insertMsgList(msgdata: MessageData(name:"指尖刘总", phone:"12345678901",time:Date(timeIntervalSinceNow:-60*60*24*2),mtype:1, message: [], unread:0))
-        msgdb.insertMsgList(msgdata: MessageData(name:"指尖何总", phone:"12345678902",time:Date(timeIntervalSinceNow:-60*60*24),mtype:1, message: [], unread:0))
-        msgdb.insertMsgList(msgdata: MessageData(name:"待执行计划", phone:planPhone,time:Date(timeIntervalSinceNow:-60*60*24*4),mtype:2, message: [], unread:0))
-        msgdb.insertMsgList(msgdata: MessageData(name:"消息通知", phone:notifyPhone,time:Date(timeIntervalSinceNow:-60*60*24*3),mtype:3, message: [], unread:0))
+        msgdb.insertMsgList(msgdata: MessageData(name:"系统消息", phone:notifyPhone,time:Date(timeIntervalSinceNow:-60*60*24*3),mtype:3, message: [], unread:0))
     }
     
     func insertMsg(msgdetail: MessageDetail){
         msgdb.insertMsgItem(msgdetail: msgdetail)
         let msglist = msgdb.getMsgList(msgphone: msgdetail.msgphone)
+//        if msglist.count == 0{
+//            let msgdata = MessageData(name: <#String#>, phone: <#String#>, time: <#Date#>, mtype: Int, message: [msgdetail,], unread: 1)
+//            msgdb.insertMsgList(msgdata: msgdata)
+//            //将新data插到第一行
+//            self.DataSource.insert(msgdata, at: 0)
+//            self.tableView.reloadData()
+//            self.removeBadgeOnItemIndex(index: 2)
+//            self.showDotOnItemIndex(index: 2)
+//            return
+//        }
         let value = msglist[0].msg_unread
         msgdb.updateMsgList(msgphone: msgdetail.msgphone, key: "msg_unread", value: value + 1)
        
@@ -182,22 +174,14 @@ class MessageViewController: UITableViewController {
         if msgitem != []{
             return
         }
-
-        insertMsg(msgdetail: MessageDetail(msgtime:Date(timeIntervalSinceNow:0),msgtype:2,msgcontent:"国防部声明指出，中印边境对峙事件发生以来，中国本着最大善意，努力通过外交渠道解决当前事态。中国军队从维护两国关系大局和地区和平稳定出发，始终保持高度克制。", msgphone: "12345678901"))
         
-        insertMsg(msgdetail: MessageDetail(msgtime:Date(timeIntervalSinceNow:-60*60*24),msgtype:1,msgcontent:"巴基斯坦《国际新闻》网站7日报道称，据可靠消息，中国政府就印军非法越界严正警告。", msgphone: "12345678901"))
+        insertMsg(msgdetail: MessageDetail(msgtime:Date(timeIntervalSinceNow:0),msgtype:3,msgcontent:"国防部声明指出，中印边境对峙事件发生以来，中国本着最大善意，努力通过外交渠道解决当前事态。中国军队从维护两国关系大局和地区和平稳定出发，始终保持高度克制。www.baidu.com", msgphone: notifyPhone))
         
-        insertMsg(msgdetail: MessageDetail(msgtime:Date(timeIntervalSinceNow:0),msgtype:1,msgcontent:"国防部声明指出，中印边境对峙事件发生以来，中国本着最大善意，努力通过外交渠道解决当前事态。中国军队从维护两国关系大局和地区和平稳定出发，始终保持高度克制。", msgphone: "12345678902"))
+        insertMsg(msgdetail: MessageDetail(msgtime:Date(timeIntervalSinceNow:-60*60*24),msgtype:3,msgcontent:"巴基斯坦《国际新闻》网站7日报道称，据可靠消息，中国政府就印军非法越界严正警告。中国军队从维护两国关系大局和地区和平稳定出发，始终保持高度克制。", msgphone: notifyPhone))
         
-        insertMsg(msgdetail: MessageDetail(msgtime:Date(timeIntervalSinceNow:-60*60*24),msgtype:2,msgcontent:"巴基斯坦《国际新闻》网站7日报道称，据可靠消息，中国政府就印军非法越界严正警告。", msgphone: "12345678902"))
+        insertMsg(msgdetail: MessageDetail(msgtime:Date(timeIntervalSinceNow:0),msgtype:3,msgcontent:"国防部声明指出，中印边境对峙事件发生以来，中国本着最大善意，努力通过外交渠道解决当前事态。中国军队从维护两国关系大局和地区和平稳定出发，始终保持高度克制。国防部声明指出，中印边境对峙事件发生以来，中国本着最大善意，努力通过外交渠道解决当前事态。中国军队从维护两国关系大局和地区和平稳定出发，始终保持高度克制。", msgphone: notifyPhone))
         
-        insertMsg(msgdetail: MessageDetail(msgtime:Date(timeIntervalSinceNow:0),msgtype:3,msgcontent:"国防部声明指出，中印边境对峙事件发生以来，中国本着最大善意，努力通过外交渠道解决当前事态。中国军队从维护两国关系大局和地区和平稳定出发，始终保持高度克制。", msgphone: notifyPhone))
-        
-        insertMsg(msgdetail: MessageDetail(msgtime:Date(timeIntervalSinceNow:-60*60*24),msgtype:3,msgcontent:"巴基斯坦《国际新闻》网站7日报道称，据可靠消息，中国政府就印军非法越界严正警告。中国军队从维护两国关系大局和地区和平稳定出发，始终保持高度克制。", msgphone: planPhone))
-        
-        insertMsg(msgdetail: MessageDetail(msgtime:Date(timeIntervalSinceNow:0),msgtype:3,msgcontent:"国防部声明指出，中印边境对峙事件发生以来，中国本着最大善意，努力通过外交渠道解决当前事态。中国军队从维护两国关系大局和地区和平稳定出发，始终保持高度克制。国防部声明指出，中印边境对峙事件发生以来，中国本着最大善意，努力通过外交渠道解决当前事态。中国军队从维护两国关系大局和地区和平稳定出发，始终保持高度克制。", msgphone: planPhone))
-        
-        insertMsg(msgdetail: MessageDetail(msgtime:Date(timeIntervalSinceNow:-60*60*24),msgtype:3,msgcontent:"巴基斯坦《国际新闻》网站7日报道称，据可靠消息，中国政府就印军非法越界严正警告。国防部声明指出，中印边境对峙事件发生以来，中国本着最大善意，努力通过外交渠道解决当前事态。", msgphone: planPhone))
+        insertMsg(msgdetail: MessageDetail(msgtime:Date(timeIntervalSinceNow:-60*60*24),msgtype:3,msgcontent:"巴基斯坦《国际新闻》网站7日报道称，据可靠消息，中国政府就印军非法越界严正警告。国防部声明指出，中印边境对峙事件发生以来，中国本着最大善意，努力通过外交渠道解决当前事态。", msgphone: notifyPhone))
     }
     
     override func didReceiveMemoryWarning() {
@@ -214,22 +198,26 @@ class MessageViewController: UITableViewController {
         }
         return 0
     }
-
+    
+//    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+//        return 5
+//    }
+//    
+//    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?
+//    {
+//        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: Int(tableView.bounds.size.width), height: 5))
+//        headerView.backgroundColor = UIColor.clear
+//        return headerView
+//    }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! MessageListCell
         let data = self.DataSource[indexPath.row] as! MessageData
         cell.cellname.text = data.name
         cell.cellphone.text = data.phone
-        if data.phone == planPhone{
+        if data.phone == notifyPhone{
             if data.unread == 0{
-                cell.cellphone.text = "目前没有新的待执行计划"
-            }else{
-                cell.cellphone.text = "您有\(data.unread)个待执行计划"
-            }
-        }else if data.phone == notifyPhone{
-            if data.unread == 0{
-                cell.cellphone.text = "目前没有新的消息通知"
+                cell.cellphone.text = "暂无新的消息通知"
             }else{
                 cell.cellphone.text = "您有\(data.unread)条新消息通知"
             }
@@ -238,14 +226,9 @@ class MessageViewController: UITableViewController {
         cell.mtype = data.mtype
         cell.setCellContnet(data.unread)
         
-        if cell.mtype == 1{
-            cell.cellimage.image = UIImage(named: "pic_xx_hf.png")
-        }else if cell.mtype == 2{
-            cell.cellimage.image = UIImage(named: "pic_xx_dzx.png")
-        }else{
+        if cell.mtype == 3{
             cell.cellimage.image = UIImage(named: "pic_xx_tz.png")
         }
-        
         return cell
     }
     
@@ -273,10 +256,8 @@ class MessageViewController: UITableViewController {
             self.removeBadgeOnItemIndex(index: 2)
         }
         
-        if data.phone == planPhone{
-            cell.cellphone.text = "目前没有新的待执行计划"
-        }else if data.phone == notifyPhone{
-            cell.cellphone.text = "目前没有新的消息通知"
+        if data.phone == notifyPhone{
+            cell.cellphone.text = "暂无新的消息通知"
         }
         
         let msgitem = msgdb.getMsgItem(msgphone: data.phone)
