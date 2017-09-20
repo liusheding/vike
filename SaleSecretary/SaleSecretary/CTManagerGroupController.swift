@@ -10,7 +10,7 @@ import UIKit
 import MBProgressHUD
 
 protocol ContactTableViewDelegate {
-    func reloadTableViewData( )
+    func reloadTableViewData()
 }
 
 class CTManagerGroupController: UIViewController  {

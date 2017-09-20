@@ -23,7 +23,8 @@ class BatchProcessViewController: UIViewController {
     
     let cellId : String  = "CustomerSelectViewCellId"
     
-
+    var delegate: ContactTableViewDelegate?
+    
     lazy var collapses: [Bool] = { [unowned self] in
         return Array<Bool>(repeating: true, count: self.contacts.count)
     }()
@@ -37,6 +38,7 @@ class BatchProcessViewController: UIViewController {
         
         self.navigationSetting()
         self.bottomSetting()
+        delegate = ContactTableViewController.instance
     }
     
     func initSelections() -> JSON {
@@ -148,6 +150,7 @@ class BatchProcessViewController: UIViewController {
             })
             request.response(completionHandler: { _ in
                 self.reloadTableViewData()
+                self.delegate?.reloadTableViewData()
             })
         })
         alertController.addAction(cancelAction)
