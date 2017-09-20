@@ -26,7 +26,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate,WXApiDelegate {
         // Override point for customization after application launch.
         DropDown.startListeningToKeyboard()
         UINavigationBar.appearance().tintColor = APP_THEME_COLOR
-        
         //读取用户信息
         APP_USER_ID = UserDefaults.standard.string(forKey: "APP_USER_ID")
         let storyBoard = UIStoryboard(name: "Login", bundle: nil)
@@ -34,8 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,WXApiDelegate {
         if APP_USER_ID == nil {
             self.window?.rootViewController = loginVC
         } else {
-            let msgcontroller = self.window?.rootViewController?.childViewControllers[2].childViewControllers[0]    as! MessageViewController
-            msgcontroller.showDotOnItem()
+            
         }
         // 微信注册
         WXApi.registerApp("wx3cd741c2be80a27d")
@@ -149,6 +147,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate,WXApiDelegate {
                 AppUser.logout()
             } else {
                 AppUser.currentUser = user
+                let children = self.window?.rootViewController?.childViewControllers
+                if (children?.count)! >= 4 {
+                    let msgcontroller = children?[2].childViewControllers[0]  as! MessageViewController
+                    msgcontroller.showDotOnItem()
+                }
             }
         }
     }
