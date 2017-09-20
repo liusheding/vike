@@ -9,6 +9,7 @@
 import UIKit
 import MBProgressHUD
 import SwiftyJSON
+import SnapKit
 
 //var sections: [Section] = [
 //    Section(name: "七夕节", items:[
@@ -118,6 +119,10 @@ class TemplateSelectorController: UIViewController {
         self.searchTableView = self.searchDisplayController?.searchResultsTableView
         self.searchTableView.estimatedRowHeight = 44.0
         self.searchTableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.snp.makeConstraints({
+            make in
+            make.top.equalTo(self.menu.snp.bottom)
+        })
         
     }
     

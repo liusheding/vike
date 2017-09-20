@@ -21,5 +21,8 @@ class ScanResultCell: UITableViewCell {
         super.awakeFromNib()
         self.textField.borderStyle = .none
     }
+    @IBAction func doExitEditing(_ sender: UITextField) {
+        self.textField.resignFirstResponder()
+    }
     
 }

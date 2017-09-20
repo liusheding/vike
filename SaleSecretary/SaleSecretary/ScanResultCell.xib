@@ -16,7 +16,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Q5y-QI-RMS" id="mSh-DO-USG">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1oU-DC-oSI">
@@ -29,10 +29,13 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="0Dw-8R-chf">
-                        <rect key="frame" x="93" y="8" width="274" height="27.5"/>
+                        <rect key="frame" x="93" y="8" width="276" height="27.5"/>
                         <nil key="textColor"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                        <connections>
+                            <action selector="doExitEditing:" destination="Q5y-QI-RMS" eventType="editingDidEndOnExit" id="m3O-p3-mOU"/>
+                        </connections>
                     </textField>
                 </subviews>
                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -41,9 +44,9 @@
                     <constraint firstItem="0Dw-8R-chf" firstAttribute="top" secondItem="mSh-DO-USG" secondAttribute="topMargin" id="azj-GK-a57"/>
                     <constraint firstItem="0Dw-8R-chf" firstAttribute="top" secondItem="1oU-DC-oSI" secondAttribute="top" id="bRp-IW-IV4"/>
                     <constraint firstItem="1oU-DC-oSI" firstAttribute="leading" secondItem="mSh-DO-USG" secondAttribute="leadingMargin" constant="-3" id="bxD-Nk-yPQ"/>
+                    <constraint firstItem="0Dw-8R-chf" firstAttribute="trailing" secondItem="mSh-DO-USG" secondAttribute="trailingMargin" constant="2" id="jQG-PY-xSQ"/>
                     <constraint firstItem="0Dw-8R-chf" firstAttribute="bottom" secondItem="1oU-DC-oSI" secondAttribute="bottom" id="kh5-hU-e1j"/>
                     <constraint firstItem="0Dw-8R-chf" firstAttribute="leading" secondItem="1oU-DC-oSI" secondAttribute="trailing" constant="17" id="osh-vn-joP"/>
-                    <constraint firstItem="0Dw-8R-chf" firstAttribute="trailing" secondItem="mSh-DO-USG" secondAttribute="trailingMargin" id="rwz-83-3QV"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
