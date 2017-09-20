@@ -63,6 +63,10 @@ class MessageSchedule: NSObject {
     
     var containsCW: Bool?
     
+    var status: String?
+    
+    var templateId: String?
+    
     override init() {
         super.init()
     }
@@ -83,6 +87,7 @@ class MessageSchedule: NSObject {
                 self.customers.append(MsgKH(json: o))
             }
         }
+        self.status = json["status"].string
     }
     
     public func addCustomer(customer: Customer) {
@@ -158,6 +163,8 @@ class MessageSchedule: NSObject {
         }
         let td: String = self.dxtd ?? ""
         body["dxtdId"] = td
+        let temp: String = self.templateId ?? ""
+        body["dxmbId"] = temp
         var yld:[[String:String]] = []
         for c in self.customers {
             yld.append(["sjhm": c.sjhm, "cw": c.cw, "qm": self.userSign])

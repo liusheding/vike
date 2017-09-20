@@ -180,10 +180,23 @@ extension SMSUIViewController {
         let schedule = self.schedules[section]
         cell.smsImage.image = UIImage(named: images[schedule.type]!)
         cell.textContent.text = schedule.content
-        cell.smsStatus.text = "待执行"
+        let status = schedule.status ?? "0"
+        if (status == "1" || status == "3") {
+            cell.smsStatus.textColor = APP_THEME_COLOR
+        } else if (status == "0" || status == "4") {
+            cell.smsStatus.textColor = UIColor.orange
+        } else {
+            cell.smsStatus.textColor = UIColor.red
+        }
+        cell.smsStatus.text = "状态未知"
+        if let json: JSON = NetworkUtils.getDictionary(key: "DXJH_STATUS") {
+            if let s = json[status].string {
+                cell.smsStatus.text = s
+            }
+        }
         cell.createTime.text = "创建于:\(schedule.createTime!)"
         cell.executeDate.text = "执行时间:\(schedule.executeTime!)"
-        cell.totalSMS.text = "共\(schedule.count!)条短信"
+        cell.totalSMS.text = "\(schedule.count!)条短信"
         return cell
         
     }
@@ -194,7 +207,7 @@ extension SMSUIViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        self.performSegue(withIdentifier: "showSMSDetailRel", sender: self.schedules[indexPath.row])
+        self.performSegue(withIdentifier: "showSMSDetailRel", sender: self.schedules[indexPath.section])
         // self.performSegue(withIdentifier: <#T##String#>, sender: <#T##Any?#>)
     }
     

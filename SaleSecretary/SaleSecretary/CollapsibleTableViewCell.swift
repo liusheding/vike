@@ -11,7 +11,8 @@ import UIKit
 public struct CollapsibleItem {
     var name: String
     var detail: String
-    
+    var templateId: String?
+    var dxtd: String?
     public init(name: String, detail: String) {
         self.name = name
         self.detail = detail
@@ -37,6 +38,7 @@ class CollapsibleTableViewCell: UITableViewCell {
     let detailLabel = UILabel()
     
     var dxtdId: String?
+    var templateId: String?
     
     
     // MARK: Initalizers

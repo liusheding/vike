@@ -37,7 +37,18 @@ class ContactTableViewController: UIViewController {
     
     var changeGroupIndex : IndexPath = [-1,-1]
     
-    var contactsCells:[CustomerGroup] = []
+    var contactsCells:[CustomerGroup] = [] {
+        
+        didSet {
+            if self.contactsCells.count == 0 {return}
+            for g in self.contactsCells {
+                if let f = g.friends {
+                    self.searchDelegator.origin += f
+                }
+            }
+        }
+        
+    }
     
     @IBOutlet weak var searchBarLocal: UISearchBar!
     
@@ -90,9 +101,10 @@ class ContactTableViewController: UIViewController {
         // 搜索
         self.searchDisplayController?.searchResultsDelegate = self.searchDelegator
         self.searchDisplayController?.searchResultsDataSource = self.searchDelegator
+        self.searchDisplayController?.searchResultsTableView.register(UINib(nibName: String(describing: PersonContactCell.self ), bundle: nil), forCellReuseIdentifier: "customerSearchCellId")
         self.searchDisplayController?.delegate = self.searchDelegator
         ContactTableViewController.instance = self
-        
+        self.searchDelegator.parent = self
     }
     
     func generateData()  {
@@ -523,7 +535,13 @@ extension ContactTableViewController : ContactTableViewDelegate {
 
 class ContactSearchDelegator: NSObject, UITableViewDelegate, UITableViewDataSource, UISearchDisplayDelegate {
     
-    var customers: [Customer] = [Customer()]
+    let storyboardLocal = UIStoryboard(name: "ContactStoryboard" , bundle: nil)
+    
+    var parent: ContactTableViewController!
+    
+    var origin: [Customer] = []
+    
+    var customers: [Customer] = []
     
     public override init() {
         super.init()
@@ -538,13 +556,56 @@ class ContactSearchDelegator: NSObject, UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell.init(style: .subtitle, reuseIdentifier: "contactSearchCell")
-        cell.textLabel?.text = "搜索结果"
+        let cell = tableView.dequeueReusableCell(withIdentifier: "customerSearchCellId", for: indexPath) as! PersonContactCell
+        let row = indexPath.row
+        let customer = self.customers[row]
+        let userName = customer.name
+        var cString : String = ""
+        if !(userName?.isEmpty)! {
+            let index = userName?.index( (userName?.startIndex)! , offsetBy: 1)
+            cString = (userName?.substring(to: index! ))!
+        }
+        
+        cell.name?.text = userName
+        cell.phoneNumber?.text = customer.phone_number?[0] // mutil
+        cell.picName.backgroundColor = ContactCommon.sampleColor[ indexPath.row % ContactCommon.count ]
+        
+        cell.picName.setTitle(cString , for: .normal )
+        cell.acception.backgroundColor = UIColor.white
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cust = self.customers[indexPath.row]
+        let detail = storyboardLocal.instantiateViewController(withIdentifier: "customerDetail") as! CTCustomerDetailInfoViewController
+        detail.userInfo = cust
+        detail.contactViewController = parent
+        parent.navigationController?.pushViewController( detail , animated: true)
+    }
+    
     func searchDisplayController(_ controller: UISearchDisplayController, shouldReloadTableForSearch searchString: String?) -> Bool {
-        return false
+        if self.origin.count == 0 { return false }
+        if searchString == nil { return false }
+        let str = searchString!
+        var result: [Customer] = []
+        if Utils.inputOnlyNumbers(str: str) {
+            if str.characters.count <= 1 {return false}
+            for u in self.origin {
+                if u.phone_number == nil || u.phone_number!.count == 0 { continue}
+                let phone = u.phone_number![0]
+                if (phone.contains(str)) {
+                    result.append(u)
+                }
+            }
+        } else {
+            for u in self.origin {
+                if (u.name?.contains(str))! {
+                    result.append(u)
+                }
+            }
+        }
+        self.customers = result
+        return true
     }
     
 }

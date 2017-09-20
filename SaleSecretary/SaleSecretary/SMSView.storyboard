@@ -68,13 +68,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="NW7-RK-JBb">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="NW7-RK-JBb">
                                 <rect key="frame" x="16" y="64" width="343" height="444"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="NW7-RK-JBb" firstAttribute="leading" secondItem="Vna-qW-Kxf" secondAttribute="leadingMargin" id="7Jj-pp-NHQ"/>
+                            <constraint firstItem="BS5-Mx-UwK" firstAttribute="top" secondItem="NW7-RK-JBb" secondAttribute="bottom" constant="159" id="BGC-QQ-X26"/>
+                            <constraint firstItem="NW7-RK-JBb" firstAttribute="trailing" secondItem="Vna-qW-Kxf" secondAttribute="trailingMargin" id="RxN-o6-hCq"/>
+                            <constraint firstItem="NW7-RK-JBb" firstAttribute="top" secondItem="jrY-Tp-l9D" secondAttribute="bottom" id="nQM-pf-CEV"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="新增客户" id="Cdg-Aa-nvr">
                         <barButtonItem key="rightBarButtonItem" title="确认" id="IMm-8e-Iab">

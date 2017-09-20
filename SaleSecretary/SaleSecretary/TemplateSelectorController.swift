@@ -132,8 +132,10 @@ class TemplateSelectorController: UIViewController {
         if idx != nil {
             let cell = self.tableView.cellForRow(at: idx!) as! CollapsibleTableViewCell
             let content = cell.detailLabel.text!
-            let dxtd = cell.dxtdId
-            self.templateSelectorDelegate!.didSelected(SMSTemplate(dxtd, content: content))
+            let template = SMSTemplate("", content: content)
+            template.id = cell.templateId!
+            template.dxtd = cell.dxtdId!
+            self.templateSelectorDelegate!.didSelected(template)
             let count = self.navigationController?.viewControllers.count
             self.navigationController?.popToViewController((self.navigationController?.viewControllers[count! - 2])!, animated: true)
         }
@@ -184,7 +186,10 @@ class TemplateSelectorController: UIViewController {
                 let list = s["list"].arrayValue
                 var items: [Item] = []
                 for item in list {
-                    items.append(Item(name: item["dxtdId"].stringValue, detail: item["content"].stringValue))
+                    var i = Item(name: "", detail: item["content"].stringValue)
+                    i.templateId = item["id"].stringValue
+                    i.dxtd = item["dxtdId"].stringValue
+                    items.append(i)
                 }
                 _sec.append(Section(name: name, items: items))
             }
@@ -287,7 +292,8 @@ extension TemplateSelectorController: UITableViewDelegate, UITableViewDataSource
         let textLabel = cell.detailLabel
         textLabel.text = item.detail
         textLabel.textColor = UIColor.black
-        cell.dxtdId = item.name
+        cell.dxtdId = item.dxtd
+        cell.templateId = item.templateId
         return cell
     }
 
@@ -318,8 +324,10 @@ extension TemplateSelectorController: UITableViewDelegate, UITableViewDataSource
         let cell = tableView.cellForRow(at: indexPath) as! CollapsibleTableViewCell
         if self.tableCanSelected {
             let content = cell.detailLabel.text!
-            let dxtd = cell.dxtdId
-            self.templateSelectorDelegate!.didSelected(SMSTemplate(dxtd, content: content))
+            let temp = SMSTemplate("", content: content)
+            temp.id = cell.templateId!
+            temp.dxtd = cell.dxtdId!
+            self.templateSelectorDelegate!.didSelected(temp)
             let count = self.navigationController?.viewControllers.count
             self.navigationController?.popToViewController((self.navigationController?.viewControllers[count! - 2])!, animated: true)
         }
@@ -389,7 +397,8 @@ class TamplateTableViewDelegator: NSObject ,UITableViewDataSource, UITableViewDe
         let item: Item = templateSections[indexPath.section].items[indexPath.row]
         // cell.nameLabel.text = item.name
         cell.detailLabel.text = item.detail
-        cell.dxtdId = item.name
+        cell.dxtdId = item.dxtd!
+        cell.templateId = item.templateId!
         if controller.tableCanSelected {
             // cell.accessoryView = UIImageView(image: UIImage(named: "ico_nr"))
             cell.accessoryType = .disclosureIndicator

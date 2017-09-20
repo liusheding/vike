@@ -95,7 +95,7 @@ class SMSTemplateViewController : UIViewController {
     var executeDate: String?
     //短信通道
     var dxtd: String?
-    //
+    // 是否有称谓
     var isAppellationShow = true {
         
         didSet {
@@ -109,8 +109,9 @@ class SMSTemplateViewController : UIViewController {
             }
         }
     }
-    
+    // 总共多少字
     var totalWords: UILabel!
+    var templateId: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -200,6 +201,7 @@ class SMSTemplateViewController : UIViewController {
         sched.executeTime = self.executeDate
         sched.type = "0"
         sched.dxtd = self.dxtd
+        sched.templateId = self.templateId
         let sign = self.inscribeView.inscribeText.text!
         sched.userSign = sign.isEmpty ? (AppUser.currentUser?.name)! : sign
         for c in self.customers! {
@@ -420,7 +422,8 @@ extension SMSTemplateViewController : TemplateSelectorDelegate, ChooseDateDelega
         let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 1))
         cell?.textLabel?.text = template.content
         cell?.textLabel?.textColor = UIColor.darkText
-        self.dxtd = template.id
+        self.templateId = template.id
+        self.dxtd = template.dxtd
         self.content = template.content
         self.totalWords.text = "模板\(self.content!.characters.count)字"
         self.isAppellationShow = (self.content?.contains("【称谓】"))!

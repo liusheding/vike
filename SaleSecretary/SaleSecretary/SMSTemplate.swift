@@ -15,6 +15,8 @@ class SMSTemplate {
     
     var content: String
     
+    var dxtd:String?
+    
     init(_ id: String?, content: String) {
         self.id = id
         self.content = content
