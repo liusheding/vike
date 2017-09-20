@@ -53,8 +53,6 @@ class BatchProcessViewController: UIViewController {
     }
     
     func navigationSetting() {
-        
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(title: "取消", style: .plain , target: self , action: #selector(self.cancelButton))
         self.navigationItem.title = "批量处理"
     }
     
