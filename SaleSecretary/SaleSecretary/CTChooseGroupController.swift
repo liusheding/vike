@@ -17,6 +17,7 @@ class CTChooseGroupController: UITableViewController {
     
     var selectedGroup : Int = -1
     var reloadViewDelegate : ContactTableViewDelegate?
+    var contacTableDelegate : ContactTableViewDelegate?
     var group : [Group] = []
     
     override func viewDidLoad() {
@@ -24,7 +25,7 @@ class CTChooseGroupController: UITableViewController {
         self.group = self.contextDb.getGroupInDb(userId: APP_USER_ID!)
         self.navigationSetting()
         self.tableSetting()
-        reloadViewDelegate = ContactTableViewController.instance
+        self.contacTableDelegate = ContactTableViewController.instance
     }
     
     func tableSetting()  {
@@ -61,6 +62,7 @@ class CTChooseGroupController: UITableViewController {
             if self.reloadViewDelegate != nil{
                 self.reloadViewDelegate?.reloadTableViewData()
             }
+            self.contacTableDelegate?.reloadTableViewData()
         }
         self.navigationController?.popViewController(animated: true)
         
