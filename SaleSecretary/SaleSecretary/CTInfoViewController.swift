@@ -42,6 +42,7 @@ class CTInfoViewController: UIViewController {
         if self.currentInfo?.id == nil || (self.currentInfo?.id.characters.count)! > 0 {
             self.getDataFromServer()
         }
+        self.reloadDelegate = ContactTableViewController.instance
     }
     
     func getDataFromServer() {

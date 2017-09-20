@@ -41,6 +41,8 @@ class ContactTableViewController: UIViewController {
         
         didSet {
             if self.contactsCells.count == 0 {return}
+            // 清空
+            self.searchDelegator.origin = []
             for g in self.contactsCells {
                 if let f = g.friends {
                     self.searchDelegator.origin += f
@@ -103,6 +105,7 @@ class ContactTableViewController: UIViewController {
         self.searchDisplayController?.searchResultsDataSource = self.searchDelegator
         self.searchDisplayController?.searchResultsTableView.register(UINib(nibName: String(describing: PersonContactCell.self ), bundle: nil), forCellReuseIdentifier: "customerSearchCellId")
         self.searchDisplayController?.delegate = self.searchDelegator
+        
         ContactTableViewController.instance = self
         self.searchDelegator.parent = self
     }
@@ -182,6 +185,11 @@ class ContactTableViewController: UIViewController {
         self.ctMoreItemView.hide(true)
         self.chooseGroup.isHidden = true
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        self.searchDisplayController?.isActive = false
     }
     
     func pressCancel() {
@@ -607,5 +615,6 @@ class ContactSearchDelegator: NSObject, UITableViewDelegate, UITableViewDataSour
         self.customers = result
         return true
     }
+    
     
 }
