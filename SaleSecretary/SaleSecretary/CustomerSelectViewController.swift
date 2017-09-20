@@ -192,7 +192,6 @@ extension CustomerSelectViewController : UITableViewDelegate, UITableViewDataSou
         } else {
             cell.accessoryView = UIImageView(image: UIImage(named: "icon_xz_1"))
         }
-        
         return cell
     }
     

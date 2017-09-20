@@ -22,6 +22,7 @@ class CollapsibleTableImageViewCell: UITableViewCell {
         
         let marginGuide = contentView.layoutMarginsGuide
         
+        
         // configure nameLabel
         contentView.addSubview(nameLabel)
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
