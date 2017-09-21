@@ -112,6 +112,7 @@
 		6E8110C61F4D0DEA0021788A /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E8110C51F4D0DEA0021788A /* Security.framework */; };
 		6E8110C81F4D0E940021788A /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E8110C71F4D0E940021788A /* AdSupport.framework */; };
 		6E8110CA1F4D0E9E0021788A /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E8110C91F4D0E9E0021788A /* libresolv.tbd */; };
+		6E8385FB1F73668100FF49ED /* MineView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E8385FA1F73668100FF49ED /* MineView.storyboard */; };
 		6E8739841F666772004BF380 /* TakeoutMoneyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8739831F666772004BF380 /* TakeoutMoneyViewController.swift */; };
 		6E8739881F6676A6004BF380 /* CardManageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8739871F6676A6004BF380 /* CardManageController.swift */; };
 		6E87398A1F667E09004BF380 /* AddCardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8739891F667E09004BF380 /* AddCardController.swift */; };
@@ -128,7 +129,6 @@
 		6EBAA54F1F3C2E480099DA89 /* MineInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBAA54E1F3C2E480099DA89 /* MineInfoCell.swift */; };
 		6EBAA5511F3C2E520099DA89 /* MineInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EBAA5501F3C2E520099DA89 /* MineInfoCell.xib */; };
 		6EBAA5611F3C43B50099DA89 /* WalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBAA5601F3C43B50099DA89 /* WalletViewController.swift */; };
-		6EBAA5651F3C4AA40099DA89 /* MineView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6EBAA5641F3C4AA40099DA89 /* MineView.storyboard */; };
 		6EBAA5671F3C59340099DA89 /* WalletDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBAA5661F3C59340099DA89 /* WalletDetailController.swift */; };
 		6EBAA56A1F3C5B330099DA89 /* WalletDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBAA5681F3C5B330099DA89 /* WalletDetailCell.swift */; };
 		6EBAA56B1F3C5B330099DA89 /* WalletDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EBAA5691F3C5B330099DA89 /* WalletDetailCell.xib */; };
@@ -349,6 +349,7 @@
 		6E8110C71F4D0E940021788A /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		6E8110C91F4D0E9E0021788A /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
 		6E8110CB1F4D0F620021788A /* SaleSecretary.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SaleSecretary.entitlements; sourceTree = "<group>"; };
+		6E8385FA1F73668100FF49ED /* MineView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MineView.storyboard; sourceTree = "<group>"; };
 		6E8739831F666772004BF380 /* TakeoutMoneyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TakeoutMoneyViewController.swift; sourceTree = "<group>"; };
 		6E8739871F6676A6004BF380 /* CardManageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardManageController.swift; sourceTree = "<group>"; };
 		6E8739891F667E09004BF380 /* AddCardController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCardController.swift; sourceTree = "<group>"; };
@@ -365,7 +366,6 @@
 		6EBAA54E1F3C2E480099DA89 /* MineInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MineInfoCell.swift; sourceTree = "<group>"; };
 		6EBAA5501F3C2E520099DA89 /* MineInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MineInfoCell.xib; sourceTree = "<group>"; };
 		6EBAA5601F3C43B50099DA89 /* WalletViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletViewController.swift; sourceTree = "<group>"; };
-		6EBAA5641F3C4AA40099DA89 /* MineView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MineView.storyboard; sourceTree = "<group>"; };
 		6EBAA5661F3C59340099DA89 /* WalletDetailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletDetailController.swift; sourceTree = "<group>"; };
 		6EBAA5681F3C5B330099DA89 /* WalletDetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletDetailCell.swift; sourceTree = "<group>"; };
 		6EBAA5691F3C5B330099DA89 /* WalletDetailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WalletDetailCell.xib; sourceTree = "<group>"; };
@@ -763,6 +763,7 @@
 		6EF19C591F3BF4AB00646BCF /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				6E8385FA1F73668100FF49ED /* MineView.storyboard */,
 				6E8739A71F68E85E004BF380 /* SMSDetailRecordController.swift */,
 				6E8739831F666772004BF380 /* TakeoutMoneyViewController.swift */,
 				6EF2A1EB1F4EDD710059DB59 /* MineInfoViewController.swift */,
@@ -772,7 +773,6 @@
 				6EBAA56E1F3D5C190099DA89 /* BusinessRecordController.swift */,
 				6EF19C5C1F3BF9E000646BCF /* MineUIViewController.swift */,
 				6EBAA5601F3C43B50099DA89 /* WalletViewController.swift */,
-				6EBAA5641F3C4AA40099DA89 /* MineView.storyboard */,
 				6EBAA5661F3C59340099DA89 /* WalletDetailController.swift */,
 				6EF2B7841F3EC7B400C808EE /* PayDetailController.swift */,
 				6EF2B7861F3EC7F400C808EE /* PayViewController.swift */,
@@ -1141,6 +1141,7 @@
 				E7D2AC361F4A7A48000123A5 /* AddingCustomViewCell.xib in Resources */,
 				6EF2B78B1F3ECB1D00C808EE /* PayDetailCell.xib in Resources */,
 				837E4CB3CAA4F9E6F67FCD9B689A4731 /* Assets.xcassets in Resources */,
+				6E8385FB1F73668100FF49ED /* MineView.storyboard in Resources */,
 				B57F541A2E6EE35F55BF1F726094C124 /* LaunchScreen.storyboard in Resources */,
 				E7D2ABD71F457AC7000123A5 /* PersonContactCell.xib in Resources */,
 				66B602F71F2F35CC002A55E6 /* SMSDetailView.xib in Resources */,
@@ -1160,7 +1161,6 @@
 				6E20ECA01F341B8D00A0F29E /* MessageChat.storyboard in Resources */,
 				E7FC61E71F68DEA200B58483 /* MustAddCell.xib in Resources */,
 				D9D045E89EEF6E531B731C29AF71C6D8 /* MessageListCell.xib in Resources */,
-				6EBAA5651F3C4AA40099DA89 /* MineView.storyboard in Resources */,
 				29D06932D6D0A7D01DEBF31C0546DAAE /* SMSView.storyboard in Resources */,
 				6EF5B7291F4582C1001B0A77 /* ExitViewCell.xib in Resources */,
 				6615BF6B1F34134C0052879B /* customerList.plist in Resources */,
