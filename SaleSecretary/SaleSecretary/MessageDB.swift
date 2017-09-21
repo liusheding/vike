@@ -42,6 +42,7 @@ class MessageDB: NSObject {
         message.setValue(msgdata.phone + (AppUser.currentUser?.cellphoneNumber)!, forKey: "msg_phone")
         message.setValue(msgdata.date, forKey: "msg_time")
         message.setValue(msgdata.mtype, forKey: "msg_type")
+        message.setValue(msgdata.unread, forKey: "msg_unread")
         
         do {
             try context.save()
@@ -254,10 +255,9 @@ class MessageDB: NSObject {
     func handlerNotification(userinfo: [AnyHashable : Any]?, type: JPNotificationType) {
         if  userinfo == nil || userinfo?.count == 0 { return }
         if AppUser.currentUser == nil {return}
-        let user = AppUser.currentUser!
         let info = userinfo! as! [String: Any]
         let msg = MessageDetail()
-        msg.msgphone = user.cellphoneNumber! + "100001"
+        msg.msgphone = "100001"
         // 系统消息
         if type == .APNS {
             let apsKey = "aps"

@@ -89,9 +89,6 @@ class AppUser: NSObject {
             tags.insert("userphone_\(user.cellphoneNumber!)")
             tags.insert("usertype_\(user.roleCode!)")
             JpushUtils.addTags(tags: tags)
-            if let msgvc = MessageViewController.instance {
-                msgvc.showDotOnItem()
-            }
             callback(user)
         })
     }
@@ -107,9 +104,6 @@ class AppUser: NSObject {
             tags.insert("userphone_\(user.cellphoneNumber!)")
             tags.insert("usertype_\(user.roleCode!)")
             JpushUtils.addTags(tags: tags)
-            if let msgvc = MessageViewController.instance {
-                msgvc.showDotOnItem()
-            }
             callback(user)
         })
     }

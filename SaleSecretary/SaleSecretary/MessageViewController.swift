@@ -68,6 +68,7 @@ class MessageViewController: UITableViewController {
                 return
             }
         }
+        self.removeBadgeOnItemIndex(index: 2)
     }
     
     //显示小红点
@@ -277,6 +278,8 @@ class MessageViewController: UITableViewController {
             msgdb.deleteMsgList(msgdata: data)
             self.tableView!.deleteRows(at: [indexPath], with: UITableViewRowAnimation.fade)
         }
+        
+        self.showDotOnItem()
         emptyView?.dismiss()
         if DataSource.count == 0{
             let frame = self.tableView.frame
