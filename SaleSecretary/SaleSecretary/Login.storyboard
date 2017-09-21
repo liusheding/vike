@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="tWE-O0-bB3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="tWE-O0-bB3">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -23,7 +23,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ERi-lm-K1F">
-                                <rect key="frame" x="29" y="100" width="317" height="250"/>
+                                <rect key="frame" x="29" y="120" width="317" height="250"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_sjh" highlightedImage="icon_sjh" translatesAutoresizingMaskIntoConstraints="NO" id="j4c-qR-hwc">
                                         <rect key="frame" x="4" y="12" width="26" height="26"/>
@@ -191,11 +191,12 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nhZ-up-yCF">
-                                <rect key="frame" x="44" y="386" width="287" height="50"/>
+                                <rect key="frame" x="44" y="406" width="287" height="50"/>
                                 <color key="backgroundColor" red="0.1065740479" green="0.77210897840000003" blue="0.1872832348" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="we4-ey-hb6"/>
                                 </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" title="注册">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
@@ -212,7 +213,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hG4-tz-fxb">
-                                <rect key="frame" x="114" y="631" width="146" height="21"/>
+                                <rect key="frame" x="114.5" y="631" width="146" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="XhS-D7-EC5"/>
                                 </constraints>
@@ -223,20 +224,50 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="轻触上面的&quot;注册&quot;按钮，即表示你同意" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sXP-YX-YrB">
-                                <rect key="frame" x="75.5" y="613" width="223.5" height="16"/>
+                                <rect key="frame" x="76" y="613" width="223.5" height="16"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hBX-V0-qtG">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="2w7-Rn-fTf"/>
+                                </constraints>
+                                <items>
+                                    <navigationItem title="注册" id="LWA-Yi-bJW">
+                                        <barButtonItem key="leftBarButtonItem" title="取消" id="YZb-jT-wLO">
+                                            <color key="tintColor" red="0.0039215686269999999" green="0.70588235290000001" blue="0.078431372550000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <connections>
+                                                <action selector="cancelBtn:" destination="Iph-4C-eli" id="vzY-be-wrg"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wvr-tc-Q1s">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="20"/>
+                                <color key="backgroundColor" red="0.97647058823529409" green="0.97647058823529409" blue="0.97647058823529409" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="J6k-eS-xAy"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="nhZ-up-yCF" firstAttribute="leading" secondItem="xYY-gH-vja" secondAttribute="leadingMargin" constant="28" id="06j-sP-rKz"/>
                             <constraint firstItem="nhZ-up-yCF" firstAttribute="top" secondItem="ERi-lm-K1F" secondAttribute="bottom" constant="36" id="1f7-nY-mlh"/>
                             <constraint firstItem="ERi-lm-K1F" firstAttribute="leading" secondItem="xYY-gH-vja" secondAttribute="leadingMargin" constant="13" id="5lL-OW-slL"/>
+                            <constraint firstItem="hBX-V0-qtG" firstAttribute="top" secondItem="Wvr-tc-Q1s" secondAttribute="bottom" id="BVO-yw-hbK"/>
+                            <constraint firstItem="Wvr-tc-Q1s" firstAttribute="top" secondItem="xYY-gH-vja" secondAttribute="top" id="LGF-P8-rUF"/>
+                            <constraint firstItem="hBX-V0-qtG" firstAttribute="top" secondItem="Wvr-tc-Q1s" secondAttribute="bottom" id="NTi-TE-zFS"/>
                             <constraint firstAttribute="trailingMargin" secondItem="nhZ-up-yCF" secondAttribute="trailing" constant="28" id="RHa-Cq-Tty"/>
+                            <constraint firstItem="Wvr-tc-Q1s" firstAttribute="leading" secondItem="xYY-gH-vja" secondAttribute="leading" id="ShN-HQ-jZh"/>
+                            <constraint firstItem="hBX-V0-qtG" firstAttribute="leading" secondItem="xYY-gH-vja" secondAttribute="leading" id="TPG-dZ-NaH"/>
+                            <constraint firstAttribute="trailing" secondItem="hBX-V0-qtG" secondAttribute="trailing" id="WZS-Mi-ort"/>
                             <constraint firstItem="ERi-lm-K1F" firstAttribute="top" secondItem="xYY-gH-vja" secondAttribute="topMargin" constant="100" id="Yju-hq-ibr"/>
                             <constraint firstItem="sXP-YX-YrB" firstAttribute="centerX" secondItem="xYY-gH-vja" secondAttribute="centerX" id="a9b-EG-PEf"/>
+                            <constraint firstAttribute="trailing" secondItem="Wvr-tc-Q1s" secondAttribute="trailing" id="bX9-Ho-Vhe"/>
                             <constraint firstItem="hG4-tz-fxb" firstAttribute="centerX" secondItem="xYY-gH-vja" secondAttribute="centerX" id="cCZ-Lu-AuR"/>
                             <constraint firstItem="DqA-4e-444" firstAttribute="top" secondItem="hG4-tz-fxb" secondAttribute="bottom" constant="15" id="dh6-xf-Whg"/>
                             <constraint firstAttribute="trailingMargin" secondItem="ERi-lm-K1F" secondAttribute="trailing" constant="13" id="lAT-H0-9nr"/>
@@ -274,10 +305,39 @@
                                 <rect key="frame" x="0.0" y="80" width="375" height="587"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </webView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kUn-Kz-uDR">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="20"/>
+                                <color key="backgroundColor" red="0.97647058819999999" green="0.97647058819999999" blue="0.97647058819999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="J59-Qo-F2I"/>
+                                </constraints>
+                            </view>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iFl-el-ajF">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="Sy5-7M-wmz"/>
+                                </constraints>
+                                <items>
+                                    <navigationItem title="用户服务协议" id="ky9-Zr-ycH">
+                                        <barButtonItem key="leftBarButtonItem" title="返回" id="jZh-3r-672">
+                                            <color key="tintColor" red="0.0039215686269999999" green="0.70588235290000001" blue="0.078431372550000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <connections>
+                                                <action selector="backBtn:" destination="PRl-87-5wj" id="jSi-j2-xEa"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="1eS-it-pcR" firstAttribute="leading" secondItem="ZgF-c9-JpG" secondAttribute="leading" id="4u7-uw-qzT"/>
+                            <constraint firstItem="iFl-el-ajF" firstAttribute="leading" secondItem="ZgF-c9-JpG" secondAttribute="leading" id="5RE-jM-E6R"/>
+                            <constraint firstAttribute="trailing" secondItem="iFl-el-ajF" secondAttribute="trailing" id="96V-T6-OW7"/>
+                            <constraint firstAttribute="trailing" secondItem="kUn-Kz-uDR" secondAttribute="trailing" id="9dG-xo-yyD"/>
+                            <constraint firstItem="kUn-Kz-uDR" firstAttribute="top" secondItem="ZgF-c9-JpG" secondAttribute="top" id="aKf-dX-vem"/>
+                            <constraint firstItem="kUn-Kz-uDR" firstAttribute="leading" secondItem="ZgF-c9-JpG" secondAttribute="leading" id="alz-cN-OZm"/>
+                            <constraint firstItem="iFl-el-ajF" firstAttribute="top" secondItem="kUn-Kz-uDR" secondAttribute="bottom" id="cel-Bf-5GI"/>
                             <constraint firstAttribute="trailing" secondItem="1eS-it-pcR" secondAttribute="trailing" id="jXv-ug-Znl"/>
                             <constraint firstItem="1eS-it-pcR" firstAttribute="top" secondItem="ovI-db-3Fm" secondAttribute="bottom" constant="60" id="oYI-ae-jcT"/>
                             <constraint firstItem="vXL-ra-7Rn" firstAttribute="top" secondItem="1eS-it-pcR" secondAttribute="bottom" id="wZP-uw-tGn"/>
@@ -289,7 +349,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jaI-Xb-iP1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-937" y="623"/>
+            <point key="canvasLocation" x="-938.39999999999998" y="622.93853073463276"/>
         </scene>
         <!--找回密码-->
         <scene sceneID="kQV-BW-yIZ">
@@ -304,7 +364,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CFF-If-ZC7">
-                                <rect key="frame" x="29" y="100" width="317" height="200"/>
+                                <rect key="frame" x="29" y="120" width="317" height="200"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_sjh" highlightedImage="icon_sjh" translatesAutoresizingMaskIntoConstraints="NO" id="V2D-Mc-cKq">
                                         <rect key="frame" x="4" y="12" width="26" height="26"/>
@@ -443,11 +503,12 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BRS-fj-KvP">
-                                <rect key="frame" x="29" y="337" width="320" height="50"/>
+                                <rect key="frame" x="29" y="357" width="320" height="50"/>
                                 <color key="backgroundColor" red="0.0039215686269999999" green="0.70588235290000001" blue="0.078431372550000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="qim-Lf-fzG"/>
                                 </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <state key="normal" title="立即找回">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
@@ -457,13 +518,42 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </button>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ROP-yQ-JUc">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="tGe-xN-6lP"/>
+                                </constraints>
+                                <items>
+                                    <navigationItem title="找回密码" id="TB7-Ow-yGO">
+                                        <barButtonItem key="leftBarButtonItem" title="取消" id="Waa-BI-rsv">
+                                            <color key="tintColor" red="0.0039215686269999999" green="0.70588235290000001" blue="0.078431372550000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <connections>
+                                                <action selector="cancelBtn:" destination="kMA-01-BWP" id="I3a-bF-Rne"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uet-rn-B17">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="20"/>
+                                <color key="backgroundColor" red="0.97647058819999999" green="0.97647058819999999" blue="0.97647058819999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="3lm-uj-mwl"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="CFF-If-ZC7" firstAttribute="top" secondItem="Dmw-Uk-V3w" secondAttribute="topMargin" constant="100" id="6iz-a0-pw6"/>
+                            <constraint firstItem="uet-rn-B17" firstAttribute="leading" secondItem="Dmw-Uk-V3w" secondAttribute="leading" id="IFO-Ln-1kY"/>
                             <constraint firstItem="BRS-fj-KvP" firstAttribute="leading" secondItem="CFF-If-ZC7" secondAttribute="leading" id="QdH-pH-Ces"/>
+                            <constraint firstItem="ROP-yQ-JUc" firstAttribute="top" secondItem="uet-rn-B17" secondAttribute="bottom" id="RgM-2v-inQ"/>
                             <constraint firstItem="CFF-If-ZC7" firstAttribute="leading" secondItem="Dmw-Uk-V3w" secondAttribute="leadingMargin" constant="13" id="UYy-wf-VLs"/>
+                            <constraint firstItem="ROP-yQ-JUc" firstAttribute="leading" secondItem="Dmw-Uk-V3w" secondAttribute="leading" id="V7g-5r-lRy"/>
+                            <constraint firstAttribute="trailing" secondItem="ROP-yQ-JUc" secondAttribute="trailing" id="fft-0n-ExL"/>
+                            <constraint firstItem="uet-rn-B17" firstAttribute="top" secondItem="Dmw-Uk-V3w" secondAttribute="top" id="l1n-6L-h0s"/>
                             <constraint firstAttribute="trailingMargin" secondItem="BRS-fj-KvP" secondAttribute="trailing" constant="10" id="lLs-FS-quT"/>
+                            <constraint firstAttribute="trailing" secondItem="uet-rn-B17" secondAttribute="trailing" id="nR0-wP-p5W"/>
                             <constraint firstItem="BRS-fj-KvP" firstAttribute="top" secondItem="CFF-If-ZC7" secondAttribute="bottom" constant="37" id="qXc-G1-yVx"/>
                             <constraint firstAttribute="trailingMargin" secondItem="CFF-If-ZC7" secondAttribute="trailing" constant="13" id="usJ-ff-jhh"/>
                         </constraints>
@@ -498,6 +588,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="bS5-92-BZZ"/>
                                 </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" title="登录">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
@@ -585,7 +676,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" highlightedImage="logo" translatesAutoresizingMaskIntoConstraints="NO" id="N57-yn-3qw">
-                                <rect key="frame" x="137" y="70" width="100" height="110"/>
+                                <rect key="frame" x="137.5" y="70" width="100" height="110"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="223" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4ZX-q6-ZUz">
                                 <rect key="frame" x="192" y="448" width="62" height="30"/>
