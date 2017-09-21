@@ -92,9 +92,6 @@ class MessageViewController: UITableViewController {
     }
     
     override func viewDidLoad() {
-        insertMsgList()
-        insertMsgItem()
-        
         initData()
         super.viewDidLoad()
         
@@ -119,14 +116,6 @@ class MessageViewController: UITableViewController {
                 msgdb.deleteMsgItem(msgphone: dd.msgphone)
             }
         }
-    }
-    
-    func insertMsgList(){
-        let msglist = msgdb.getAllMsgList()
-        if msglist != []{
-            return
-        }
-        msgdb.insertMsgList(msgdata: MessageData(name:"系统消息", phone:notifyPhone,time:Date(timeIntervalSinceNow:-60*60*24*3),mtype:3, message: [], unread:0))
     }
     
     func insertMsg(msgdetail: MessageDetail){
@@ -169,21 +158,6 @@ class MessageViewController: UITableViewController {
             
     }
     
-    func insertMsgItem(){
-        let msgitem = msgdb.getAllMsgItem()
-        if msgitem != []{
-            return
-        }
-        
-        insertMsg(msgdetail: MessageDetail(msgtime:Date(timeIntervalSinceNow:0),msgtype:3,msgcontent:"国防部声明指出，中印边境对峙事件发生以来，中国本着最大善意，努力通过外交渠道解决当前事态。中国军队从维护两国关系大局和地区和平稳定出发，始终保持高度克制。www.baidu.com", msgphone: notifyPhone))
-        
-        insertMsg(msgdetail: MessageDetail(msgtime:Date(timeIntervalSinceNow:-60*60*24),msgtype:3,msgcontent:"巴基斯坦《国际新闻》网站7日报道称，据可靠消息，中国政府就印军非法越界严正警告。中国军队从维护两国关系大局和地区和平稳定出发，始终保持高度克制。", msgphone: notifyPhone))
-        
-        insertMsg(msgdetail: MessageDetail(msgtime:Date(timeIntervalSinceNow:0),msgtype:3,msgcontent:"国防部声明指出，中印边境对峙事件发生以来，中国本着最大善意，努力通过外交渠道解决当前事态。中国军队从维护两国关系大局和地区和平稳定出发，始终保持高度克制。国防部声明指出，中印边境对峙事件发生以来，中国本着最大善意，努力通过外交渠道解决当前事态。中国军队从维护两国关系大局和地区和平稳定出发，始终保持高度克制。", msgphone: notifyPhone))
-        
-        insertMsg(msgdetail: MessageDetail(msgtime:Date(timeIntervalSinceNow:-60*60*24),msgtype:3,msgcontent:"巴基斯坦《国际新闻》网站7日报道称，据可靠消息，中国政府就印军非法越界严正警告。国防部声明指出，中印边境对峙事件发生以来，中国本着最大善意，努力通过外交渠道解决当前事态。", msgphone: notifyPhone))
-    }
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -198,18 +172,7 @@ class MessageViewController: UITableViewController {
         }
         return 0
     }
-    
-//    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-//        return 5
-//    }
-//    
-//    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?
-//    {
-//        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: Int(tableView.bounds.size.width), height: 5))
-//        headerView.backgroundColor = UIColor.clear
-//        return headerView
-//    }
-    
+
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! MessageListCell
         let data = self.DataSource[indexPath.row] as! MessageData
@@ -306,6 +269,14 @@ class MessageViewController: UITableViewController {
             msgdb.deleteMsgItem(msgphone: data.phone)
             msgdb.deleteMsgList(msgdata: data)
             self.tableView!.deleteRows(at: [indexPath], with: UITableViewRowAnimation.fade)
+        }
+        emptyView?.dismiss()
+        if DataSource.count == 0{
+            let frame = self.tableView.frame
+            emptyView = EmptyContentView.init(frame: frame)
+            emptyView?.textLabel.text = "暂无任何消息通知～"
+            emptyView?.textLabel.numberOfLines = 2
+            emptyView?.showInView(self.view)
         }
     }
 
