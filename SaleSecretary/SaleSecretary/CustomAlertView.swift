@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import SnapKit
 import RxSwift
-import RxCocoa
+// import RxCocoa
 
 private let kActionViewWidth: CGFloat = 140   //container view width
 private let kActionViewHeight: CGFloat = 116    //container view height
@@ -102,13 +102,21 @@ class CustomAlertView: UICollectionViewCell {
         //add tap to view
         let tap = UITapGestureRecognizer()
         self.addGestureRecognizer(tap)
-        tap.rx.event.subscribe { _ in
-            self.hide(true)
-            }.addDisposableTo(self.disposeBag)
+        tap.addTarget(self, action: #selector(tapedBackgroud(_:)))
+//        tap.rx.event.subscribe { _ in
+//            self.hide(true)
+//            }.addDisposableTo(self.disposeBag)
         
         self.isHidden = true
         
     }
+    
+    func tapedBackgroud(_ sender: UITapGestureRecognizer) {
+        self.hide(true)
+    }
+    
+    
+    
     func buttonTaped(_ sender: UIButton!) {
         guard let delegate = self.delegate else {
             self.hide(true)

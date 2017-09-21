@@ -9,7 +9,7 @@
 import UIKit
 import SnapKit
 import RxSwift
-import RxCocoa
+// import RxCocoa
 
 private let kActionViewWidth: CGFloat = 138   //container view width
 private let kActionViewHeight: CGFloat = 34   //container view height
@@ -119,12 +119,17 @@ class CustomerPopUpView: UIView {
         //add tap to view
         let tap = UITapGestureRecognizer()
         self.addGestureRecognizer(tap)
-        tap.rx.event.subscribe { _ in
-            self.hide(true)
-            }.addDisposableTo(self.disposeBag)
+        tap.addTarget(self, action: #selector(tapedBackgroud(_:)))
+//        tap.rx.event.subscribe { _ in
+//            self.hide(true)
+//            }.addDisposableTo(self.disposeBag)
         
         self.isHidden = true
        
+    }
+    
+    func tapedBackgroud(_ sender: UITapGestureRecognizer) {
+        self.hide(true)
     }
     
     func buttonTaped(_ sender: UIButton!) {

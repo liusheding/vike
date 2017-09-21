@@ -3,9 +3,7 @@ PODS:
   - DropDown (2)
   - Kingfisher (3.10.3)
   - MBProgressHUD (1.0.0)
-  - RxCocoa (3.6.0):
-    - RxSwift (~> 3.6)
-  - RxSwift (3.6.0)
+  - RxSwift (3.6.1)
   - SnapKit (3.0.2)
   - SwiftyJSON (3.1.4)
   - YBAttributeTextTapAction (2.0.6)
@@ -15,7 +13,6 @@ DEPENDENCIES:
   - DropDown
   - Kingfisher (~> 3.10.1)
   - MBProgressHUD (~> 1.0.0)
-  - RxCocoa (~> 3.0)
   - RxSwift (~> 3.0)
   - SnapKit (= 3.0.2)
   - SwiftyJSON (~> 3.1.4)
@@ -26,12 +23,11 @@ SPEC CHECKSUMS:
   DropDown: 744784d9c9aa505100e942c16acd05430cbb2f0a
   Kingfisher: a0ac82dc5bcf0388dd74b294cf2cc13730c63436
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
-  RxCocoa: cb865569239ebf1b1434056e5c8859d99dff103a
-  RxSwift: a0925c7fb11fbe60055285f6f2062241aa37a175
+  RxSwift: f9de85ea20cd2f7716ee5409fc13523dc638e4e4
   SnapKit: 2e456761aa92d4d4067a7a5594c18769d451a8ad
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
   YBAttributeTextTapAction: 650ff36251479f8cfc7b5dd8fb62587c538ce502
 
-PODFILE CHECKSUM: 36bda38aee5e964c18c09119adc5d90db9dc0222
+PODFILE CHECKSUM: 36f05834cb2f5cf421ba0be2bb70715e74b57185
 
 COCOAPODS: 1.2.1
