@@ -39,9 +39,10 @@ class MessageData {
     }
 }
 
-class MessageDetail {
+class MessageDetail: NSObject {
     //消息时间
     var msgdate:Date
+    
     var msgtime:String
     //消息类型 1-自己 2-对方
     var msgtype:Int
@@ -51,12 +52,22 @@ class MessageDetail {
     //用户电话/提示内容
     var msgphone:String
     
+    override init() {
+        let time = Date()
+        self.msgdate = time
+        let dateFormatter =  DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd hh:mm"
+        self.msgtime = dateFormatter.string(from: time)
+        self.msgtype = 1
+        self.msgcontent = ""
+        self.msgphone = ""
+    }
+    
     init(msgtime:Date, msgtype:Int, msgcontent:String, msgphone:String) {
         self.msgtype = msgtype
         self.msgdate = msgtime
         self.msgcontent = msgcontent
         self.msgphone = msgphone
-        
         let dateFormatter =  DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd hh:mm"
         self.msgtime = dateFormatter.string(from: msgtime)

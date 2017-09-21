@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import SwiftyJSON
 
 enum JPNotificationType {
     case APNS;
@@ -235,6 +236,7 @@ class MessageDB: NSObject {
     }
     
     func addSystemMessege(_ msg: MessageDetail) {
+        if AppUser.currentUser == nil {return}
         self.insertMsgItem(msgdetail: msg)
         let msglist = self.getMsgList(msgphone:  msg.msgphone)
         if msglist.count == 0 {
@@ -251,11 +253,45 @@ class MessageDB: NSObject {
     // 处理极光推送消息
     func handlerNotification(userinfo: [AnyHashable : Any]?, type: JPNotificationType) {
         if  userinfo == nil || userinfo?.count == 0 { return }
-        let info = userinfo!
-        let k = AnyHashable("title")
-        let exists = info.contains { $0.key == k}
-        if exists {
-            print(info[k])
+        if AppUser.currentUser == nil {return}
+        let user = AppUser.currentUser!
+        let info = userinfo! as! [String: Any]
+        let msg = MessageDetail()
+        msg.msgphone = user.cellphoneNumber! + "100001"
+        // 系统消息
+        if type == .APNS {
+            let apsKey = "aps"
+            let contentKey = "alert"
+            let exists = info.contains { $0.key == apsKey}
+            if exists {
+                let aps = info[apsKey] as! [String: Any]
+                let apsContains = aps.contains {$0.key == contentKey}
+                if apsContains {
+                    msg.msgcontent = aps[contentKey] as! String
+                    self.addSystemMessege(msg)
+                }
+            }
+        } else if type == .CUSTOM {
+            let json = JSON(info)
+            let str = json.rawString(.utf8, options: .init(rawValue: 0))
+            print(str ?? "")
+            let msgType = json["extras"]["type"].string
+            if let t = msgType {
+                if t == "AccountFreeze" {
+                    msg.msgcontent = "您的账户已被系统冻结"
+                    self.addSystemMessege(msg)
+                    Utils.alert("您的账户已被冻结！")
+                    AppUser.logout()
+                } else {
+                    if let cont = json["content"].string {
+                        if !cont.isEmpty {
+                            msg.msgcontent = cont
+                            self.addSystemMessege(msg)
+                        }
+                    }
+                }
+            }
         }
+        
     }
 }
