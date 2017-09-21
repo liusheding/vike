@@ -16,6 +16,8 @@ class MessageViewController: UITableViewController {
     let notifyPhone = "100001" //消息通知预设的电话号码
     var emptyView: EmptyContentView?
     
+    static var instance: MessageViewController?
+    
     func initData(){
         let msglist = msgdb.getAllMsgList()
         var msgdata = [MessageData]()
@@ -36,6 +38,7 @@ class MessageViewController: UITableViewController {
             emptyView?.textLabel.numberOfLines = 2
             emptyView?.showInView(self.view)
         }
+        self.tableView.reloadData()
     }
     
     func getPhoneNumber(_ phone:String) -> String{
@@ -92,14 +95,18 @@ class MessageViewController: UITableViewController {
     }
     
     override func viewDidLoad() {
-        initData()
         super.viewDidLoad()
-        
+        MessageViewController.instance = self
         tableView.tableFooterView = UIView()
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableView.register(UINib(nibName: String(describing: MessageListCell.self), bundle: nil), forCellReuseIdentifier: cellId)
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        initData()
     }
     
     func delectMsgList(){

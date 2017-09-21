@@ -30,12 +30,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 UserDefaults.standard.synchronize()
                 APP_USER_ID = user.id!
                 UIApplication.shared.delegate?.window??.rootViewController = mainVC
-                
-                let children = UIApplication.shared.delegate?.window??.rootViewController?.childViewControllers
-                if (children?.count)! >= 4 {
-                    let msgcontroller = children?[2].childViewControllers[0]  as! MessageViewController
-                    msgcontroller.showDotOnItem()
-                }
             }
             request?.response(completionHandler: {_ in sender.isEnabled = true})
         } else {

@@ -238,9 +238,13 @@ class MessageDB: NSObject {
         self.insertMsgItem(msgdetail: msg)
         let msglist = self.getMsgList(msgphone:  msg.msgphone)
         if msglist.count == 0 {
-        let msgdata = MessageData(name: "系统通知", phone: msg.msgphone, time: Date(), mtype: 3, message: [msg], unread: 1)
+            let msgdata = MessageData(name: "系统通知", phone: msg.msgphone, time: Date(), mtype: 3, message: [msg], unread: 1)
             self.insertMsgList(msgdata: msgdata)
+        } else {
+            let m = msglist[0].msg_unread >= 0 ? msglist[0].msg_unread : 0
+            self.updateMsgList(msgphone: msg.msgphone, key: "msg_unread", value: m + 1)
         }
+        MessageViewController.instance?.showDotOnItem()
     }
     
     

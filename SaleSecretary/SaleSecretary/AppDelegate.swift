@@ -154,11 +154,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate,WXApiDelegate {
                 AppUser.logout()
             } else {
                 AppUser.currentUser = user
-                let children = self.window?.rootViewController?.childViewControllers
-                if (children?.count)! >= 4 {
-                    let msgcontroller = children?[2].childViewControllers[0]  as! MessageViewController
-                    msgcontroller.showDotOnItem()
-                }
             }
         }
     }
