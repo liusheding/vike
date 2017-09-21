@@ -59,6 +59,27 @@ class MessageViewController: UITableViewController {
         }
     }
     
+    func RefreshCell(_ msgphone: String){
+        let cell = self.tableView.cellForRow(at: [0, 0]) //目前只有1个section 1个row 先用此方法处理
+        if cell == nil || AppUser.currentUser == nil {
+            return
+        }
+        let msgcell = cell as! MessageListCell
+        let msglist = msgdb.getMsgList(msgphone: msgphone)
+        if msglist.count == 0{
+            msgcell.setCellContnet(1)
+            msgcell.cellphone.text = "您有1条新消息通知"
+        }else{
+            let value = msglist[0].msg_unread
+            msgcell.setCellContnet(Int(value))
+            msgcell.cellphone.text = "您有\(value)条新消息通知"
+        }
+        let time = Date()
+        let dateFormatter =  DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd hh:mm"
+        msgcell.celltime.text = dateFormatter.string(from: time)
+    }
+    
     func showDotOnItem(){
         let msglist = msgdb.getAllMsgList()
         for msg in msglist{

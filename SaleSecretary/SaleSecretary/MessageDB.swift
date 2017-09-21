@@ -246,8 +246,10 @@ class MessageDB: NSObject {
         } else {
             let m = msglist[0].msg_unread >= 0 ? msglist[0].msg_unread : 0
             self.updateMsgList(msgphone: msg.msgphone, key: "msg_unread", value: m + 1)
+            self.updateMsgList(msgphone: msg.msgphone, key: "msg_time", value: Date())
         }
         MessageViewController.instance?.showDotOnItem()
+        MessageViewController.instance?.RefreshCell(msg.msgphone)
     }
     
     
