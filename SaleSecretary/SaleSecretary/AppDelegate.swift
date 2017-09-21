@@ -21,6 +21,8 @@ var APP_USER: AppUser?
 class AppDelegate: UIResponder, UIApplicationDelegate,WXApiDelegate {
 
     var window: UIWindow?
+    
+    var msgDB: MessageDB? = MessageDB.defaultInstance()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -55,7 +57,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,WXApiDelegate {
         JPUSHService.setup(withOption: nil, appKey: "c06a7098971e360662a2d990",channel: "AppStore", apsForProduction: false)
         
         JPUSHService.setBadge(0)
-        // JPUSHService.addTags(<#T##tags: Set<String>!##Set<String>!#>, completion: <#T##JPUSHTagsOperationCompletion!##JPUSHTagsOperationCompletion!##(Int, Set<AnyHashable>?, Int) -> Void#>, seq: <#T##Int#>)
+        NotificationCenter.default.addObserver(self, selector: #selector(didreceiveCustomerMesseage(_:)), name:NSNotification.Name.jpfNetworkDidReceiveMessage, object: nil)
         application.applicationIconBadgeNumber = 0
         // 请求通讯录
         DispatchQueue.global(qos: .userInteractive).async {
@@ -87,6 +89,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate,WXApiDelegate {
         return WXApi.handleOpen(url as URL!, delegate: self)
     }
     
+    func didreceiveCustomerMesseage(_ notification: Notification) {
+        let userinfo = notification.userInfo
+        self.msgDB?.handlerNotification(userinfo: userinfo, type: .CUSTOM)
+    }
+    
     //onReq是微信终端向第三方程序发起请求，要求第三方程序响应。第三方程序响应完后必须调用sendRsp返回。在调用sendRsp返回时，会切回到微信终端程序界面。
     func onReq(_ req: BaseReq!) {
         
@@ -111,7 +118,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,WXApiDelegate {
         //增加IOS 7的支持
         JPUSHService.handleRemoteNotification(userInfo)
         completionHandler(UIBackgroundFetchResult.newData)
-        
+        self.msgDB?.handlerNotification(userinfo: userInfo, type: .APNS)
         JPUSHService.setBadge(0)
         application.applicationIconBadgeNumber = 0
     }
@@ -163,6 +170,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,WXApiDelegate {
     }
 
     // MARK: - Core Data stack
+    
 
     lazy var persistentContainer: NSPersistentContainer = {
         /*

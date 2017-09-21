@@ -207,7 +207,7 @@ class MessageViewController: UITableViewController {
         
         var flag = false
         
-        for data in self.DataSource{
+        for data in self.DataSource {
             let d = data as! MessageData
             if d.unread > 0{
                 flag = true

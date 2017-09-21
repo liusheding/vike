@@ -9,11 +9,16 @@
 import UIKit
 import CoreData
 
+enum JPNotificationType {
+    case APNS;
+    case CUSTOM;
+}
+
 class MessageDB: NSObject {
     
-    private static let instance = MessageDB()
+    public static let instance = MessageDB()
     
-    static func defaultInstance() -> MessageDB {
+    public static func defaultInstance() -> MessageDB {
         return self.instance
     }
     
@@ -144,7 +149,7 @@ class MessageDB: NSObject {
         
         do {
             try context.save()
-        }catch{
+        } catch {
             print(error)
         }
     }
@@ -218,7 +223,6 @@ class MessageDB: NSObject {
         var result : [MsgItem] = []
         fetchRequest.fetchLimit = 10 //限定查询结果的数量
         fetchRequest.fetchOffset = 0 //查询的偏移量
-        
         do {
             let searchResults = try getContext().fetch(fetchRequest)
             for p in (searchResults as! [NSManagedObject]){
@@ -228,5 +232,26 @@ class MessageDB: NSObject {
             NSLog(error as! String)
         }
         return result
+    }
+    
+    func addSystemMessege(_ msg: MessageDetail) {
+        self.insertMsgItem(msgdetail: msg)
+        let msglist = self.getMsgList(msgphone:  msg.msgphone)
+        if msglist.count == 0 {
+        let msgdata = MessageData(name: "系统通知", phone: msg.msgphone, time: Date(), mtype: 3, message: [msg], unread: 1)
+            self.insertMsgList(msgdata: msgdata)
+        }
+    }
+    
+    
+    // 处理极光推送消息
+    func handlerNotification(userinfo: [AnyHashable : Any]?, type: JPNotificationType) {
+        if  userinfo == nil || userinfo?.count == 0 { return }
+        let info = userinfo!
+        let k = AnyHashable("title")
+        let exists = info.contains { $0.key == k}
+        if exists {
+            print(info[k])
+        }
     }
 }

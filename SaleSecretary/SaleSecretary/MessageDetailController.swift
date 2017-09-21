@@ -60,11 +60,12 @@ class MessageDetailController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! MessageDetailCell
         
-        let message = self.DataSource.message as! [MessageDetail]
-        let msg = message[indexPath.section] as! MessageDetail
+        let message = self.DataSource.message
+        let msg = message[indexPath.section]
         cell.celltime.text = msg.msgtime
         cell.cellcontent.text = msg.msgcontent
         cell.celltitle.text = self.DataSource.name
+        
         return cell
     }
     

@@ -47,6 +47,8 @@ class AppUser: NSObject {
     
     var status: String!
     
+    var roleCode: String?
+    
     override init() {
         
     }
@@ -58,6 +60,7 @@ class AppUser: NSObject {
         self.role = UserRole.fromString(str: response["roleCode"].string)
         self.referralCode = response["referralCode"].string
         self.status = response["status"].stringValue
+        self.roleCode = response["roleCode"].string
         self.body = response
     }
     
@@ -82,6 +85,10 @@ class AppUser: NSObject {
             json in
             let response = json["body"]
             let user = AppUser(response: response)
+            var tags = Set<String>()
+            tags.insert("userphone_\(user.cellphoneNumber!)")
+            tags.insert("usertype_\(user.roleCode!)")
+            JpushUtils.addTags(tags: tags)
             callback(user)
         })
     }
@@ -93,6 +100,10 @@ class AppUser: NSObject {
             json in
             let response = json["body"]
             let user = AppUser(response: response)
+            var tags = Set<String>()
+            tags.insert("userphone_\(user.cellphoneNumber!)")
+            tags.insert("usertype_\(user.roleCode!)")
+            JpushUtils.addTags(tags: tags)
             callback(user)
         })
     }
