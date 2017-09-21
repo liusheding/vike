@@ -42,14 +42,13 @@ class CTChooseNewerController: UIViewController {
 //    }
     
     override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
+//        super.viewDidAppear(animated)
+        let hud = MBProgressHUD.showAdded(to: self.view , animated: true)
         hud.label.text = "读取通讯录中..."
-//        self.chooseAlertView.isHidden = true
         // init contacts data
-        findNewCustomer()
-        self.tableView.reloadData()
+        self.findNewCustomer()
         hud.hide(animated: true)
+        self.tableView.reloadData()
     }
     
     override func viewDidLoad() {

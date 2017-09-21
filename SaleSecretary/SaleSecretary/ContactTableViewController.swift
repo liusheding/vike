@@ -350,6 +350,52 @@ extension ContactTableViewController : UITableViewDataSource, UITableViewDelegat
         return headView
     }
     
+    func synLimited(cust : [Customer] , start : Int , juhua : MBProgressHUD ) {
+        var terminal = false
+        var maxIndex = ContactCommon.maxSyncNum
+        if  ( cust.count - start ) <= ContactCommon.maxSyncNum {
+            terminal = true
+            maxIndex = (cust.count - start)
+        }
+        
+        var info : String = "{"
+        for key in 0..<maxIndex {
+            let x = cust[start + key]
+            let pn = (x.phone_number?.count)! > 0 ? x.phone_number?[0] : " "
+            let y = "\"" + x.name! + "\":"  + "\"" + pn! + "\","
+            info += (y)
+        }
+        
+        info.remove(at: info.index(before: info.endIndex ))
+        let body : [String:String] = [ "busi_scene" : ContactCommon.addUserBatch ,"userId" : APP_USER_ID!, "pldrkh" : info + "}" ]
+        // batch insert
+        let request = NetworkUtils.postBackEnd("C_TXL_CUS_INFO", body: body ){
+            json in
+        }
+        request.response { (_) in
+            if terminal {
+                juhua.hide(animated: true)
+                self.tableView.reloadData()
+                // information notice
+                let alertController = UIAlertController(title: "同步通讯录成功!新增\(cust.count)个用户", message: nil, preferredStyle: .alert)
+                //显示提示框
+                self.present(alertController, animated: true, completion: nil)
+                let defaultId  = ContactCommon.getDefaultId(groups:  self.contextDb.getGroupInDb(userId: APP_USER_ID!) )
+                self.contextDb.insertCustomerArray(ctms: cust , groupId: defaultId )
+                self.contactsCells = self.contextDb.getContacts2Group(userId : APP_USER_ID! ,  true)
+                self.customer = self.contextDb.getCustomerInDb(userId: APP_USER_ID!)
+
+                self.tableView.reloadData()
+                //两秒钟后自动消失
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
+                    self.presentedViewController?.dismiss(animated: false, completion: nil)
+                }
+            }else {
+                self.synLimited(cust: cust , start: start + ContactCommon.maxSyncNum , juhua: juhua )
+            }
+        }
+    }
+    
     func synContact2Server(){
         let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
         hud.label.text = "同步通讯录中..."
@@ -369,38 +415,8 @@ extension ContactTableViewController : UITableViewDataSource, UITableViewDelegat
                             }
                         }
                         if newCustomer.count > 0 {
-                            var info : String = "{"
-                            for key in 0..<newCustomer.count {
-                                let x = newCustomer[key]
-                                let pn = (x.phone_number?.count)! > 0 ? x.phone_number?[0] : " "
-                                let y = "\"" + x.name! + "\":"  + "\"" + pn! + "\","
-                                info += (y)
-                            }
-                            info.remove(at: info.index(before: info.endIndex ))
-                            let body : [String:String] = [ "busi_scene" : ContactCommon.addUserBatch ,"userId" : APP_USER_ID!, "pldrkh" : info + "}" ]
-                            // batch insert
-                            let request = NetworkUtils.postBackEnd("C_TXL_CUS_INFO", body: body ){
-                                json in
-                                let defaultId  = ContactCommon.getDefaultId(groups:  self.contextDb.getGroupInDb(userId: APP_USER_ID!) )
-                                self.contextDb.insertCustomerArray(ctms: newCustomer , groupId: defaultId )
-                                self.contactsCells = self.contextDb.getContacts2Group(userId : APP_USER_ID! ,  true)
-                                self.customer = self.contextDb.getCustomerInDb(userId: APP_USER_ID!)
-                            }
-                            request.response(completionHandler: { _ in
-                                hud.hide(animated: true)
-                                self.tableView.reloadData()
-                                // information notice
-                                let alertController = UIAlertController(title: "同步通讯录成功!新增\(newCustomer.count)个用户", message: nil, preferredStyle: .alert)
-                                //显示提示框
-                                self.present(alertController, animated: true, completion: nil)
-                                
-                                self.contactsCells = self.contextDb.getContacts2Group(userId: APP_USER_ID! , true)
-                                self.tableView.reloadData()
-                                //两秒钟后自动消失
-                                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
-                                    self.presentedViewController?.dismiss(animated: false, completion: nil)
-                                }
-                            })
+                            self.synLimited(cust: newCustomer , start: 0 , juhua: hud)
+                            
                         }else {
                             hud.hide(animated: true)
                         }
@@ -447,8 +463,8 @@ extension ContactTableViewController : UITableViewDataSource, UITableViewDelegat
     
     func contactPressTest() {
         var arrContact : [Customer] = []
-        let cust = Customer.init(name: "ahtest1", phoneNum: ["177897"])
-        for i in 0..<10000 {
+        let cust = Customer.init(name: "abhtest1", phoneNum: ["177898"])
+        for i in 0..<5000 {
             var x = ""
             for _ in 0..<( 5 - String(i).characters.count ) {
                 x.append("0")

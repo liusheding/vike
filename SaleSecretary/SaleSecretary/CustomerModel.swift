@@ -385,6 +385,7 @@ struct ContactCommon {
     static let separatorDefault = ","
     static let groupDefault : NSString = "默认分组"
     static let groupDefaultX : String = "defaultId"
+    static let maxSyncNum : Int = 1000
     
     static func limitedLength(str : String) -> Bool {
         var flag = false
