@@ -37,9 +37,12 @@ class CTChangeGroupViewController: UIViewController {
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var confirmButton: UIButton!
     static var instance : CTChangeGroupViewController!
+    
     func initSetting() {
-        
-        // init data
+        self.groupArr.append( self.addIconTag ) // the last for "Add button"
+    }
+    
+    func reloadData() {
         self.groupArr = MemGroup.toMemGroup(dbGroup: self.contextDb.getGroupInDb(userId: APP_USER_ID! , true))
         self.groupArr.append( self.addIconTag ) // the last for "Add button"
     }
@@ -60,19 +63,34 @@ class CTChangeGroupViewController: UIViewController {
         let cust = view.contactsCells[tmpIndexPath.section - 1].friends?[tmpIndexPath.row]
         
         if self.currentSel != tmpIndexPath.row  {
+            
             let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
-            hud.label.text = "加载中..."
+            hud.label.text = ""
             
-            let request = NetworkUtils.postBackEnd("U_TXL_CUS_INFO", body: ["id": cust?.id ?? "" , "userId": APP_USER_ID! , "cusGroupId" : g.id ], handler: { (json) in
-                self.contextDb.updateById(id: (cust?.id)! , newGroup: g.id )
-            })
-            
-            request.response(completionHandler: { _ in
-                view.reloadTableViewData()
-                hud.hide(animated: true)
-            })
+            if cust?.id.characters.count == 0 {
+                let phone = (cust?.phone_number?.count)!>0 ? cust?.phone_number![0] ?? "" :""
+                let r = NetworkUtils.postBackEnd("R_BASE_TXL_CUS_INFO", body:["userId": APP_USER_ID! , "cellphoneNumber" :  phone  ] , handler: { (json) in
+                    let id = json["body"]["id"].stringValue
+                    let request = NetworkUtils.postBackEnd("U_TXL_CUS_INFO", body: ["id": id , "userId": APP_USER_ID! , "cusGroupId" : g.id ], handler: { (json) in
+                        self.contextDb.updateByPhone(phone: phone , g: g )
+                    })
+                    request.response(completionHandler: { _ in
+                        view.reloadTableViewData()
+                        hud.hide(animated: true)
+                    })
+                })
+                r.response(completionHandler: { (_) in  })
+                
+            }else {
+                let request = NetworkUtils.postBackEnd("U_TXL_CUS_INFO", body: ["id": cust?.id ?? "" , "userId": APP_USER_ID! , "cusGroupId" : g.id ], handler: { (json) in
+                    self.contextDb.updateById(id: (cust?.id)! , newGroup: g.id )
+                })
+                request.response(completionHandler: { _ in
+                    view.reloadTableViewData()
+                    hud.hide(animated: true)
+                })
+            }
         }
-        
         view.pressCancel()
     }
     
@@ -117,13 +135,17 @@ extension CTChangeGroupViewController  : UICollectionViewDelegate, UICollectionV
             
             if indexPath.row == (self.groupArr.count-1) {
                 // remove setting
-//                cell.addingButton.removeTarget(self , action: #selector(self.choosedButton(_:)) , for: .touchDown )
-//                cell.addingButton.layer.borderWidth = 0
+                
                 cell.addingButton.setTitle("", for: .normal)
                 cell.addingButton.setImage(UIImage(named: "icon_tj") , for: .normal )
                 cell.addingButton.tintColor = ContactCommon.THEME_COLOR
-                cell.addingButton.addTarget(self , action: #selector(self.addNewGroup) , for: .touchUpInside  )
+                cell.addingButton.removeTarget(self , action: #selector(self.choosedButton(_:)) , for: .touchDown )
+                cell.addingButton.addTarget(self , action: #selector(self.addNewGroup) , for: .touchDown  )
                 cell.addingButton.frame = CGRect.init(x: 5, y: 5, width: cell.addingButton.frame.width + self.defaultLeftRight , height: cell.addingButton.frame.height)
+                cell.addingButton.tag = indexPath.row
+                cell.addingButton.isSelected = false
+                cell.addingButton.backgroundColor = UIColor.clear
+                cell.addingButton.layer.borderColor = UIColor.white.cgColor
                 
             }else {
                 if indexPath.row == 0 {
@@ -143,16 +165,14 @@ extension CTChangeGroupViewController  : UICollectionViewDelegate, UICollectionV
                 cell.addingButton.setTitle( self.groupArr[indexPath.row].group_name , for: .normal)
                 cell.addingButton.setTitleColor( ContactCommon.THEME_COLOR , for: .normal)
                 cell.addingButton.setTitleColor( UIColor.white , for: .selected )
+                cell.addingButton.setTitleColor( UIColor.white , for: .focused)
                 cell.addingButton.frame = CGRect.init(x: 5 , y: 5, width: ( self.groupArr[indexPath.row].group_name as NSString ).size(attributes: [NSFontAttributeName:UIFont.systemFont(ofSize: self.defaultFontSize )]).width + self.defaultLeftRight , height: cell.addingButton.frame.height)
                 cell.addingButton.tag = indexPath.row
-                
-                let tmpTarget = cell.addingButton.allTargets
-                if cell.addingButton.allTargets.count > 0 {
-                    print(tmpTarget)
-                }
+                print("____====++++\(String(describing: cell.addingButton.titleLabel?.text))")
                 cell.addingButton.removeTarget(self, action: #selector(self.addNewGroup), for: .touchDown )
                 cell.addingButton.addTarget(self , action: #selector(self.choosedButton(_:)), for: .touchDown )
                 
+                //
                 cell.addingButton.setImage(UIImage.init(), for: .normal )
                 cell.addingButton.imageView?.isHidden = true
                 
@@ -229,13 +249,13 @@ extension CTChangeGroupViewController  : UICollectionViewDelegate, UICollectionV
             let width = ( self.groupArr[indexPath.row].group_name as NSString ).size(attributes: [NSFontAttributeName:UIFont.systemFont(ofSize: self.defaultFontSize )]).width
             var tmp : CGFloat = 20
             if indexPath.row == self.groupArr.count - 1 {
-                tmp = 47
+                tmp = 49
             }
             return CGSize(width: width + tmp , height: self.defaultButtonHeight )
         }
         
         func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat{
-            return 10
+            return 7
         }
         
         func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
@@ -246,12 +266,16 @@ extension CTChangeGroupViewController  : UICollectionViewDelegate, UICollectionV
         func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
             return true
         }
-        
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 5
+    }
+    
     }
 
 extension CTChangeGroupViewController : GroupDataDelegate {
     func reloadGroupData() {
-        self.initSetting()
+        self.reloadData()
         self.collectionView.reloadData()
     }
 }

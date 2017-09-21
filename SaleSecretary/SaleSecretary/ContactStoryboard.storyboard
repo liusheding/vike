@@ -73,7 +73,7 @@
                                     <constraint firstAttribute="height" constant="240" id="9Jg-7M-QKl"/>
                                 </constraints>
                                 <connections>
-                                    <segue destination="1Og-Je-tds" kind="embed" id="pRt-e2-dp9"/>
+                                    <segue destination="1Og-Je-tds" kind="embed" identifier="" id="pRt-e2-dp9"/>
                                 </connections>
                             </containerView>
                         </subviews>

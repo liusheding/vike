@@ -115,7 +115,7 @@ class ContactTableViewController: UIViewController {
         // get group from local db , if this count is 0 , then ,get from server
         if self.groupsInDb.count == 0 {
             let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
-            hud.label.text = "加载中..."
+            hud.label.text = "第一次同步数据中..."
             // get data from server , and insert to local db
             let request = NetworkUtils.postBackEnd("R_PAGED_QUERY_TXL_CUS_GROUP", body: ["userId" : APP_USER_ID! , "pageSize" : "1000" ] ){
                 json in
@@ -123,6 +123,22 @@ class ContactTableViewController: UIViewController {
                 let rsp = json["body"]
                 for i in rsp["obj"].arrayValue {
                     gp.append(MemGroup.init(json: i))
+                }
+                // sort 默认分组第一个
+                if gp[0].group_name != ContactCommon.groupDefault as String {
+                    var tmp : MemGroup?
+                    var tmpTag  = -1
+                    for i in 0..<gp.count {
+                        if gp[i].group_name == ContactCommon.groupDefault as String {
+                            tmp = gp[i]
+                            tmpTag = i
+                            break
+                        }
+                    }
+                    if tmpTag > 0 {
+                        gp[tmpTag] = gp[0]
+                        gp[0] = tmp!
+                    }
                 }
                 self.contextDb.storeGroupArray(userId: APP_USER_ID! , gArray: gp)
                 
@@ -138,18 +154,25 @@ class ContactTableViewController: UIViewController {
                     }
                 })
                 rt.response(completionHandler: {_ in
-                    
+                    self.contactsCells = self.contextDb.getContacts2Group(userId: APP_USER_ID! , true ) // load customer data
+                    hud.hide(animated: true)
+                    self.tableView.reloadData()
                 })
             }
             request.response(completionHandler: { _ in
-                self.contactsCells = self.contextDb.getContacts2Group(userId: APP_USER_ID! , true ) // load customer data
-                hud.hide(animated: true)
-                self.tableView.reloadData()
+                
             })
         }else {
             self.contactsCells = self.contextDb.getContacts2Group(userId: APP_USER_ID! , true ) // load customer data
         }
         self.customer = self.contextDb.getCustomerInDb(userId: APP_USER_ID! )
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "chooseGroupMainPage"{
+            let vc = segue.destination as! CTChangeGroupViewController
+            vc.groupArr =  MemGroup.toMemGroup(dbGroup: self.contextDb.getGroupInDb(userId: APP_USER_ID! , true))
+        }
     }
     
     func loadingData(){
@@ -491,6 +514,7 @@ extension ContactTableViewController : UITableViewDataSource, UITableViewDelegat
             let cust: Customer = self.contactsCells[indexPath.section - 1].friends![indexPath.row]
             let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
             hud.label.text = "加载中..."
+            
             let request = NetworkUtils.postBackEnd("D_TXL_CUS_INFO", body: ["userId" : APP_USER_ID! , "sjhms" : (cust.phone_number?.count)! > 0 ? cust.phone_number?[0] ?? "" : "" ], handler: { (json) in
                 self.contactsCells[indexPath.section - 1].friends?.remove(at: indexPath.row)
                 let indexTag = ContactCommon.findIndexInArray(ctm: cust, target: self.customer)

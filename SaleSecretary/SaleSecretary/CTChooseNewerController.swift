@@ -30,15 +30,26 @@ class CTChooseNewerController: UIViewController {
     @IBOutlet weak var chooseAlertView: UIView!
     @IBOutlet weak var tableView: UITableView!
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//        let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
+//        hud.label.text = "读取通讯录中..."
+//        self.chooseAlertView.isHidden = true
+//        // init contacts data
+//        findNewCustomer()
+//        hud.hide(animated: true)
+//        
+//    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
         hud.label.text = "读取通讯录中..."
-        self.chooseAlertView.isHidden = true
+//        self.chooseAlertView.isHidden = true
         // init contacts data
         findNewCustomer()
+        self.tableView.reloadData()
         hud.hide(animated: true)
-        
     }
     
     override func viewDidLoad() {

@@ -211,7 +211,7 @@ extension CTInfoViewController : UITableViewDelegate , UITableViewDataSource {
                 // 同步到服务器和本地数据库
                 let request = NetworkUtils.postBackEnd("D_TXL_CUS_INFO", body: ["userId" : APP_USER_ID! , "sjhms" : (self.currentInfo?.phone_number?.count)!>0 ? self.currentInfo?.phone_number?[0] ?? "" : ""  ] ){
                     json in
-                    self.contactDb.deleteCustomer(cust: self.currentInfo!)
+                    self.contactDb.deleteCustomer(cust: self.currentInfo! , tag: "phone")
                 }
                 request.response(completionHandler: { _ in
                     hud.hide(animated: true)

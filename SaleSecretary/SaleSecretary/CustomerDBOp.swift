@@ -153,16 +153,36 @@ class CustomerDBOp : NSObject {
         }
     }
     
+    func updateByPhone(phone:String , g : MemGroup) {
+        let context = getContext()
+        let fetchRequest = NSFetchRequest<Customers>(entityName: "Customers")
+        fetchRequest.fetchOffset = 0 //查询的偏移量
+        
+        fetchRequest.predicate = NSPredicate(format: "phone_number = %@  and app_userId = %s ", argumentArray: [ phone , APP_USER_ID!])
+        do {
+            let searchResults = try context.fetch(fetchRequest)
+            NSLog("numbers of update by phone \(searchResults.count)")
+            if searchResults.count > 0 {
+                for sr in searchResults {
+                    sr.group_id = g.id
+                }
+            }
+            try context.save()
+        } catch  {
+            NSLog(error as! String)
+        }
+    }
+    
     func updateCustomer(cust : Customer) {
         let context = getContext()
         let fetchRequest = NSFetchRequest<Customers>(entityName: "Customers")
         fetchRequest.fetchOffset = 0 //查询的偏移量
         let phone = (cust.phone_number?.count)! > 0 ? cust.phone_number?[0] : ""
         
-        fetchRequest.predicate = NSPredicate(format: "phone_number = %@  and app_userId = %s ", argumentArray: [ phone , APP_USER_ID!])
+        fetchRequest.predicate = NSPredicate(format: "phone_number = %@  and app_userId = %s ", argumentArray: [ phone ?? "" , APP_USER_ID!])
         do {
             let searchResults = try context.fetch(fetchRequest)
-            NSLog("numbers of update \(searchResults.count)")
+            NSLog("numbers of update phone \(searchResults.count)")
             if searchResults.count > 0 {
                 for sr in searchResults {
                     sr.birthday = cust.birthday
