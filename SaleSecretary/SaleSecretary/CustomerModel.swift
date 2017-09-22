@@ -316,11 +316,11 @@ class TrailMessage {
     }
     
     init(json : JSON) {
-        self.id = json["cusInfoId"].stringValue
+        self.id = json["id"].stringValue
         self.title = json["title"].stringValue
         self.content = json["content"].stringValue
-        self.date = json["date"].stringValue
-        self.cusInfoId = ""
+        self.date = json["dateLastUpdate"].stringValue
+        self.cusInfoId = json["cusInfoId"].stringValue
     }
     
     init(title : String , content : String , cusInfoId : String) {

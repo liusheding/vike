@@ -153,23 +153,47 @@ class CustomerDBOp : NSObject {
         }
     }
     
-    func updateByPhone(phone:String , g : MemGroup) {
-        let context = getContext()
-        let fetchRequest = NSFetchRequest<Customers>(entityName: "Customers")
-        fetchRequest.fetchOffset = 0 //查询的偏移量
-        
-        fetchRequest.predicate = NSPredicate(format: "phone_number = %@  and app_userId = %s ", argumentArray: [ phone , APP_USER_ID!])
-        do {
-            let searchResults = try context.fetch(fetchRequest)
-            NSLog("numbers of update by phone \(searchResults.count)")
-            if searchResults.count > 0 {
-                for sr in searchResults {
-                    sr.group_id = g.id
+    func updateByPhoneForId(phone : String , id : String) {
+        if phone.characters.count > 0 {
+            let context = getContext()
+            let fetchRequest = NSFetchRequest<Customers>(entityName: "Customers")
+            fetchRequest.fetchOffset = 0 //查询的偏移量
+            
+            fetchRequest.predicate = NSPredicate(format: "phone_number = %@  and app_userId = %s ", argumentArray: [ phone , APP_USER_ID!])
+            do {
+                let searchResults = try context.fetch(fetchRequest)
+                NSLog("numbers of update by phone for id \(searchResults.count)")
+                if searchResults.count > 0 {
+                    for sr in searchResults {
+                        sr.id = id
+                    }
                 }
+                try context.save()
+            } catch  {
+                NSLog(error as! String)
             }
-            try context.save()
-        } catch  {
-            NSLog(error as! String)
+        }
+    }
+    
+    func updateByPhone(phone:String , g : MemGroup) {
+        if phone.characters.count > 0 {
+            let context = getContext()
+            let fetchRequest = NSFetchRequest<Customers>(entityName: "Customers")
+            fetchRequest.fetchOffset = 0 //查询的偏移量
+            
+            fetchRequest.predicate = NSPredicate(format: "phone_number = %@  and app_userId = %s ", argumentArray: [ phone , APP_USER_ID!])
+            do {
+                let searchResults = try context.fetch(fetchRequest)
+                NSLog("numbers of update by phone \(searchResults.count)")
+                if searchResults.count > 0 {
+                    for sr in searchResults {
+                        sr.group_id = g.id
+                    }
+                }
+                try context.save()
+            } catch  {
+                NSLog(error as! String)
+            }
         }
     }
     

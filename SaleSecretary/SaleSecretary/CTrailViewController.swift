@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 protocol TrailMsgReloadDelegate {
     func reloadTrailMsg()
@@ -21,6 +22,10 @@ class CTrailViewController: UIViewController {
     let contactDb = CustomerDBOp.defaultInstance()
     var trailInfo : [TrailMsg] = []
     var displayData  = [ String : [TrailMsg] ]()
+
+    var trailInfoMsg : [TrailMessage] = []
+    var displayDataMsg = [String : [TrailMessage]]()
+    
     var years : [String] = []
     
     static var instance : CTrailViewController!
@@ -40,7 +45,55 @@ class CTrailViewController: UIViewController {
         CTrailViewController.instance = self
     }
     
+    override func viewWillAppear(_ animated: Bool){
+        super.viewWillAppear(animated)
+        self.generateDateMsg()
+    }
+    
+    func generateDateMsg() {
+        //query from server
+        
+        let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
+        hud.label.text = "数据加载中..."
+        
+        let request = NetworkUtils.postBackEnd("R_PAGED_QUERY_TXL_CUS_GTGJ", body: ["cusInfoId" : self.custInfo?.id ?? "" , "pageSize" : 1000]) { (json) in
+                let obj = json["body"]["obj"].arrayValue
+                for bj in obj {
+                    self.trailInfoMsg.append( TrailMessage.init(json: bj))
+                }
+            }
+        request.response { (_) in
+            self.trailInfoMsg.sort { (x, y) -> Bool in
+                let dx = DateFormatterUtils.getDateFromString(x.date!, dateFormat: "yyyy/MM/dd HH-mm-ss")
+                let dy = DateFormatterUtils.getDateFromString(y.date!, dateFormat: "yyyy/MM/dd HH-mm-ss")
+                return (dx > dy)
+            }
+            
+            self.createDisplayDataMsg(info: self.trailInfoMsg)
+            self.trailTableView.reloadData()
+            hud.hide(animated: true)
+        }
+    }
+    func createDisplayDataMsg(info : [TrailMessage])  {
+        self.displayDataMsg.removeAll()
+        for msg in info {
+            if (msg.date?.characters.count)! > 0 {
+                let year = msg.date?.components(separatedBy: "/")[0]
+                if self.displayDataMsg[year!] == nil {
+                    self.displayDataMsg[year!] =  [msg]
+                }else {
+                    self.displayDataMsg[year!]?.append(msg)
+                }
+            }
+        }
+        let tmp = self.displayDataMsg.keys
+        for t in tmp {
+            self.years.append(t)
+        }
+    }
+    
     func generateDate() {
+        // query from db
         self.trailInfo = self.contactDb.queryTrailInfo(cusInfoId: (self.custInfo?.id)!)
         self.trailInfo.sort { (x, y) -> Bool in
             let dx = DateFormatterUtils.getDateFromString(x.date!, dateFormat: "yyyy/MM/dd HH-mm-ss")
@@ -78,7 +131,8 @@ extension CTrailViewController : UITableViewDelegate , UITableViewDataSource {
     // required
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
         let cell = tableView.dequeueReusableCell(withIdentifier: self.trailCell , for: indexPath) as! TrailMsgCell
-        let msg : TrailMsg = self.displayData[self.years[indexPath.section]]![indexPath.row]
+//        let msg : TrailMsg = self.displayData[self.years[indexPath.section]]![indexPath.row]
+        let msg : TrailMessage = self.displayDataMsg[self.years[indexPath.section]]![indexPath.row]
         cell.content.text = msg.content
         cell.time.text = msg.date
         cell.title.text = msg.title
@@ -99,12 +153,14 @@ extension CTrailViewController : UITableViewDelegate , UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
-         return  (self.displayData[self.years[section]]?.count)!
+//         return  (self.displayData[self.years[section]]?.count)!
+        return (self.displayDataMsg[self.years[section]]?.count)!
     }
     // end of required
     
     func numberOfSections(in tableView: UITableView) -> Int{
-        return self.displayData.count
+//        return self.displayData.count
+        return self.displayDataMsg.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -115,9 +171,10 @@ extension CTrailViewController : UITableViewDelegate , UITableViewDataSource {
 
 extension CTrailViewController : TrailMsgReloadDelegate {
     func reloadTrailMsg(){
-        self.generateDate()
-        self.createDisplayData(info: self.trailInfo)
-        self.trailTableView.reloadData()
+//        self.generateDate()
+//        self.createDisplayData(info: self.trailInfo)
+//        self.generateDateMsg()
+//        self.trailTableView.reloadData()
     }
 }
 

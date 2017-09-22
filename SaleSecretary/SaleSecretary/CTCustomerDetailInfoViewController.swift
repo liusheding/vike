@@ -23,6 +23,8 @@ class CTCustomerDetailInfoViewController: UIViewController {
     
     @IBOutlet weak var customerTrail: UIView!
     
+    let contactDb = CustomerDBOp.defaultInstance()
+    
     var messageVC: MFMessageComposeViewController?
     var segmentView : [UIView] = []
     
@@ -114,7 +116,15 @@ class CTCustomerDetailInfoViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-//        print(self.segments.frame)
+        if self.userInfo.id.characters.count == 0 {
+            let request = NetworkUtils.postBackEnd("R_BASE_TXL_CUS_INFO" , body: ["userId" : APP_USER_ID! , "cellphoneNumber": (self.userInfo.phone_number?.count)!>0 ? self.userInfo.phone_number?[0] ?? "" : "" ]) { [weak self](json) in
+                let id = json["body"]["id"].stringValue
+                self?.userInfo.id  = id
+            }
+            request.response(completionHandler: { (_) in
+                self.contactDb.updateByPhoneForId(phone: (self.userInfo.phone_number?.count)! > 0 ? (self.userInfo.phone_number?[0])! : ""  , id: self.userInfo.id)
+            })
+        }
         
     }
 

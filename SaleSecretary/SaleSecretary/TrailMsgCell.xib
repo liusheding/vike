@@ -16,12 +16,11 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="79.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X8o-tB-6MJ">
-                        <rect key="frame" x="51" y="25" width="269" height="30"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X8o-tB-6MJ">
+                        <rect key="frame" x="51" y="30" width="269" height="26"/>
                         <attributedString key="attributedText">
                             <fragment content="Label">
                                 <attributes>
@@ -32,9 +31,8 @@
                         </attributedString>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fci-w0-W9r">
-                        <rect key="frame" x="51" y="52" width="269" height="26"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fci-w0-W9r">
+                        <rect key="frame" x="51" y="57" width="269" height="23"/>
                         <attributedString key="attributedText">
                             <fragment content="Label">
                                 <attributes>
@@ -46,7 +44,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gaz-zJ-ph3">
-                        <rect key="frame" x="51" y="8" width="261" height="20"/>
+                        <rect key="frame" x="51" y="8" width="161" height="20"/>
                         <attributedString key="attributedText">
                             <fragment content="Label">
                                 <attributes>
@@ -59,16 +57,22 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="line" translatesAutoresizingMaskIntoConstraints="NO" id="8E0-V9-NXO">
-                        <rect key="frame" x="30" y="-1" width="6" height="81.5"/>
+                        <rect key="frame" x="30" y="0.0" width="6" height="80"/>
                     </imageView>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="bottom" secondItem="8E0-V9-NXO" secondAttribute="bottom" constant="-1" id="Db8-cg-t8j"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="gaz-zJ-ph3" secondAttribute="trailing" id="muo-Ix-Zd9"/>
-                    <constraint firstItem="gaz-zJ-ph3" firstAttribute="leading" secondItem="8E0-V9-NXO" secondAttribute="trailing" constant="15" id="ref-dc-ncH"/>
-                    <constraint firstItem="8E0-V9-NXO" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="-1" id="vew-RZ-PTM"/>
-                    <constraint firstItem="gaz-zJ-ph3" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="wRd-dN-dus"/>
-                    <constraint firstItem="8E0-V9-NXO" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="30" id="xiI-if-0IK"/>
+                    <constraint firstItem="gaz-zJ-ph3" firstAttribute="leading" secondItem="8E0-V9-NXO" secondAttribute="trailing" constant="15" id="4gc-ev-FrF"/>
+                    <constraint firstItem="Fci-w0-W9r" firstAttribute="bottom" secondItem="8E0-V9-NXO" secondAttribute="bottom" id="EB1-OK-Bm0"/>
+                    <constraint firstItem="Fci-w0-W9r" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="51" id="Rkt-0G-ISr"/>
+                    <constraint firstItem="8E0-V9-NXO" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="SMZ-Ey-349"/>
+                    <constraint firstItem="Fci-w0-W9r" firstAttribute="trailing" secondItem="X8o-tB-6MJ" secondAttribute="trailing" id="SxE-nJ-D4A"/>
+                    <constraint firstItem="gaz-zJ-ph3" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="cpc-Ij-Zfg"/>
+                    <constraint firstAttribute="bottom" secondItem="8E0-V9-NXO" secondAttribute="bottom" id="fcj-6S-LZP"/>
+                    <constraint firstItem="Fci-w0-W9r" firstAttribute="top" secondItem="X8o-tB-6MJ" secondAttribute="bottom" constant="1" id="fje-nC-cRJ"/>
+                    <constraint firstItem="8E0-V9-NXO" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="30" id="ijb-2z-RWa"/>
+                    <constraint firstItem="Fci-w0-W9r" firstAttribute="leading" secondItem="X8o-tB-6MJ" secondAttribute="leading" id="ku4-9f-bV1"/>
+                    <constraint firstAttribute="trailing" secondItem="Fci-w0-W9r" secondAttribute="trailing" id="mS9-fa-Luk"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="gaz-zJ-ph3" secondAttribute="trailing" constant="100" id="v60-hh-SBa"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

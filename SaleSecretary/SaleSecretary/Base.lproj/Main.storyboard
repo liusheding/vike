@@ -30,7 +30,7 @@
                                 </connections>
                             </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="50" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hWh-3J-Vaa">
-                                <rect key="frame" x="0.0" y="108" width="375" height="515"/>
+                                <rect key="frame" x="0.0" y="108" width="375" height="559"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="lWF-9m-jjf">
@@ -56,7 +56,7 @@
                             <constraint firstItem="szd-wR-P8q" firstAttribute="trailing" secondItem="hWh-3J-Vaa" secondAttribute="trailing" id="0hc-EV-q3r"/>
                             <constraint firstItem="vrj-Fu-iTW" firstAttribute="centerX" secondItem="szd-wR-P8q" secondAttribute="centerX" id="QIQ-Fe-CUz"/>
                             <constraint firstItem="vrj-Fu-iTW" firstAttribute="leading" secondItem="jC0-wl-NIc" secondAttribute="leadingMargin" constant="16" id="SYm-dQ-h4P"/>
-                            <constraint firstAttribute="bottomMargin" secondItem="hWh-3J-Vaa" secondAttribute="bottom" constant="44" id="Ush-FJ-HhD"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="hWh-3J-Vaa" secondAttribute="bottom" id="Ush-FJ-HhD"/>
                             <constraint firstItem="szd-wR-P8q" firstAttribute="leading" secondItem="jC0-wl-NIc" secondAttribute="leading" id="Y7s-3q-psa"/>
                             <constraint firstAttribute="trailing" secondItem="szd-wR-P8q" secondAttribute="trailing" id="bbZ-rH-cQK"/>
                             <constraint firstItem="szd-wR-P8q" firstAttribute="top" secondItem="rOh-cz-SlB" secondAttribute="bottom" id="eqq-We-fYs"/>

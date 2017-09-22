@@ -76,7 +76,9 @@ class ContactTableViewController: UIViewController {
         self.tableView.tableFooterView = UIView()
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        
+        self.tableView.snp.makeConstraints({make in
+            make.bottom.equalToSuperview().offset(-44)
+        })
         self.view.backgroundColor = UIColor.groupTableViewBackground
         self.tableView.backgroundColor = UIColor.groupTableViewBackground
         NSLog("ContactTableviewController init ! \(NSHomeDirectory())")
