@@ -53,7 +53,12 @@ class TakeoutMoneyViewController: UIViewController {
     }
     
     @IBAction func clickGetCodeBtn(_ sender: UIButton) {
-        self.isCounting = true
+        let phoneValue = AppUser.currentUser?.cellphoneNumber
+        // 短信发送
+        let _ = NetworkUtils.postBackEnd("C_SMSCODE_SEND", body: ["busi_code": "TXSQ", "cellphone_number": phoneValue!], handler: {
+            json in
+            self.isCounting = true
+        })
     }
 
     @IBAction func clickSubmit(_ sender: UIButton) {
@@ -93,21 +98,25 @@ class TakeoutMoneyViewController: UIViewController {
         }
         
         self.takebtn.isEnabled = false
-        let body = ["txje":str, "userId": APP_USER_ID, "kbId":cardid]
-        let request = NetworkUtils.postBackEnd("C_ME_TXMX", body: body , handler: {[weak self] (val ) in
-            let hub = MBProgressHUD.showAdded(to: (self?.view)!, animated: true)
-            hub.mode = MBProgressHUDMode.text
-            hub.label.text = "提现申请提交成功"
-            
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
-                hub.hide(animated: true)
-                self?.navigationController?.popViewController(animated: true)
-            }
+        let phoneValue = AppUser.currentUser?.cellphoneNumber
+        let checkBody = ["busi_code": "TXSQ", "cellphone_number": phoneValue, "sms_code": code]
+        let checkReq = NetworkUtils.postBackEnd("R_SMSCODE_CHECK", body: checkBody, handler: {
+            json in
+            let body = ["txje":str, "userId": APP_USER_ID, "kbId":self.cardid]
+            let _ = NetworkUtils.postBackEnd("C_ME_TXMX", body: body , handler: {[weak self] (val ) in
+                let hub = MBProgressHUD.showAdded(to: (self?.view)!, animated: true)
+                hub.mode = MBProgressHUDMode.text
+                hub.label.text = "提现申请提交成功"
+                
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
+                    hub.hide(animated: true)
+                    self?.navigationController?.popViewController(animated: true)
+                }
+            })
         })
-        request.response(completionHandler: {_ in
+        checkReq.response(completionHandler: {_ in
             self.takebtn.isEnabled = true
         })
-        
     }
     
     func showAlert(_ message:String){
