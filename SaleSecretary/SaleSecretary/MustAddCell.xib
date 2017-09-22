@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -20,31 +20,32 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Peh-xS-lbq">
-                        <rect key="frame" x="13" y="12" width="35" height="21"/>
+                        <rect key="frame" x="8" y="12" width="35" height="17"/>
                         <attributedString key="attributedText">
                             <fragment content="姓名">
                                 <attributes>
-                                    <font key="NSFont" metaFont="system" size="17"/>
+                                    <font key="NSFont" size="17" name=".PingFangSC-Regular"/>
+                                    <font key="NSOriginalFont" metaFont="system" size="17"/>
                                 </attributes>
                             </fragment>
                         </attributedString>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="*" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L1m-ly-VEX">
-                        <rect key="frame" x="48" y="8" width="9" height="21"/>
+                        <rect key="frame" x="43" y="8" width="7.5" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" allowsEditingTextAttributes="YES" borderStyle="roundedRect" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DO6-Wq-Zbt">
-                        <rect key="frame" x="65" y="11" width="302" height="26.5"/>
+                        <rect key="frame" x="58.5" y="11" width="308.5" height="26.5"/>
                         <nil key="textColor"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <textInputTraits key="textInputTraits"/>
                     </textField>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="Peh-xS-lbq" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="5" id="0tg-Ji-jJQ"/>
+                    <constraint firstItem="Peh-xS-lbq" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="0tg-Ji-jJQ"/>
                     <constraint firstItem="L1m-ly-VEX" firstAttribute="leading" secondItem="Peh-xS-lbq" secondAttribute="trailing" id="AAo-KA-aom"/>
                     <constraint firstItem="DO6-Wq-Zbt" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="3" id="AHQ-mb-Tc9"/>
                     <constraint firstAttribute="bottomMargin" secondItem="DO6-Wq-Zbt" secondAttribute="bottom" constant="4" id="E8h-TY-0UY"/>
