@@ -176,31 +176,38 @@ extension CTChangeGroupViewController  : UICollectionViewDelegate, UICollectionV
                 return cell
                 
             }else {
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! AddingCustomViewCell
-                if self.tagGroupArr[indexPath.row] == 1 {
-                    cell.addingButton.isSelected = true
-                    cell.addingButton.tintColor = ContactCommon.THEME_COLOR
-                    cell.addingButton.backgroundColor = ContactCommon.THEME_COLOR
+                if indexPath.row < self.tagGroupArr.count {
+                    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! AddingCustomViewCell
+                    
+                    if self.tagGroupArr[indexPath.row] == 1 {
+                        cell.addingButton.isSelected = true
+                        cell.addingButton.tintColor = ContactCommon.THEME_COLOR
+                        cell.addingButton.backgroundColor = ContactCommon.THEME_COLOR
+                    }else {
+                        cell.addingButton.isSelected = false
+                        cell.addingButton.tintColor = UIColor.clear
+                        cell.addingButton.backgroundColor = UIColor.clear
+                    }
+                    
+                    cell.addingButton.layer.borderWidth = 1
+                    cell.addingButton.layer.borderColor = ContactCommon.THEME_COLOR.cgColor
+                    cell.addingButton.layer.cornerRadius = 3.0
+                    
+                    cell.addingButton.setTitle( self.groupArr[indexPath.row].group_name , for: .normal)
+                    cell.addingButton.setTitleColor( ContactCommon.THEME_COLOR , for: .normal)
+                    cell.addingButton.setTitleColor( UIColor.white , for: .selected )
+                    cell.addingButton.setTitleColor( UIColor.white , for: .highlighted )
+                    cell.addingButton.frame = CGRect.init(x: 5 , y: 5, width: ( self.groupArr[indexPath.row].group_name as NSString ).size(attributes: [NSFontAttributeName:UIFont.systemFont(ofSize: self.defaultFontSize )]).width + self.defaultLeftRight , height: cell.addingButton.frame.height)
+                    cell.addingButton.tag = indexPath.row
+                    cell.addingButton.addTarget(self , action: #selector(self.choosedButton(_:)), for: .touchDown )
+                    return cell
                 }else {
-                    cell.addingButton.isSelected = false
-                    cell.addingButton.tintColor = UIColor.clear
-                    cell.addingButton.backgroundColor = UIColor.clear
+                    print("this is bug!")
+                    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! AddingCustomViewCell
+                    return cell
+                    
                 }
-                
-                cell.addingButton.layer.borderWidth = 1
-                cell.addingButton.layer.borderColor = ContactCommon.THEME_COLOR.cgColor
-                cell.addingButton.layer.cornerRadius = 3.0
-                
-                cell.addingButton.setTitle( self.groupArr[indexPath.row].group_name , for: .normal)
-                cell.addingButton.setTitleColor( ContactCommon.THEME_COLOR , for: .normal)
-                cell.addingButton.setTitleColor( UIColor.white , for: .selected )
-                cell.addingButton.setTitleColor( UIColor.white , for: .highlighted )
-                cell.addingButton.frame = CGRect.init(x: 5 , y: 5, width: ( self.groupArr[indexPath.row].group_name as NSString ).size(attributes: [NSFontAttributeName:UIFont.systemFont(ofSize: self.defaultFontSize )]).width + self.defaultLeftRight , height: cell.addingButton.frame.height)
-                cell.addingButton.tag = indexPath.row
-                cell.addingButton.addTarget(self , action: #selector(self.choosedButton(_:)), for: .touchDown )
-                return cell
             }
-            
         }
         
         func choosedButton(_ sender: UIButton!) {

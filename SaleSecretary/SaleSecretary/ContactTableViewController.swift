@@ -220,6 +220,9 @@ class ContactTableViewController: UIViewController {
     func pressCancel() {
         self.chooseGroup.isHidden = true
         self.chooseGroup.isUserInteractionEnabled = false
+        self.searchBarLocal.isUserInteractionEnabled = true
+        self.tabBarController?.tabBar.isUserInteractionEnabled  = true
+        self.ctMoreBar.isEnabled = true
         self.view.backgroundColor = UIColor.white
         self.tableView.backgroundColor = UIColor.white
         self.tableView.alpha = 1.0
@@ -523,6 +526,10 @@ extension ContactTableViewController : UITableViewDataSource, UITableViewDelegat
             self.view.backgroundColor = UIColor.gray
             self.tableView.alpha = 0.6
             self.tableView.isUserInteractionEnabled = false
+//            self.view.isUserInteractionEnabled = false
+            self.searchBarLocal.isUserInteractionEnabled = false
+            self.tabBarController?.tabBar.isUserInteractionEnabled  = false
+            self.ctMoreBar.isEnabled = false
         }
         
         changeGroup.backgroundColor = UIColor.lightGray

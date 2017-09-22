@@ -84,6 +84,7 @@ class CTAddUserViewController: UITableViewController {
                 let cell = UITableViewCell(style: .value1, reuseIdentifier: "addUserCell")
                 cell.textLabel?.font = UIFont.systemFont(ofSize: 17)
                 cell.textLabel?.text = self.titles[0]?[5]
+                cell.detailTextLabel?.textColor = UIColor.black
                 cell.accessoryType = .disclosureIndicator
                 return cell
             }else if indexPath.row == 0 || indexPath.row == 1{
@@ -110,6 +111,7 @@ class CTAddUserViewController: UITableViewController {
         }else{
             let cell = UITableViewCell(style: .value1, reuseIdentifier: "addUserCell")
             cell.textLabel?.text = self.titles[indexPath.section]?[indexPath.row]
+            cell.detailTextLabel?.textColor = UIColor.black
             cell.accessoryType = .disclosureIndicator
             return cell
         }
