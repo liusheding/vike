@@ -20,7 +20,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Peh-xS-lbq">
-                        <rect key="frame" x="8" y="12" width="35" height="17"/>
+                        <rect key="frame" x="10" y="12" width="35" height="17"/>
                         <attributedString key="attributedText">
                             <fragment content="姓名">
                                 <attributes>
@@ -32,27 +32,27 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="*" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L1m-ly-VEX">
-                        <rect key="frame" x="43" y="8" width="7.5" height="21"/>
+                        <rect key="frame" x="45" y="13" width="7.5" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" allowsEditingTextAttributes="YES" borderStyle="roundedRect" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DO6-Wq-Zbt">
-                        <rect key="frame" x="58.5" y="11" width="308.5" height="26.5"/>
+                        <rect key="frame" x="60.5" y="11" width="306.5" height="26.5"/>
                         <nil key="textColor"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <textInputTraits key="textInputTraits"/>
                     </textField>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="Peh-xS-lbq" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="0tg-Ji-jJQ"/>
+                    <constraint firstItem="Peh-xS-lbq" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="2" id="0tg-Ji-jJQ"/>
                     <constraint firstItem="L1m-ly-VEX" firstAttribute="leading" secondItem="Peh-xS-lbq" secondAttribute="trailing" id="AAo-KA-aom"/>
                     <constraint firstItem="DO6-Wq-Zbt" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="3" id="AHQ-mb-Tc9"/>
                     <constraint firstAttribute="bottomMargin" secondItem="DO6-Wq-Zbt" secondAttribute="bottom" constant="4" id="E8h-TY-0UY"/>
                     <constraint firstItem="L1m-ly-VEX" firstAttribute="leading" secondItem="Peh-xS-lbq" secondAttribute="trailing" id="EWf-fa-Y2N"/>
                     <constraint firstItem="Peh-xS-lbq" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="4" id="RDf-O7-Bpf"/>
                     <constraint firstAttribute="trailingMargin" secondItem="DO6-Wq-Zbt" secondAttribute="trailing" id="ZqC-W6-bdY"/>
-                    <constraint firstItem="L1m-ly-VEX" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="bkL-db-vq0"/>
+                    <constraint firstItem="L1m-ly-VEX" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="5" id="bkL-db-vq0"/>
                     <constraint firstItem="DO6-Wq-Zbt" firstAttribute="leading" secondItem="L1m-ly-VEX" secondAttribute="trailing" constant="8" id="zCi-Vv-XTj"/>
                 </constraints>
             </tableViewCellContentView>

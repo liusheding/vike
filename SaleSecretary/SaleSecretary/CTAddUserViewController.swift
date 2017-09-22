@@ -86,6 +86,11 @@ class CTAddUserViewController: UITableViewController {
                 cell.textLabel?.text = self.titles[0]?[5]
                 cell.detailTextLabel?.textColor = UIColor.black
                 cell.accessoryType = .disclosureIndicator
+                cell.textLabel?.snp.makeConstraints({
+                    make in
+                    make.left.equalToSuperview().offset(15)
+                    make.centerY.equalToSuperview()
+                })
                 return cell
             }else if indexPath.row == 0 || indexPath.row == 1{
                 let cell = tableView.dequeueReusableCell(withIdentifier: mustcellId, for: indexPath) as! MustAddCell
@@ -93,12 +98,21 @@ class CTAddUserViewController: UITableViewController {
                 cell.title.text = self.titles[0]?[indexPath.row]
                 cell.selectionStyle = .none
                 self.inputtext.append(cell.inputtext)
+                cell.title.snp.makeConstraints({make in
+                    make.left.equalToSuperview().offset(15)
+                    make.centerY.equalToSuperview()
+                })
                 return cell
-            }else if  indexPath.row == 0 || indexPath.row == 2{
+            }else if indexPath.row == 2{
                 let cell = UITableViewCell(style: .value1, reuseIdentifier: "addUserCell")
                 cell.textLabel?.font = UIFont.systemFont(ofSize: 17)
                 cell.textLabel?.text = self.titles[0]?[indexPath.row]
                 cell.accessoryType = .disclosureIndicator
+                cell.textLabel?.snp.makeConstraints({
+                    make in
+                    make.left.equalToSuperview().offset(15)
+                    make.centerY.equalToSuperview()
+                })
                 return cell
             }else {
                 let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! CTAddUserCell
@@ -106,6 +120,10 @@ class CTAddUserViewController: UITableViewController {
                 cell.title.text = self.titles[0]?[indexPath.row]
                 cell.selectionStyle = .none
                 self.inputtext.append(cell.inputtext)
+                cell.title.snp.makeConstraints({make in
+                    make.left.equalToSuperview().offset(15)
+                    make.centerY.equalToSuperview()
+                })
                 return cell
             }
         }else{
@@ -113,6 +131,11 @@ class CTAddUserViewController: UITableViewController {
             cell.textLabel?.text = self.titles[indexPath.section]?[indexPath.row]
             cell.detailTextLabel?.textColor = UIColor.black
             cell.accessoryType = .disclosureIndicator
+            cell.textLabel?.snp.makeConstraints({
+                make in
+                make.left.equalToSuperview().offset(15)
+                make.centerY.equalToSuperview()
+            })
             return cell
         }
         

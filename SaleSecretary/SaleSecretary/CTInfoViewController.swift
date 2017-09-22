@@ -102,6 +102,11 @@ extension CTInfoViewController : UITableViewDelegate , UITableViewDataSource {
                 cell.textLabel?.text = self.infoPate[i]
                 cell.detailTextLabel?.text = dataCell[i] as? String
                 cell.accessoryType = .disclosureIndicator
+                cell.textLabel?.snp.makeConstraints({
+                    make in
+                    make.left.equalToSuperview().offset(15)
+                    make.centerY.equalToSuperview()
+                })
                 return cell
             }else {
                 let cell = tableView.dequeueReusableCell(withIdentifier: self.cellId , for: indexPath) as! CTAddUserCell
@@ -114,6 +119,10 @@ extension CTInfoViewController : UITableViewDelegate , UITableViewDataSource {
                 }else if indexPath.row ==  3{
                     cell.inputtext.isSecureTextEntry = true
                 }
+                cell.title.snp.makeConstraints({make in
+                    make.left.equalToSuperview().offset(15)
+                    make.centerY.equalToSuperview()
+                })
                 self.inputtext.append(cell.inputtext)
                 return cell
             }
@@ -124,6 +133,10 @@ extension CTInfoViewController : UITableViewDelegate , UITableViewDataSource {
             cell.inputtext.text = self.currentInfo?.nick_name
             cell.inputtext.borderStyle = .none
             self.inputtext.append(cell.inputtext)
+            cell.title.snp.makeConstraints({make in
+                make.left.equalToSuperview().offset(15)
+                make.centerY.equalToSuperview()
+            })
             return cell
         case 2:
             let cell = UITableViewCell(style: UITableViewCellStyle.value1, reuseIdentifier: "cell")
@@ -136,11 +149,21 @@ extension CTInfoViewController : UITableViewDelegate , UITableViewDataSource {
                 }
             }
             cell.detailTextLabel?.text = group_name
+            cell.textLabel?.snp.makeConstraints({
+                make in
+                make.left.equalToSuperview().offset(15)
+                make.centerY.equalToSuperview()
+            })
             return cell
         case 3:
             let cell = UITableViewCell(style: UITableViewCellStyle.value1, reuseIdentifier: "cell")
             cell.textLabel?.text = "删除联系人"
             cell.textLabel?.textColor = UIColor.red
+            cell.textLabel?.snp.makeConstraints({
+                make in
+                make.left.equalToSuperview().offset(15)
+                make.centerY.equalToSuperview()
+            })
             return cell
         case 4:
             let cell = UITableViewCell(style: UITableViewCellStyle.value1, reuseIdentifier: "cell")
