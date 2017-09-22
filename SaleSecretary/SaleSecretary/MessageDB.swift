@@ -148,6 +148,7 @@ class MessageDB: NSObject {
         message.setValue(msgdetail.msgphone + (AppUser.currentUser?.cellphoneNumber)!, forKey: "msg_item_phone")
         message.setValue(msgdetail.msgcontent, forKey: "msg_item_content")
         message.setValue(msgdetail.msgtype, forKey: "msg_item_type")
+        message.setValue(msgdetail.msgtitle, forKey: "msg_item_title")
         
         do {
             try context.save()
@@ -260,6 +261,7 @@ class MessageDB: NSObject {
         let info = userinfo! as! [String: Any]
         let msg = MessageDetail()
         msg.msgphone = "100001"
+        msg.msgtitle = "系统消息"
         // 系统消息
         if type == .APNS {
             let apsKey = "aps"
@@ -269,6 +271,7 @@ class MessageDB: NSObject {
                 let aps = info[apsKey] as! [String: Any]
                 let apsContains = aps.contains {$0.key == contentKey}
                 if apsContains {
+                    msg.msgtitle = info["title"] as! String
                     msg.msgcontent = aps[contentKey] as! String
                     self.addSystemMessege(msg)
                 }

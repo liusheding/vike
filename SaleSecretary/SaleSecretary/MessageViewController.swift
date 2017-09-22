@@ -256,7 +256,7 @@ class MessageViewController: UITableViewController {
         var msgitems = [MessageDetail]()
         for item in msgitem{
             let phonenumber = getPhoneNumber(item.msg_item_phone!)
-            msgitems.append(MessageDetail(msgtime:item.msg_item_time! as Date, msgtype:Int(item.msg_item_type), msgcontent:item.msg_item_content!, msgphone:phonenumber))
+            msgitems.append(MessageDetail(msgtime:item.msg_item_time! as Date, msgtype:Int(item.msg_item_type), msgcontent:item.msg_item_content!, msgphone:phonenumber, msgtitle:item.msg_item_title!))
             }
         data.message = msgitems.sorted { (s1, s2) -> Bool in
             if(s1.msgdate.timeIntervalSince1970 < s2.msgdate.timeIntervalSince1970){return true}

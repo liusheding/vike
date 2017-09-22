@@ -67,7 +67,7 @@ class MessageDetailController: UITableViewController {
         let msg = message[indexPath.section]
         cell.celltime.text = msg.msgtime
         cell.cellcontent.text = msg.msgcontent
-        cell.celltitle.text = self.DataSource.name
+        cell.celltitle.text = msg.msgtitle
         viewHeight = viewHeight + cell.frame.height
         return cell
     }
