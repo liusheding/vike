@@ -191,6 +191,7 @@
 		E7D2AC351F4A7A48000123A5 /* AddingCustomViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D2AC301F4A7A48000123A5 /* AddingCustomViewCell.swift */; };
 		E7D2AC361F4A7A48000123A5 /* AddingCustomViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7D2AC311F4A7A48000123A5 /* AddingCustomViewCell.xib */; };
 		E7D2AC371F4A7A48000123A5 /* CustomAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D2AC321F4A7A48000123A5 /* CustomAlertView.swift */; };
+		E7D71A851F752E1000D12D0F /* CTChooseDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D71A841F752E1000D12D0F /* CTChooseDate.swift */; };
 		E7DB1FE21F4EB9A6002DD96D /* CTManagerGroupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DB1FE11F4EB9A6002DD96D /* CTManagerGroupController.swift */; };
 		E7FC61DC1F68DE7F00B58483 /* CTAddMessageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FC61DA1F68DE7F00B58483 /* CTAddMessageController.swift */; };
 		E7FC61DD1F68DE7F00B58483 /* CTAddUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FC61DB1F68DE7F00B58483 /* CTAddUserViewController.swift */; };
@@ -433,6 +434,7 @@
 		E7D2AC301F4A7A48000123A5 /* AddingCustomViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddingCustomViewCell.swift; sourceTree = "<group>"; };
 		E7D2AC311F4A7A48000123A5 /* AddingCustomViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddingCustomViewCell.xib; sourceTree = "<group>"; };
 		E7D2AC321F4A7A48000123A5 /* CustomAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomAlertView.swift; sourceTree = "<group>"; };
+		E7D71A841F752E1000D12D0F /* CTChooseDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CTChooseDate.swift; sourceTree = "<group>"; };
 		E7DB1FE11F4EB9A6002DD96D /* CTManagerGroupController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CTManagerGroupController.swift; sourceTree = "<group>"; };
 		E7FC61DA1F68DE7F00B58483 /* CTAddMessageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CTAddMessageController.swift; sourceTree = "<group>"; };
 		E7FC61DB1F68DE7F00B58483 /* CTAddUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CTAddUserViewController.swift; sourceTree = "<group>"; };
@@ -682,6 +684,7 @@
 				662D6A471F3177BA001C1FB1 /* AddNewCustomersCell.xib */,
 				E75435731F34640E00BDE8C6 /* CustomerPopUpView.swift */,
 				E7A1A5A01F6A644800D756FA /* ChooseDataView.swift */,
+				E7D71A841F752E1000D12D0F /* CTChooseDate.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -1271,6 +1274,7 @@
 				6E20EC951F341B4500A0F29E /* MessageItem.swift in Sources */,
 				E754DC941F3D4E3D0025DBBE /* CTAddNewTableViewController.swift in Sources */,
 				E75CA6EA1F5D054C00C92F14 /* BatchProcessViewController.swift in Sources */,
+				E7D71A851F752E1000D12D0F /* CTChooseDate.swift in Sources */,
 				66BF592B1F3075E800154E8C /* SMSAddViewController.swift in Sources */,
 				669A33971F54F94B00C61F3B /* Constants.swift in Sources */,
 				6EBAA5441F3C03240099DA89 /* MineViewCell.swift in Sources */,

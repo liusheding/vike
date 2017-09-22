@@ -53,22 +53,22 @@ class CTAddUserViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == 0 {
-            return 5
+            return 0
         } else {
             return 10
         }
     }
     
-    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?
-    {
-        var vHeight = 10
-        if section == 0{
-            vHeight = 5
-        }
-        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: Int(tableView.bounds.size.width), height: vHeight))
-        headerView.backgroundColor = UIColor.clear
-        return headerView
-    }
+//    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?
+//    {
+//        var vHeight = 10
+//        if section == 0{
+//            vHeight = 5
+//        }
+//        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: Int(tableView.bounds.size.width), height: vHeight))
+//        headerView.backgroundColor = UIColor.clear
+//        return headerView
+//    }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         return self.titles.count
@@ -107,6 +107,7 @@ class CTAddUserViewController: UITableViewController {
                 let cell = UITableViewCell(style: .value1, reuseIdentifier: "addUserCell")
                 cell.textLabel?.font = UIFont.systemFont(ofSize: 17)
                 cell.textLabel?.text = self.titles[0]?[indexPath.row]
+                cell.detailTextLabel?.textColor = UIColor.black
                 cell.accessoryType = .disclosureIndicator
                 cell.textLabel?.snp.makeConstraints({
                     make in
@@ -168,7 +169,7 @@ class CTAddUserViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 0 && indexPath.row == 5{
-            let shooseView = ChooseDateView.init(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT))
+            let shooseView = CTChooseDate.init(frame: self.view.frame)
             shooseView.delegate = self
             shooseView.showInViewController(self)
             tableView.deselectRow(at: indexPath, animated: false)

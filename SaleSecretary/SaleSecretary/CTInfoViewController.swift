@@ -101,6 +101,7 @@ extension CTInfoViewController : UITableViewDelegate , UITableViewDataSource {
                 let cell = UITableViewCell(style: UITableViewCellStyle.value1, reuseIdentifier: "cell")
                 cell.textLabel?.text = self.infoPate[i]
                 cell.detailTextLabel?.text = dataCell[i] as? String
+                cell.detailTextLabel?.textColor = UIColor.black
                 cell.accessoryType = .disclosureIndicator
                 cell.textLabel?.snp.makeConstraints({
                     make in
@@ -148,6 +149,7 @@ extension CTInfoViewController : UITableViewDelegate , UITableViewDataSource {
                     break
                 }
             }
+            cell.detailTextLabel?.textColor = UIColor.black
             cell.detailTextLabel?.text = group_name
             cell.textLabel?.snp.makeConstraints({
                 make in
