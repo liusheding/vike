@@ -13,7 +13,6 @@ class MessageDetailController: UITableViewController {
     let cellId = "MessageDetailID"
     var DataSource:MessageData!
     var chattitle:String!
-    var viewHeight:CGFloat = 0.0
     
     override func viewDidLoad() {
         self.navigationItem.title = chattitle
@@ -30,7 +29,15 @@ class MessageDetailController: UITableViewController {
         tableView.separatorStyle = .none
         
     }
-
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        let count = DataSource.message.count
+        if count > 0{
+            self.tableView.scrollToRow(at: [count - 1, 0], at: UITableViewScrollPosition.bottom, animated: true)
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -44,15 +51,6 @@ class MessageDetailController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if viewHeight > self.view.frame.height{
-            //滑倒最底部
-            DispatchQueue.main.async(execute: {
-                let offset = CGPoint(x:0, y:self.tableView.contentSize.height
-                    - self.tableView.frame.size.height)
-                self.tableView.setContentOffset(offset, animated: false)
-            })
-        }
-        
         if section == 0 {
             return 0
         } else {
@@ -68,13 +66,12 @@ class MessageDetailController: UITableViewController {
         cell.celltime.text = msg.msgtime
         cell.cellcontent.text = msg.msgcontent
         cell.celltitle.text = msg.msgtitle
-        viewHeight = viewHeight + cell.frame.height
         return cell
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?
     {
-        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: 0))
+        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: 10))
         headerView.backgroundColor = UIColor.clear
         return headerView
     }
