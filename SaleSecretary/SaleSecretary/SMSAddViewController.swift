@@ -342,7 +342,7 @@ extension SMSTemplateViewController : UITableViewDataSource, UITableViewDelegate
     private func createTemplateCell() -> UITableViewCell {
         let cell = UITableViewCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: cellId)
         cell.imageView?.image = UIImage(named: "icon_nr")
-        cell.textLabel?.text = "短信模版内容，每70字按一条短信计算"
+        cell.textLabel?.text = "短信模版内容，短信70字/条"
         cell.textLabel?.textColor = UIColor.lightGray
         cell.textLabel?.adjustsFontSizeToFitWidth = true
         // cell.textLabel?.font = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
