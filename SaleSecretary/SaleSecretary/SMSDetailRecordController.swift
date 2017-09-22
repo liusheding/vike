@@ -21,8 +21,8 @@ class SMSDetailRecordController: UIViewController {
     let cellId = "stateCell"
     let menuTitles = ["全部"]
     
-    let states = ["全部", "提交中", "发送成功", "发送失败", "未知状态"]
-    let statesdic = ["0":"提交中", "1":"发送成功", "2":"发送失败", "3":"未知状态"]
+    let states = ["全部", "发送成功", "发送失败", "未知状态"]
+    let statesdic = ["1":"发送成功", "2":"发送失败", "3":"未知状态"]
     
     lazy var menus: [[Any]] = { [unowned self] in
         return [self.states]
@@ -142,11 +142,11 @@ extension SMSDetailRecordController: JSDropDownMenuDataSource, JSDropDownMenuDel
     }
     
     func displayByCollectionView(inColumn column: Int) -> Bool {
-        return false
+        return true
     }
     
     func refreshTable(_ indexPath:JSIndexPath){
-        let statusdic = [1:"0", 2:"1", 3:"2", 4:"3"]
+        let statusdic = [1:"1", 2:"2", 3:"3", 4:"3"]
         if indexPath.row == 0{
             RecordData = DataCache
             self.tableView.reloadData()

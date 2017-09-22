@@ -20,7 +20,7 @@ class BusinessRecordController: UIViewController {
     
     let menuTitles = ["今天"]
     
-    let times = ["今天", "最近一周", "最近一月", "最近两月", "最近三月"]
+    let times = ["今天", "最近一周", "最近两周" ,"最近一月", "最近两月", "最近三月"]
     
     lazy var menus: [[Any]] = { [unowned self] in
         return [self.times]
@@ -148,7 +148,7 @@ extension BusinessRecordController: JSDropDownMenuDataSource, JSDropDownMenuDele
     }
     
     func displayByCollectionView(inColumn column: Int) -> Bool {
-        return false
+        return true
     }
     
     func dataFormat(_ time:Date) -> String{
@@ -160,7 +160,7 @@ extension BusinessRecordController: JSDropDownMenuDataSource, JSDropDownMenuDele
     func menu(_ menu: JSDropDownMenu!, didSelectRowAt indexPath: JSIndexPath!) {
         self.selTimesIndex = indexPath.row
         let dateEnd = dataFormat(Date(timeIntervalSinceNow:0))
-        let timesdic = [0:0, 1:7, 2:30, 3:60, 4:90]
+        let timesdic = [0:0, 1:7, 2:14, 3:30, 4:60, 5:90]
         let dateStart = dataFormat(Date(timeIntervalSinceNow:TimeInterval(-daySeconds*timesdic[indexPath.row]!)))
         loading(dateStart, dateEnd)
     }
