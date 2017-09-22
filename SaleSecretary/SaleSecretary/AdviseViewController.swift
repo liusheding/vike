@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 class AdviseViewController: UIViewController {
     var textView:UITextView!
@@ -19,7 +20,7 @@ class AdviseViewController: UIViewController {
         let bgView = UIView(frame:CGRect(x: 0,y: 70,width: UIScreen.main.bounds.size.width,height: 160))
         bgView.backgroundColor = UIColor.white
         
-        let textView = UITextView(frame:CGRect(x: 0,y: 0,width: UIScreen.main.bounds.size.width,height: 130))
+        textView = UITextView(frame:CGRect(x: 0,y: 0,width: UIScreen.main.bounds.size.width,height: 130))
         textView.font = UIFont.systemFont(ofSize: 15)
         textView.returnKeyType = UIReturnKeyType.send
         
@@ -57,16 +58,16 @@ class AdviseViewController: UIViewController {
     // MARK: - 通知响应方法
     func textViewEditChanged(notification:NSNotification)
     {
-        let textView:UITextView! = notification.object as! UITextView
-        if (textView != nil)
+        let textview:UITextView! = notification.object as! UITextView
+        if (textview != nil)
         {
-            let text:String! = textView.text
+            let text:String! = textview.text
             let length = text.characters.count
             self.wordcount.text = "\(length)/1000"
             if (length > 1000)
             {
                 let index = text.index(text.startIndex, offsetBy:1000)
-                textView.text = text.substring(to: index)
+                textview.text = text.substring(to: index)
                 self.wordcount.text = "1000/1000"
             }
         }
@@ -80,7 +81,26 @@ class AdviseViewController: UIViewController {
     }
     
     func clickSubmitBtn(){
-        print("====Submit======")
+        let content = textView.text!
+        if content == ""{
+            showAlert("请描述问题出现的情况或者操作步骤")
+            return
+        }
+        let hub = MBProgressHUD.showAdded(to: (self.view)!, animated: true)
+        hub.mode = MBProgressHUDMode.text
+        hub.label.text = "提交成功"
+        hub.detailsLabel.text = "我们会尽快核实处理，感谢您的反馈"
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
+            hub.hide(animated: true)
+            self.navigationController?.popViewController(animated: true)
+        }
+    }
+    
+    func showAlert(_ message:String){
+        let alertController = UIAlertController(title: "提示", message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "好的", style: .cancel, handler: nil)
+        alertController.addAction(okAction)
+        self.present(alertController, animated: true, completion: nil)
     }
 }
 
