@@ -39,24 +39,12 @@ class CTInfoViewController: UIViewController {
         // Do any additional setup after loading the view.
         //点击空白收起键盘
         self.view.addGestureRecognizer(UITapGestureRecognizer(target:self, action:#selector(self.handleTap(sender:))))
-        if self.currentInfo?.id == nil || (self.currentInfo?.id.characters.count)! > 0 {
-            self.getDataFromServer()
-        }
+        
         self.reloadDelegate = ContactTableViewController.instance
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(_:)), name: .UIKeyboardWillShow, object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide(_:)), name: .UIKeyboardWillHide, object: nil)
-    }
-    
-    func getDataFromServer() {
-        let request = NetworkUtils.postBackEnd("R_BASE_TXL_CUS_INFO" , body: ["userId" : APP_USER_ID! , "cellphoneNumber": (self.currentInfo?.phone_number?.count)!>0 ? self.currentInfo?.phone_number?[0] ?? "" : "" ]) { [weak self](json) in
-            let id = json["body"]["id"].stringValue
-            self?.currentInfo?.id  = id
-        }
-        request.response { (_) in
-            
-        }
     }
     
     //键盘的显示
@@ -184,20 +172,40 @@ extension CTInfoViewController : UITableViewDelegate , UITableViewDataSource {
             }
         }
         
-        let changedCust : Customer = Customer.init(birth: self.birthDay , company: self.inputtext[2].text! , nick_name: self.inputtext[4].text! , phone_number: [self.inputtext[1].text! ] , name: self.inputtext[0].text! , id: (self.currentInfo?.id)! , is_solar: false , groupId: gdId , gender: (self.currentInfo?.gender)! , desc: self.inputtext[3].text! )
-        
-        Utils.showLoadingHUB(view: self.view , msg: "正在保存...") { (_) in
-            let request = changedCust.update(cust: changedCust) { (_) in
-                
-            }
-            request?.response { (_) in
-                if self.reloadDelegate != nil {
-                    self.reloadDelegate?.reloadTableViewData()
+        if self.currentInfo?.id == nil || (self.currentInfo?.id.characters.count)! == 0 {
+            
+            Utils.showLoadingHUB(view: self.view , completion: { ( _) in
+                let request = NetworkUtils.postBackEnd("R_BASE_TXL_CUS_INFO" , body: ["userId" : APP_USER_ID! , "cellphoneNumber": (self.currentInfo?.phone_number?.count)!>0 ? self.currentInfo?.phone_number?[0] ?? "" : "" ]) { [weak self](json) in
+                    let id = json["body"]["id"].stringValue
+                    self?.currentInfo?.id  = id
                 }
-                self.navigationController?.popViewController(animated: true)
+                request.response { (_) in
+                    let changedCust : Customer = Customer.init(birth: self.birthDay , company: self.inputtext[2].text! , nick_name: self.inputtext[4].text! , phone_number: [self.inputtext[1].text! ] , name: self.inputtext[0].text! , id: (self.currentInfo?.id)! , is_solar: false , groupId: gdId , gender: (self.currentInfo?.gender)! , desc: self.inputtext[3].text! )
+                    
+                    let request = changedCust.update(cust: changedCust) { (_) in  }
+                    request?.response { (_) in
+                        if self.reloadDelegate != nil {
+                            self.reloadDelegate?.reloadTableViewData()
+                        }
+                        self.navigationController?.popViewController(animated: true)
+                    }
+                }
+            })
+        }else {
+            let changedCust : Customer = Customer.init(birth: self.birthDay , company: self.inputtext[2].text! , nick_name: self.inputtext[4].text! , phone_number: [self.inputtext[1].text! ] , name: self.inputtext[0].text! , id: (self.currentInfo?.id)! , is_solar: false , groupId: gdId , gender: (self.currentInfo?.gender)! , desc: self.inputtext[3].text! )
+            
+            Utils.showLoadingHUB(view: self.view , msg: "正在保存...") { (_) in
+                let request = changedCust.update(cust: changedCust) { (_) in
+                    
+                }
+                request?.response { (_) in
+                    if self.reloadDelegate != nil {
+                        self.reloadDelegate?.reloadTableViewData()
+                    }
+                    self.navigationController?.popViewController(animated: true)
+                }
             }
         }
-        
     }
     
     func showRole(_ message: String , index : IndexPath){

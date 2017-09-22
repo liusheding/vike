@@ -188,10 +188,11 @@ class CustomerDBOp : NSObject {
                     sr.birthday = cust.birthday
                     sr.user_name = cust.name
                     sr.nick_name = cust.nick_name
-                    sr.gender = Int16(cust.gender)
+                    sr.desc = cust.desc
                     sr.company = cust.company
                     sr.phone_number = (cust.phone_number?.count)! > 0 ? cust.phone_number?[0] : ""
                     sr.id = cust.id
+                    sr.group_id = cust.group_id
                 }
             }
             try context.save()

@@ -15,8 +15,10 @@ class AddingCustomViewCell: UICollectionViewCell {
 
 //    override init(frame: CGRect) {
 //        super.init(frame: frame)
-//        self.addingButton.layer.borderWidth = 1
-//        self.addingButton.layer.borderColor = ContactCommon.THEME_COLOR.cgColor
+////        self.addingButton = UIButton.init()
+////        contentView.addSubview(addingButton)
+////        self.addingButton.layer.borderWidth = 1
+////        self.addingButton.layer.borderColor = ContactCommon.THEME_COLOR.cgColor
 ////        self.addingButton.layer.cornerRadius = 1.0   // need  dynamic setting 
 //    }
 //    
@@ -28,5 +30,10 @@ class AddingCustomViewCell: UICollectionViewCell {
         super.awakeFromNib()
         // Initialization code
     }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+    }
+    
 
 }

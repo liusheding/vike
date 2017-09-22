@@ -77,7 +77,7 @@ class ContactTableViewController: UIViewController {
         self.tableView.delegate = self
         self.tableView.dataSource = self
         
-//        self.view.backgroundColor = UIColor.groupTableViewBackground
+        self.view.backgroundColor = UIColor.groupTableViewBackground
         self.tableView.backgroundColor = UIColor.groupTableViewBackground
         NSLog("ContactTableviewController init ! \(NSHomeDirectory())")
         self.tableView.register(UINib(nibName: String(describing: PersonContactCell.self ), bundle: nil), forCellReuseIdentifier: cellId)

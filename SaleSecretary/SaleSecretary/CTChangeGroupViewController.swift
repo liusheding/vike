@@ -14,9 +14,12 @@ protocol GroupDataDelegate {
 }
 
 private let reuseIdentifier = "ChangeCell"
+private let reuseIdentifierIcon = "addingIconCell"
 class CTChangeGroupViewController: UIViewController {
 
     var groupArr : [MemGroup] = []
+    var tagGroupArr : [Int] = []
+    
     let addIconTag : MemGroup = MemGroup.init(id: "0", gn: "")
     let defaultFontSize : CGFloat  = 16
     let defaultBottomTopHeight : CGFloat = 25
@@ -27,7 +30,6 @@ class CTChangeGroupViewController: UIViewController {
     //    var tableViewSel : Int = -1
     
     var defaultSelectGroup : Int = -1
-    
     let contextDb = CustomerDBOp.defaultInstance()
     
     let sectionInsets = UIEdgeInsets(top: -5.0, left: 5.0, bottom: 0.0, right: 5.0)
@@ -39,10 +41,25 @@ class CTChangeGroupViewController: UIViewController {
     static var instance : CTChangeGroupViewController!
     
     func initSetting() {
+        for tag in 0..<self.groupArr.count {
+            if tag == 0 {
+                self.tagGroupArr.append(1)
+            }else {
+                self.tagGroupArr.append(0)
+            }
+        }
         self.groupArr.append( self.addIconTag ) // the last for "Add button"
     }
     
     func reloadData() {
+        self.tagGroupArr.removeAll()
+        for tag in 0..<self.groupArr.count {
+            if tag == 0 {
+                self.tagGroupArr.append(1)
+            }else {
+                self.tagGroupArr.append(0)
+            }
+        }
         self.groupArr = MemGroup.toMemGroup(dbGroup: self.contextDb.getGroupInDb(userId: APP_USER_ID! , true))
         self.groupArr.append( self.addIconTag ) // the last for "Add button"
     }
@@ -107,8 +124,11 @@ class CTChangeGroupViewController: UIViewController {
         self.collectionView.backgroundColor = UIColor.clear
         self.view.backgroundColor = UIColor.white
         self.view.layer.cornerRadius = 10
+        
         // Register cell classes
         self.collectionView.register( UINib.init(nibName: String.init(describing: AddingCustomViewCell.self ) , bundle: nil) , forCellWithReuseIdentifier: reuseIdentifier)
+        self.collectionView.register( UINib.init(nibName: String.init(describing: AddingCustomViewCell.self ) , bundle: nil) , forCellWithReuseIdentifier: reuseIdentifierIcon)
+        
         CTChangeGroupViewController.instance = self
     }
     
@@ -116,6 +136,18 @@ class CTChangeGroupViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.reloadData()
+        self.collectionView.reloadData()
+    }
+    
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//        self.reloadData()
+//        self.collectionView.reloadData()
+//    }
 }
     
 extension CTChangeGroupViewController  : UICollectionViewDelegate, UICollectionViewDataSource ,UICollectionViewDelegateFlowLayout{
@@ -129,26 +161,23 @@ extension CTChangeGroupViewController  : UICollectionViewDelegate, UICollectionV
             
             return self.groupArr.count
         }
-        
+    
         func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! AddingCustomViewCell
             
             if indexPath.row == (self.groupArr.count-1) {
                 // remove setting
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifierIcon , for: indexPath) as! AddingCustomViewCell
                 
                 cell.addingButton.setTitle("", for: .normal)
                 cell.addingButton.setImage(UIImage(named: "icon_tj") , for: .normal )
                 cell.addingButton.tintColor = ContactCommon.THEME_COLOR
-                cell.addingButton.removeTarget(self , action: #selector(self.choosedButton(_:)) , for: .touchDown )
                 cell.addingButton.addTarget(self , action: #selector(self.addNewGroup) , for: .touchDown  )
-                cell.addingButton.frame = CGRect.init(x: 5, y: 5, width: cell.addingButton.frame.width + self.defaultLeftRight , height: cell.addingButton.frame.height)
-                cell.addingButton.tag = indexPath.row
-                cell.addingButton.isSelected = false
-                cell.addingButton.backgroundColor = UIColor.clear
-                cell.addingButton.layer.borderColor = UIColor.white.cgColor
+                cell.addingButton.tag = -1
+                return cell
                 
             }else {
-                if indexPath.row == 0 {
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! AddingCustomViewCell
+                if self.tagGroupArr[indexPath.row] == 1 {
                     cell.addingButton.isSelected = true
                     cell.addingButton.tintColor = ContactCommon.THEME_COLOR
                     cell.addingButton.backgroundColor = ContactCommon.THEME_COLOR
@@ -165,21 +194,13 @@ extension CTChangeGroupViewController  : UICollectionViewDelegate, UICollectionV
                 cell.addingButton.setTitle( self.groupArr[indexPath.row].group_name , for: .normal)
                 cell.addingButton.setTitleColor( ContactCommon.THEME_COLOR , for: .normal)
                 cell.addingButton.setTitleColor( UIColor.white , for: .selected )
-                cell.addingButton.setTitleColor( UIColor.white , for: .focused)
+                cell.addingButton.setTitleColor( UIColor.white , for: .highlighted )
                 cell.addingButton.frame = CGRect.init(x: 5 , y: 5, width: ( self.groupArr[indexPath.row].group_name as NSString ).size(attributes: [NSFontAttributeName:UIFont.systemFont(ofSize: self.defaultFontSize )]).width + self.defaultLeftRight , height: cell.addingButton.frame.height)
                 cell.addingButton.tag = indexPath.row
-                print("____====++++\(String(describing: cell.addingButton.titleLabel?.text))")
-                cell.addingButton.removeTarget(self, action: #selector(self.addNewGroup), for: .touchDown )
                 cell.addingButton.addTarget(self , action: #selector(self.choosedButton(_:)), for: .touchDown )
-                
-                //
-                cell.addingButton.setImage(UIImage.init(), for: .normal )
-                cell.addingButton.imageView?.isHidden = true
-                
+                return cell
             }
             
-            //cell.backgroundColor = UIColor.red
-            return cell
         }
         
         func choosedButton(_ sender: UIButton!) {
@@ -193,14 +214,35 @@ extension CTChangeGroupViewController  : UICollectionViewDelegate, UICollectionV
         }
         
         func changeButtonBackGroudColor(_ indexTag:Int){
-            for i in 0  ..< self.groupArr.count - 1     {
-                if i != indexTag {
-                    let cell = self.collectionView.cellForItem(at: [0, i ]) as! AddingCustomViewCell
-                    cell.addingButton.isSelected = false
-                    cell.addingButton.tintColor = UIColor.clear
-                    cell.addingButton.backgroundColor = UIColor.clear
+            
+            for i in 0..<self.tagGroupArr.count {
+                if i == indexTag {
+                    self.tagGroupArr[i] = 1
+                }else {
+                    self.tagGroupArr[i] = 0
                 }
             }
+            let cells = self.collectionView.visibleCells
+            for c in cells {
+                let cc = c as! AddingCustomViewCell
+                if cc.addingButton.tag != -1{
+                    if self.tagGroupArr[cc.addingButton.tag] == 0  {
+                        cc.addingButton.isSelected = false
+                        cc.addingButton.tintColor = UIColor.clear
+                        cc.addingButton.backgroundColor = UIColor.clear
+                    }
+                }
+                
+            }
+            
+//            for i in 0  ..< self.groupArr.count - 1     {
+//                if i != indexTag {
+//                    let cell = self.collectionView.cellForItem(at: [0, i ]) as! AddingCustomViewCell
+//                    cell.addingButton.isSelected = false
+//                    cell.addingButton.tintColor = UIColor.clear
+//                    cell.addingButton.backgroundColor = UIColor.clear
+//                }
+//            }
         }
         
         func addNewGroup() {
@@ -229,11 +271,9 @@ extension CTChangeGroupViewController  : UICollectionViewDelegate, UICollectionV
                 // 同步到服务器和本地数据库
                 let request = NetworkUtils.postBackEnd("C_TXL_CUS_GROUP", body: ["userId" : APP_USER_ID! , "name" : groupName.text! ] ){
                     json in
-                    print("++++===\(json)")
                     let dt = json["body"]["id"].stringValue
                     self.contextDb.storeGroup(id: dt , group_name: groupName.text!, userId: APP_USER_ID!)
-                    self.groupArr = MemGroup.toMemGroup(dbGroup: self.contextDb.getGroupInDb(userId: APP_USER_ID!, true))
-                    self.groupArr.append( self.addIconTag )
+                    self.reloadData()
                 }
                 request.response(completionHandler: { _ in
                     hud.hide(animated: true)
@@ -271,7 +311,7 @@ extension CTChangeGroupViewController  : UICollectionViewDelegate, UICollectionV
         return 5
     }
     
-    }
+}
 
 extension CTChangeGroupViewController : GroupDataDelegate {
     func reloadGroupData() {

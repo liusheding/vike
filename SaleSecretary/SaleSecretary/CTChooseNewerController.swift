@@ -143,6 +143,7 @@ class CTChooseNewerController: UIViewController {
         self.tableView.alpha = 1.0
         self.tableView.isUserInteractionEnabled = true
     }
+    
 }
 
 extension CTChooseNewerController : UITableViewDelegate , UITableViewDataSource  {

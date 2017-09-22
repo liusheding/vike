@@ -108,9 +108,7 @@ extension CTManagerGroupController : UITableViewDelegate , UITableViewDataSource
                 if self.contactsTableviewDelegate != nil {
                     self.contactsTableviewDelegate?.reloadTableViewData()
                 }
-                if self.groupDelegate != nil {
-                    self.groupDelegate?.reloadGroupData()
-                }
+                self.groupDelegate?.reloadGroupData()
             })
         })
         alertController.addAction(cancelAction)
