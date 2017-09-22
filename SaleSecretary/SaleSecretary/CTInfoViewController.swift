@@ -43,6 +43,10 @@ class CTInfoViewController: UIViewController {
             self.getDataFromServer()
         }
         self.reloadDelegate = ContactTableViewController.instance
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(_:)), name: .UIKeyboardWillShow, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide(_:)), name: .UIKeyboardWillHide, object: nil)
     }
     
     func getDataFromServer() {
@@ -52,6 +56,26 @@ class CTInfoViewController: UIViewController {
         }
         request.response { (_) in
             
+        }
+    }
+    
+    //键盘的显示
+    func keyboardWillShow(_ notification: Notification) {
+        let info = notification.userInfo
+        let rect = (info?[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        let y = rect.origin.y - UIScreen.main.bounds.size.height
+        let duration = info?[UIKeyboardAnimationDurationUserInfoKey] as! Double
+        UIView.animate(withDuration: duration, animations: {
+            self.parent?.view.transform = CGAffineTransform(translationX: 0, y: y/3)
+        })
+    }
+    
+    //键盘的隐藏
+    func keyboardWillHide(_ notification: Notification){
+        let info = notification.userInfo
+        let duration = info?[UIKeyboardAnimationDurationUserInfoKey] as! Double
+        UIView.animate(withDuration: duration) {
+            self.parent?.view.transform = CGAffineTransform.identity
         }
     }
 
