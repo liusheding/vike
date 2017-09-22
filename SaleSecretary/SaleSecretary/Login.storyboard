@@ -398,7 +398,7 @@
                                         <rect key="frame" x="38" y="12" width="275" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="phonePad" returnKeyType="done"/>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="c2T-XC-Pod">
                                         <rect key="frame" x="38" y="62" width="275" height="30"/>
@@ -419,14 +419,20 @@
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <state key="normal" title="获取验证码">
-                                            <color key="titleColor" red="0.0039215686269999999" green="0.70588235290000001" blue="0.078431372550000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="titleColor" red="0.1065740479" green="0.77210897840000003" blue="0.1872832348" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
+                                        <state key="disabled" title="重新发送">
+                                            <color key="titleColor" red="0.50196078430000002" green="0.85098039219999999" blue="0.53725490200000003" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="sendSMS:" destination="kMA-01-BWP" eventType="touchUpInside" id="ba0-nC-a8N"/>
+                                        </connections>
                                     </button>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8RP-5D-ewf">
                                         <rect key="frame" x="38" y="162" width="193" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done"/>
                                     </textField>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sxI-n8-znY">
                                         <rect key="frame" x="0.0" y="50" width="317" height="1"/>
@@ -512,11 +518,17 @@
                                 <state key="normal" title="立即找回">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <state key="disabled" title="立即找回">
+                                    <color key="titleColor" white="0.5" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                         <integer key="value" value="10"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="findBtnAction:" destination="kMA-01-BWP" eventType="touchUpInside" id="BnY-Kk-6aN"/>
+                                </connections>
                             </button>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ROP-yQ-JUc">
                                 <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -561,8 +573,10 @@
                     <connections>
                         <outlet property="backgroundView" destination="CFF-If-ZC7" id="8zm-Iq-oyC"/>
                         <outlet property="confirmPwd" destination="kLH-0o-kb0" id="ZdV-OX-von"/>
+                        <outlet property="findBtn" destination="BRS-fj-KvP" id="bcq-Hb-bfc"/>
                         <outlet property="password" destination="c2T-XC-Pod" id="R1P-G5-Fzx"/>
                         <outlet property="phone" destination="L1m-E5-Z5N" id="3sX-YK-ZR0"/>
+                        <outlet property="smsBtn" destination="rIe-3d-duK" id="HnI-uy-Hc4"/>
                         <outlet property="smsCheck" destination="8RP-5D-ewf" id="LBz-3b-flf"/>
                     </connections>
                 </viewController>

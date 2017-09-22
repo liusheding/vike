@@ -187,9 +187,9 @@ class RegisterViewController: UIViewController,UITextFieldDelegate {
         // 短信发送
         let _ = NetworkUtils.postBackEnd("C_SMSCODE_SEND", body: ["busi_code": "REGISTER", "cellphone_number": phoneValue], handler: {
             json in
-            self.registerBtn.isEnabled = true
             self.isCounting = true
         })
+        self.registerBtn.isEnabled = true
         
     }
     override func didReceiveMemoryWarning() {

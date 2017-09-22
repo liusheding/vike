@@ -108,6 +108,13 @@ class AppUser: NSObject {
         })
     }
     
+    public static func findPassword(phone: String, password: String, callback: @escaping ((JSON)-> Void)) -> DataRequest? {
+        let body: [String: Any] = ["busi_scene": "RETRIEVE_PWD", "cellphoneNumber": phone, "loginPwd": password]
+        return NetworkUtils.postBackEnd("U_USER", body: body, handler: {
+            json in
+            callback(json)
+        })
+    }
     
     public static func logout() {
         APP_USER_ID = nil
