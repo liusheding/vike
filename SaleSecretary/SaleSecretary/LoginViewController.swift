@@ -17,9 +17,10 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBAction func loginbtn(_ sender: UIButton) {
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
         let mainVC = storyBoard.instantiateViewController(withIdentifier: "mainID")
+        let p = phone.text!.trimmingCharacters(in: .whitespaces), pw = password.text!.trimmingCharacters(in: .whitespaces)
+        if p.isEmpty || pw.isEmpty {return }
         sender.isEnabled = false
-        if let phoneValue = phone.text, let pwd = password.text {
-            let request = AppUser.login(phone: phoneValue, password: pwd) {
+        let request = AppUser.login(phone: p, password: pw) {
                 user in
                 if user.status != "0" {
                     Utils.alert("对不起，您的账户已被冻结或处于异常状态，暂时无法登陆，请联系您的代理商。");
@@ -36,11 +37,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                     let msgcontroller = children?[2].childViewControllers[0]  as! MessageViewController
                     msgcontroller.showDotOnItem()
                 }
-            }
-            request?.response(completionHandler: {_ in sender.isEnabled = true})
-        } else {
-            return
         }
+            request?.response(completionHandler: {_ in sender.isEnabled = true})
         // self.present(mainVC, animated: true, completion: nil)
     }
 
@@ -62,11 +60,14 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         self.view.addGestureRecognizer(UITapGestureRecognizer(target:self, action:#selector(self.handleTap(sender:))))
     }
     
+    func resignFirstResponders() {
+        phone.resignFirstResponder()
+        password.resignFirstResponder()
+    }
+    
     func handleTap(sender: UITapGestureRecognizer) {
         if sender.state == .ended {
-            phone.resignFirstResponder()
-            password.resignFirstResponder()
-            // checknum.resignFirstResponder()
+            self.resignFirstResponders()
         }
         sender.cancelsTouchesInView = false
     }

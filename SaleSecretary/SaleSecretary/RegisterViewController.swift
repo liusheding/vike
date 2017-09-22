@@ -57,7 +57,8 @@ class RegisterViewController: UIViewController,UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         backgroundView.layer.borderColor = UIColor.lightGray.cgColor
-        
+        self.registerBtn.isEnabled = false
+        self.registerBtn.setTitle("注册", for: .disabled)
         phone.borderStyle = .none
         phone.placeholder = "手机号"
         name.borderStyle = .none
@@ -77,13 +78,17 @@ class RegisterViewController: UIViewController,UITextFieldDelegate {
         self.view.addGestureRecognizer(UITapGestureRecognizer(target:self, action:#selector(self.handleTap(sender:))))
     }
     
+    func resignFirstResponders() {
+        phone.resignFirstResponder()
+        name.resignFirstResponder()
+        password.resignFirstResponder()
+        smsCheck.resignFirstResponder()
+        recommendCode.resignFirstResponder()
+    }
+    
     func handleTap(sender: UITapGestureRecognizer) {
         if sender.state == .ended {
-            phone.resignFirstResponder()
-            name.resignFirstResponder()
-            password.resignFirstResponder()
-            smsCheck.resignFirstResponder()
-            recommendCode.resignFirstResponder()
+            self.resignFirstResponders()
         }
         sender.cancelsTouchesInView = false
     }
@@ -123,6 +128,7 @@ class RegisterViewController: UIViewController,UITextFieldDelegate {
     
     @IBAction func registerUser(_ sender: UIButton) {
         sender.isEnabled = false
+        self.resignFirstResponders()
         let phoneValue = phone.text!
         let pwdValue = password.text!
         let nameValue = name.text!
@@ -138,38 +144,35 @@ class RegisterViewController: UIViewController,UITextFieldDelegate {
             sender.isEnabled = true
             return
         }
-        
         let checkBody = ["busi_code": "REGISTER", "cellphone_number": phoneValue, "sms_code": sms]
         let checkReq = NetworkUtils.postBackEnd("R_SMSCODE_CHECK", body: checkBody, handler: {
             json in
-            print(json)
-        })
-        let body = ["busi_scene": "REGISTER", "cellphoneNumber": phoneValue, "loginPwd": pwdValue, "name": nameValue]
-        
-        let request = NetworkUtils.postBackEnd("C_USER", body: body , handler: {[weak self] (val ) in
-            let hub = MBProgressHUD.showAdded(to: (self?.view)!, animated: true)
-            hub.mode = MBProgressHUDMode.text
-            hub.label.text = "注册成功，正在登录中"
-            let id = val["body"]["id"].stringValue
-            APP_USER_ID = id
-            UserDefaults.standard.setValue(id, forKey: "APP_USER_ID")
-            UserDefaults.standard.synchronize()
-            
-            let r = AppUser.loadFromServer() { (user) in
-                AppUser.currentUser = user
-                let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-                let mainVC = storyBoard.instantiateViewController(withIdentifier: "mainID")
-                do {
-                    UIApplication.shared.delegate?.window??.rootViewController = mainVC
-                } catch {
-                    print(error)
+            let body = ["busi_scene": "REGISTER", "cellphoneNumber": phoneValue, "loginPwd": pwdValue, "name": nameValue]
+            let _ = NetworkUtils.postBackEnd("C_USER", body: body , handler: {[weak self] (val ) in
+                let hub = MBProgressHUD.showAdded(to: (self?.view)!, animated: true)
+                hub.mode = MBProgressHUDMode.text
+                hub.label.text = "注册成功，正在登录中"
+                let id = val["body"]["id"].stringValue
+                APP_USER_ID = id
+                UserDefaults.standard.setValue(id, forKey: "APP_USER_ID")
+                UserDefaults.standard.synchronize()
+                
+                let r = AppUser.loadFromServer() { (user) in
+                    AppUser.currentUser = user
+                    let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+                    let mainVC = storyBoard.instantiateViewController(withIdentifier: "mainID")
+                    do {
+                        UIApplication.shared.delegate?.window??.rootViewController = mainVC
+                    } catch {
+                        print(error)
+                    }
                 }
-            }
-            r?.response(completionHandler: {_ in
-                hub.hide(animated: true)
+                r?.response(completionHandler: {_ in
+                    hub.hide(animated: true)
+                })
             })
         })
-        request.response(completionHandler: {_ in
+        checkReq.response(completionHandler: {_ in
             sender.isEnabled = true
             
         })
@@ -184,6 +187,7 @@ class RegisterViewController: UIViewController,UITextFieldDelegate {
         // 短信发送
         let _ = NetworkUtils.postBackEnd("C_SMSCODE_SEND", body: ["busi_code": "REGISTER", "cellphone_number": phoneValue], handler: {
             json in
+            self.registerBtn.isEnabled = true
             self.isCounting = true
         })
         

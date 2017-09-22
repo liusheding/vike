@@ -52,7 +52,8 @@ class PhoneSMSViewController : UIViewController {
         let y = rect.origin.y - SCREEN_HEIGHT
         let duration = info?[UIKeyboardAnimationDurationUserInfoKey] as! Double
         UIView.animate(withDuration: duration, animations: {
-            self.tableView.transform = CGAffineTransform(translationX: 0, y: y/2)
+            self.parent?.view.transform = CGAffineTransform(translationX: 0, y: y/3)
+            self.tableView.transform = CGAffineTransform(translationX: 0, y: y/3)
         })
     }
     
@@ -61,6 +62,7 @@ class PhoneSMSViewController : UIViewController {
         let info = notification.userInfo
         let duration = info?[UIKeyboardAnimationDurationUserInfoKey] as! Double
         UIView.animate(withDuration: duration) {
+            self.parent?.view.transform = CGAffineTransform.identity
             self.tableView.transform = CGAffineTransform.identity
         }
     }
