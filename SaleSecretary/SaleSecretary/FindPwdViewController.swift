@@ -115,10 +115,11 @@ class FindPwdViewController: UIViewController,UITextFieldDelegate {
         self.findBtn.isEnabled = false
         let r = NetworkUtils.postBackEnd("R_SMSCODE_CHECK", body: checkBody, handler: {
             json in
-            let req = AppUser.findPassword(phone: vals[0], password: vals[1], callback: {
+            let req = AppUser.findPassword(phone: vals[0], password: vals[1], callback: {[weak self]
                 _ in
-                Utils.alert("修改密码成功")
-                self.dismiss(animated: true, completion: {})
+                self?.dismiss(animated: true, completion: {
+                     Utils.alert("修改密码成功")
+                })
             })
         })
         r.response(completionHandler: { _ in
