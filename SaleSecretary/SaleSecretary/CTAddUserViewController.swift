@@ -212,10 +212,10 @@ class CTAddUserViewController: UITableViewController {
         let request = cust.save { (_) in  }
         
         request?.response(completionHandler: { _ in
-            self.navigationController?.popViewController(animated: true)
             if self.tableDelegate != nil {
                 self.tableDelegate?.reloadTableViewData()
             }
+            self.navigationController?.popViewController(animated: false)
         })
         
     }

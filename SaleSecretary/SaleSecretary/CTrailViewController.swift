@@ -58,6 +58,7 @@ class CTrailViewController: UIViewController {
         
         let request = NetworkUtils.postBackEnd("R_PAGED_QUERY_TXL_CUS_GTGJ", body: ["cusInfoId" : self.custInfo?.id ?? "" , "pageSize" : 1000]) { (json) in
                 let obj = json["body"]["obj"].arrayValue
+                self.trailInfoMsg.removeAll()
                 for bj in obj {
                     self.trailInfoMsg.append( TrailMessage.init(json: bj))
                 }
@@ -173,7 +174,7 @@ extension CTrailViewController : TrailMsgReloadDelegate {
     func reloadTrailMsg(){
 //        self.generateDate()
 //        self.createDisplayData(info: self.trailInfo)
-//        self.generateDateMsg()
+        self.generateDateMsg()
 //        self.trailTableView.reloadData()
     }
 }
