@@ -113,7 +113,7 @@ class ShareView: UIView,UIScrollViewDelegate {
      */
     func shareButtonClicked(_ sender:UIButton) {
         if WXApi.isWXAppInstalled() == false{
-            print("未安装微信")
+            showAlert("尚未安装微信客户端")
             return
         }
         if sender.tag == 100 {
@@ -123,7 +123,12 @@ class ShareView: UIView,UIScrollViewDelegate {
         }
     }
     
-    
+    func showAlert(_ message:String){
+        let alertController = UIAlertController(title: "提示", message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "好的", style: .cancel, handler: nil)
+        alertController.addAction(okAction)
+        self.rootVC.present(alertController, animated: true, completion: nil)
+    }
     
     func showInViewController(_ viewController:UIViewController){
         self.rootVC = viewController

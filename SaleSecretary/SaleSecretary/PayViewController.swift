@@ -85,10 +85,12 @@ class PayViewController: UIViewController {
     }
     @IBAction func clickConfirm(_ sender: UIButton) {
         if self.currentSel == 0{
-            let alertController = UIAlertController(title: "提示", message: "请选择充值金额", preferredStyle: .alert)
-            let okAction = UIAlertAction(title: "好的", style: .cancel, handler: nil)
-            alertController.addAction(okAction)
-            self.present(alertController, animated: true, completion: nil)
+            showAlert("请选择充值金额")
+            return
+        }
+        
+        if WXApi.isWXAppInstalled() == false{
+            showAlert("尚未安装微信客户端")
             return
         }
         
@@ -201,6 +203,13 @@ class PayViewController: UIViewController {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    func showAlert(_ message:String){
+        let alertController = UIAlertController(title: "提示", message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "好的", style: .cancel, handler: nil)
+        alertController.addAction(okAction)
+        self.present(alertController, animated: true, completion: nil)
     }
 }
 
