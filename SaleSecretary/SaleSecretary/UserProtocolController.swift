@@ -17,8 +17,8 @@ class UserProtocolController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // 1.设置访问资源 - 百度搜索
-        let url = URL(string: "http://www.zj.vc");
+        // 1.设置访问资源
+        let url = URL(string: "http://xm.zj.vc/privacy");
         
         // 2.建立网络请求
         let request = URLRequest(url: url!);

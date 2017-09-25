@@ -156,7 +156,7 @@ extension MineUIViewController: ShareViewDelegate {
         message.setThumbImage(UIImage(named:"logo_xxm"))
         
         let ext = WXWebpageObject()
-        ext.webpageUrl = "http://www.zj.vc"
+        ext.webpageUrl = "http://xm.zj.vc/download"
         message.mediaObject = ext
         
         let req =  SendMessageToWXReq()
