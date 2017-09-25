@@ -54,7 +54,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,WXApiDelegate {
         }
         
         // 启动JPushSDK 正式发布时apsForProduction参数改为true
-        JPUSHService.setup(withOption: nil, appKey: "c06a7098971e360662a2d990",channel: "AppStore", apsForProduction: false)
+        JPUSHService.setup(withOption: nil, appKey: "c06a7098971e360662a2d990",channel: "AppStore", apsForProduction: true)
         
         JPUSHService.setBadge(0)
         NotificationCenter.default.addObserver(self, selector: #selector(didreceiveCustomerMesseage(_:)), name:NSNotification.Name.jpfNetworkDidReceiveMessage, object: nil)
