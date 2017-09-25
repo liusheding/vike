@@ -23,6 +23,8 @@ class SMSDetailViewController : UIViewController {
     }
     
     @IBOutlet weak var dateBtn: UIButton!
+    @IBOutlet weak var tipsLabel: UILabel!
+    @IBOutlet weak var recLabel: UILabel!
     
     var executeTime: String! {
         
@@ -53,6 +55,11 @@ class SMSDetailViewController : UIViewController {
         self.dateBtn.titleLabel?.textAlignment = .right
         self.dateBtn.setTitle(schedule.executeTime, for: .normal)
         self.numberLabel.text = "总共\(self.receiptions.count)人"
+        self.tipsLabel.snp.makeConstraints({
+            make in
+            make.centerY.equalTo(self.recLabel.snp.centerY)
+            make.left.equalTo(self.recLabel.snp.right).offset(8)
+        })
     }
     
     @IBOutlet weak var numberLabel: UILabel!

@@ -101,6 +101,10 @@ extension SMSPreviewController : UITableViewDataSource, UITableViewDelegate {
         return schedule.customers.count
     }
     
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 2
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
