@@ -1176,7 +1176,7 @@
         <!--短信充值-->
         <scene sceneID="U6v-67-qcg">
             <objects>
-                <viewController storyboardIdentifier="onlinepayID" title="短信充值" hidesBottomBarWhenPushed="YES" id="9IF-2l-FT2" customClass="PayViewController" customModule="SaleSecretary" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="onlinepayID" title="短信充值" hidesBottomBarWhenPushed="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="9IF-2l-FT2" customClass="PayViewController" customModule="SaleSecretary" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ScG-QQ-EQc"/>
                         <viewControllerLayoutGuide type="bottom" id="Spg-hS-AvM"/>

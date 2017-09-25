@@ -150,8 +150,7 @@ class MessageSchedule: NSObject {
         return request
     }
     
-    
-    func save(_ completion: @escaping ((JSON) -> Void)) -> DataRequest? {
+    private func createSaveRequestBody() -> [String: Any] {
         var body:[String: Any] = [:]
         body["userId"] = APP_USER_ID
         body["planType"] = self.type
@@ -172,8 +171,26 @@ class MessageSchedule: NSObject {
         let yl = JSON(yld)
         let str = yl.rawString(.utf8, options: .init(rawValue: 0))
         body["yl"] = str
+        return body
+    }
+    // 新增短信计划
+    func save(_ completion: @escaping ((JSON) -> Void)) -> DataRequest? {
+        let body = self.createSaveRequestBody()
         let request = NetworkUtils.postBackEnd("C_DXJH", body: body, handler: {json in
             completion(json["body"])
+        })
+        return request
+    }
+    // 新增短信计划，增加自定义错误处理方式
+    func saveTemplate(_ success: ((JSON) -> Void)?, failure: ((AppError) -> Void)?) -> DataRequest?  {
+        let body = self.createSaveRequestBody()
+        let request = NetworkUtils.postBackEnd("C_DXJH", body: body, successHandler: success, failedHandler: {
+            error in
+            if error.code == "50001" {
+                failure?(error)
+            } else {
+                NetworkUtils.defaultFailureHandler(error.msg)
+            }
         })
         return request
     }

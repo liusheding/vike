@@ -70,6 +70,20 @@ extension String {
     }
 }
 
+struct AppError {
+    
+    var code: String
+    var msg: String = ""
+    
+    public init(_ code: String) {
+        self.code = code
+    }
+    public init(code: String, msg: String) {
+        self.code = code
+        self.msg = msg
+    }
+}
+
 
 struct NetworkUtils {
     
@@ -103,23 +117,32 @@ struct NetworkUtils {
     }
     
     static func postBackEnd(_ method: String, body: [String: Any], successHandler: ((_ json : JSON) -> Void)?,
-                            failedHandler: ((_ result: Error) -> Void)? ) {
+                            failedHandler: ((_ error: AppError) -> Void)? ) -> DataRequest  {
         let bodyStr = createBody(method, body: body)
         var req = URLRequest(url: URL(string: ZJKJ_API_URL)!)
         req.httpMethod = HTTPMethod.post.rawValue
         req.setValue("application/json", forHTTPHeaderField: "Content-Type")
         req.httpBody = bodyStr.data(using: .utf8)! as Data
-        Alamofire.request(req).responseJSON {
+        return Alamofire.request(req).responseJSON {
             response in
             let result = response.result
             switch result  {
             case .success(let value):
                 guard response.result.value != nil else {return }
+                let json = JSON(value)
+                let code = json["head"]["error_code"].string
+                if code != "0" {
+                    let msg = json["head"]["error_msg"].string
+                    let err = AppError(code: code!, msg: msg ?? "")
+                    failedHandler?(err)
+                    return
+                }
                 if successHandler != nil {
                     successHandler!(JSON(value))
                 }
             case .failure(let error):
-                failedHandler!(error)
+                let err = AppError(code: "90001", msg: "\(error)")
+                failedHandler?(err)
             }
         }
     }

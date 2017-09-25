@@ -89,20 +89,43 @@ class CustomSMSViewController : UIViewController {
         }
     }
     
+    func failureHanlder(_ error: AppError) {
+        let alertController = UIAlertController(title: "", message: error.msg, preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "去充值", style: .default, handler: {
+            action in
+            let story = UIStoryboard(name: "MineView", bundle: nil)
+            let vc = story.instantiateViewController(withIdentifier: "onlinepayID")
+            self.navigationController?.pushViewController(vc, animated: true)
+        })
+        let okAction = UIAlertAction(title: "好的", style: .cancel, handler: {
+            action in
+        })
+        alertController.addAction(cancelAction)
+        alertController.addAction(okAction)
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
     @IBAction func saveAction(_ sender: UIButton) {
         
         if self.customers == nil || self.customers?.count == 0 { Utils.alert("您还没有选择短信收件人");return}
         if self.contentCell.textView.text.isEmpty  { Utils.alert("您还没有填写短信内容"); return }
         if self.executeDate == nil {Utils.alert("您还没有设置短信发送时间");return}
         let sched = self.createSchedule()
-        Utils.showLoadingHUB(view: self.view, msg: "保存中", completion: {
+        Utils.showLoadingHUB(view: self.view, msg: "保存中...", completion: {
             hub in
-            let _ = sched.save() {
-                json in
-                hub.hide(animated: true)
+//            let _ = sched.save() {
+//                json in
+//                hub.hide(animated: true)
+//                let vc = self.navigationController?.viewControllers
+//                self.navigationController?.popToViewController((vc?[(vc?.count)! - 2])!, animated: true)
+//            }
+            let r = sched.saveTemplate({ json in
                 let vc = self.navigationController?.viewControllers
                 self.navigationController?.popToViewController((vc?[(vc?.count)! - 2])!, animated: true)
-            }
+            }, failure: {error in
+                self.failureHanlder(error)
+            })
+            r?.response(completionHandler: {_ in hub.hide(animated: true) })
         })
 
     }
