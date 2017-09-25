@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftyJSON
+import MBProgressHUD
 
 class BatchProcessViewController: UIViewController {
 
@@ -160,6 +161,7 @@ class BatchProcessViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
+    
     override func viewWillDisappear(_ animated: Bool) {
         self.tableView.setContentOffset(self.tableView.contentOffset, animated: false)
     }
@@ -268,10 +270,21 @@ extension BatchProcessViewController : UITableViewDelegate , UITableViewDataSour
 extension BatchProcessViewController : CollapsibleImageHeaderViewDelegate {
     
     func toggleSection(_ header: CollapsibleImageHeaderView, section: Int) {
-        let collapsed = !self.collapses[section]
-        self.collapses[section] = collapsed
-        header.setHeaderCollapsed(collapsed)
-        self.tableView.reloadSections(IndexSet(integer: section), with: .automatic)
+        if (self.contacts[section].friends?.count)! > 3000 {
+            let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
+            hud.show(animated: true, whileExecuting: {
+                let collapsed = !self.collapses[section]
+                self.collapses[section] = collapsed
+                header.setHeaderCollapsed(collapsed)
+                self.tableView.reloadSections(IndexSet(integer: section), with: .automatic)
+            }, on: DispatchQueue.main)
+        }else {
+            let collapsed = !self.collapses[section]
+            self.collapses[section] = collapsed
+            header.setHeaderCollapsed(collapsed)
+            self.tableView.reloadSections(IndexSet(integer: section), with: .automatic)
+        }
+        
     }
     
     func tappedSectionImage(_ section: Int) {

@@ -143,11 +143,11 @@ class CTChangeGroupViewController: UIViewController {
         self.collectionView.reloadData()
     }
     
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
-//        self.reloadData()
-//        self.collectionView.reloadData()
-//    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.reloadData()
+        self.collectionView.reloadData()
+    }
 }
     
 extension CTChangeGroupViewController  : UICollectionViewDelegate, UICollectionViewDataSource ,UICollectionViewDelegateFlowLayout{

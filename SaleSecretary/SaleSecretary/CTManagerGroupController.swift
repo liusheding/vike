@@ -130,6 +130,10 @@ extension CTManagerGroupController : UITableViewDelegate , UITableViewDataSource
         }
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 50
+    }
+    
     //返回编辑类型，滑动删除
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
         

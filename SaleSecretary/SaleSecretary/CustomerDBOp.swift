@@ -315,22 +315,28 @@ class CustomerDBOp : NSObject {
             NSLog(error as! String)
         }
     }
-    
+    // 暂时按照手机来修改分组 ， 后续会做修改，为用户id
     func batchChangeCustomerGroup(cust : [Customer] , group : Group) {
         if cust.count > 0 {
             var ids : [String] = []
+//            for c in cust {
+//                ids.append(c.id)
+//            }
             for c in cust {
-                ids.append(c.id)
+                let phone = (c.phone_number?.count)! > 0 ? c.phone_number?[0] : ""
+                if (phone?.characters.count)! > 0 {
+                    ids.append( phone! )
+                }
             }
             let context = getContext()
             let fetchRequest = NSFetchRequest<Customers>(entityName: "Customers")
             //        fetchRequest.fetchLimit = 10 //限定查询结果的数量
             fetchRequest.fetchOffset = 0 //查询的偏移量
-            
-            fetchRequest.predicate = NSPredicate(format: "id in %@", argumentArray: [ ids ])
+            fetchRequest.predicate = NSPredicate(format: "phone_number in %@", argumentArray: [ ids ])
+//            fetchRequest.predicate = NSPredicate(format: "id in %@", argumentArray: [ ids ])
             do {
                 let searchResults = try context.fetch(fetchRequest)
-                NSLog("numbers of delete \(searchResults.count)")
+                NSLog("numbers of remove \(searchResults.count)")
                 
                 for p in searchResults  {
                     p.group_id = group.id

@@ -20,8 +20,9 @@ class CTrailViewController: UIViewController {
     var custInfo : Customer?
     
     let contactDb = CustomerDBOp.defaultInstance()
-    var trailInfo : [TrailMsg] = []
-    var displayData  = [ String : [TrailMsg] ]()
+    
+//    var trailInfo : [TrailMsg] = []
+//    var displayData  = [ String : [TrailMsg] ]()
 
     var trailInfoMsg : [TrailMessage] = []
     var displayDataMsg = [String : [TrailMessage]]()
@@ -38,8 +39,12 @@ class CTrailViewController: UIViewController {
         
         self.trailTableView.delegate = self
         self.trailTableView.dataSource = self
-        self.generateDate()
-        self.createDisplayData(info: self.trailInfo)
+//        self.generateDate()
+//        self.createDisplayData(info: self.trailInfo)
+        
+        self.generateDateMsg()
+        self.createDisplayDataMsg(info: self.trailInfoMsg)
+        
         self.trailTableView.register( UINib(nibName: String(describing: TrailMsgCell.self ), bundle: nil) , forCellReuseIdentifier: self.trailCell )
         self.trailTableView.separatorStyle = .none
         CTrailViewController.instance = self
@@ -56,23 +61,50 @@ class CTrailViewController: UIViewController {
         let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
         hud.label.text = "数据加载中..."
         
-        let request = NetworkUtils.postBackEnd("R_PAGED_QUERY_TXL_CUS_GTGJ", body: ["cusInfoId" : self.custInfo?.id ?? "" , "pageSize" : 1000]) { (json) in
+        if self.custInfo?.id.characters.count == 0  {
+            let request = NetworkUtils.postBackEnd("R_BASE_TXL_CUS_INFO" , body: ["userId" : APP_USER_ID! , "cellphoneNumber": (self.custInfo!.phone_number?.count)!>0 ? self.custInfo!.phone_number?[0] ?? "" : "" ]) { [weak self](json) in
+                let id = json["body"]["id"].stringValue
+                self?.custInfo!.id  = id
+            }
+            request.response(completionHandler: { (_) in
+                let rt = NetworkUtils.postBackEnd("R_PAGED_QUERY_TXL_CUS_GTGJ", body: ["cusInfoId" : self.custInfo?.id ?? "" , "pageSize" : 1000]) { (json) in
+                    let obj = json["body"]["obj"].arrayValue
+                    self.trailInfoMsg.removeAll()
+                    for bj in obj {
+                        self.trailInfoMsg.append( TrailMessage.init(json: bj))
+                    }
+                }
+                rt.response { (_) in
+                    self.trailInfoMsg.sort { (x, y) -> Bool in
+                        let dx = DateFormatterUtils.getDateFromString(x.date!, dateFormat: "yyyy/MM/dd HH-mm-ss")
+                        let dy = DateFormatterUtils.getDateFromString(y.date!, dateFormat: "yyyy/MM/dd HH-mm-ss")
+                        return (dx > dy)
+                    }
+                    
+                    self.createDisplayDataMsg(info: self.trailInfoMsg)
+                    self.trailTableView.reloadData()
+                    hud.hide(animated: true)
+                }
+            })
+        }else {
+            let request = NetworkUtils.postBackEnd("R_PAGED_QUERY_TXL_CUS_GTGJ", body: ["cusInfoId" : self.custInfo?.id ?? "" , "pageSize" : 1000]) { (json) in
                 let obj = json["body"]["obj"].arrayValue
                 self.trailInfoMsg.removeAll()
                 for bj in obj {
                     self.trailInfoMsg.append( TrailMessage.init(json: bj))
                 }
             }
-        request.response { (_) in
-            self.trailInfoMsg.sort { (x, y) -> Bool in
-                let dx = DateFormatterUtils.getDateFromString(x.date!, dateFormat: "yyyy/MM/dd HH-mm-ss")
-                let dy = DateFormatterUtils.getDateFromString(y.date!, dateFormat: "yyyy/MM/dd HH-mm-ss")
-                return (dx > dy)
+            request.response { (_) in
+                self.trailInfoMsg.sort { (x, y) -> Bool in
+                    let dx = DateFormatterUtils.getDateFromString(x.date!, dateFormat: "yyyy/MM/dd HH-mm-ss")
+                    let dy = DateFormatterUtils.getDateFromString(y.date!, dateFormat: "yyyy/MM/dd HH-mm-ss")
+                    return (dx > dy)
+                }
+                
+                self.createDisplayDataMsg(info: self.trailInfoMsg)
+                self.trailTableView.reloadData()
+                hud.hide(animated: true)
             }
-            
-            self.createDisplayDataMsg(info: self.trailInfoMsg)
-            self.trailTableView.reloadData()
-            hud.hide(animated: true)
         }
     }
     func createDisplayDataMsg(info : [TrailMessage])  {
@@ -93,33 +125,33 @@ class CTrailViewController: UIViewController {
         }
     }
     
-    func generateDate() {
-        // query from db
-        self.trailInfo = self.contactDb.queryTrailInfo(cusInfoId: (self.custInfo?.id)!)
-        self.trailInfo.sort { (x, y) -> Bool in
-            let dx = DateFormatterUtils.getDateFromString(x.date!, dateFormat: "yyyy/MM/dd HH-mm-ss")
-            let dy = DateFormatterUtils.getDateFromString(y.date!, dateFormat: "yyyy/MM/dd HH-mm-ss")
-            return (dx > dy)
-        }
-    }
+//    func generateDate() {
+//        // query from db
+//        self.trailInfo = self.contactDb.queryTrailInfo(cusInfoId: (self.custInfo?.id)!)
+//        self.trailInfo.sort { (x, y) -> Bool in
+//            let dx = DateFormatterUtils.getDateFromString(x.date!, dateFormat: "yyyy/MM/dd HH-mm-ss")
+//            let dy = DateFormatterUtils.getDateFromString(y.date!, dateFormat: "yyyy/MM/dd HH-mm-ss")
+//            return (dx > dy)
+//        }
+//    }
     
-    func createDisplayData( info : [TrailMsg]) {
-        self.displayData.removeAll()
-        for msg in info {
-            if (msg.date?.characters.count)! > 0 {
-                let year = msg.date?.components(separatedBy: "/")[0]
-                if self.displayData[year!] == nil {
-                    self.displayData[year!] =  [msg]
-                }else {
-                    self.displayData[year!]?.append(msg)
-                }
-            }
-        }
-        let tmp = self.displayData.keys
-        for t in tmp {
-            self.years.append(t)
-        }
-    }
+//    func createDisplayData( info : [TrailMsg]) {
+//        self.displayData.removeAll()
+//        for msg in info {
+//            if (msg.date?.characters.count)! > 0 {
+//                let year = msg.date?.components(separatedBy: "/")[0]
+//                if self.displayData[year!] == nil {
+//                    self.displayData[year!] =  [msg]
+//                }else {
+//                    self.displayData[year!]?.append(msg)
+//                }
+//            }
+//        }
+//        let tmp = self.displayData.keys
+//        for t in tmp {
+//            self.years.append(t)
+//        }
+//    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

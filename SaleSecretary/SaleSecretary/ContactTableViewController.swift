@@ -404,6 +404,7 @@ extension ContactTableViewController : UITableViewDataSource, UITableViewDelegat
     func synContact2Server(){
         let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
         hud.label.text = "同步通讯录中..."
+        hud.show(animated: true)
         
         self.requestAccessToContacts { [unowned self](success) in
             if success {
@@ -468,8 +469,8 @@ extension ContactTableViewController : UITableViewDataSource, UITableViewDelegat
     
     func contactPressTest() {
         var arrContact : [Customer] = []
-        let cust = Customer.init(name: "abhtest1", phoneNum: ["177898"])
-        for i in 0..<5000 {
+        let cust = Customer.init(name: "aaa2s", phoneNum: ["188898"])
+        for i in 0..<6900 {
             var x = ""
             for _ in 0..<( 5 - String(i).characters.count ) {
                 x.append("0")
