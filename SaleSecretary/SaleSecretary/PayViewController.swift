@@ -85,7 +85,7 @@ class PayViewController: UIViewController {
     }
     @IBAction func clickConfirm(_ sender: UIButton) {
         if self.currentSel == 0{
-            showAlert("请选择充值金额")
+            showAlert("请选择充值套餐")
             return
         }
         
