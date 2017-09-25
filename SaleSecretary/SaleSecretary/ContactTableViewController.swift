@@ -314,6 +314,10 @@ extension ContactTableViewController : UITableViewDataSource, UITableViewDelegat
         }
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 50
+    }
+    
     func clickedGroupTitle(headerView: CustomerHeaderView) {
         let section = NSIndexSet.init(index: headerView.tag + 1) as IndexSet
         
@@ -444,7 +448,7 @@ extension ContactTableViewController : UITableViewDataSource, UITableViewDelegat
             break
             
         case .synContacts: // read contact from iphon contacts , and add newers to default group
-            let alertController = UIAlertController(title: "同步通讯录", message: "会将您手机通讯录数据同步到云端！",preferredStyle: .alert)
+            let alertController = UIAlertController(title: "会将通讯录数据同步到云端！", message: "",preferredStyle: .alert)
             let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
             let okAction = UIAlertAction(title: "添加", style: .default, handler: {
                 action in

@@ -83,6 +83,9 @@ class CTChooseGroupController: UITableViewController {
         return self.group.count
     }
 
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 50
+    }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId , for: indexPath)
         cell.textLabel?.text = self.group[indexPath.row].group_name
