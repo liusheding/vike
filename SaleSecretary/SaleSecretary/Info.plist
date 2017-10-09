@@ -47,7 +47,7 @@
 	<key>NSCameraUsageDescription</key>
 	<string>拍摄名片</string>
 	<key>NSContactsUsageDescription</key>
-	<string>当您执行同步通讯录或新的客户操作时，通讯录数据将同步至服务器</string>
+	<string>当您执行同步通讯录或新的客户操作时，通讯录数据将同步至服务器用于客户管理</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>访问您的照片，识别客户名片</string>
 	<key>UIBackgroundModes</key>
