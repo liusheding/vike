@@ -69,7 +69,7 @@ class CTChooseNewerController: UIViewController {
         case .authorized: completion(true) // authorized previously
         case .denied, .notDetermined: // needs to ask for authorization
             CNContactStore().requestAccess(for: CNEntityType.contacts, completionHandler: { (accessGranted, error) -> Void in
-                let alertController = UIAlertController(title: "『销小秘』想访问您的通讯录", message: "销小秘需要访问通讯录，才能为您提供更好的服务体验！", preferredStyle: .alert)
+                let alertController = UIAlertController(title: "『销小秘』想访问您的通讯录", message: "销小秘需要访问通讯录，许可后数据将同步至服务器用于客户管理，以获取更好的服务体验！", preferredStyle: .alert)
                 let cancelAction = UIAlertAction(title: "拒绝", style: .cancel, handler: {
                     action in
                     self.navigationController?.popViewController(animated: true)
