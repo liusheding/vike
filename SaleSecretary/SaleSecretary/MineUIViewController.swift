@@ -34,27 +34,26 @@ class MineUIViewController: UITableViewController {
             
             self.identifiers = [1:["onlinepayID"], 2:["walletView"], 3:["businessRecord"], 4:["setViewID", "helpViewID"]]
             
-            if WXApi.isWXAppInstalled() == false{
+            if WXApi.isWXAppInstalled() == false || AppUser.currentUser?.cellphoneNumber == "13888888888"{
                 self.mineCells = [
                     0: [["label": "", "image": "", "id":""]],
-                    1: [["label": "钱包", "image": "icon_w_qb", "id":"qb"]],
-                    2: [["label": "短信发送统计", "image": "icon_w_dxtj", "id":"dxtj"]],
-                    3: [["label": "设置", "image": "icon_w_sz", "id":"sz"], ["label": "帮助", "image": "icon_w_bz", "id":"bz"]],
+                    1: [["label": "短信发送统计", "image": "icon_w_dxtj", "id":"dxtj"]],
+                    2: [["label": "设置", "image": "icon_w_sz", "id":"sz"], ["label": "帮助", "image": "icon_w_bz", "id":"bz"]],
                 ]
                 
-                self.identifiers = [1:["walletView"], 2:["businessRecord"], 3:["setViewID", "helpViewID"]]
+                self.identifiers = [1:["businessRecord"], 2:["setViewID", "helpViewID"]]
             }
+            
         }
         else{
-            if WXApi.isWXAppInstalled() == false{
+            if WXApi.isWXAppInstalled() == false || AppUser.currentUser?.cellphoneNumber == "13888888888"{
                 self.mineCells = [
                     0: [["label": "", "image": "", "id":""]],
                     1: [["label": "用户管理", "image": "icon_w_yhgl", "id":"yhgl"]],
-                    2: [["label": "钱包", "image": "icon_w_qb", "id":"qb"]],
-                    3: [["label": "短信发送统计", "image": "icon_w_dxtj", "id":"dxtj"]],
-                    4: [["label": "设置", "image": "icon_w_sz", "id":"sz"], ["label": "帮助", "image": "icon_w_bz", "id":"bz"]],
+                    2: [["label": "短信发送统计", "image": "icon_w_dxtj", "id":"dxtj"]],
+                    3: [["label": "设置", "image": "icon_w_sz", "id":"sz"], ["label": "帮助", "image": "icon_w_bz", "id":"bz"]],
                 ]
-                self.identifiers = [1:["userManageID"], 2:["walletView"], 3:["businessRecord"], 4:["setViewID", "helpViewID"]]
+                self.identifiers = [1:["userManageID"], 2:["businessRecord"], 3:["setViewID", "helpViewID"]]
             }
         }
     }
@@ -156,7 +155,7 @@ class MineUIViewController: UITableViewController {
                 let cell = self.tableView.cellForRow(at: [0,0]) as! MineInfoCell
                 cell.name.text = jsondata["name"].stringValue
                 
-                if WXApi.isWXAppInstalled() == true{
+                if WXApi.isWXAppInstalled() == true && AppUser.currentUser?.cellphoneNumber != "13888888888"{
                     let smscell = self.tableView.cellForRow(at: [1,0]) as! MineViewCell
                     smscell.mineinfo.isHidden = false
                     let messageSyts = jsondata["messageSyts"].stringValue
